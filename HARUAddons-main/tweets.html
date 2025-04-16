@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>開発者つぶやき - HARU Addons</title>
+    <meta name="description" content="HARU Addons開発者のつぶやきページ。開発の裏話や最新情報をチェック！">
+    <meta property="og:title" content="開発者つぶやき | HARU Addons">
+    <meta property="og:image" content="https://harugames8686.github.io/HARUAddons/ogp-image.png">
+    <meta property="og:url" content="https://harugames8686.github.io/HARUAddons/devtweets.html">
+    <meta property="og:description" content="HARU Addons開発者のつぶやきをチェック！">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://harugames8686.github.io/HARUAddons/devtweets.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/png" href="https://harugames8686.github.io/HARUAddons/icon.png" sizes="32x32">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --shadow-teal: #2dd4bf;
+            --midnight-blue: #1e3a8a;
+            --glow-purple: #a855f7;
+            --dark-bg: #0f172a;
+            --text-light: #f1f5f9;
+            --glass-bg: rgba(45, 55, 72, 0.6);
+            --accent-gradient: linear-gradient(135deg, #2dd4bf, #a855f7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', 'Noto Sans JP', sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg) url('./thumbnail.png') center/cover no-repeat fixed;
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95%;
+            max-width: 1000px;
+            background: rgba(30, 58, 138, 0.2);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: padding 0.3s, background 0.3s;
+        }
+
+        nav.scrolled {
+            padding: 0.5rem 1rem;
+            background: rgba(30, 58, 138, 0.5);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .logo-container img {
+            width: 32px;
+            height: 32px;
+            transition: transform 0.3s;
+        }
+
+        .logo-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .logo-container .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--shadow-teal);
+            letter-spacing: 0.5px;
+            background: linear-gradient(90deg, #bcc8e7, #9fbfdb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        nav ul li a:hover {
+            background: rgba(38, 166, 154, 0.3);
+            color: var(--shadow-teal);
+            box-shadow: 0 0 5px var(--shadow-teal);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--shadow-teal);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 22px;
+            height: 3px;
+            background: var(--shadow-teal);
+            margin: 4px 0;
+            transition: all 0.3s;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 60px;
+            right: 10px;
+            width: 200px;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            padding: 1rem;
+            z-index: 999;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav.active {
+            display: block;
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .mobile-nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 0.6rem 1rem;
+            border-radius: 10px;
+            display: block;
+            transition: all 0.3s;
+        }
+
+        .mobile-nav ul li a:hover {
+            background: var(--shadow-teal);
+            color: var(--dark-bg);
+        }
+
+        .tweets-section {
+            min-height: 85vh;
+            padding: 6rem 2rem 2rem;
+            background: rgba(15, 23, 42, 0.85);
+            border-radius: 40px 40px 0 0;
+            margin-top: 20px;
+        }
+
+        .tweets-section h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            color: #bef3e3;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 8px var(--shadow-teal);
+        }
+
+        .tweets-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .tweet {
+            background: var(--glass-bg);
+            padding: 1.5rem;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .tweet p {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tweet .timestamp {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        footer {
+            background: linear-gradient(180deg, rgba(10, 17, 32, 0.9), rgba(15, 23, 42, 0.8));
+            color: var(--text-light);
+            text-align: center;
+            padding: 1.5rem;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .tweets-section h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tweet p {
+                font-size: 1rem;
+            }
+
+            .tweet .timestamp {
+                font-size: 0.8rem;
+            }
+        }
+.tweet img {
+    width: 100%;
+    max-width: 500px; /* 最大幅を制限して大きすぎないように */
+    height: auto; /* アスペクト比を維持 */
+    margin: 1rem auto; /* 上下に余白を追加し、中央寄せ */
+    border-radius: 15px; /* 角を丸くしてデザインに合わせる */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* 軽い影で立体感 */
+    object-fit: contain; /* 画像が枠に収まるように */
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .tweet img {
+        max-width: 100%; /* 小さい画面では幅いっぱいに */
+    }
+}
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo-container">
+            <img src="./icon.png" alt="HARU Addons Icon" loading="lazy">
+            <div class="logo">HARUAddons</div>
+        </div>
+        <button class="menu-toggle" aria-label="メニューを開く" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul>
+            <li><a href="./index.html">ホーム</a></li>
+            <li><a href="./Assistant/support.html">Assistant</a></li>
+            <li><a href="./developer_info.html">開発者情報</a></li>
+            <li><a href="./links.html">リンク</a></li>
+            <li><a href="./tweets.html">Tweet</a></li>
+        </ul>
+    </nav>
+
+    <div class="mobile-nav">
+        <ul>
+            <li><a href="./index.html">ホーム</a></li>
+            <li><a href="./Assistant/support.html">Assistant</a></li>
+            <li><a href="./developer_info.html">開発者情報</a></li>
+            <li><a href="./links.html">リンク</a></li>
+            <li><a href="./tweets.html">Tweet</a></li>
+        </ul>
+    </div>
+
+    <section class="tweets-section">
+        <h1>Tweet</h1>
+        <div class="tweets-container">
+            <!-- つぶやきを追加する場合は以下をコピペ -->
+            <!--
+            <div class="tweet">
+                <p>ここに新しいつぶやきを書く</p>
+                <div class="timestamp">日付と時間を書く</div>
+            </div>
+            -->
+
+            <!-- ここにつぶやきを追加していく -->
+            <div class="tweet">
+                <p>SecurityCraftのX-ray検知システムにて、稀に誤検知がある可能性</p>
+                <p>X-ray検知システムはデフォルトで、Level3に設定されています。ですが、今月1件の誤検知の報告がございました！</p>
+                <p>Levelを2に引き下げることで、誤検知はほとんど発生しなくなります！また、X-rayの検知にほんのわずかの遅れが生じる可能性はありますが、大きな問題はありません。</p>
+                <img src="./SecurityCraft.png" alt="SecurityCraft" loading="lazy">
+                <div class="timestamp">2025年4月3日 3:49</div>
+            </div>
+            <div class="tweet">
+                <p>先程CommandShortCutのアップデート V.1.0.1がリリースされました！</p>
+                <p>・追加したコマンド編集出来ない不具合を修正しました</p>
+                <img src="./CommandShortCut.jpg" alt="CommandShortCut" loading="lazy">
+                <div class="timestamp">2025年4月3日 3:43</div>
+            </div>
+            <div class="tweet">
+                <p>先程HARUPhone1のアップデート V.2.3.5がリリースされました！</p>
+                <p>・不必要な機能の非表示や機能の表示順を変更できるように！</p>
+                <p>・初期金額の設定画面が改善されました！</p>
+                <p>これで、HARUAssistantなど経済アドオンとして不必要な機能などが、邪魔にならないようになります</p>
+                <img src="./haruphone1.png" alt="HARUPhone1" loading="lazy">
+                <div class="timestamp">2025年4月3日 3:40</div>
+            </div>
+            <div class="tweet">
+                <p>【初ツイート】</p>
+                <p>本日からHARUAddons公式サイトにて、Tweetページが公開されました！✨</p>
+                <p>アドオン開発の細かな情報や、アイデアなどをここに書いていきます！</p>
+                <p>よければ是非色々と見て頂ければ嬉しいです！</p>
+                <div class="timestamp">2025年4月3日 00:49</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 HARU Addons. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mobileNav = document.querySelector('.mobile-nav');
+        menuToggle.addEventListener('click', () => {
+            const isExpanded = mobileNav.classList.toggle('active');
+            menuToggle.setAttribute('aria-expanded', isExpanded);
+        });
+
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
