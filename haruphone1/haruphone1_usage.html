@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HaruAddons - HARUPhone1 使い方</title>
+    <link rel="icon" type="image/png" href="../icon.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        nav {
+            background-color: #000000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-container .logo {
+            color: #fff;
+            font-size: 1.6rem;
+            font-weight: bold;
+        }
+
+        .logo-container .logo-icon {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #1abc9c;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: #fff;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .addon-header {
+            padding: 6rem 2rem 2rem;
+            background-color: #f5f6f5;
+            text-align: center;
+        }
+
+        .addon-header img {
+            width: 100%;
+            max-width: 960px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .addon-header h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin: 1.5rem 0;
+        }
+
+        .addon-page {
+            padding: 0 2rem 4rem;
+            background-color: #f5f6f5;
+            text-align: center;
+        }
+
+        .addon-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .addon-content h2 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .addon-content h3 {
+            font-size: 1.4rem;
+            color: #1abc9c;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .addon-content p {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .addon-content .buttons {
+            display: flex;
+            gap: 1rem;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+
+        .addon-content .btn {
+            padding: 0.6rem 1.2rem;
+            background-color: #1abc9c;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .addon-content .btn:hover {
+            background-color: #16a085;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .addon-content ul {
+            list-style-type: disc;
+            padding-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .addon-content ul li {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .update-list {
+            padding-left: 1.5rem;
+            list-style-type: none;
+        }
+
+        .update-list li {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 0.8rem;
+            position: relative;
+        }
+
+        .update-list li:before {
+            content: "📅";
+            margin-right: 0.5rem;
+            color: #1abc9c;
+        }
+
+        footer {
+            background-color: #000000;
+            color: #fff;
+            text-align: center;
+            padding: 2rem;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 0.8rem 1rem;
+                flex-wrap: wrap;
+            }
+
+            .logo-container .logo {
+                font-size: 1.4rem;
+            }
+
+            .logo-container .logo-icon {
+                width: 24px;
+                height: 24px;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                padding: 1rem 0;
+                background-color: #131313;
+                position: absolute;
+                top: 100%;
+                left: 0;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+                text-align: center;
+            }
+
+            nav ul li a {
+                font-size: 1rem;
+                padding: 0.5rem;
+                display: block;
+            }
+
+            .addon-header {
+                padding: 5rem 1rem 1.5rem;
+            }
+
+            .addon-header img {
+                max-width: 600px;
+            }
+
+            .addon-header h1 {
+                font-size: 2rem;
+            }
+
+            .addon-page {
+                padding: 0 1rem 3rem;
+            }
+
+            .addon-content {
+                padding: 1.5rem;
+            }
+
+            .addon-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .addon-content h3 {
+                font-size: 1.2rem;
+            }
+
+            .addon-content p {
+                font-size: 1rem;
+            }
+
+            .addon-content .buttons {
+                position: static;
+                flex-direction: row;
+                justify-content: center;
+                margin: 1.5rem 0;
+            }
+
+            .addon-content .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .addon-content ul li,
+            .update-list li {
+                font-size: 1rem;
+            }
+
+            footer {
+                padding: 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-container .logo {
+                font-size: 1.2rem;
+            }
+
+            .logo-container .logo-icon {
+                width: 20px;
+                height: 20px;
+            }
+
+            .menu-toggle {
+                font-size: 1.2rem;
+            }
+
+            .addon-header {
+                padding: 4.5rem 0.5rem 1rem;
+            }
+
+            .addon-header img {
+                max-width: 400px;
+            }
+
+            .addon-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .addon-page {
+                padding: 0 0.5rem 2.5rem;
+            }
+
+            .addon-content {
+                padding: 1rem;
+            }
+
+            .addon-content h2 {
+                font-size: 1.3rem;
+            }
+
+            .addon-content h3 {
+                font-size: 1.1rem;
+            }
+
+            .addon-content p {
+                font-size: 0.9rem;
+            }
+
+            .addon-content .buttons {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .addon-content .btn {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.8rem;
+            }
+
+            .addon-content ul li,
+            .update-list li {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo-container">
+            <img src="../icon.png" alt="Logo Icon" class="logo-icon">
+            <div class="logo">HaruAddons</div>
+        </div>
+        <button class="menu-toggle">☰</button>
+        <ul>
+            <li><a href="../index.html">ホーム</a></li>
+            <li><a href="../developer_info.html">開発者情報</a></li>
+            <li><a href="../links.html">リンク</a></li>
+        </ul>
+    </nav>
+    
+    <section class="addon-header">
+        <img src="../haruphone1.png" alt="HARUPhone1 Image">
+        <h1>HARUPhone1</h1>
+    </section>
+
+    <section class="addon-page">
+        <div class="addon-content">
+            <div class="buttons">
+                <a href="./haruphone1.html" class="btn">戻る</a>
+            </div>
+            <h2>基本操作</h2>
+            <p>HARUPhone1は、Minecraft統合版のスマートフォン風UIを提供するアドオンです。</p>
+            <ul>
+                <li>インベントリから <strong>HARUPhone1</strong> を選択し、使用する。</li>
+                <li>メニューからアプリを選んでタップ操作で利用できる。</li>
+                <li>「Quick」や「メール」など、様々な機能が搭載されている。</li>
+            </ul>
+            
+            <h2>主な機能</h2>
+            <h3>1. HARUPAY（通貨）機能</h3>
+            <p>ゲーム内の仮想通貨を管理し、送金やチャージが可能です。</p>
+            <ul>
+                <li><strong>✅ 残高の確認</strong><br>スマホを開き「HARUPAY」→「残高確認」</li>
+                <li><strong>✅ プレイヤーへの送金</strong><br>「HARUPAY」→「送る」→ 送信先プレイヤーを選択 → 金額を設定し送信</li>
+            </ul>
+
+            <h3>2. Quick（ネットショップ）機能</h3>
+            <p>ゲーム内でアイテムの出品や購入が可能です。</p>
+            <ul>
+                <li><strong>💰 出品する場合</strong><br>「Quick」→「出品」→ 商品名と金額を入力し送信</li>
+                <li><strong>🛒 購入する場合</strong><br>「Quick」→「購入」→ 商品を選択 → 確認後、購入</li>
+            </ul>
+            <p><strong>⚠️ 注意</strong><br>現在テスト段階のため、ワールドを終了すると出品データが消えます。</p>
+
+            <h3>・メール</h3>
+            <p>他のプレイヤーとメッセージをやり取りできます。</p>
+            
+            <h3>・換金</h3>
+            <p>ゲーム内アイテムを仮想通貨に変換できます。</p>
+            
+            <h3>・ショップ</h3>
+            <p>アイテムの購入や出品ができます。</p>
+
+            <h2>よくある質問</h2>
+
+            <h3>🔹 全プレイヤーのHARUPAY残高をランキング順に表示したい</h3>
+            <p>HARUPAYの残高は <strong>scoreboard</strong> で管理されています。</p>
+            <p>以下のコマンドを使用すると、ランキング順に画面右側へ表示できます。</p>
+            <pre><code>/scoreboard objectives setdisplay sidebar money</code></pre>
+            
+            <h3>🔹 HARUPhone1の入手方法</h3>
+            <p>HARUPhone1は、<strong>初回参加時に自動付与</strong> されます（システムが有効な場合）。</p>
+            <p>再度取得する場合は、以下のコマンドを使用してください。</p>
+            <pre><code>/give <ゲーマータグ> additem:haruphone1</code></pre>
+            
+            <h3>🔹 レジの入手方法</h3>
+            <p>以下のコマンドでレジを入手できます。</p>
+            <pre><code>/give <ゲーマータグ> addblock:register</code></pre>
+        </div>
+    </section>
+    
+    <footer>
+        <p>© 2025 HaruAddons. All Rights Reserved.</p>
+    </footer>
+    
+    <script>
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

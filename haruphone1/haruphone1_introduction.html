@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HaruAddons - HARUPhone1 ダウンロード</title>
+    <link rel="icon" type="image/png" href="../icon.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        nav {
+            background-color: #000000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-container .logo {
+            color: #fff;
+            font-size: 1.6rem;
+            font-weight: bold;
+        }
+
+        .logo-container .logo-icon {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #1abc9c;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: #fff;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .addon-header {
+            padding: 6rem 2rem 2rem;
+            background-color: #f5f6f5;
+            text-align: center;
+        }
+
+        .addon-header img {
+            width: 100%;
+            max-width: 960px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .addon-header h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin: 1.5rem 0;
+        }
+
+        .addon-page {
+            padding: 0 2rem 4rem;
+            background-color: #f5f6f5;
+            text-align: center;
+        }
+
+        .addon-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .addon-content h2 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .addon-content h3 {
+            font-size: 1.4rem;
+            color: #1abc9c;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .addon-content p {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .addon-content .buttons {
+            display: flex;
+            gap: 1rem;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+
+        .addon-content .btn {
+            padding: 0.6rem 1.2rem;
+            background-color: #1abc9c;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .addon-content .btn:hover {
+            background-color: #16a085;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .download-buttons {
+            display: flex;
+            flex-direction: column; /* ボタンと説明を縦に */
+            justify-content: flex-start;
+            margin: 1rem 0 2rem;
+            padding: 1rem;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        /* バージョン情報のスタイル */
+        .version-info {
+            font-size: 0.95rem;
+            color: #777;
+            margin-top: 0.5rem;
+            line-height: 1.4;
+        }
+
+        /* ダウンロードボタン共通スタイル */
+        .download-btn, .download-btn_back, .download-btn_out {
+            padding: 0.9rem 2rem;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 最新バージョンのボタン */
+        .download-btn {
+            background: linear-gradient(135deg, #1abc9c, #3498db);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #16a085, #2980b9);
+        }
+
+        .download-btn::before {
+            content: "最新";
+            font-size: 0.8rem;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            position: absolute;
+            top: 0.4rem;
+            right: 0.4rem;
+            font-weight: normal;
+        }
+
+        .download-btn:hover::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(30deg);
+            transition: all 0.5s ease;
+            opacity: 1;
+        }
+
+        /* 旧バージョンのボタン */
+        .download-btn_back {
+            background: linear-gradient(135deg, #7f8c8d, #34495e);
+            opacity: 0.9;
+        }
+
+        .download-btn_back:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #95a5a6, #2c3e50);
+        }
+
+        .download-btn_back::before {
+            content: "旧";
+            font-size: 0.8rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            position: absolute;
+            top: 0.4rem;
+            right: 0.4rem;
+            font-weight: normal;
+        }
+
+        .download-btn_back:hover::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(30deg);
+            transition: all 0.5s ease;
+            opacity: 1;
+        }
+
+        /* 配布サイトバージョンのボタン */
+        .download-btn_out {
+            background: linear-gradient(135deg, #c1c432, #caa439);
+            opacity: 0.9;
+        }
+
+        .download-btn_out:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #cccc5b, #c09f44);
+        }
+
+        .download-btn_out::before {
+            content: "サイト";
+            font-size: 0.8rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            position: absolute;
+            top: 0.4rem;
+            right: 0.4rem;
+            font-weight: normal;
+        }
+
+        .download-btn_out:hover::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(30deg);
+            transition: all 0.5s ease;
+            opacity: 1;
+        }
+
+        .addon-content ul {
+            list-style-type: disc;
+            padding-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .addon-content ul li {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .update-list {
+            padding-left: 1.5rem;
+            list-style-type: none;
+        }
+
+        .update-list li {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 0.8rem;
+            position: relative;
+        }
+
+        .update-list li:before {
+            content: "📝";
+            margin-right: 0.5rem;
+            color: #1abc9c;
+        }
+
+        footer {
+            background-color: #000000;
+            color: #fff;
+            text-align: center;
+            padding: 2rem;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 0.8rem 1rem;
+                flex-wrap: wrap;
+            }
+
+            .logo-container .logo {
+                font-size: 1.4rem;
+            }
+
+            .logo-container .logo-icon {
+                width: 24px;
+                height: 24px;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                padding: 1rem 0;
+                background-color: #131313;
+                position: absolute;
+                top: 100%;
+                left: 0;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+                text-align: center;
+            }
+
+            nav ul li a {
+                font-size: 1rem;
+                padding: 0.5rem;
+                display: block;
+            }
+
+            .addon-header {
+                padding: 5rem 1rem 1.5rem;
+            }
+
+            .addon-header img {
+                max-width: 600px;
+            }
+
+            .addon-header h1 {
+                font-size: 2rem;
+            }
+
+            .addon-page {
+                padding: 0 1rem 3rem;
+            }
+
+            .addon-content {
+                padding: 1.5rem;
+            }
+
+            .addon-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .addon-content h3 {
+                font-size: 1.2rem;
+            }
+
+            .addon-content p {
+                font-size: 1rem;
+            }
+
+            .addon-content .buttons {
+                position: static;
+                flex-direction: row;
+                justify-content: center;
+                margin: 1.5rem 0;
+            }
+
+            .addon-content .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .download-btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .addon-content ul li,
+            .update-list li {
+                font-size: 1rem;
+            }
+
+            footer {
+                padding: 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-container .logo {
+                font-size: 1.2rem;
+            }
+
+            .logo-container .logo-icon {
+                width: 20px;
+                height: 20px;
+            }
+
+            .menu-toggle {
+                font-size: 1.2rem;
+            }
+
+            .addon-header {
+                padding: 4.5rem 0.5rem 1rem;
+            }
+
+            .addon-header img {
+                max-width: 400px;
+            }
+
+            .addon-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .addon-page {
+                padding: 0 0.5rem 2.5rem;
+            }
+
+            .addon-content {
+                padding: 1rem;
+            }
+
+            .addon-content h2 {
+                font-size: 1.3rem;
+            }
+
+            .addon-content h3 {
+                font-size: 1.1rem;
+            }
+
+            .addon-content p {
+                font-size: 0.9rem;
+            }
+
+            .addon-content .buttons {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .addon-content .btn {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.8rem;
+            }
+
+            .download-buttons {
+                padding: 0.8rem;
+            }
+
+            .download-btn, .download-btn_back {
+                padding: 0.7rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .download-btn::before, .download-btn_back::before {
+                font-size: 0.7rem;
+                padding: 0.15rem 0.4rem;
+            }
+
+
+            .addon-content ul li,
+            .update-list li {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ナビゲーションバー -->
+    <nav>
+        <div class="logo-container">
+            <img src="../icon.png" alt="Logo Icon" class="logo-icon">
+            <div class="logo">HaruAddons</div>
+        </div>
+        <button class="menu-toggle">☰</button>
+        <ul>
+            <li><a href="../index.html">ホーム</a></li>
+            <li><a href="../developer_info.html">開発者情報</a></li>
+            <li><a href="../links.html">リンク</a></li>
+        </ul>
+    </nav>
+
+    <!-- アドオンヘッダー（画像とタイトルエリア） -->
+    <section class="addon-header">
+        <img src="../haruphone1.png" alt="HARUPhone1 Image">
+        <h1>HARUPhone1</h1>
+    </section>
+
+    <!-- アドオン紹介セクション -->
+    <section class="addon-page">
+        <div class="addon-content">
+            <div class="buttons">
+                <a href="./haruphone1.html" class="btn">戻る</a>
+            </div>
+
+            <h2>アドオンの入手</h2>
+            <p>HARUPhone1は以下のボタンからダウンロードできます。</p>
+            <div class="download-buttons">
+                <a href="https://harugames8686.github.io/HARUAddons/addonfile/HARUPhone1_v.2.3.6.mcaddon" class="download-btn">【mcaddon】HARUPhone1_v2.3.6</a>
+                <br>
+                <a href="https://harugames8686.github.io/HARUAddons/addonfile/HARUPhone1_v.2.3.6.zip" class="download-btn">【zip】HARUPhone1_v2.3.6</a>
+                <p class="version-info">・HARUPAY<br>・Quick<br>・メール<br>・オープンチャット<br>・Advance<br>・換金<br>・購入<br>・HARUAssistant<br>・HARU-X-Editor<br>・Short<br>・ブラウザ<br>・OperatorController<br>※その他にも様々な機能があります</p>
+            </div>
+            <div class="download-buttons">
+                <a href="./haruphone1_old.html" class="download-btn_back">過去バージョンのダウンロードページへ</a>
+                <br>
+                <p class="version-info">・不具合が見られる場合は、過去バージョンをお試しください</p>
+            </div>
+            <p>以下の配布サイトからもダウンロードできます。</p>
+            <div class="download-buttons">
+                <a href="https://minecraft-mcworld.com/84633/" class="download-btn_out">クラフターズコロニーでダウンロード</a>
+                <p class="version-info">常に最新バージョンをダウンロードできます</p>
+            </div>
+            <h2>導入方法</h2>
+            <p>HARUPhone1をゲーム内で使用するための設定手順を説明します。以下のステップを順に進めてください。</p>
+            
+            <h3>1. ワールド設定</h3>
+            <p>ワールドを作成または編集する際に、以下の設定を有効にしてください：</p>
+            <ul>
+                <li>チートの有効化</li>
+                <li>Beta APIの有効化</li>
+                <li>コマンドを実行</li>
+            </ul>
+
+            <h3>2. スマホの配布</h3>
+            <p>ゲーム内で以下のコマンドを実行してください：</p>
+            <p style="font-weight: bold; color: #2c3e50; background-color: #f0f0f0; padding: 0.5rem; border-radius: 5px;">/function op</p>
+            <p>これにより、スマホ（HARUPhone1）がプレイヤーに配布されます。</p>
+
+            <h3>3. スマホの開き方</h3>
+            <p>配布されたスマホを開く方法はプレイ環境によって異なります：</p>
+            <ul class="update-list">
+                <li>PC版 → 右クリック</li>
+                <li>スマホ版 → 画面長押し</li>
+            </ul>
+
+            <h3>4. 初期金額の設定</h3>
+            <p>スマホを開いた後、初期金額を設定します：</p>
+            <ul>
+                <li>スマホを開く</li>
+                <li>初期金額を決定（例: 2000）</li>
+            </ul>
+            <p>これで基本設定は完了です！HARUPhone1をお楽しみください。</p>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer>
+        <p>© 2025 HaruAddons. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
