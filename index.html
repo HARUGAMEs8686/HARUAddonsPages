@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="9S9blQzCvgIm-0eArJeotUn8jH2cKG7KbiQ1VUnwNDQ" />
-    <title>HARU Addons - Minecraft BEアドオン配布＆開発</title>
+    <title>HARU Addons 公式サイト - Minecraft BEアドオン配布</title>
     <meta name="description" content="Minecraft統合版のアドオン開発チーム『HARU Addons』の公式サイト!経済システムや荒らし対策など、多彩で高品質なアドオンを公開中！">
     <meta property="og:title" content="HARU Addons | マイクラBEアドオン配布＆開発">
     <meta property="og:image" content="https://harugames8686.github.io/HARUAddonsPages/ogp-image.png">
@@ -14,547 +14,713 @@
     <link rel="canonical" href="https://harugames8686.github.io/HARUAddonsPages/">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" type="image/png" href="https://harugames8686.github.io/HARUAddonsPages/icon.png" sizes="32x32">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+
     <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "HARU Addonsのアドオン一覧",
-  "itemListElement": [
     {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "HARUPhone1 - 経済システム",
-      "url": "https://harugames8686.github.io/HARUAddonsPages/haruphone1/haruphone1"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "SecurityCraft - 荒らし対策",
-      "url": "https://harugames8686.github.io/HARUAddonsPages/securitycraft/securitycraft_introduction"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": "CommandShortCut - ショートカット",
-      "url": "https://harugames8686.github.io/HARUAddonsPages/commandshortcut/commandshortcut"
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "HARU Addonsのアドオン一覧",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "HARUPhone1 - 経済システム",
+          "url": "https://harugames8686.github.io/HARUAddonsPages/haruphone1/haruphone1"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "SecurityCraft - 荒らし対策",
+          "url": "https://harugames8686.github.io/HARUAddonsPages/securitycraft/securitycraft_introduction"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "CommandShortCut - ショートカット",
+          "url": "https://harugames8686.github.io/HARUAddonsPages/commandshortcut/commandshortcut"
+        }
+      ]
     }
-  ]
-}
-</script>
+    </script>
     <style>
         :root {
-            --shadow-teal: #2dd4bf; /* support.htmlから採用 */
-            --midnight-blue: #1e3a8a;
-            --glow-purple: #a855f7; /* support.htmlから採用 */
-            --dark-bg: #0f172a;
-            --text-light: #f1f5f9; /* support.htmlから採用 */
-            --glass-bg: rgba(45, 55, 72, 0.6); /* support.htmlから採用 */
-            --accent-gradient: linear-gradient(135deg, #2dd4bf, #a855f7); /* support.htmlから採用 */
+            /* --- ✨ 明るい配色テーマ ✨ --- */
+            --bg-light: #f8f9fa;       /* 全体の背景色 (明るいグレー) */
+            --bg-white: #ffffff;       /* カードなどの背景色 (白) */
+            --text-dark: #343a40;      /* 基本のテキスト色 (濃いグレー) */
+            --text-muted: #6c757d;     /* やや薄いテキスト色 */
+            --primary: #007bff;        /* メインカラー (明るい青) */
+            --primary-light: #e6f2ff;  /* メインカラーの薄い色 (ホバー背景など) */
+            --accent: #28a745;         /* アクセントカラー (緑) */
+            --accent-light: #eaf6ec;   /* アクセントカラーの薄い色 */
+            --border-color: #dee2e6;   /* 境界線の色 */
+            --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08); /* 柔らかい影 */
+            --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.12); /* ホバー時の影 */
+            --font-sans-jp: 'Noto Sans JP', sans-serif;
+            --font-rounded: 'M PLUS Rounded 1c', sans-serif; /* 親しみやすい丸ゴシック */
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Roboto', 'Noto Sans JP', sans-serif; /* support.htmlに合わせる */
         }
 
         body {
-            background: var(--dark-bg) url('./thumbnail.png') center/cover no-repeat fixed;
-            color: var(--text-light);
-            line-height: 1.6;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            font-family: var(--font-sans-jp);
+            line-height: 1.7; /* 行間を少し広げる */
             overflow-x: hidden;
         }
 
-        /* ナビゲーションのデザインをsupport.htmlに寄せる */
+        /* --- ☁️ ナビゲーション ☁️ --- */
         nav {
             position: fixed;
-            top: 10px;
+            top: 15px; /* 少し下に */
             left: 50%;
             transform: translateX(-50%);
-            width: 95%;
-            max-width: 1000px;
-            background: rgba(30, 58, 138, 0.2);
-            backdrop-filter: blur(12px);
-            border-radius: 20px;
-            padding: 0.8rem 1.5rem;
+            width: calc(100% - 40px); /* 左右に余白 */
+            max-width: 1100px;
+            background: rgba(255, 255, 255, 0.85); /* 白っぽい半透明 */
+            backdrop-filter: blur(10px);
+            border-radius: 30px; /* 角丸を大きく */
+            padding: 0.8rem 1.8rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            transition: padding 0.3s, background 0.3s;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
         }
 
         nav.scrolled {
-            padding: 0.5rem 1rem;
-            background: rgba(30, 58, 138, 0.5);
+            top: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 0.6rem; /* support.htmlに合わせる */
+            gap: 0.8rem;
+            text-decoration: none; /* ロゴのアンダーラインを削除 */
         }
 
         .logo-container img {
-            width: 32px; /* support.htmlに合わせる */
-            height: 32px;
-            transition: transform 0.3s;
+            width: 35px; /* 少し大きく */
+            height: 35px;
+            transition: transform 0.3s ease;
         }
-
         .logo-container:hover img {
-            transform: scale(1.05);
+            transform: rotate(15deg); /* ホバーで少し回転 */
         }
 
         .logo-container .logo {
-            font-size: 1.5rem; /* support.htmlに合わせる */
+            font-size: 1.6rem; /* 元のサイズに戻す */
             font-weight: 700;
-            font-family: 'Montserrat', sans-serif;
-            color: var(--shadow-teal);
+            font-family: var(--font-rounded); /* 丸ゴシック */
+            color: var(--primary); /* 元の色（青）に */
             letter-spacing: 0.5px;
-            background: linear-gradient(90deg, #bcc8e7, #9fbfdb);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 1.5rem; /* support.htmlに合わせる */
+            gap: 1rem; /* 少し間隔を調整 */
         }
 
         nav ul li a {
-            color: var(--text-light);
+            color: var(--text-muted); /* やや薄い色に */
             text-decoration: none;
-            font-size: 1rem; /* support.htmlに合わせる */
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 10px;
-            transition: all 0.3s;
+            font-size: 1rem;
+            font-weight: 700; /* 少し太く */
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px; /* 角丸 */
+            transition: all 0.3s ease;
         }
 
-        nav ul li a:hover {
-            background: rgba(38, 166, 154, 0.3);
-            color: var(--shadow-teal);
-            box-shadow: 0 0 5px var(--shadow-teal);
+        nav ul li a:hover,
+        nav ul li a.active { /* アクティブなリンク（必要ならJSでクラス付与） */
+            background: var(--primary-light);
+            color: var(--primary);
+            transform: translateY(-2px);
         }
 
+        /* --- 🍔 モバイルメニュー 🍔 --- */
         .menu-toggle {
             display: none;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             background: none;
             border: none;
-            color: var(--shadow-teal);
+            color: var(--primary); /* メインカラー */
             cursor: pointer;
-            transition: transform 0.3s;
+            padding: 5px;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        .menu-toggle:hover {
+            background-color: var(--primary-light);
         }
 
         .menu-toggle span {
             display: block;
-            width: 22px; /* support.htmlに合わせる */
+            width: 25px;
             height: 3px;
-            background: var(--shadow-teal);
-            margin: 4px 0;
-            transition: all 0.3s;
+            background: var(--primary);
+            margin: 5px 0;
+            border-radius: 3px;
+            transition: all 0.3s ease;
         }
-
-        .menu-toggle:hover {
-            transform: scale(1.05);
+        /* ハンバーガーメニューのアニメーション（開いたとき）*/
+        .menu-toggle.open span:nth-child(1) {
+             transform: translateY(8px) rotate(45deg);
+        }
+        .menu-toggle.open span:nth-child(2) {
+             opacity: 0;
+        }
+        .menu-toggle.open span:nth-child(3) {
+             transform: translateY(-8px) rotate(-45deg);
         }
 
         .mobile-nav {
             display: none;
             position: fixed;
-            top: 60px; /* support.htmlに合わせる */
-            right: 10px;
-            width: 200px; /* support.htmlに合わせる */
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(15px);
+            top: 80px; /* ナビゲーションの下に配置 */
+            right: 20px;
+            width: 220px;
+            background: var(--bg-white);
             border-radius: 15px;
             padding: 1rem;
             z-index: 999;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
-            transform: translateY(-20px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            transform: translateY(-10px);
             opacity: 0;
             transition: all 0.3s ease;
+            list-style: none; /* ul要素に直接適用 */
         }
 
         .mobile-nav.active {
-            display: block;
+            display: block; /* ul要素を表示 */
             transform: translateY(0);
             opacity: 1;
         }
 
-        .mobile-nav ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem; /* support.htmlに合わせる */
+        .mobile-nav li { /* liを追加 */
+             margin-bottom: 0.5rem; /* 各項目に少し間隔 */
         }
 
-        .mobile-nav ul li a {
-            color: var(--text-light);
+        .mobile-nav li a { /* aタグのスタイル */
+            color: var(--text-dark);
             text-decoration: none;
-            font-size: 1rem; /* support.htmlに合わせる */
-            font-weight: 500;
-            padding: 0.6rem 1rem;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 0.8rem 1.2rem; /* パディング調整 */
             border-radius: 10px;
             display: block;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
         }
 
-        .mobile-nav ul li a:hover {
-            background: var(--shadow-teal);
-            color: var(--dark-bg);
+        .mobile-nav li a:hover {
+            background: var(--primary-light);
+            color: var(--primary);
         }
 
-        /* 既存のスタイルはそのまま維持 */
+        /* --- ☀️ ヒーローセクション ☀️ --- */
         .hero {
-            min-height: 85vh;
+            min-height: 70vh; /* 少し高さを抑える */
             display: flex;
+            flex-direction: column; /* コンテンツを縦に */
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 6rem 2rem 2rem;
+            padding: 120px 2rem 4rem; /* 上部のパディングを増やす */
+            background: linear-gradient(135deg, #e7f3ff 0%, #f8f9fa 100%); /* 明るいグラデーション */
             position: relative;
-            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.9));
+            overflow: hidden; /* 装飾要素のため */
+        }
+        /* ちょっとした装飾 */
+        .hero::before {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 100px;
+            right: -80px;
+            width: 250px;
+            height: 250px;
+            background: var(--accent-light);
+            border-radius: 50%;
+            opacity: 0.6;
         }
 
         .hero-content {
-            max-width: 800px;
+            max-width: 700px; /* 少し狭める */
             position: relative;
             z-index: 1;
         }
 
         .hero h1 {
-            font-size: 4.5rem;
+            font-size: 3.8rem; /* 少し調整 */
             font-weight: 700;
-            color: #d7f7ff;
-            margin-bottom: 1.5rem;
-            animation: fadeInGlow 1.5s ease-out;
+            font-family: var(--font-rounded);
+            color: var(--primary);
+            margin-bottom: 1rem;
+            line-height: 1.2;
         }
 
         .hero p {
-            font-size: 1.6rem;
-            font-weight: 500;
-            color: var(--text-light);
-            opacity: 0.9;
+            font-size: 1.3rem; /* 少し調整 */
+            color: var(--text-muted);
             margin-bottom: 2.5rem;
         }
 
+        .hero .cta-container {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem; /* ボタン間の間隔 */
+        }
+
         .hero .cta {
-            padding: 1.2rem 3rem;
-            background: var(--glow-purple);
-            color: var(--text-light);
+            padding: 1rem 2.8rem;
+            background: var(--accent); /* アクセントカラー */
+            color: var(--bg-white);
             text-decoration: none;
-            font-size: 1.3rem;
-            font-weight: 600;
+            font-size: 1.1rem;
+            font-weight: 700;
             border-radius: 50px;
-            border: 2px solid var(--text-light);
-            transition: all 0.3s;
-            box-shadow: 0 0 10px var(--glow-purple);
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3); /* ボタン色に合わせた影 */
+            display: inline-block; /* ボタンらしく */
         }
 
         .hero .cta:hover {
-            background: var(--shadow-teal);
-            color: var(--dark-bg);
+            background: #218838; /* 少し濃い緑 */
             transform: translateY(-3px);
-            box-shadow: 0 0 15px var(--shadow-teal);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
         }
 
+        .hero .cta.news {
+            background: var(--primary); /* ニュースボタンは青 */
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3); /* 青い影 */
+        }
+
+        .hero .cta.news:hover {
+            background: #0056b3; /* 少し濃い青 */
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+        }
+
+        /* --- 🧩 アドオンリスト 🧩 --- */
         .addon-list {
-            padding: 6rem 2rem;
-            background: rgba(15, 23, 42, 0.85);
-            border-radius: 40px 40px 0 0;
-            margin-top: -40px;
+            padding: 5rem 2rem 2rem; /* 下部パディングを減らす */
+            background-color: var(--bg-light); /* ボディと同じ背景色 */
             position: relative;
             z-index: 0;
+            margin-bottom: 2rem; /* ニュースセクションとの間隔を追加 */
         }
 
         .addon-list h2 {
-            font-size: 3rem;
+            font-size: 2.5rem; /* 少し調整 */
             font-weight: 700;
+            font-family: var(--font-rounded);
             text-align: center;
-            color: var(--shadow-teal);
-            margin-bottom: 4rem;
-            text-shadow: 0 0 8px var(--shadow-teal);
+            color: var(--text-dark); /* 暗めのテキスト色 */
+            margin-bottom: 3.5rem;
+            position: relative;
+            display: inline-block; /* 下線のため */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        /* 見出しの下線 */
+        .addon-list h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
         }
 
         .addon-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
-            gap: 3rem;
-            max-width: 1440px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem; /* ギャップ調整 */
+            max-width: 1200px; /* 最大幅 */
             margin: 0 auto;
         }
 
         .addon-item {
-            position: relative;
-            border-radius: 25px;
+            border-radius: 16px; /* 角丸を調整 */
             overflow: hidden;
-            transition: all 0.3s;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease-in-out;
+            box-shadow: var(--shadow-soft);
+            background: var(--bg-white); /* 白背景 */
             display: flex;
             flex-direction: column;
-            background: none;
-            align-items: center;
+            text-decoration: none; /* aタグに直接適用 */
+            color: inherit; /* 親要素の色を継承 */
         }
 
         .addon-item:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 25px rgba(38, 166, 154, 0.4);
+            transform: translateY(-5px); /* 少し浮き上がる */
+            box-shadow: var(--shadow-hover);
         }
 
-        .addon-item a {
+        .addon-item a { /* aタグ自体のスタイルはリセット */
             text-decoration: none;
-            color: var(--text-light);
+            color: inherit;
             display: flex;
             flex-direction: column;
             height: 100%;
-            align-items: center;
         }
 
         .addon-item img {
-            width: 90%;
+            width: 100%;
             aspect-ratio: 16 / 9;
-            object-fit: contain;
-            border-radius: 20px;
-            transition: all 0.3s;
-            background: rgba(0, 0, 0, 0.3);
+            object-fit: cover; /* 画像がコンテナ全体を覆うように */
+            border-bottom: 1px solid var(--border-color); /* 画像とテキストの区切り */
+            transition: transform 0.3s ease;
         }
-
         .addon-item:hover img {
-            filter: brightness(1.05);
+            transform: scale(1.03); /* ホバーで画像を少し拡大 */
         }
 
         .addon-item .title-container {
-            padding: 0.6rem 1rem;
-            text-align: center;
-            background: rgba(39, 45, 92, 0.75);
-            border-radius: 20px;
-            margin: 8px auto 12px;
-            backdrop-filter: blur(8px);
-            width: 70%;
-            max-width: 350px;
-            transition: all 0.3s;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25), inset 0 0 6px rgba(255, 255, 255, 0.15);
-        }
-
-        .addon-item:hover .title-container {
-            background: rgba(38, 166, 154, 0.65);
-            box-shadow: 0 6px 16px rgba(38, 166, 154, 0.3), inset 0 0 8px rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.3);
+            padding: 1.2rem 1.5rem; /* パディング調整 */
+            text-align: center; /* 中央寄せ */
+            margin-top: auto; /* 画像の下、常に下部に配置 */
+            background: var(--bg-white); /* 背景は白 */
         }
 
         .addon-item .title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            font-family: 'Noto Sans JP', sans-serif;
-            color: var(--text-light);
-            text-shadow: 0 0 6px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.3);
+            font-size: 1.25rem; /* 少し大きく */
+            font-weight: 700;
+            font-family: var(--font-sans-jp); /* 通常のゴシック体 */
+            color: var(--text-dark);
+            margin-bottom: 0.25rem; /* 少し下に余白 */
         }
 
-        footer {
-            background: linear-gradient(180deg, rgba(10, 17, 32, 0.9), rgba(15, 23, 42, 0.8)); /* support.htmlから採用 */
-            color: var(--text-light);
+        /* --- 📰 ニュースセクション 📰 --- */
+        .news-section {
+            padding: 2rem 2rem 5rem; /* 上部パディングを減らし、下部を増やす */
+            background-color: var(--bg-white);
+            position: relative;
+            z-index: 0;
+        }
+
+        .news-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: var(--font-rounded);
             text-align: center;
-            padding: 1.5rem; /* support.htmlに合わせる */
-            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3); /* support.htmlから採用 */
+            color: var(--text-dark);
+            margin-bottom: 3.5rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .news-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .news-item {
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+            box-shadow: var(--shadow-soft);
+            background: var(--bg-light);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .news-item .news-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .news-item .news-date {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .news-item .news-content {
+            font-size: 1rem;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* --- 🦶 フッター 🦶 --- */
+        footer {
+            background-color: var(--text-dark); /* 濃いグレー */
+            color: var(--bg-light); /* 明るいテキスト色 */
+            text-align: center;
+            padding: 2rem 1rem; /* パディング調整 */
+            margin-top: 4rem; /* 上に十分なスペース */
         }
 
         footer p {
-            font-size: 0.9rem; /* support.htmlに合わせる */
-            opacity: 0.9;
-            letter-spacing: 0.5px; /* support.htmlから採用 */
+            font-size: 0.9rem;
+            opacity: 0.8; /* 少し透明度 */
+            letter-spacing: 0.5px;
         }
 
-        @keyframes fadeInGlow {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* レスポンシブデザインをsupport.htmlに寄せつつ、さらに洗練 */
-        @media (max-width: 1024px) {
-            .addon-grid {
-                grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        /* --- 🔄 レスポンシブデザイン 🔄 --- */
+        @media (max-width: 992px) {
+            nav ul {
+                gap: 0.5rem; /* ナビゲーションの間隔を狭める */
+            }
+            nav ul li a {
+                padding: 0.5rem 0.8rem;
+            }
+            .hero h1 {
+                font-size: 3rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .hero .cta-container {
+                flex-direction: column; /* ボタンを縦に */
+                gap: 1rem;
             }
         }
 
         @media (max-width: 768px) {
             nav {
-                top: 10px;
-                width: 95%;
-                padding: 0.8rem 1rem;
+                padding: 0.6rem 1rem; /* パディング縮小 */
+                width: calc(100% - 30px);
             }
-
             .menu-toggle {
-                display: block;
+                display: block; /* ハンバーガーメニュー表示 */
             }
-
             nav ul {
-                display: none;
+                display: none; /* PC用メニュー非表示 */
             }
-
+            .hero {
+                min-height: 60vh;
+                padding-top: 100px;
+            }
             .hero h1 {
-                font-size: 3rem;
+                font-size: 2.5rem;
             }
-
             .hero p {
-                font-size: 1.3rem;
+                font-size: 1rem;
                 padding: 0 1rem;
             }
-
-            .hero .cta {
-                padding: 1rem 2rem;
-                font-size: 1.1rem;
-            }
-
             .addon-list {
-                padding: 4rem 1rem;
+                padding: 4rem 1rem 1rem;
+                margin-bottom: 1rem;
             }
-
             .addon-list h2 {
-                font-size: 2.2rem;
+                font-size: 2rem;
+            }
+            .addon-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 1.5rem;
+            }
+            .news-section {
+                padding: 1rem 1rem 4rem;
+            }
+            .news-section h2 {
+                font-size: 2rem;
+            }
+            .news-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 1.5rem;
             }
         }
 
         @media (max-width: 480px) {
+            body {
+                line-height: 1.6;
+            }
             .logo-container .logo {
-                font-size: 1.3rem; /* support.htmlに合わせる */
+                font-size: 1.3rem;
             }
-
             .logo-container img {
-                width: 28px; /* support.htmlに合わせる */
-                height: 28px;
+                width: 30px;
+                height: 30px;
             }
-
             .mobile-nav {
-                width: 180px; /* support.htmlに合わせ、さらに小さく */
-                right: 5px; /* support.htmlに合わせる */
-                top: 55px; /* support.htmlに合わせる */
+                width: 200px;
+                top: 70px;
+                right: 15px;
             }
-
-            .mobile-nav ul li a {
-                font-size: 0.9rem; /* support.htmlに合わせる */
-                padding: 0.5rem 0.8rem; /* support.htmlに合わせる */
+            .hero {
+                padding-top: 80px;
             }
-
             .hero h1 {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
-
             .hero p {
+                font-size: 0.9rem;
+                margin-bottom: 2rem;
+            }
+            .hero .cta {
+                padding: 0.8rem 2rem;
                 font-size: 1rem;
             }
-
-            .addon-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            .addon-list h2 {
+                font-size: 1.8rem;
+                margin-bottom: 2.5rem;
             }
-
+            .addon-list h2::after {
+                width: 50px;
+                height: 3px;
+                bottom: -8px;
+            }
+            .news-section h2 {
+                font-size: 1.8rem;
+                margin-bottom: 2.5rem;
+            }
+            .news-section h2::after {
+                width: 50px;
+                height: 3px;
+                bottom: -8px;
+            }
             .addon-item .title {
                 font-size: 1.1rem;
             }
-
-            .addon-item .title-container {
-                width: 85%;
-                max-width: 300px;
-            }
-
-            footer {
-                padding: 1rem; /* support.htmlに合わせる */
-            }
-
-            footer p {
-                font-size: 0.85rem; /* support.htmlに合わせる */
-            }
-        }
-
-        @media (hover: none) {
-            .logo-container:hover img,
-            nav ul li a:hover,
-            .addon-item:hover,
-            .hero .cta:hover {
-                transform: none;
-                box-shadow: inherit;
+            .news-item .news-title {
+                font-size: 1.1rem;
             }
         }
     </style>
 </head>
 <body>
     <nav>
-        <div class="logo-container">
+        <a href="./index.html" class="logo-container"> 
             <img src="./icon.png" alt="HARU Addons Icon" loading="lazy">
             <div class="logo">HARUAddons</div>
-        </div>
-        <button class="menu-toggle" aria-label="メニューを開く" aria-expanded="false">
+        </a>
+        <ul>
+            <li><a href="./index.html" class="active">ホーム</a></li> 
+            <li><a href="./Assistant/support.html">Assistant</a></li>
+            <li><a href="./developer_info.html">開発者情報</a></li>
+            <li><a href="./links.html">リンク</a></li>
+            <li><a href="./tweets.html">Tweet</a></li>
+        </ul>
+        <button class="menu-toggle" aria-label="メニューを開閉する" aria-expanded="false">
             <span></span>
             <span></span>
             <span></span>
         </button>
-        <ul>
-            <li><a href="./index.html">ホーム</a></li>
-            <li><a href="./Assistant/support.html">Assistant</a></li>
-            <li><a href="./developer_info.html">開発者情報</a></li>
-            <li><a href="./links.html">リンク</a></li>
-            <li><a href="./tweets.html">Tweet</a></li>
-        </ul>
     </nav>
 
-    <div class="mobile-nav">
-        <ul>
-            <li><a href="./index.html">ホーム</a></li>
-            <li><a href="./Assistant/support.html">Assistant</a></li>
-            <li><a href="./developer_info.html">開発者情報</a></li>
-            <li><a href="./links.html">リンク</a></li>
-            <li><a href="./tweets.html">Tweet</a></li>
-        </ul>
-    </div>
+    <ul class="mobile-nav">
+        <li><a href="./index.html">ホーム</a></li>
+        <li><a href="./Assistant/support.html">Assistant</a></li>
+        <li><a href="./developer_info.html">開発者情報</a></li>
+        <li><a href="./links.html">リンク</a></li>
+        <li><a href="./tweets.html">Tweet</a></li>
+    </ul>
 
     <section class="hero">
         <div class="hero-content">
             <h1>HARU Addons</h1>
-            <p>高品質なアドオンで新しい体験を</p>
-            <a href="#addons" class="cta" onclick="scrollToAddons(event)">アドオン一覧</a>
+            <p>高品質なMinecraftアドオンで、あなたのワールドをもっと楽しく！</p>
+            <div class="cta-container">
+                <a href="#addons" class="cta" onclick="scrollToAddons(event)">◆ アドオンを見る ◆</a>
+                <a href="#news" class="cta news" onclick="scrollToNews(event)">◆ 最新情報 ◆</a>
+            </div>
         </div>
     </section>
 
     <section class="addon-list" id="addons">
+        <h2>公開中のアドオン</h2>
         <div class="addon-grid">
-            <div class="addon-item">
-                <a href="./haruphone1/haruphone1.html">
-                    <img src="./haruphone1.png" alt="HARUPhone1" loading="lazy">
-                    <div class="title-container">
-                        <div class="title">HARUPhone1</div>
-                    </div>
-                </a>
+            <a href="./haruphone1/haruphone1.html" class="addon-item">
+                <img src="./haruphone1.png" alt="HARUPhone1 アドオン" loading="lazy">
+                <div class="title-container">
+                    <div class="title">HARUPhone1</div>
+                </div>
+            </a>
+            <a href="./securitycraft/securitycraft_introduction.html" class="addon-item">
+                <img src="./SecurityCraft.png" alt="SecurityCraft アドオン" loading="lazy">
+                <div class="title-container">
+                    <div class="title">SecurityCraft</div>
+                </div>
+            </a>
+            <a href="./commandshortcut/commandshortcut.html" class="addon-item">
+                <img src="./CommandShortCut.jpg" alt="CommandShortCut アドオン" loading="lazy">
+                <div class="title-container">
+                    <div class="title">CommandShortCut</div>
+                </div>
+            </a>
+            <a href="./communicationplus/communicationplus.html" class="addon-item">
+                <img src="./CommunicationPlus.png" alt="CommunicationPlus アドオン" loading="lazy">
+                <div class="title-container">
+                    <div class="title">CommunicationPlus</div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section class="news-section" id="news">
+        <h2>最新ニュース</h2>
+        <div class="news-grid">
+            <div class="news-item">
+                <div class="news-title">HARUPhone1 新バージョンリリース</div>
+                <div class="news-date">2025年4月15日</div>
+                <div class="news-content">
+                    HARUPhone1の最新バージョン1.2.0をリリースしました。新しい経済機能とUIの改善を追加しました。詳細はアドオンページをご覧ください。
+                </div>
             </div>
-            <div class="addon-item">
-                <a href="./securitycraft/securitycraft_introduction.html">
-                    <img src="./SecurityCraft.png" alt="SecurityCraft" loading="lazy">
-                    <div class="title-container">
-                        <div class="title">SecurityCraft</div>
-                    </div>
-                </a>
+            <div class="news-item">
+                <div class="news-title">SecurityCraftアップデート</div>
+                <div class="news-date">2025年4月10日</div>
+                <div class="news-content">
+                    SecurityCraftに新たな荒らし対策機能を追加しました。サーバー管理者の皆様、ぜひお試しください！
+                </div>
             </div>
-            <div class="addon-item">
-                <a href="./commandshortcut/commandshortcut.html">
-                    <img src="./CommandShortCut.jpg" alt="CommandShortCut" loading="lazy">
-                    <div class="title-container">
-                        <div class="title">CommandShortCut</div>
-                    </div>
-                </a>
-            </div>
-            <div class="addon-item">
-                <a href="./communicationplus/communicationplus.html">
-                    <img src="./CommunicationPlus.png" alt="CommunicationPlus" loading="lazy">
-                    <div class="title-container">
-                        <div class="title">CommunicationPlus</div>
-                    </div>
-                </a>
+            <div class="news-item">
+                <div class="news-title">コミュニティイベント開催予定</div>
+                <div class="news-date">2025年4月5日</div>
+                <div class="news-content">
+                    5月にHARU Addonsコミュニティイベントを開催予定です。詳細は近日公開！Twitterで最新情報をチェックしてください。
+                </div>
             </div>
         </div>
     </section>
@@ -564,21 +730,30 @@
     </footer>
 
     <script>
+        // スムーススクロール
         function scrollToAddons(event) {
             event.preventDefault();
-            document.getElementById('addons').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('addons').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
+        function scrollToNews(event) {
+            event.preventDefault();
+            document.getElementById('news').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // モバイルメニューの開閉
         const menuToggle = document.querySelector('.menu-toggle');
         const mobileNav = document.querySelector('.mobile-nav');
         menuToggle.addEventListener('click', () => {
             const isExpanded = mobileNav.classList.toggle('active');
             menuToggle.setAttribute('aria-expanded', isExpanded);
+            menuToggle.classList.toggle('open'); // アイコンアニメーション用クラス
         });
 
+        // スクロールでナビゲーションのスタイル変更
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
+            if (window.scrollY > 30) { // 少し早めに変化
                 nav.classList.add('scrolled');
             } else {
                 nav.classList.remove('scrolled');

@@ -3,150 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>開発者つぶやき - HARU Addons</title>
+    <meta name="google-site-verification" content="9S9blQzCvgIm-0eArJeotUn8jH2cKG7KbiQ1VUnwNDQ" />
+    <title>HaruAddons - 開発者つぶやき</title>
     <meta name="description" content="HARU Addons開発者のつぶやきページ。開発の裏話や最新情報をチェック！">
-    <meta property="og:title" content="開発者つぶやき | HARU Addons">
-    <meta property="og:image" content="https://harugames8686.github.io/HARUAddons/ogp-image.png">
-    <meta property="og:url" content="https://harugames8686.github.io/HARUAddons/devtweets.html">
+    <meta property="og:title" content="HaruAddons | 開発者つぶやき">
+    <meta property="og:image" content="https://harugames8686.github.io/HARUAddonsPages/ogp-image.png">
+    <meta property="og:url" content="https://harugames8686.github.io/HARUAddonsPages/tweets.html">
     <meta property="og:description" content="HARU Addons開発者のつぶやきをチェック！">
     <meta property="og:type" content="website">
-    <link rel="canonical" href="https://harugames8686.github.io/HARUAddons/devtweets.html">
+    <link rel="canonical" href="https://harugames8686.github.io/HARUAddonsPages/tweets.html">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="icon" type="image/png" href="https://harugames8686.github.io/HARUAddons/icon.png" sizes="32x32">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="./icon.png" sizes="32x32">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --shadow-teal: #2dd4bf;
-            --midnight-blue: #1e3a8a;
-            --glow-purple: #a855f7;
-            --dark-bg: #0f172a;
-            --text-light: #f1f5f9;
-            --glass-bg: rgba(45, 55, 72, 0.6);
-            --accent-gradient: linear-gradient(135deg, #2dd4bf, #a855f7);
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --text-dark: #343a40;
+            --text-muted: #6c757d;
+            --primary: #007bff;
+            --primary-light: #e6f2ff;
+            --accent: #28a745;
+            --accent-light: #eaf6ec;
+            --border-color: #dee2e6;
+            --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.12);
+            --font-sans-jp: 'Noto Sans JP', sans-serif;
+            --font-rounded: 'M PLUS Rounded 1c', sans-serif;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Roboto', 'Noto Sans JP', sans-serif;
         }
 
         body {
-            background: var(--dark-bg) url('./thumbnail.png') center/cover no-repeat fixed;
-            color: var(--text-light);
-            line-height: 1.6;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            font-family: var(--font-sans-jp);
+            line-height: 1.7;
             overflow-x: hidden;
         }
 
         nav {
             position: fixed;
-            top: 10px;
+            top: 15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 95%;
-            max-width: 1000px;
-            background: rgba(30, 58, 138, 0.2);
-            backdrop-filter: blur(12px);
-            border-radius: 20px;
-            padding: 0.8rem 1.5rem;
+            width: calc(100% - 40px);
+            max-width: 1100px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 0.8rem 1.8rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            transition: padding 0.3s, background 0.3s;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
         }
 
         nav.scrolled {
-            padding: 0.5rem 1rem;
-            background: rgba(30, 58, 138, 0.5);
+            top: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.8rem;
+            text-decoration: none;
         }
 
         .logo-container img {
-            width: 32px;
-            height: 32px;
-            transition: transform 0.3s;
+            width: 35px;
+            height: 35px;
+            transition: transform 0.3s ease;
         }
-
         .logo-container:hover img {
-            transform: scale(1.05);
+            transform: rotate(15deg);
         }
 
         .logo-container .logo {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 700;
-            font-family: 'Montserrat', sans-serif;
-            color: var(--shadow-teal);
+            font-family: var(--font-rounded);
+            color: var(--primary);
             letter-spacing: 0.5px;
-            background: linear-gradient(90deg, #bcc8e7, #9fbfdb);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 1.5rem;
+            gap: 1rem;
         }
 
         nav ul li a {
-            color: var(--text-light);
+            color: var(--text-muted);
             text-decoration: none;
             font-size: 1rem;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 10px;
-            transition: all 0.3s;
+            font-weight: 700;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
         }
 
-        nav ul li a:hover {
-            background: rgba(38, 166, 154, 0.3);
-            color: var(--shadow-teal);
-            box-shadow: 0 0 5px var(--shadow-teal);
+        nav ul li a:hover,
+        nav ul li a.active {
+            background: var(--primary-light);
+            color: var(--primary);
+            transform: translateY(-2px);
         }
 
         .menu-toggle {
             display: none;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             background: none;
             border: none;
-            color: var(--shadow-teal);
+            color: var(--primary);
             cursor: pointer;
-            transition: transform 0.3s;
+            padding: 5px;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        .menu-toggle:hover {
+            background-color: var(--primary-light);
         }
 
         .menu-toggle span {
             display: block;
-            width: 22px;
+            width: 25px;
             height: 3px;
-            background: var(--shadow-teal);
-            margin: 4px 0;
-            transition: all 0.3s;
+            background: var(--primary);
+            margin: 5px 0;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        .menu-toggle.open span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .menu-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.open span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
         }
 
         .mobile-nav {
             display: none;
             position: fixed;
-            top: 60px;
-            right: 10px;
-            width: 200px;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(15px);
+            top: 80px;
+            right: 20px;
+            width: 220px;
+            background: var(--bg-white);
             border-radius: 15px;
             padding: 1rem;
             z-index: 999;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
-            transform: translateY(-20px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            transform: translateY(-10px);
             opacity: 0;
             transition: all 0.3s ease;
+            list-style: none;
         }
 
         .mobile-nav.active {
@@ -155,44 +178,52 @@
             opacity: 1;
         }
 
-        .mobile-nav ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
+        .mobile-nav li {
+            margin-bottom: 0.5rem;
         }
 
-        .mobile-nav ul li a {
-            color: var(--text-light);
+        .mobile-nav li a {
+            color: var(--text-dark);
             text-decoration: none;
             font-size: 1rem;
-            font-weight: 500;
-            padding: 0.6rem 1rem;
+            font-weight: 700;
+            padding: 0.8rem 1.2rem;
             border-radius: 10px;
             display: block;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
         }
 
-        .mobile-nav ul li a:hover {
-            background: var(--shadow-teal);
-            color: var(--dark-bg);
+        .mobile-nav li a:hover {
+            background: var(--primary-light);
+            color: var(--primary);
         }
 
         .tweets-section {
-            min-height: 85vh;
-            padding: 6rem 2rem 2rem;
-            background: rgba(15, 23, 42, 0.85);
-            border-radius: 40px 40px 0 0;
-            margin-top: 20px;
+            padding: 8rem 2rem 5rem;
+            background-color: var(--bg-light);
+            text-align: center;
         }
 
         .tweets-section h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            text-align: center;
-            color: #bef3e3;
+            font-family: var(--font-rounded);
+            color: var(--primary);
             margin-bottom: 2rem;
-            text-shadow: 0 0 8px var(--shadow-teal);
+            position: relative;
+            display: inline-block;
+        }
+
+        .tweets-section h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
         }
 
         .tweets-container {
@@ -201,120 +232,165 @@
         }
 
         .tweet {
-            background: var(--glass-bg);
+            background: var(--bg-white);
             padding: 1.5rem;
-            border-radius: 20px;
+            border-radius: 16px;
             margin-bottom: 1.5rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: var(--shadow-soft);
+            text-align: left;
         }
 
         .tweet p {
             font-size: 1.1rem;
-            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+        }
+
+        .tweet img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            margin: 1rem auto;
+            border-radius: 12px;
+            box-shadow: var(--shadow-soft);
+            object-fit: contain;
+            display: block;
         }
 
         .tweet .timestamp {
             font-size: 0.9rem;
+            color: var(--text-muted);
             opacity: 0.7;
+            text-align: right;
         }
 
         footer {
-            background: linear-gradient(180deg, rgba(10, 17, 32, 0.9), rgba(15, 23, 42, 0.8));
-            color: var(--text-light);
+            background-color: var(--text-dark);
+            color: var(--bg-light);
             text-align: center;
-            padding: 1.5rem;
-            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
+            padding: 2rem 1rem;
+            margin-top: 4rem;
         }
 
         footer p {
             font-size: 0.9rem;
-            opacity: 0.9;
+            opacity: 0.8;
             letter-spacing: 0.5px;
         }
 
+        @media (max-width: 992px) {
+            nav ul {
+                gap: 0.5rem;
+            }
+            nav ul li a {
+                padding: 0.5rem 0.8rem;
+            }
+            .tweets-section h1 {
+                font-size: 2rem;
+            }
+        }
+
         @media (max-width: 768px) {
+            nav {
+                padding: 0.6rem 1rem;
+                width: calc(100% - 30px);
+            }
             .menu-toggle {
                 display: block;
             }
-
             nav ul {
                 display: none;
             }
-
+            .tweets-section {
+                padding: 6rem 1rem 4rem;
+            }
             .tweets-section h1 {
-                font-size: 2.2rem;
+                font-size: 1.8rem;
+            }
+            .tweet p {
+                font-size: 1rem;
+            }
+            .tweet img {
+                max-width: 100%;
+            }
+            .tweet .timestamp {
+                font-size: 0.85rem;
             }
         }
 
         @media (max-width: 480px) {
-            .tweet p {
-                font-size: 1rem;
+            body {
+                line-height: 1.6;
             }
-
+            .logo-container .logo {
+                font-size: 1.3rem;
+            }
+            .logo-container img {
+                width: 30px;
+                height: 30px;
+            }
+            .mobile-nav {
+                width: 200px;
+                top: 70px;
+                right: 15px;
+            }
+            .tweets-section {
+                padding: 5rem 0.5rem 3rem;
+            }
+            .tweets-section h1 {
+                font-size: 1.6rem;
+            }
+            .tweets-section h1::after {
+                width: 50px;
+                height: 3px;
+                bottom: -8px;
+            }
+            .tweet {
+                padding: 1rem;
+            }
+            .tweet p {
+                font-size: 0.9rem;
+            }
+            .tweet img {
+                margin: 0.8rem auto;
+            }
             .tweet .timestamp {
                 font-size: 0.8rem;
             }
         }
-.tweet img {
-    width: 100%;
-    max-width: 500px; /* 最大幅を制限して大きすぎないように */
-    height: auto; /* アスペクト比を維持 */
-    margin: 1rem auto; /* 上下に余白を追加し、中央寄せ */
-    border-radius: 15px; /* 角を丸くしてデザインに合わせる */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* 軽い影で立体感 */
-    object-fit: contain; /* 画像が枠に収まるように */
-}
-
-/* レスポンシブ対応 */
-@media (max-width: 768px) {
-    .tweet img {
-        max-width: 100%; /* 小さい画面では幅いっぱいに */
-    }
-}
     </style>
 </head>
 <body>
     <nav>
-        <div class="logo-container">
+        <a href="./index.html" class="logo-container"> 
             <img src="./icon.png" alt="HARU Addons Icon" loading="lazy">
             <div class="logo">HARUAddons</div>
-        </div>
-        <button class="menu-toggle" aria-label="メニューを開く" aria-expanded="false">
+        </a>
+        <ul>
+            <li><a href="./index.html">ホーム</a></li> 
+            <li><a href="./Assistant/support.html">Assistant</a></li>
+            <li><a href="./developer_info.html">開発者情報</a></li>
+            <li><a href="./links.html">リンク</a></li>
+            <li><a href="./tweets.html" class="active">Tweet</a></li>
+        </ul>
+        <button class="menu-toggle" aria-label="メニューを開閉する" aria-expanded="false">
             <span></span>
             <span></span>
             <span></span>
         </button>
-        <ul>
-            <li><a href="./index.html">ホーム</a></li>
-            <li><a href="./Assistant/support.html">Assistant</a></li>
-            <li><a href="./developer_info.html">開発者情報</a></li>
-            <li><a href="./links.html">リンク</a></li>
-            <li><a href="./tweets.html">Tweet</a></li>
-        </ul>
     </nav>
 
-    <div class="mobile-nav">
-        <ul>
-            <li><a href="./index.html">ホーム</a></li>
-            <li><a href="./Assistant/support.html">Assistant</a></li>
-            <li><a href="./developer_info.html">開発者情報</a></li>
-            <li><a href="./links.html">リンク</a></li>
-            <li><a href="./tweets.html">Tweet</a></li>
-        </ul>
-    </div>
+    <ul class="mobile-nav">
+        <li><a href="./index.html">ホーム</a></li>
+        <li><a href="./Assistant/support.html">Assistant</a></li>
+        <li><a href="./developer_info.html">開発者情報</a></li>
+        <li><a href="./links.html">リンク</a></li>
+        <li><a href="./tweets.html">Tweet</a></li>
+    </ul>
 
     <section class="tweets-section">
         <h1>Tweet</h1>
         <div class="tweets-container">
-            <!-- つぶやきを追加する場合は以下をコピペ -->
-            <!--
-            <div class="tweet">
-                <p>ここに新しいつぶやきを書く</p>
-                <div class="timestamp">日付と時間を書く</div>
-            </div>
-            -->
-
-            <!-- ここにつぶやきを追加していく -->
             <div class="tweet">
                 <p>SecurityCraftのX-ray検知システムにて、稀に誤検知がある可能性</p>
                 <p>X-ray検知システムはデフォルトで、Level3に設定されています。ですが、今月1件の誤検知の報告がございました！</p>
@@ -356,11 +432,12 @@
         menuToggle.addEventListener('click', () => {
             const isExpanded = mobileNav.classList.toggle('active');
             menuToggle.setAttribute('aria-expanded', isExpanded);
+            menuToggle.classList.toggle('open');
         });
 
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
+            if (window.scrollY > 30) {
                 nav.classList.add('scrolled');
             } else {
                 nav.classList.remove('scrolled');

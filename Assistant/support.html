@@ -3,857 +3,510 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>サポートチャット - HARU Addons</title>
-    <meta name="description" content="HARU Addonsのサポートチャットページ。アドオンに関する質問にお答えします！">
-    <meta property="og:image" content="https://haruaddons.pages.dev/ogp-image.png">
-    <meta property="og:url" content="https://haruaddons.pages.dev/support.html">
+    <meta name="google-site-verification" content="9S9blQzCvgIm-0eArJeotUn8jH2cKG7KbiQ1VUnwNDQ" />
+    <title>HARUassistant - Web Chat</title>
+    <meta name="description" content="HARUassistantでMinecraft統合版のアドオンについて気軽にチャット！HARU Addonsのサポートや質問に答えます。">
+    <meta property="og:title" content="HARUassistant | Web Chat - HARU Addons">
+    <meta property="og:image" content="https://harugames8686.github.io/HARUAddonsPages/ogp-image.png">
+    <meta property="og:url" content="https://harugames8686.github.io/HARUAddonsPages/Assistant/support.html">
+    <meta property="og:description" content="HARUassistantでHARU Addonsのアドオンについてチャット！Minecraft BEの質問やサポートをリアルタイムで。">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://harugames8686.github.io/HARUAddonsPages/Assistant/support.html">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="icon" type="image/png" href="../icon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+JP:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder"></script>
+    <link rel="icon" type="image/png" href="https://harugames8686.github.io/HARUAddonsPages/icon.png" sizes="32x32">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --shadow-teal: #2dd4bf;
-            --midnight-blue: #1e3a8a;
-            --glow-purple: #a855f7;
-            --dark-bg: #0f172a;
-            --text-light: #f1f5f9;
-            --glass-bg: rgba(45, 55, 72, 0.6);
-            --accent-gradient: linear-gradient(135deg, #2dd4bf, #a855f7);
+            /* --- ✨ 明るい配色テーマ ✨ --- */
+            --bg-light: #f8f9fa;       /* 全体の背景色 (明るいグレー) */
+            --bg-white: #ffffff;       /* カードなどの背景色 (白) */
+            --text-dark: #343a40;      /* 基本のテキスト色 (濃いグレー) */
+            --text-muted: #6c757d;     /* やや薄いテキスト色 */
+            --primary: #007bff;        /* メインカラー (明るい青) */
+            --primary-light: #e6f2ff;  /* メインカラーの薄い色 (ホバー背景など) */
+            --accent: #28a745;         /* アクセントカラー (緑) */
+            --accent-light: #eaf6ec;   /* アクセントカラーの薄い色 */
+            --border-color: #dee2e6;   /* 境界線の色 */
+            --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08); /* 柔らかい影 */
+            --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.12); /* ホバー時の影 */
+            --font-sans-jp: 'Noto Sans JP', sans-serif;
+            --font-rounded: 'M PLUS Rounded 1c', sans-serif; /* 親しみやすい丸ゴシック */
         }
-    
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Roboto', 'Noto Sans JP', sans-serif;
         }
-    
+
         body {
-            background: var(--dark-bg) url('../thumbnail.png') center/cover no-repeat fixed;
-            color: var(--text-light);
-            line-height: 1.6;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            font-family: var(--font-sans-jp);
+            line-height: 1.7; /* 行間を少し広げる */
             overflow-x: hidden;
         }
-    
+
+        /* --- ☁️ ナビゲーション ☁️ --- */
         nav {
             position: fixed;
-            top: 10px; /* スマホで少し上部に寄せる */
+            top: 15px; /* 少し下に */
             left: 50%;
             transform: translateX(-50%);
-            width: 95%; /* スマホで幅を広げる */
-            max-width: 1000px;
-            background: rgba(30, 58, 138, 0.2);
-            backdrop-filter: blur(12px);
-            border-radius: 20px;
-            padding: 0.8rem 1.5rem; /* 初期パディングを小さめに */
+            width: calc(100% - 40px); /* 左右に余白 */
+            max-width: 1100px;
+            background: rgba(255, 255, 255, 0.85); /* 白っぽい半透明 */
+            backdrop-filter: blur(10px);
+            border-radius: 30px; /* 角丸を大きく */
+            padding: 0.8rem 1.8rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            transition: padding 0.3s, background 0.3s;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
         }
-    
+
         nav.scrolled {
-            padding: 0.5rem 1rem;
-            background: rgba(30, 58, 138, 0.5);
+            top: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
-    
+
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 0.6rem; /* スマホで少し狭く */
+            gap: 0.8rem;
+            text-decoration: none; /* ロゴのアンダーラインを削除 */
         }
-    
+
         .logo-container img {
-            width: 32px; /* スマホで少し小さく */
-            height: 32px;
-            transition: transform 0.3s;
+            width: 35px; /* 少し大きく */
+            height: 35px;
+            transition: transform 0.3s ease;
         }
-    
         .logo-container:hover img {
-            transform: scale(1.05);
+            transform: rotate(15deg); /* ホバーで少し回転 */
         }
-    
+
         .logo-container .logo {
-            font-size: 1.5rem; /* スマホで少し小さく */
+            font-size: 1.6rem;
             font-weight: 700;
-            font-family: 'Montserrat', sans-serif;
-            color: var(--shadow-teal);
+            font-family: var(--font-rounded); /* 丸ゴシック */
+            color: var(--primary); /* メインカラー */
             letter-spacing: 0.5px;
-            background: linear-gradient(90deg, #bcc8e7, #9fbfdb);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
-    
+
         nav ul {
             display: flex;
             list-style: none;
-            gap: 1.5rem; /* デスクトップでの間隔を少し狭く */
+            gap: 1rem; /* 少し間隔を調整 */
         }
-    
+
         nav ul li a {
-            color: var(--text-light);
+            color: var(--text-muted); /* やや薄い色に */
             text-decoration: none;
-            font-size: 1rem; /* フォントサイズを少し小さく */
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 10px;
-            transition: all 0.3s;
+            font-size: 1rem;
+            font-weight: 700; /* 少し太く */
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px; /* 角丸 */
+            transition: all 0.3s ease;
         }
-    
-        nav ul li a:hover {
-            background: rgba(38, 166, 154, 0.3);
-            color: var(--shadow-teal);
-            box-shadow: 0 0 5px var(--shadow-teal);
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            background: var(--primary-light);
+            color: var(--primary);
+            transform: translateY(-2px);
         }
-    
+
+        /* --- 🍔 モバイルメニュー 🍔 --- */
         .menu-toggle {
             display: none;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             background: none;
             border: none;
-            color: var(--shadow-teal);
+            color: var(--primary); /* メインカラー */
             cursor: pointer;
-            transition: transform 0.3s;
+            padding: 5px;
+            border-radius: 50%;
+            transition: background-color 0.3s;
         }
-    
+        .menu-toggle:hover {
+            background-color: var(--primary-light);
+        }
+
         .menu-toggle span {
             display: block;
-            width: 22px; /* スマホで少し小さく */
+            width: 25px;
             height: 3px;
-            background: var(--shadow-teal);
-            margin: 4px 0;
-            transition: all 0.3s;
+            background: var(--primary);
+            margin: 5px 0;
+            border-radius: 3px;
+            transition: all 0.3s ease;
         }
-    
-        .menu-toggle:hover {
-            transform: scale(1.05);
+        .menu-toggle.open span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
         }
-    
+        .menu-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.open span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
         .mobile-nav {
             display: none;
             position: fixed;
-            top: 60px; /* ナビとの間隔を狭く */
-            right: 10px;
-            width: 200px; /* スマホで少し小さく */
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(15px);
+            top: 80px; /* ナビゲーションの下に配置 */
+            right: 20px;
+            width: 220px;
+            background: var(--bg-white);
             border-radius: 15px;
             padding: 1rem;
             z-index: 999;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
-            transform: translateY(-20px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            transform: translateY(-10px);
             opacity: 0;
             transition: all 0.3s ease;
+            list-style: none; /* ul要素に直接適用 */
         }
-    
+
         .mobile-nav.active {
-            display: block;
+            display: block; /* ul要素を表示 */
             transform: translateY(0);
             opacity: 1;
         }
-    
-        .mobile-nav ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem; /* スマホで間隔を狭く */
+
+        .mobile-nav li {
+            margin-bottom: 0.5rem; /* 各項目に少し間隔 */
         }
-    
-        .mobile-nav ul li a {
-            color: var(--text-light);
+
+        .mobile-nav li a {
+            color: var(--text-dark);
             text-decoration: none;
-            font-size: 1rem; /* スマホで読みやすく */
-            font-weight: 500;
-            padding: 0.6rem 1rem;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 0.8rem 1.2rem; /* パディング調整 */
             border-radius: 10px;
             display: block;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
         }
-    
-        .mobile-nav ul li a:hover {
-            background: var(--shadow-teal);
-            color: var(--dark-bg);
+
+        .mobile-nav li a:hover {
+            background: var(--primary-light);
+            color: var(--primary);
         }
-    
-        .chat-container {
-            margin: 80px auto 40px; /* 上部の余白を減らし、フッターとの間隔も調整 */
-            width: 95%; /* スマホで幅を広げる */
-            max-width: 800px;
-            height: 80vh; /* スマホで画面高さを最大限活用 */
-            background: rgba(30, 58, 138, 0.2);
-            backdrop-filter: blur(12px);
-            border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+
+        /* --- 💬 チャットセクション 💬 --- */
+        .chat-section {
+            padding: 8rem 2rem 5rem; /* ナビゲーションとの間隔を増やす */
+            background-color: var(--bg-light);
+            min-height: 70vh;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-    
-        .chat-container:hover {
-            transform: translateY(-3px);
-        }
-    
-        .chat-header {
-            padding: 1rem; /* スマホで少し小さく */
-            background: rgba(30, 58, 138, 0.5);
-            color: var(--text-light);
-            font-size: 1.2rem; /* スマホで小さく */
-            font-weight: 600;
-            text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            text-shadow: none;
-        }
-    
-        .chat-body {
-            flex: 1;
-            padding: 1rem; /* スマホで小さく */
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem; /* メッセージ間の隙間を狭く */
-            background: rgba(15, 23, 42, 0.9);
-            border-radius: 15px;
-            margin: 0.5rem;
-            position: relative;
-        }
-    
-        .message {
-            max-width: 85%; /* スマホで少し広く */
-            padding: 0.6rem 1rem; /* スマホで小さく */
-            border-radius: 12px;
-            font-size: 0.95rem; /* スマホで読みやすく */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: none;
-        }
-    
-        .user-message {
-            background: rgba(45, 212, 191, 0.3);
-            color: var(--text-light);
-            align-self: flex-end;
-        }
-    
-        .bot-message {
-            background: rgba(45, 55, 72, 0.8);
-            color: var(--text-light);
-            align-self: flex-start;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-    
-        .chat-input {
-            display: flex;
-            padding: 0.8rem; /* スマホで小さく */
-            background: rgba(30, 58, 138, 0.2);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-        }
-    
-        .chat-input input {
-            flex: 1;
-            padding: 0.6rem; /* スマホで小さく */
-            border: none;
-            border-radius: 10px 0 0 10px;
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-light);
-            font-size: 0.95rem; /* スマホで読みやすく */
-            outline: none;
-            transition: background 0.3s ease;
-        }
-    
-        .chat-input input:disabled {
-            background: rgba(255, 255, 255, 0.05);
-            cursor: not-allowed;
-        }
-    
-        .chat-input input:focus {
-            background: rgba(255, 255, 255, 0.2);
-        }
-    
-        .chat-input button {
-            padding: 0.6rem 1.2rem; /* スマホで小さく */
-            background: var(--shadow-teal);
-            color: #fff;
-            border: none;
-            border-radius: 0 10px 10px 0;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            box-shadow: 0 0 5px rgba(45, 212, 191, 0.3);
-        }
-    
-        .chat-input button:disabled {
-            background: #666;
-            cursor: not-allowed;
-        }
-    
-        .chat-input button:hover:not(:disabled) {
-            background: var(--glow-purple);
-            box-shadow: 0 0 8px rgba(168, 85, 247, 0.5);
-        }
-    
-        .loading-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(15, 23, 42, 0.8);
-            display: flex;
-            justify-content: center;
             align-items: center;
-            z-index: 10;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
+            justify-content: center;
         }
-    
-        .loading-overlay.active {
-            opacity: 1;
-            pointer-events: all;
+
+        .chat-section h1 {
+            font-size: 2.5rem; /* 大きすぎないサイズ */
+            font-weight: 700;
+            font-family: var(--font-rounded);
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
         }
-    
-        .loader {
-            width: 40px; /* スマホで小さく */
-            height: 40px;
-            border: 4px solid var(--shadow-teal);
-            border-top: 4px solid var(--glow-purple);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-    
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    
-        .thinking-overlay {
-            position: fixed;
-            bottom: 60px; /* スマホで入力欄に近づけすぎない */
+
+        .chat-section h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
             left: 50%;
             transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+
+        #chat-container {
+            max-width: 700px; /* 少し広く */
+            width: 100%;
+            margin: 0 auto;
+            background: var(--bg-white);
+            border-radius: 16px;
+            box-shadow: var(--shadow-soft);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        #chat-history {
+            height: 400px; /* 十分な高さ */
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            background: var(--bg-white); /* 白背景 */
+            color: var(--text-dark); /* 暗いテキスト */
+            font-family: var(--font-sans-jp);
+            margin-bottom: 0; /* 入力欄との間隔を調整 */
+            line-height: 1.5;
+        }
+
+        .chat-input-container {
             display: flex;
             align-items: center;
-            gap: 6px; /* スマホで少し狭く */
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-            z-index: 11;
+            gap: 1rem;
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
         }
-    
-        .thinking-overlay.active {
-            opacity: 1;
+
+        #chat-input {
+            flex: 1;
+            padding: 0.8rem;
+            font-size: 1rem;
+            border: none;
+            background: transparent;
+            font-family: var(--font-sans-jp);
+            color: var(--text-dark);
         }
-    
-        .thinking-text {
-            color: var(--text-light);
-            font-size: 0.9rem; /* スマホで小さく */
-            font-style: italic;
+
+        #chat-input:focus {
+            outline: none;
         }
-    
-        .thinking-dots span {
-            display: inline-block;
-            width: 6px; /* スマホで小さく */
-            height: 6px;
-            background: var(--shadow-teal);
-            border-radius: 50%;
-            margin: 0 2px;
-            animation: bounce 0.6s infinite alternate;
+
+        #send-button {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: var(--font-sans-jp);
+            background: var(--accent); /* 緑 */
+            color: var(--bg-white);
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+            transition: all 0.3s ease;
         }
-    
-        .thinking-dots span:nth-child(2) {
-            animation-delay: 0.2s;
+
+        #send-button:hover {
+            background: #218838; /* 濃い緑 */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
         }
-    
-        .thinking-dots span:nth-child(3) {
-            animation-delay: 0.4s;
+
+        #exit-button {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: var(--font-sans-jp);
+            background: #dc3545; /* 赤 */
+            color: var(--bg-white);
+            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+            transition: all 0.3s ease;
         }
-    
-        @keyframes bounce {
-            from { transform: translateY(0); }
-            to { transform: translateY(-8px); } /* スマホで動きを控えめに */
+
+        #exit-button:hover {
+            background: #c82333; /* 濃い赤 */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
         }
-    
+
+        /* チャットメッセージのスタイル */
+        .assistant-message { color: var(--primary); } /* 青 */
+        .user-message { color: var(--text-muted); } /* 薄いグレー */
+        .error-message { color: #dc3545; } /* 赤 */
+        .highlight { color: var(--primary); font-weight: bold; } /* 青で強調 */
+        .green { color: var(--accent); } /* 緑 */
+        .yellow { color: #ffc107; } /* 黄色 */
+        .red { color: #dc3545; } /* 赤 */
+        .purple { color: #6f42c1; } /* 紫 */
+        .bold { font-weight: bold; } /* 太字 */
+
+        /* --- 🦶 フッター 🦶 --- */
         footer {
-            background: linear-gradient(180deg, rgba(10, 17, 32, 0.9), rgba(15, 23, 42, 0.8));
-            color: var(--text-light);
+            background-color: var(--text-dark);
+            color: var(--bg-light);
             text-align: center;
-            padding: 1.5rem; /* スマホで小さく */
-            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
+            padding: 2rem 1rem;
+            margin-top: 4rem;
         }
-    
+
         footer p {
-            font-size: 0.9rem; /* スマホで小さく */
-            opacity: 0.9;
+            font-size: 0.9rem;
+            opacity: 0.8;
             letter-spacing: 0.5px;
         }
-    
-        /* タブレットサイズ */
+
+        /* --- 🔄 レスポンシブデザイン 🔄 --- */
+        @media (max-width: 992px) {
+            nav ul {
+                gap: 0.5rem;
+            }
+            nav ul li a {
+                padding: 0.5rem 0.8rem;
+            }
+            .chat-section h1 {
+                font-size: 2rem;
+            }
+        }
+
         @media (max-width: 768px) {
             nav {
-                top: 10px;
-                width: 95%;
-                padding: 0.8rem 1rem;
+                padding: 0.6rem 1rem;
+                width: calc(100% - 30px);
             }
-    
             .menu-toggle {
                 display: block;
             }
-    
             nav ul {
                 display: none;
             }
-    
-            .chat-container {
-                height: 70vh; /* タブレットで少し小さく */
-                margin: 70px auto 30px;
+            .chat-section {
+                padding: 6rem 1rem 4rem;
             }
-    
-            .chat-header {
-                font-size: 1.1rem;
+            .chat-section h1 {
+                font-size: 1.8rem;
             }
-    
-            .message {
-                font-size: 0.9rem;
+            #chat-container {
+                padding: 1.5rem;
             }
-        }
-    
-        /* スマートフォンサイズ */
-        @media (max-width: 480px) {
-            .logo-container .logo {
-                font-size: 1.3rem; /* さらに小さく */
+            #chat-history {
+                height: 300px;
             }
-    
-            .logo-container img {
-                width: 28px;
-                height: 28px;
-            }
-    
-            .mobile-nav {
-                width: 180px; /* さらに小さく */
-                right: 5px;
-                top: 55px;
-            }
-    
-            .mobile-nav ul li a {
-                font-size: 0.9rem;
-                padding: 0.5rem 0.8rem;
-            }
-    
-            .chat-container {
-                width: 98%; /* ほぼ全幅 */
-                height: 80vh; /* スマホで最大限活用 */
-                margin: 60px auto 20px; /* 余白をさらに調整 */
-            }
-    
-            .chat-header {
-                font-size: 1rem;
-                padding: 0.8rem;
-            }
-    
-            .chat-body {
-                padding: 0.8rem;
-                gap: 0.6rem;
-            }
-    
-            .message {
-                font-size: 0.85rem;
-                padding: 0.5rem 0.8rem;
-            }
-    
-            .chat-input {
-                padding: 0.6rem;
-            }
-    
-            .chat-input input {
-                font-size: 0.9rem;
-                padding: 0.5rem;
-            }
-    
-            .chat-input button {
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
-            }
-    
-            .thinking-overlay {
-                bottom: 50px; /* 入力欄に近すぎないように */
-            }
-    
-            .thinking-text {
-                font-size: 0.85rem;
-            }
-    
-            .thinking-dots span {
-                width: 5px;
-                height: 5px;
-            }
-    
-            footer {
+            .chat-input-container {
+                flex-direction: column;
+                border-radius: 16px;
                 padding: 1rem;
             }
-    
-            footer p {
-                font-size: 0.85rem;
+            #chat-input {
+                width: 100%;
+                padding: 0.8rem;
+            }
+            #send-button, #exit-button {
+                width: 100%;
+                padding: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                line-height: 1.6;
+            }
+            .logo-container .logo {
+                font-size: 1.3rem;
+            }
+            .logo-container img {
+                width: 30px;
+                height: 30px;
+            }
+            .mobile-nav {
+                width: 200px;
+                top: 70px;
+                right: 15px;
+            }
+            .chat-section {
+                padding: 5rem 1rem 3rem;
+            }
+            .chat-section h1 {
+                font-size: 1.6rem;
+            }
+            .chat-section h1::after {
+                width: 50px;
+                height: 3px;
+                bottom: -8px;
+            }
+            #chat-container {
+                padding: 1rem;
+            }
+            #chat-input {
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+            #send-button, #exit-button {
+                padding: 0.7rem;
+                font-size: 0.9rem;
             }
         }
     </style>
 </head>
 <body>
     <nav>
-        <div class="logo-container">
+        <a href="../index.html" class="logo-container"> 
             <img src="../icon.png" alt="HARU Addons Icon" loading="lazy">
             <div class="logo">HARUAddons</div>
-        </div>
-        <button class="menu-toggle" aria-label="メニューを開く" aria-expanded="false">
+        </a>
+        <ul>
+            <li><a href="../index.html">ホーム</a></li> 
+            <li><a href="./support.html" class="active">Assistant</a></li>
+            <li><a href="../developer_info.html">開発者情報</a></li>
+            <li><a href="../links.html">リンク</a></li>
+            <li><a href="../tweets.html">Tweet</a></li>
+        </ul>
+        <button class="menu-toggle" aria-label="メニューを開閉する" aria-expanded="false">
             <span></span>
             <span></span>
             <span></span>
         </button>
-        <ul>
-            <li><a href="../index.html">ホーム</a></li>
-            <li><a href="../links.html">Assistant</a></li>
-            <li><a href="../developer_info.html">開発者情報</a></li>
-            <li><a href="../links.html">リンク</a></li>
-            <li><a href="../tweets.html">Tweet</a></li>
-        </ul>
     </nav>
 
-    <div class="mobile-nav">
-        <ul>
-            <li><a href="../index.html">ホーム</a></li>
-            <li><a href="./support.html">Assistant</a></li>
-            <li><a href="../developer_info.html">開発者情報</a></li>
-            <li><a href="../links.html">リンク</a></li>
-            <li><a href="../tweets.html">Tweet</a></li>
-        </ul>
-    </div>
-    <br>
-    <br>
-    <div class="chat-container">
-        <div class="chat-header">HARU Addons サポートAI</div>
-        <div class="chat-body" id="chatBody">
-            <div class="message bot-message">こんにちは！HARU AddonsのサポートAIです。アドオンについて質問してください！</div>
-            <div class="loading-overlay" id="loadingOverlay">
-                <div class="loader"></div>
+    <ul class="mobile-nav">
+        <li><a href="../index.html">ホーム</a></li>
+        <li><a href="./support.html">Assistant</a></li>
+        <li><a href="../developer_info.html">開発者情報</a></li>
+        <li><a href="../links.html">リンク</a></li>
+        <li><a href="../tweets.html">Tweet</a></li>
+    </ul>
+
+    <section class="chat-section">
+        <h1>HARUAssistant</h1>
+        <div id="chat-container">
+            <div id="chat-history"></div>
+            <div class="chat-input-container">
+                <input type="text" id="chat-input" placeholder="話しかけてみてください (exitで終了)">
+                <button id="send-button">送信</button>
+                <button id="exit-button">終了</button>
             </div>
         </div>
-        <div class="chat-input">
-            <input type="text" id="chatInput" placeholder="メッセージを入力..." disabled />
-            <button onclick="sendMessage()" id="sendButton" style="background-color: #a855f7;" disabled>送信</button>
-        </div>
-    </div>
+    </section>
 
     <footer>
         <p>© 2025 HARU Addons. All Rights Reserved.</p>
     </footer>
 
     <script>
+        // モバイルメニューの開閉
         const menuToggle = document.querySelector('.menu-toggle');
         const mobileNav = document.querySelector('.mobile-nav');
         menuToggle.addEventListener('click', () => {
             const isExpanded = mobileNav.classList.toggle('active');
             menuToggle.setAttribute('aria-expanded', isExpanded);
+            menuToggle.classList.toggle('open');
         });
-    
+
+        // スクロールでナビゲーションのスタイル変更
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
+            if (window.scrollY > 30) {
                 nav.classList.add('scrolled');
             } else {
                 nav.classList.remove('scrolled');
             }
         });
-    
-        // AI関連の変数
-        let encoder = null;
-        let addonsText = '';
-        let addonsChunks = [];
-        let conversationContext = { 
-            lastMessage: null, 
-            lastTopic: null, 
-            lastAddon: null, 
-            history: [] 
-        };
-        let isLoading = true;
-    
-        const chatInput = document.getElementById('chatInput');
-        const sendButton = document.getElementById('sendButton');
-        const loadingOverlay = document.getElementById('loadingOverlay');
-        const chatBody = document.getElementById('chatBody');
-    
-        // ロード状態を管理
-        function toggleLoading(state) {
-            isLoading = state;
-            chatInput.disabled = state;
-            sendButton.disabled = state;
-            loadingOverlay.classList.toggle('active', state);
-        }
-    
-        // Universal Sentence Encoderをロード
-        async function loadEncoder() {
-            toggleLoading(true);
-            console.log('エンコーダーロード開始...');
-            try {
-                encoder = await use.load();
-                console.log('エンコーダー準備OK！');
-            } catch (error) {
-                console.error('エンコーダーロード失敗:', error);
-                chatBody.innerHTML += '<div class="message bot-message">AIのロードに失敗しました。ネット接続をご確認ください。</div>';
-                toggleLoading(false);
-            }
-        }
-    
-        // addons.txtを読み込み
-        async function loadAddonsText() {
-            console.log('addons.txt読み込み開始...');
-            try {
-                const response = await fetch('./addons.txt');
-                if (!response.ok) throw new Error('addons.txtの取得に失敗');
-                addonsText = await response.text();
-                addonsChunks = chunkText(addonsText);
-                console.log('アドオンテキスト読み込み完了:', addonsText.slice(0, 100));
-                toggleLoading(false);
-            } catch (error) {
-                console.error('テキスト読み込みエラー:', error);
-                chatBody.innerHTML += '<div class="message bot-message">データが読み込めませんでした。addons.txtをご確認ください。</div>';
-                toggleLoading(false);
-            }
-        }
-    
-        // テキストを文単位でチャンクに分割
-        function chunkText(text) {
-            const sentences = text.split(/[。！？\n]+/).filter(s => s.trim().length > 0);
-            return sentences.map(s => s.trim() + '。');
-        }
-    
-        // アドオン名を動的に抽出
-        function extractAddons(chunks) {
-            const addonNames = new Set();
-            chunks.forEach(chunk => {
-                const match = chunk.match(/\[Addon: (HARU\w+)\]/i);
-                if (match) addonNames.add(match[1]);
-            });
-            return Array.from(addonNames);
-        }
-    
-        // トピックをキーワードベースで推測
-        function guessTopic(message) {
-            const msgLower = message.toLowerCase();
-            if (msgLower.match(/使い方|どうやって|開き方|設定|送る|送金|購入|出品/)) return 'usage';
-            if (msgLower.match(/特徴|何|どんな|できること|概要|説明/)) return 'features';
-            if (msgLower.match(/インストール|導入|入れる|ワールド設定/)) return 'install';
-            if (msgLower.match(/quick/i)) return 'quick';
-            if (msgLower.match(/harupay/i)) return 'harupay';
-            if (msgLower.match(/キルポイント/)) return 'killpoints';
-            if (msgLower.match(/更新|アップデート|最新版/)) return 'update';
-            if (msgLower.match(/リンク|動画|discord|twitter|x/)) return 'links';
-            if (msgLower.match(/もっと|詳しく|深/)) return conversationContext.lastTopic;
-            if (msgLower.match(/こんにちは|おはよう|こんばんは|やあ|ねえ|おーい/)) return 'greeting';
-            if (msgLower.match(/疲れた|眠い|忙しい|お疲れ様|頑張ってね/)) return 'mood';
-            if (msgLower.match(/元気|調子|どう|大丈夫/)) return 'checkin';
-            if (msgLower.match(/ありがとう|感謝|助かる/)) return 'thanks';
-            if (msgLower.match(/天気|今日|雨|晴れ/)) return 'weather';
-            return 'general';
-        }
-    
-        // メッセージ送信処理
-        async function sendMessage() {
-            if (isLoading) return;
-    
-            const input = document.getElementById('chatInput');
-            const message = input.value.trim();
-            if (!message) return;
-    
-            const userMsg = document.createElement('div');
-            userMsg.className = 'message user-message';
-            userMsg.textContent = message;
-            chatBody.appendChild(userMsg);
-    
-            const thinkingOverlay = document.createElement('div');
-            thinkingOverlay.className = 'thinking-overlay active';
-            thinkingOverlay.innerHTML = `
-                <span class="thinking-text">考え中</span>
-                <span class="thinking-dots">
-                    <span></span><span></span><span></span>
-                </span>
-            `;
-            document.body.appendChild(thinkingOverlay);
-    
-            setTimeout(async () => {
-                const botReply = await generateResponse(message);
-                document.body.removeChild(thinkingOverlay);
-                const botMsg = document.createElement('div');
-                botMsg.className = 'message bot-message';
-                botMsg.innerHTML = botReply;
-                chatBody.appendChild(botMsg);
-                chatBody.scrollTop = chatBody.scrollHeight;
-            }, 500);
-    
-            input.value = '';
-            chatBody.scrollTop = chatBody.scrollHeight;
-        }
-    
-        // 応答生成
-        async function generateResponse(message) {
-            if (!encoder || !addonsChunks.length) return 'まだ準備中です。少しお待ちください。';
-    
-            const msgLower = message.toLowerCase();
-            conversationContext.lastMessage = message;
-            conversationContext.history.push(message);
-            if (conversationContext.history.length > 5) conversationContext.history.shift();
-    
-            // トピック推測
-            const addonNames = extractAddons(addonsChunks);
-            let addon = null;
-            for (const name of addonNames) {
-                if (msgLower.includes(name.toLowerCase())) {
-                    addon = name;
-                    break;
-                }
-            }
-            conversationContext.lastAddon = addon || conversationContext.lastAddon || addonNames[0] || 'アドオン';
-            const topic = guessTopic(message);
-            conversationContext.lastTopic = topic;
-    
-            // 日常会話対応
-            if (topic === 'greeting') {
-                return 'こんにちは！HARU Addonsのサポートです。何かお知りになりたいことがあればお気軽にお尋ねください。';
-            }
-            if (topic === 'mood') {
-                return 'お疲れのようですね…。アドオンのお話をしながら少し気分転換しませんか？何かお手伝いできることがあればお気軽にどうぞ。';
-            }
-            if (topic === 'checkin') {
-                return 'お元気ですか？私の方は今日もサポート頑張ってます！何かお困りのことがあればお教えくださいね。';
-            }
-            if (topic === 'thanks') {
-                return 'ありがとうございます！お役に立てて嬉しいです。また何かあればいつでもお声がけくださいね。';
-            }
-            if (topic === 'weather') {
-                const currentDate = new Date().toLocaleDateString('ja-JP');
-                return `今日は${currentDate}ですね。天気のお話を少ししましょうか？こちらはアドオンと同じくらい晴れやかな気分です！何かアドオンの質問があればお気軽にどうぞ。`;
-            }
-    
-            // アドオン関連の応答
-            // 関連チャンクを収集
-            const questionEmbedding = await encoder.embed([message]);
-            const chunkEmbeddings = await encoder.embed(addonsChunks);
-            const similarities = tf.matMul(questionEmbedding, chunkEmbeddings, false, true).dataSync();
-            const topMatches = [];
-            const similarityThreshold = 0.4;
-            for (let i = 0; i < similarities.length; i++) {
-                if (similarities[i] >= similarityThreshold && (!addon || addonsChunks[i].includes(addon))) {
-                    topMatches.push({ text: addonsChunks[i], score: similarities[i] });
-                }
-            }
-            topMatches.sort((a, b) => b.score - a.score);
-    
-            if (topMatches.length === 0) {
-                if (conversationContext.lastTopic) {
-                    return `前回の「${conversationContext.lastTopic}」に関するご質問でしょうか？<br>もう少し具体的に教えていただければ、詳しくお答えできます。例えば「${conversationContext.lastAddon}の使い方」などはいかがでしょうか？`;
-                }
-                return '申し訳ありません、少し分かりませんでした…。<br>例えば「HARUPhone1の使い方」のようにお尋ねいただければお答えしやすいです。';
-            }
-    
-            // トピックに応じた自然な応答
-            const addonName = conversationContext.lastAddon;
-            let response = `${addonName}についての${topic === 'general' ? 'ご質問' : topic === 'usage' ? '使い方' : topic === 'features' ? '特徴' : topic === 'install' ? 'インストール方法' : topic === 'quick' ? 'Quick' : topic === 'harupay' ? 'HARUPAY' : topic === 'killpoints' ? 'キルポイント' : topic === 'update' ? '更新履歴' : 'リンク'}ですね。<br>`;
-    
-            if (topic === 'general') {
-                const generalMatches = topMatches.filter(m => m.text.match(/概要|特徴|機能/));
-                if (generalMatches.length > 0) {
-                    response += `${addonName}は、Minecraft統合版向けの通貨システムアドオンです。スマホを使って、プレイヤー同士の取引や残高管理、ネットショップ機能が利用できます。これにより、ゲーム内で経済的なやり取りを楽しむことが可能です。<br>`;
-                    response += `さらに詳しくお知りになりたい場合は、「${addonName}の使い方」や「${addonName}の特徴」などをお尋ねください。`;
-                } else {
-                    response += `${addonName}に関する情報として、${topMatches[0].text}といった内容があります。<br>`;
-                    response += `何か特定の点について知りたいことがあれば、お気軽にお教えください。`;
-                }
-            } else if (topic === 'usage') {
-                const usageMatches = topMatches.filter(m => m.text.match(/使い方|開き方|設定|送る|購入|出品|有効化|コマンド/));
-                if (msgLower.includes('送金')) {
-                    const sendMatches = topMatches.filter(m => m.text.match(/送金|送る/));
-                    if (sendMatches.length > 0) {
-                        response += `${addonName}で送金するには、スマホを開いて「HARUPAY」から「送る」を選択します。次に、送信先のプレイヤーを選び、金額を設定して送信してください。これで簡単に送金が完了します。<br>`;
-                        response += `他にも知りたい操作があれば、「${addonName}の残高確認」などとお尋ねください。`;
-                    } else {
-                        response += `${addonName}の送金方法については、具体的な手順が見つかりませんでした。「HARUPAY」を使った操作になる可能性がありますので、試してみてください。ご不明点があればお教えください。`;
-                    }
-                } else if (usageMatches.length > 0) {
-                    response += `${addonName}をご利用いただくには、まずスマホを開く必要があります。PC版では右クリック、スマホ版では画面長押しで操作可能です。初期設定として、スマホを開いて初期金額（例えば2000コイン）を設定してください。<br>`;
-                    response += `具体的な機能としては、「HARUPAY」で送金や残高確認、「Quick」でアイテムの売買ができます。使い方についてさらに知りたい場合は、「${addonName}の送金方法」などとお尋ねください。`;
-                } else {
-                    response += `${addonName}の使い方は、スマホを操作することでさまざまな機能を利用する形です。具体的な手順についてお知りになりたいことがあればお教えください。`;
-                }
-            } else if (topic === 'features') {
-                const featureMatches = topMatches.filter(m => m.text.match(/特徴|機能|概要|説明/));
-                if (featureMatches.length > 0) {
-                    response += `${addonName}は、スマホを使った通貨システムが特徴のアドオンです。例えば、「HARUPAY」でプレイヤー同士のお金のやり取りができたり、「Quick」でネットショップのようなアイテム売買が可能です。また、オプションとして「キルポイントシステム」も利用できます。<br>`;
-                    response += `どの機能についてさらに知りたいか、「${addonName}のQuick」など具体的にご質問いただければ詳しくお答えします。`;
-                } else {
-                    response += `${addonName}には、通貨やショップ機能などさまざまな特徴があります。詳しくお知りになりたい点があればお教えください。`;
-                }
-            } else if (topic === 'install') {
-                const installMatches = topMatches.filter(m => m.text.match(/導入|インストール|ワールド設定/));
-                if (installMatches.length > 0) {
-                    response += `${addonName}をインストールするには、ワールド設定で「チートの有効化」と「Beta APIの有効化」をONにしてください。その後、コマンド「/function op」を実行すると、スマホ（${addonName}）が配布されます。これで準備が完了です。<br>`;
-                    response += `もしインストールでお困りのことがあれば、どの部分でつまずいたかお教えください。`;
-                } else {
-                    response += `${addonName}のインストールは、ワールド設定を調整してコマンドを実行する流れです。お困りのことがあればお気軽にご質問ください。`;
-                }
-            } else if (topic === 'quick') {
-                const quickMatches = topMatches.filter(m => m.text.match(/Quick/i));
-                if (quickMatches.length > 0) {
-                    response += `${addonName}のQuickは、ネットショップ機能です。アイテムを出品するには、スマホを開いて「Quick」から「出品」を選び、商品名と金額を入力して送信します。購入する場合は、「購入」を選択し、欲しい商品を確認して確定するだけです。<br>`;
-                    response += `2025年3月のアップデートで、Quickのデータを永久に維持する設定も追加されました（オン/オフは自由に選べます）。さらに詳しく知りたい場合は、「${addonName}のQuickの使い方」などとお尋ねください。`;
-                } else {
-                    response += `${addonName}のQuickは、アイテムの売買ができるネットショップ機能です。詳しく知りたいことがあればお教えください。`;
-                }
-            } else if (topic === 'harupay') {
-                const harupayMatches = topMatches.filter(m => m.text.match(/HARUPAY/i));
-                if (harupayMatches.length > 0) {
-                    response += `${addonName}のHARUPAYは、通貨機能で、プレイヤー同士のお金のやり取りができます。残高を確認するには、スマホを開いて「HARUPAY」から「残高確認」を選択します。送金する場合は、「送る」を選び、送信先のプレイヤーと金額を設定して送信してください。<br>`;
-                    response += `初期金額はスマホから自由に設定できますので、例えば2000コインなどお好きな額にしてみてください。もっと知りたいことがあれば、「${addonName}のHARUPAYの使い方」などとお尋ねください。`;
-                } else {
-                    response += `${addonName}のHARUPAYは、通貨を管理するための機能です。ご質問があればお気軽にどうぞ。`;
-                }
-            } else if (topic === 'killpoints') {
-                const killpointMatches = topMatches.filter(m => m.text.match(/キルポイント/));
-                if (killpointMatches.length > 0) {
-                    response += `${addonName}のキルポイントシステムは、オプション機能で、プレイヤーをキルするたびにポイントが貯まります。有効化するかどうかは自由に選べますが、設定をしっかり確認しておくと不具合が防げます。<br>`;
-                    response += `この機能についてさらに知りたい場合は、「${addonName}のキルポイントの設定」などとお尋ねください。`;
-                } else {
-                    response += `${addonName}のキルポイントは、キルでポイントが貯まるオプション機能です。詳しく知りたいことがあればお教えください。`;
-                }
-            } else if (topic === 'update') {
-                const updateMatches = topMatches.filter(m => m.text.match(/更新|アップデート|最新版/));
-                if (updateMatches.length > 0) {
-                    response += `${addonName}の最新版は2025年3月24日で、HARU-X-Editorの追加やQuickのデータ永久維持機能（オン/オフ切り替え可）が追加されました。過去には、2024年7月8日に配布開始、2024年10月12日に換金システム追加など、さまざまなアップデートが行われています。<br>`;
-                    response += `特定の更新について知りたい場合は、「${addonName}の2024年10月のアップデート」などとお尋ねください。`;
-                } else {
-                    response += `${addonName}は定期的に更新されています。具体的な更新履歴について知りたいことがあればお教えください。`;
-                }
-            } else if (topic === 'links') {
-                const linkMatches = topMatches.filter(m => m.text.match(/リンク|動画|discord|twitter|x/));
-                if (linkMatches.length > 0) {
-                    response += `${addonName}の関連リンクとして、紹介動画はhttps://www.youtube.com/watch?v=692cdXYzT6A、質問やアップデート情報はhttps://x.com/haru_addons、バグ報告や提案はhttps://discord.gg/PbZtPCysfJでご確認いただけます。<br>`;
-                    response += `特定のリンクについてさらに知りたい場合は、「${addonName}の動画リンク」などとお尋ねください。`;
-                } else {
-                    response += `${addonName}のリンクについては、公式の情報源をご確認いただけます。具体的なリンクが必要でしたらお教えください。`;
-                }
-            }
-    
-            return response;
-        }
-    
-        // Enterキー対応
-        document.getElementById('chatInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && !isLoading) sendMessage();
-        });
-    
-        // 初期ロード
-        loadEncoder().then(loadAddonsText);
     </script>
+    <script type="module" src="main.js"></script>
 </body>
 </html>

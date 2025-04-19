@@ -3,75 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="9S9blQzCvgIm-0eArJeotUn8jH2cKG7KbiQ1VUnwNDQ" />
     <title>HaruAddons - CommunicationPlus 使い方</title>
-    <link rel="icon" type="image/png" href="../icon.png">
+    <meta name="description" content="CommunicationPlusの使い方を詳しく解説。Minecraft統合版のスマートフォン風UIアドオンの操作方法や機能をチェック！">
+    <meta property="og:title" content="HaruAddons | CommunicationPlus 使い方">
+    <meta property="og:image" content="https://harugames8686.github.io/HARUAddonsPages/ogp-image.png">
+    <meta property="og:url" content="https://harugames8686.github.io/HARUAddonsPages/Assistant/CommunicationPlus_introduction.html">
+    <meta property="og:description" content="CommunicationPlusの基本操作や主な機能を紹介。Minecraft BEで仮想通貨やネットショップを活用しよう！">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://harugames8686.github.io/HARUAddonsPages/Assistant/CommunicationPlus_introduction.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/png" href="../icon.png" sizes="32x32">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
+        :root {
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --text-dark: #343a40;
+            --text-muted: #6c757d;
+            --primary: #007bff;
+            --primary-light: #e6f2ff;
+            --accent: #28a745;
+            --accent-light: #eaf6ec;
+            --border-color: #dee2e6;
+            --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.12);
+            --font-sans-jp: 'Noto Sans JP', sans-serif;
+            --font-rounded: 'M PLUS Rounded 1c', sans-serif;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            font-family: var(--font-sans-jp);
+            line-height: 1.7;
+            overflow-x: hidden;
         }
 
         nav {
-            background-color: #000000;
-            padding: 1rem 2rem;
+            position: fixed;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 40px);
+            max-width: 1100px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 0.8rem 1.8rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: fixed;
-            width: 100%;
-            top: 0;
             z-index: 1000;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            top: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.8rem;
+            text-decoration: none;
+        }
+
+        .logo-container img {
+            width: 35px;
+            height: 35px;
+            transition: transform 0.3s ease;
+        }
+        .logo-container:hover img {
+            transform: rotate(15deg);
         }
 
         .logo-container .logo {
-            color: #fff;
             font-size: 1.6rem;
-            font-weight: bold;
-        }
-
-        .logo-container .logo-icon {
-            width: 32px;
-            height: 32px;
-            object-fit: contain;
+            font-weight: 700;
+            font-family: var(--font-rounded);
+            color: var(--primary);
+            letter-spacing: 0.5px;
         }
 
         nav ul {
-            list-style: none;
             display: flex;
-            gap: 2rem;
+            list-style: none;
+            gap: 1rem;
         }
 
         nav ul li a {
-            color: #fff;
+            color: var(--text-muted);
             text-decoration: none;
-            font-size: 1.1rem;
-            transition: color 0.3s;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
         }
 
-        nav ul li a:hover {
-            color: #1abc9c;
+        nav ul li a:hover,
+        nav ul li a.active {
+            background: var(--primary-light);
+            color: var(--primary);
+            transform: translateY(-2px);
         }
 
         .menu-toggle {
             display: none;
-            font-size: 1.5rem;
-            color: #fff;
+            font-size: 1.8rem;
             background: none;
             border: none;
+            color: var(--primary);
             cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        .menu-toggle:hover {
+            background-color: var(--primary-light);
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: var(--primary);
+            margin: 5px 0;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        .menu-toggle.open span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .menu-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.open span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            width: 220px;
+            background: var(--bg-white);
+            border-radius: 15px;
+            padding: 1rem;
+            z-index: 999;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            transform: translateY(-10px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            list-style: none;
+        }
+
+        .mobile-nav.active {
+            display: block;
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .mobile-nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .mobile-nav li a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 0.8rem 1.2rem;
+            border-radius: 10px;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav li a:hover {
+            background: var(--primary-light);
+            color: var(--primary);
         }
 
         .addon-header {
-            padding: 6rem 2rem 2rem;
-            background-color: #f5f6f5;
+            padding: 8rem 2rem 2rem;
+            background-color: var(--bg-light);
             text-align: center;
         }
 
@@ -81,75 +210,94 @@
             height: auto;
             display: block;
             margin: 0 auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            box-shadow: var(--shadow-soft);
         }
 
         .addon-header h1 {
             font-size: 2.5rem;
-            color: #2c3e50;
+            font-weight: 700;
+            font-family: var(--font-rounded);
+            color: var(--primary);
             margin: 1.5rem 0;
+            position: relative;
+            display: inline-block;
+        }
+
+        .addon-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
         }
 
         .addon-page {
             padding: 0 2rem 4rem;
-            background-color: #f5f6f5;
-            text-align: center;
+            background-color: var(--bg-light);
         }
 
         .addon-content {
             max-width: 800px;
             margin: 0 auto;
-            text-align: left;
-            background-color: #fff;
+            background: var(--bg-white);
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            box-shadow: var(--shadow-soft);
             position: relative;
-        }
-
-        .addon-content h2 {
-            font-size: 1.8rem;
-            color: #2c3e50;
-            margin: 1.5rem 0 1rem;
-        }
-
-        .addon-content h3 {
-            font-size: 1.4rem;
-            color: #1abc9c;
-            margin: 1rem 0 0.5rem;
-        }
-
-        .addon-content p {
-            font-size: 1.1rem;
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 1rem;
+            text-align: left;
         }
 
         .addon-content .buttons {
             display: flex;
             gap: 1rem;
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
+            margin: 1.5rem 0;
+            justify-content: center;
         }
 
         .addon-content .btn {
-            padding: 0.6rem 1.2rem;
-            background-color: #1abc9c;
-            color: #fff;
+            padding: 0.8rem 2rem;
+            background: var(--accent);
+            color: var(--bg-white);
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 50px;
             font-size: 1rem;
-            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-weight: 700;
+            font-family: var(--font-sans-jp);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
         }
 
         .addon-content .btn:hover {
-            background-color: #16a085;
+            background: #218838;
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+        }
+
+        .addon-content h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: var(--font-rounded);
+            color: var(--text-dark);
+            margin: 2rem 0 1rem;
+        }
+
+        .addon-content h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .addon-content p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 1rem;
         }
 
         .addon-content ul {
@@ -160,18 +308,33 @@
 
         .addon-content ul li {
             font-size: 1.1rem;
-            color: #666;
+            color: var(--text-muted);
             margin-bottom: 0.5rem;
+        }
+
+        .addon-content pre {
+            background-color: var(--primary-light);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        .addon-content code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1rem;
+            color: var(--text-dark);
         }
 
         .update-list {
             padding-left: 1.5rem;
             list-style-type: none;
+            margin-bottom: 1.5rem;
         }
 
         .update-list li {
             font-size: 1.1rem;
-            color: #666;
+            color: var(--text-muted);
             margin-bottom: 0.8rem;
             position: relative;
         }
@@ -179,217 +342,271 @@
         .update-list li:before {
             content: "📅";
             margin-right: 0.5rem;
-            color: #1abc9c;
+            color: var(--primary);
         }
 
         footer {
-            background-color: #000000;
-            color: #fff;
+            background-color: var(--text-dark);
+            color: var(--bg-light);
             text-align: center;
-            padding: 2rem;
-            font-size: 1rem;
+            padding: 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 992px) {
+            nav ul {
+                gap: 0.5rem;
+            }
+            nav ul li a {
+                padding: 0.5rem 0.8rem;
+            }
+            .addon-header h1 {
+                font-size: 2rem;
+            }
+            .addon-content h2 {
+                font-size: 1.8rem;
+            }
         }
 
         @media (max-width: 768px) {
             nav {
-                padding: 0.8rem 1rem;
-                flex-wrap: wrap;
+                padding: 0.6rem 1rem;
+                width: calc(100% - 30px);
             }
-
-            .logo-container .logo {
-                font-size: 1.4rem;
-            }
-
-            .logo-container .logo-icon {
-                width: 24px;
-                height: 24px;
-            }
-
             .menu-toggle {
                 display: block;
             }
-
             nav ul {
                 display: none;
-                flex-direction: column;
-                width: 100%;
-                padding: 1rem 0;
-                background-color: #131313;
-                position: absolute;
-                top: 100%;
-                left: 0;
             }
-
-            nav ul.active {
-                display: flex;
-            }
-
-            nav ul li {
-                margin: 0.5rem 0;
-                text-align: center;
-            }
-
-            nav ul li a {
-                font-size: 1rem;
-                padding: 0.5rem;
-                display: block;
-            }
-
             .addon-header {
-                padding: 5rem 1rem 1.5rem;
+                padding: 6rem 1rem 1.5rem;
             }
-
             .addon-header img {
                 max-width: 600px;
             }
-
             .addon-header h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
-
             .addon-page {
                 padding: 0 1rem 3rem;
             }
-
             .addon-content {
                 padding: 1.5rem;
             }
-
             .addon-content h2 {
                 font-size: 1.5rem;
             }
-
             .addon-content h3 {
                 font-size: 1.2rem;
             }
-
             .addon-content p {
                 font-size: 1rem;
             }
-
-            .addon-content .buttons {
-                position: static;
-                flex-direction: row;
-                justify-content: center;
-                margin: 1.5rem 0;
-            }
-
-            .addon-content .btn {
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
-            }
-
             .addon-content ul li,
             .update-list li {
                 font-size: 1rem;
             }
-
-            footer {
-                padding: 1.5rem;
+            .addon-content .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            .addon-content pre {
+                padding: 0.8rem;
+            }
+            .addon-content code {
                 font-size: 0.9rem;
             }
         }
 
         @media (max-width: 480px) {
+            body {
+                line-height: 1.6;
+            }
             .logo-container .logo {
-                font-size: 1.2rem;
+                font-size: 1.3rem;
             }
-
-            .logo-container .logo-icon {
-                width: 20px;
-                height: 20px;
+            .logo-container img {
+                width: 30px;
+                height: 30px;
             }
-
-            .menu-toggle {
-                font-size: 1.2rem;
+            .mobile-nav {
+                width: 200px;
+                top: 70px;
+                right: 15px;
             }
-
             .addon-header {
-                padding: 4.5rem 0.5rem 1rem;
+                padding: 5rem 0.8rem 1rem;
             }
-
             .addon-header img {
-                max-width: 400px;
+                max-width: 100%;
             }
-
             .addon-header h1 {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
-
+            .addon-header h1::after {
+                width: 50px;
+                height: 3px;
+                bottom: -8px;
+            }
             .addon-page {
                 padding: 0 0.5rem 2.5rem;
             }
-
             .addon-content {
                 padding: 1rem;
             }
-
-            .addon-content h2 {
-                font-size: 1.3rem;
-            }
-
-            .addon-content h3 {
-                font-size: 1.1rem;
-            }
-
-            .addon-content p {
-                font-size: 0.9rem;
-            }
-
             .addon-content .buttons {
                 flex-direction: column;
                 gap: 0.8rem;
+                justify-content: center;
             }
-
+            .addon-content h2 {
+                font-size: 1.3rem;
+            }
+            .addon-content h3 {
+                font-size: 1.1rem;
+            }
+            .addon-content p {
+                font-size: 0.9rem;
+            }
+            .addon-content ul li,
+            .update-list li {
+                font-size: 0.9rem;
+            }
             .addon-content .btn {
                 padding: 0.5rem 0.8rem;
                 font-size: 0.8rem;
             }
+            .addon-content pre {
+                padding: 0.6rem;
+            }
+            .addon-content code {
+                font-size: 0.8rem;
+            }
+        }
 
+        @media (max-width: 360px) {
+            nav {
+                padding: 0.5rem 0.8rem;
+                width: calc(100% - 20px);
+            }
+            .logo-container .logo {
+                font-size: 1.2rem;
+            }
+            .logo-container img {
+                width: 28px;
+                height: 28px;
+            }
+            .mobile-nav {
+                width: 180px;
+                top: 65px;
+                right: 10px;
+                padding: 0.8rem;
+            }
+            .mobile-nav li a {
+                font-size: 0.9rem;
+                padding: 0.6rem 1rem;
+            }
+            .addon-header {
+                padding: 4.5rem 0.5rem 0.8rem;
+            }
+            .addon-header h1 {
+                font-size: 1.4rem;
+            }
+            .addon-header h1::after {
+                width: 40px;
+                height: 2px;
+                bottom: -6px;
+            }
+            .addon-page {
+                padding: 0 0.3rem 2rem;
+            }
+            .addon-content {
+                padding: 0.8rem;
+            }
+            .addon-content h2 {
+                font-size: 1.2rem;
+            }
+            .addon-content h3 {
+                font-size: 1rem;
+            }
+            .addon-content p {
+                font-size: 0.85rem;
+            }
             .addon-content ul li,
             .update-list li {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
+            }
+            .addon-content .btn {
+                padding: 0.4rem 0.7rem;
+                font-size: 0.75rem;
+            }
+            .addon-content pre {
+                padding: 0.5rem;
+            }
+            .addon-content code {
+                font-size: 0.75rem;
             }
         }
     </style>
 </head>
 <body>
     <nav>
-        <div class="logo-container">
-            <img src="../icon.png" alt="Logo Icon" class="logo-icon">
-            <div class="logo">HaruAddons</div>
-        </div>
-        <button class="menu-toggle">☰</button>
+        <a href="../index.html" class="logo-container"> 
+            <img src="../icon.png" alt="HARU Addons Icon" loading="lazy">
+            <div class="logo">HARUAddons</div>
+        </a>
         <ul>
-            <li><a href="../index.html">ホーム</a></li>
+            <li><a href="../index.html">ホーム</a></li> 
+            <li><a href="./support.html">Assistant</a></li>
             <li><a href="../developer_info.html">開発者情報</a></li>
             <li><a href="../links.html">リンク</a></li>
+            <li><a href="../tweets.html">Tweet</a></li>
         </ul>
+        <button class="menu-toggle" aria-label="メニューを開閉する" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </nav>
-    
+
+    <ul class="mobile-nav">
+        <li><a href="../index.html">ホーム</a></li>
+        <li><a href="./support.html">Assistant</a></li>
+        <li><a href="../developer_info.html">開発者情報</a></li>
+        <li><a href="../links.html">リンク</a></li>
+        <li><a href="../tweets.html">Tweet</a></li>
+    </ul>
+
     <section class="addon-header">
-        <img src="../CommunicationPlus.png" alt="HARUPhone1 Image">
+        <img src="../CommunicationPlus.png" alt="CommunicationPlus Image" loading="lazy">
         <h1>CommunicationPlus</h1>
     </section>
 
     <section class="addon-page">
         <div class="addon-content">
             <div class="buttons">
-                <a href="./communicationplus.html" class="btn">戻る</a>
+                <a href="./communicationPlus.html" class="btn">戻る</a>
             </div>
             <h2>基本操作</h2>
             <p>CommunicationPlusは、Minecraft統合版のコミュニケーションアドオンです。</p>
             <ul>
                 <li>インベントリから <strong>ChatPlus</strong> を選択し、使用する。</li>
-                <li>メニューから機能を選んでタップ操作で利用できる。</li>
+                <li>メニューからアプリを選んでタップ操作で利用できる。</li>
             </ul>
             
             <h2>主な機能</h2>
             <h3>1. メール機能</h3>
             <p>メール機能は個別のメッセージが可能です</p>
             <ul>
-                <li><strong>1.送信先のプレイヤーを選択</strong></li>
-                <li><strong>2.メッセージを入力（任意で座標共有も可能）</strong></li>
+                <li><strong>1.送信先のプレイヤーを選択</strong><br>スマホを開き「HARUPAY」→「残高確認」</li>
+                <li><strong>2.メッセージを入力（任意で座標共有も可能）</strong><br>「HARUPAY」→「送る」→ 送信先プレイヤーを選択 → 金額を設定し送信</li>
             </ul>
 
             <h3>2. オープンチャット機能（全体チャット）</h3>
@@ -397,23 +614,29 @@
             <ul>
                 <li><strong>1.メッセージを入力（任意で座標共有も可能）</strong></li>
             </ul>
-
-            <h2>よくある質問</h2>
-
-            <h3>🔹 ChatPlusのアイテム取得方法</h3>
-            <p>ChatPlusは <strong>コマンド</strong> で入手することが出来ます。</p>
-            <p>以下のコマンドを使用すると、指定したプレイヤーにChatPlusを付与できます。</p>
-            <pre><code>/give [ゲーマータグ] additem:chatplus</code></pre>
         </div>
     </section>
-    
+
     <footer>
-        <p>© 2025 HaruAddons. All Rights Reserved.</p>
+        <p>© 2025 HARU Addons. All Rights Reserved.</p>
     </footer>
-    
+
     <script>
-        document.querySelector('.menu-toggle').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mobileNav = document.querySelector('.mobile-nav');
+        menuToggle.addEventListener('click', () => {
+            const isExpanded = mobileNav.classList.toggle('active');
+            menuToggle.setAttribute('aria-expanded', isExpanded);
+            menuToggle.classList.toggle('open');
+        });
+
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 30) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
         });
     </script>
 </body>

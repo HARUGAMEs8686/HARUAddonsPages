@@ -3,75 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="9S9blQzCvgIm-0eArJeotUn8jH2cKG7KbiQ1VUnwNDQ" />
     <title>HaruAddons - SecurityCraft</title>
-    <link rel="icon" type="image/png" href="../icon.png">
+    <meta name="description" content="SecurityCraftのダウンロードページ。Minecraft統合版向けセキュリティアドオンの最新版を入手！">
+    <meta property="og:title" content="HaruAddons | SecurityCraft">
+    <meta property="og:image" content="https://harugames8686.github.io/HARUAddonsPages/ogp-image.png">
+    <meta property="og:url" content="https://harugames8686.github.io/HARUAddonsPages/addons/securitycraft.html">
+    <meta property="og:description" content="SecurityCraftアドオンのダウンロードと導入方法。Minecraft BEで高度なセキュリティを体験！">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://harugames8686.github.io/HARUAddonsPages/addons/securitycraft.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/png" href="../icon.png" sizes="32x32">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
+        :root {
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --text-dark: #343a40;
+            --text-muted: #6c757d;
+            --primary: #007bff;
+            --primary-light: #e6f2ff;
+            --accent: #28a745;
+            --accent-light: #eaf6ec;
+            --border-color: #dee2e6;
+            --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.12);
+            --font-sans-jp: 'Noto Sans JP', sans-serif;
+            --font-rounded: 'M PLUS Rounded 1c', sans-serif;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            font-family: var(--font-sans-jp);
+            line-height: 1.7;
+            overflow-x: hidden;
         }
 
         nav {
-            background-color: #000000;
-            padding: 1rem 2rem;
+            position: fixed;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 40px);
+            max-width: 1100px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 0.8rem 1.8rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: fixed;
-            width: 100%;
-            top: 0;
             z-index: 1000;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            top: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.8rem;
+            text-decoration: none;
+        }
+
+        .logo-container img {
+            width: 35px;
+            height: 35px;
+            transition: transform 0.3s ease;
+        }
+        .logo-container:hover img {
+            transform: rotate(15deg);
         }
 
         .logo-container .logo {
-            color: #fff;
             font-size: 1.6rem;
-            font-weight: bold;
-        }
-
-        .logo-container .logo-icon {
-            width: 32px;
-            height: 32px;
-            object-fit: contain;
+            font-weight: 700;
+            font-family: var(--font-rounded);
+            color: var(--primary);
+            letter-spacing: 0.5px;
         }
 
         nav ul {
-            list-style: none;
             display: flex;
-            gap: 2rem;
+            list-style: none;
+            gap: 1rem;
         }
 
         nav ul li a {
-            color: #fff;
+            color: var(--text-muted);
             text-decoration: none;
-            font-size: 1.1rem;
-            transition: color 0.3s;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
         }
 
-        nav ul li a:hover {
-            color: #1abc9c;
+        nav ul li a:hover,
+        nav ul li a.active {
+            background: var(--primary-light);
+            color: var(--primary);
+            transform: translateY(-2px);
         }
 
         .menu-toggle {
             display: none;
-            font-size: 1.5rem;
-            color: #fff;
+            font-size: 1.8rem;
             background: none;
             border: none;
+            color: var(--primary);
             cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        .menu-toggle:hover {
+            background-color: var(--primary-light);
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: var(--primary);
+            margin: 5px 0;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        .menu-toggle.open span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .menu-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.open span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            width: 220px;
+            background: var(--bg-white);
+            border-radius: 15px;
+            padding: 1rem;
+            z-index: 999;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            transform: translateY(-10px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            list-style: none;
+        }
+
+        .mobile-nav.active {
+            display: block;
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .mobile-nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .mobile-nav li a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 0.8rem 1.2rem;
+            border-radius: 10px;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav li a:hover {
+            background: var(--primary-light);
+            color: var(--primary);
         }
 
         .addon-header {
-            padding: 6rem 2rem 2rem;
-            background-color: #f5f6f5;
+            padding: 8rem 2rem 3rem;
+            background-color: var(--bg-light);
             text-align: center;
         }
 
@@ -81,64 +210,66 @@
             height: auto;
             display: block;
             margin: 0 auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            box-shadow: var(--shadow-soft);
         }
 
         .addon-header h1 {
             font-size: 2.5rem;
-            color: #2c3e50;
+            font-weight: 700;
+            font-family: var(--font-rounded);
+            color: var(--primary);
             margin: 1.5rem 0;
+            position: relative;
+            display: inline-block;
+        }
+
+        .addon-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
         }
 
         .addon-page {
-            padding: 0 2rem 4rem;
-            background-color: #f5f6f5;
-            text-align: center;
+            padding: 0 2rem 5rem;
+            background-color: var(--bg-light);
+            display: flex;
+            justify-content: center;
         }
 
         .addon-content {
             max-width: 800px;
-            margin: 0 auto;
-            text-align: left;
-            background-color: #fff;
+            width: 100%;
+            background: var(--bg-white);
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            position: relative;
+            border-radius: 16px;
+            box-shadow: var(--shadow-soft);
         }
 
         .addon-content h2 {
-            font-size: 1.8rem;
-            color: #2c3e50;
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: var(--font-rounded);
+            color: var(--text-dark);
             margin: 1.5rem 0 1rem;
         }
 
-        /* h3のデザイン改良（絵文字なし） */
         .addon-content h3 {
-            font-size: 1.4rem;
-            margin: 1.5rem 0 0.8rem;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            display: inline-block;
-            position: relative;
-        }
-
-        .addon-content h3.latest {
-            color: #fff;
-            background: linear-gradient(135deg, #1abc9c, #3498db);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .addon-content h3.old {
-            color: #fff;
-            background: linear-gradient(135deg, #7f8c8d, #34495e);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 1rem 0 0.5rem;
         }
 
         .addon-content p {
             font-size: 1.1rem;
-            color: #666;
+            color: var(--text-muted);
             line-height: 1.6;
             margin-bottom: 1rem;
         }
@@ -146,414 +277,334 @@
         .addon-content .buttons {
             display: flex;
             gap: 1rem;
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
+            margin: 1.5rem 0;
+            justify-content: center;
         }
 
         .addon-content .btn {
-            padding: 0.6rem 1.2rem;
-            background-color: #1abc9c;
-            color: #fff;
+            padding: 0.8rem 2rem;
+            background: var(--accent);
+            color: var(--bg-white);
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 50px;
             font-size: 1rem;
-            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-weight: 700;
+            font-family: var(--font-sans-jp);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
         }
 
         .addon-content .btn:hover {
-            background-color: #16a085;
+            background: #218838;
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
         }
 
         .download-buttons {
-            display: flex;
-            flex-direction: column; /* ボタンと説明を縦に */
-            justify-content: flex-start;
-            margin: 1rem 0 2rem;
-            padding: 1rem;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: var(--primary-light);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
         }
 
-        /* バージョン情報のスタイル */
-        .version-info {
-            font-size: 0.95rem;
-            color: #777;
-            margin-top: 0.5rem;
-            line-height: 1.4;
-        }
-
-        /* ダウンロードボタン共通スタイル */
         .download-btn, .download-btn_back {
+            display: block;
             padding: 0.9rem 2rem;
-            color: #fff;
+            color: var(--bg-white);
             text-decoration: none;
-            border-radius: 30px;
+            border-radius: 50px;
             font-size: 1.2rem;
-            font-weight: bold;
+            font-weight: 700;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-soft);
             text-align: center;
-            display: inline-block;
             position: relative;
-            overflow: hidden;
+            margin-bottom: 1rem;
         }
 
-        /* 最新バージョンのボタン */
         .download-btn {
-            background: linear-gradient(135deg, #1abc9c, #3498db);
+            background: linear-gradient(135deg, #0056b3, #34649b);
         }
 
         .download-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-            background: linear-gradient(135deg, #16a085, #2980b9);
+            box-shadow: var(--shadow-hover);
+            background: linear-gradient(135deg, #0056b3, #215a88);
         }
 
         .download-btn::before {
             content: "最新";
             font-size: 0.8rem;
-            background: rgba(255, 255, 255, 0.25);
-            padding: 0.2rem 0.5rem;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 0.2rem 0.6rem;
             border-radius: 10px;
             position: absolute;
-            top: 0.4rem;
-            right: 0.4rem;
-            font-weight: normal;
+            top: 0.5rem;
+            right: 0.5rem;
         }
 
-        .download-btn:hover::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: rotate(30deg);
-            transition: all 0.5s ease;
-            opacity: 1;
-        }
-
-        /* 旧バージョンのボタン */
         .download-btn_back {
-            background: linear-gradient(135deg, #7f8c8d, #34495e);
-            opacity: 0.9;
+            background: linear-gradient(135deg, #6c757d, #343a40);
         }
 
         .download-btn_back:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-            background: linear-gradient(135deg, #95a5a6, #2c3e50);
+            box-shadow: var(--shadow-hover);
+            background: linear-gradient(135deg, #5a6268, #2c3e50);
         }
 
         .download-btn_back::before {
             content: "旧";
             font-size: 0.8rem;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 0.2rem 0.5rem;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 0.2rem 0.6rem;
             border-radius: 10px;
             position: absolute;
-            top: 0.4rem;
-            right: 0.4rem;
-            font-weight: normal;
+            top: 0.5rem;
+            right: 0.5rem;
         }
 
-        .download-btn_back:hover::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: rgba(255, 255, 255, 0.1);
-            transform: rotate(30deg);
-            transition: all 0.5s ease;
-            opacity: 1;
+        .version-info {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+            line-height: 1.5;
         }
 
         .addon-content ul {
-            list-style-type: disc;
-            padding-left: 2rem;
+            list-style-type: none;
+            padding-left: 1.5rem;
             margin-bottom: 1.5rem;
         }
 
         .addon-content ul li {
             font-size: 1.1rem;
-            color: #666;
-            margin-bottom: 0.5rem;
-        }
-
-        .update-list {
-            padding-left: 1.5rem;
-            list-style-type: none;
-        }
-
-        .update-list li {
-            font-size: 1.1rem;
-            color: #666;
+            color: var(--text-muted);
             margin-bottom: 0.8rem;
             position: relative;
+            padding-left: 1.5rem;
         }
 
-        .update-list li:before {
-            content: "📝";
-            margin-right: 0.5rem;
-            color: #1abc9c;
+        .addon-content ul li::before {
+            content: "🔒";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .command {
+            font-weight: 700;
+            color: var(--text-dark);
+            background: var(--accent-light);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            display: inline-block;
+            margin: 0.5rem 0;
         }
 
         footer {
-            background-color: #000000;
-            color: #fff;
+            background-color: var(--text-dark);
+            color: var(--bg-light);
             text-align: center;
-            padding: 2rem;
-            font-size: 1rem;
+            padding: 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 992px) {
+            nav ul {
+                gap: 0.5rem;
+            }
+            nav ul li a {
+                padding: 0.5rem 0.8rem;
+            }
+            .addon-header h1 {
+                font-size: 2rem;
+            }
         }
 
         @media (max-width: 768px) {
             nav {
-                padding: 0.8rem 1rem;
-                flex-wrap: wrap;
+                padding: 0.6rem 1rem;
+                width: calc(100% - 30px);
             }
-
-            .logo-container .logo {
-                font-size: 1.4rem;
-            }
-
-            .logo-container .logo-icon {
-                width: 24px;
-                height: 24px;
-            }
-
             .menu-toggle {
                 display: block;
             }
-
             nav ul {
                 display: none;
-                flex-direction: column;
-                width: 100%;
-                padding: 1rem 0;
-                background-color: #131313;
-                position: absolute;
-                top: 100%;
-                left: 0;
             }
-
-            nav ul.active {
-                display: flex;
-            }
-
-            nav ul li {
-                margin: 0.5rem 0;
-                text-align: center;
-            }
-
-            nav ul li a {
-                font-size: 1rem;
-                padding: 0.5rem;
-                display: block;
-            }
-
             .addon-header {
-                padding: 5rem 1rem 1.5rem;
+                padding: 6rem 1rem 2rem;
             }
-
             .addon-header img {
                 max-width: 600px;
             }
-
             .addon-header h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
-
             .addon-page {
-                padding: 0 1rem 3rem;
+                padding: 0 1rem 4rem;
             }
-
             .addon-content {
                 padding: 1.5rem;
             }
-
             .addon-content h2 {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
             }
-
             .addon-content h3 {
-                font-size: 1.2rem;
-                padding: 0.4rem 0.8rem;
+                font-size: 1.3rem;
             }
-
             .addon-content p {
                 font-size: 1rem;
             }
-
             .addon-content .buttons {
-                position: static;
                 flex-direction: row;
-                justify-content: center;
-                margin: 1.5rem 0;
+                gap: 0.8rem;
             }
-
             .addon-content .btn {
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
-            }
-
-            .download-buttons {
-                padding: 0.8rem;
-            }
-
-            .download-btn, .download-btn_back {
                 padding: 0.7rem 1.5rem;
-                font-size: 1rem;
-            }
-
-            .download-btn::before, .download-btn_back::before {
-                font-size: 0.7rem;
-                padding: 0.15rem 0.4rem;
-            }
-
-            .version-info {
-                font-size: 0.85rem;
-            }
-
-            .addon-content ul li,
-            .update-list li {
-                font-size: 1rem;
-            }
-
-            footer {
-                padding: 1.5rem;
                 font-size: 0.9rem;
+            }
+            .download-btn, .download-btn_back {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+            .version-info {
+                font-size: 0.9rem;
+            }
+            .addon-content ul li {
+                font-size: 1rem;
             }
         }
 
         @media (max-width: 480px) {
+            body {
+                line-height: 1.6;
+            }
             .logo-container .logo {
-                font-size: 1.2rem;
+                font-size: 1.3rem;
             }
-
-            .logo-container .logo-icon {
-                width: 20px;
-                height: 20px;
+            .logo-container img {
+                width: 30px;
+                height: 30px;
             }
-
-            .menu-toggle {
-                font-size: 1.2rem;
+            .mobile-nav {
+                width: 200px;
+                top: 70px;
+                right: 15px;
             }
-
             .addon-header {
-                padding: 4.5rem 0.5rem 1rem;
+                padding: 5rem 0.5rem 1.5rem;
             }
-
             .addon-header img {
                 max-width: 400px;
             }
-
             .addon-header h1 {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
-
+            .addon-header h1::after {
+                width: 50px;
+                height: 3px;
+                bottom: -8px;
+            }
             .addon-page {
-                padding: 0 0.5rem 2.5rem;
+                padding: 0 0.5rem 3rem;
             }
-
             .addon-content {
                 padding: 1rem;
             }
-
             .addon-content h2 {
-                font-size: 1.3rem;
+                font-size: 1.5rem;
             }
-
             .addon-content h3 {
-                font-size: 1.1rem;
-                padding: 0.3rem 0.6rem;
+                font-size: 1.2rem;
             }
-
             .addon-content p {
                 font-size: 0.9rem;
             }
-
             .addon-content .buttons {
                 flex-direction: column;
-                gap: 0.8rem;
+                gap: 0.5rem;
             }
-
             .addon-content .btn {
-                padding: 0.5rem 0.8rem;
+                padding: 0.6rem 1rem;
                 font-size: 0.8rem;
             }
-
             .download-buttons {
-                padding: 0.6rem;
+                padding: 0.8rem;
             }
-
             .download-btn, .download-btn_back {
-                padding: 0.6rem 1.2rem;
+                padding: 0.7rem 1rem;
                 font-size: 0.9rem;
             }
-
             .download-btn::before, .download-btn_back::before {
-                font-size: 0.6rem;
-                padding: 0.1rem 0.3rem;
+                font-size: 0.7rem;
+                padding: 0.15rem 0.4rem;
             }
-
             .version-info {
                 font-size: 0.8rem;
             }
-
-            .addon-content ul li,
-            .update-list li {
+            .addon-content ul li {
                 font-size: 0.9rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- ナビゲーションバー -->
     <nav>
-        <div class="logo-container">
-            <img src="../icon.png" alt="Logo Icon" class="logo-icon">
-            <div class="logo">HaruAddons</div>
-        </div>
-        <button class="menu-toggle">☰</button>
+        <a href="../index.html" class="logo-container"> 
+            <img src="../icon.png" alt="HARU Addons Icon" loading="lazy">
+            <div class="logo">HARUAddons</div>
+        </a>
         <ul>
-            <li><a href="../index.html">ホーム</a></li>
+            <li><a href="../index.html">ホーム</a></li> 
+            <li><a href="../Assistant/support.html">Assistant</a></li>
             <li><a href="../developer_info.html">開発者情報</a></li>
             <li><a href="../links.html">リンク</a></li>
+            <li><a href="../tweets.html">Tweet</a></li>
         </ul>
+        <button class="menu-toggle" aria-label="メニューを開閉する" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </nav>
 
-    <!-- アドオンヘッダー（画像とタイトルエリア） -->
+    <ul class="mobile-nav">
+        <li><a href="../index.html">ホーム</a></li>
+        <li><a href="../Assistant/support.html">Assistant</a></li>
+        <li><a href="../developer_info.html">開発者情報</a></li>
+        <li><a href="../links.html">リンク</a></li>
+        <li><a href="../tweets.html">Tweet</a></li>
+    </ul>
+
     <section class="addon-header">
-        <img src="../SecurityCraft.png" alt="HARUPhone1 Image">
+        <img src="../SecurityCraft.png" alt="SecurityCraft Image" loading="lazy">
         <h1>SecurityCraft</h1>
     </section>
 
-    <!-- アドオン紹介セクション -->
     <section class="addon-page">
         <div class="addon-content">
             <div class="buttons">
                 <a href="../index.html" class="btn">戻る</a>
             </div>
-    
+
             <h2>アドオンの入手</h2>
             <p>SecurityCraftは以下のボタンからダウンロードできます。</p>
             <div class="download-buttons">
                 <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/SecurityCraft_v2.8.1(beta).mcaddon" class="download-btn">【mcaddon】SecurityCraft_v2.8.1(Beta)</a>
-                <br>
                 <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/SecurityCraft_v2.8.1(beta).zip" class="download-btn">【zip】SecurityCraft_v2.8.1(Beta)</a>
                 <p class="version-info">・座標ログ記録(検索機能付き)<br>・設置記録<br>・破壊記録<br>・X-ray検知 1.1.0<br>・不正チャット検知<br>・独自セキュリティーチェスト</p>
             </div>
             <div class="download-buttons">
                 <a href="./securitycraft_old.html" class="download-btn_back">過去バージョンのダウンロードページへ</a>
-                <br>
                 <p class="version-info">・不具合が見られる場合は、過去バージョンをお試しください</p>
             </div>
 
@@ -561,39 +612,50 @@
             <p>SecurityCraftは現在ベータ版のため、動作が不安定な場合があります。</p>
             
             <h3>導入方法</h3>
+            <p>以下の手順でアドオンを導入してください：</p>
             <ul>
                 <li>チートを有効にする</li>
                 <li>Beta APIを有効にする</li>
                 <li>以下のコマンドを実行する：</li>
             </ul>
-            <p style="font-weight: bold; color: #2c3e50; background-color: #f0f0f0; padding: 0.5rem; border-radius: 5px;">/scriptevent start:s</p>
+            <p class="command">/scriptevent start:s</p>
             <p>実行すると、システムが起動します。</p>
             
             <h3>安定性について</h3>
             <p>本アドオンは開発中のため、動作が安定しない可能性があります。問題が発生した場合は、最新バージョンをご確認ください。</p>
             
             <h3>使い方</h3>
-            <p>セキュリティー設定の画面は、以下の方法で呼び出せます。</p>
+            <p>セキュリティー設定の画面は、以下の方法で呼び出せます：</p>
             <ul>
                 <li>コマンドを実行：</li>
             </ul>
-            <p style="font-weight: bold; color: #2c3e50; background-color: #f0f0f0; padding: 0.5rem; border-radius: 5px;">/scriptevent haru:s</p>
+            <p class="command">/scriptevent haru:s</p>
             <ul>
                 <li>「SecurityCraft」というアイテムを使用</li>
             </ul>
-            
         </div>
     </section>
 
-    <!-- フッター -->
     <footer>
-        <p>© 2025 HaruAddons. All Rights Reserved.</p>
+        <p>© 2025 HARU Addons. All Rights Reserved.</p>
     </footer>
 
-    <!-- JavaScript -->
     <script>
-        document.querySelector('.menu-toggle').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mobileNav = document.querySelector('.mobile-nav');
+        menuToggle.addEventListener('click', () => {
+            const isExpanded = mobileNav.classList.toggle('active');
+            menuToggle.setAttribute('aria-expanded', isExpanded);
+            menuToggle.classList.toggle('open');
+        });
+
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 30) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
         });
     </script>
 </body>

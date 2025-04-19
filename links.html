@@ -3,276 +3,496 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="9S9blQzCvgIm-0eArJeotUn8jH2cKG7KbiQ1VUnwNDQ" />
     <title>HaruAddons - リンク</title>
-    <link rel="icon" type="image/png" href="./icon.png">
+    <meta name="description" content="HARU Addonsの公式ソーシャルメディア、配信プラットフォーム、その他の関連リンクをチェック！">
+    <meta property="og:title" content="HaruAddons | リンク">
+    <meta property="og:image" content="https://harugames8686.github.io/HARUAddonsPages/ogp-image.png">
+    <meta property="og:url" content="https://harugames8686.github.io/HARUAddonsPages/links.html">
+    <meta property="og:description" content="HARU Addonsのソーシャルメディア、配信プラットフォーム、その他の関連リンク。最新情報や配信をチェック！">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://harugames8686.github.io/HARUAddonsPages/links.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/png" href="./icon.png" sizes="32x32">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
+        :root {
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --text-dark: #343a40;
+            --text-muted: #6c757d;
+            --primary: #007bff;
+            --primary-light: #e6f2ff;
+            --accent: #28a745;
+            --accent-light: #eaf6ec;
+            --border-color: #dee2e6;
+            --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.12);
+            --font-sans-jp: 'Noto Sans JP', sans-serif;
+            --font-rounded: 'M PLUS Rounded 1c', sans-serif;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
         }
 
-        /* ナビゲーションは絶対に変えない！ */
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            font-family: var(--font-sans-jp);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
         nav {
-            background-color: #000000;
-            padding: 1rem 2rem;
+            position: fixed;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 40px);
+            max-width: 1100px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 0.8rem 1.8rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: fixed;
-            width: 100%;
-            top: 0;
             z-index: 1000;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            top: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.8rem;
+            text-decoration: none;
+        }
+
+        .logo-container img {
+            width: 35px;
+            height: 35px;
+            transition: transform 0.3s ease;
+        }
+        .logo-container:hover img {
+            transform: rotate(15deg);
         }
 
         .logo-container .logo {
-            color: #fff;
             font-size: 1.6rem;
-            font-weight: bold;
-        }
-
-        .logo-container .logo-icon {
-            width: 32px;
-            height: 32px;
-            object-fit: contain;
+            font-weight: 700;
+            font-family: var(--font-rounded);
+            color: var(--primary);
+            letter-spacing: 0.5px;
         }
 
         nav ul {
-            list-style: none;
             display: flex;
-            gap: 2rem;
+            list-style: none;
+            gap: 1rem;
         }
 
         nav ul li a {
-            color: #fff;
+            color: var(--text-muted);
             text-decoration: none;
-            font-size: 1.1rem;
-            transition: color 0.3s;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
         }
 
-        nav ul li a:hover {
-            color: #1abc9c;
+        nav ul li a:hover,
+        nav ul li a.active {
+            background: var(--primary-light);
+            color: var(--primary);
+            transform: translateY(-2px);
         }
 
         .menu-toggle {
             display: none;
-            font-size: 1.5rem;
-            color: #fff;
+            font-size: 1.8rem;
             background: none;
             border: none;
+            color: var(--primary);
             cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        .menu-toggle:hover {
+            background-color: var(--primary-light);
         }
 
-        /* リンクセクションのスタイル */
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: var(--primary);
+            margin: 5px 0;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        .menu-toggle.open span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .menu-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.open span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            width: 220px;
+            background: var(--bg-white);
+            border-radius: 15px;
+            padding: 1rem;
+            z-index: 999;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            transform: translateY(-10px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            list-style: none;
+        }
+
+        .mobile-nav.active {
+            display: block;
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .mobile-nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .mobile-nav li a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 0.8rem 1.2rem;
+            border-radius: 10px;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav li a:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
         .links {
-            padding: 6rem 2rem 4rem;
-            background-color: #f5f6f5;
-            text-align: center;
-            min-height: calc(100vh - 140px);
+            padding: 8rem 2rem 5rem;
+            background-color: var(--bg-light);
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .links h1 {
             font-size: 2.5rem;
-            margin-bottom: 2rem;
-            color: #2c3e50;
+            font-weight: 700;
+            font-family: var(--font-rounded);
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 3.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .links h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
         }
 
         .links h2 {
-            font-size: 1.8rem;
-            margin: 3rem 0 1.5rem;
-            color: #2c3e50;
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: var(--font-rounded);
+            color: var(--text-dark);
+            margin: 3rem 0 2rem;
             position: relative;
             display: inline-block;
-            padding-bottom: 0.5rem;
         }
 
         .links h2::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: #1abc9c;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary);
             border-radius: 2px;
         }
 
         .link-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            gap: 2rem;
             max-width: 1200px;
+            width: 100%;
             margin: 0 auto;
-            justify-items: center; /* 中央揃えでバランスよく */
+            justify-items: center;
         }
 
         .link-item {
-            border-radius: 12px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            background: var(--bg-white);
+            border-radius: 16px;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease-in-out;
             text-align: center;
-            padding: 1.2rem;
-            border: 2px solid #e0e0e0;
-            height: 180px; /* 少し小さめに */
+            padding: 1.5rem;
             width: 100%;
-            max-width: 320px; /* 最大幅を制限 */
+            max-width: 320px;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
-            background-color: #fff;
+            min-height: 180px;
+            border: 1px solid var(--border-color);
         }
 
         .link-item:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-            border-color: #1abc9c;
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
         }
 
         .link-item a {
+            text-decoration: none;
+            color: var(--text-dark);
             display: flex;
             flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: #2c3e50;
-            transition: color 0.3s ease;
-            width: 100%;
-            height: 100%;
             justify-content: center;
-            padding: 1rem;
-        }
-
-        .link-item a:hover {
-            color: #1abc9c;
+            height: 100%;
+            width: 100%;
         }
 
         .link-item .title {
             font-size: 1.4rem;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 0.75rem;
+            color: var(--text-dark);
         }
 
         .link-item .description {
             font-size: 1rem;
-            color: #555;
-            line-height: 1.4;
+            color: var(--text-muted);
+            line-height: 1.5;
         }
 
-        /* 背景色 */
-        .link-item.social-x { background-color: #f0f7fa; }
+        .link-item.social-x { background-color: var(--primary-light); }
         .link-item.social-bluesky { background-color: #e8f0fe; }
         .link-item.social-discord { background-color: #f2ecfe; }
-        .link-item.social-note { background-color: #e9f6f2; }
+        .link-item.social-note { background-color: var(--accent-light); }
         .link-item.stream-youtube { background-color: #ffebeb; }
         .link-item.stream-twitch { background-color: #f2e8ff; }
         .link-item.other-minesecure { background-color: #fff4e6; }
         .link-item.other-crafters { background-color: #e6f3e6; }
 
         footer {
-            background-color: #000000;
-            color: #fff;
+            background-color: var(--text-dark);
+            color: var(--bg-light);
             text-align: center;
-            padding: 2rem;
-            font-size: 1rem;
+            padding: 2rem 1rem;
+            margin-top: 4rem;
         }
 
-        /* レスポンシブ対応 */
+        footer p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 992px) {
+            nav ul {
+                gap: 0.5rem;
+            }
+            nav ul li a {
+                padding: 0.5rem 0.8rem;
+            }
+            .links h1 {
+                font-size: 2rem;
+            }
+            .links h2 {
+                font-size: 1.8rem;
+            }
+            .link-grid {
+                gap: 1.5rem;
+            }
+        }
+
         @media (max-width: 768px) {
+            nav {
+                padding: 0.6rem 1rem;
+                width: calc(100% - 30px);
+            }
             .menu-toggle {
                 display: block;
             }
-
             nav ul {
                 display: none;
-                flex-direction: column;
-                width: 100%;
-                padding: 1rem 0;
-                background-color: #131313;
-                position: absolute;
-                top: 100%;
-                left: 0;
             }
-
-            nav ul.active {
-                display: flex;
-            }
-
-            nav ul li {
-                margin: 0.5rem 0;
-                text-align: center;
-            }
-
-            nav ul li a {
-                font-size: 1rem;
-                padding: 0.5rem;
-                display: block;
-            }
-
             .links {
-                padding: 5rem 1rem 3rem;
+                padding: 6rem 1rem 4rem;
             }
-
             .links h1 {
                 font-size: 1.8rem;
             }
-
             .links h2 {
                 font-size: 1.5rem;
-                margin: 2.5rem 0 1rem;
+                margin: 2.5rem 0 1.5rem;
             }
-
             .link-grid {
-                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
                 gap: 1.2rem;
             }
-
             .link-item {
-                height: 160px;
-                padding: 1rem;
+                min-height: 160px;
+                padding: 1.2rem;
+                max-width: 280px;
             }
-
             .link-item .title {
                 font-size: 1.2rem;
             }
-
             .link-item .description {
                 font-size: 0.9rem;
             }
         }
 
         @media (max-width: 480px) {
+            body {
+                line-height: 1.6;
+            }
+            .logo-container .logo {
+                font-size: 1.3rem;
+            }
+            .logo-container img {
+                width: 30px;
+                height: 30px;
+            }
+            .mobile-nav {
+                width: 200px;
+                top: 70px;
+                right: 15px;
+            }
+            .links {
+                padding: 5rem 0.8rem 3rem;
+            }
+            .links h1 {
+                font-size: 1.6rem;
+            }
+            .links h1::after {
+                width: 50px;
+                height: 3px;
+                bottom: -8px;
+            }
+            .links h2 {
+                font-size: 1.3rem;
+                margin: 2rem 0 1rem;
+            }
+            .links h2::after {
+                width: 40px;
+                height: 2px;
+                bottom: -6px;
+            }
+            .link-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 0 0.5rem;
+            }
+            .link-item {
+                min-height: 140px;
+                padding: 1rem;
+                max-width: 100%;
+            }
+            .link-item .title {
+                font-size: 1.1rem;
+            }
+            .link-item .description {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            nav {
+                padding: 0.5rem 0.8rem;
+                width: calc(100% - 20px);
+            }
+            .logo-container .logo {
+                font-size: 1.2rem;
+            }
+            .logo-container img {
+                width: 28px;
+                height: 28px;
+            }
+            .mobile-nav {
+                width: 180px;
+                top: 65px;
+                right: 10px;
+                padding: 0.8rem;
+            }
+            .mobile-nav li a {
+                font-size: 0.9rem;
+                padding: 0.6rem 1rem;
+            }
             .links {
                 padding: 4.5rem 0.5rem 2.5rem;
             }
-
             .links h1 {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
             }
-
+            .links h1::after {
+                width: 40px;
+                height: 2px;
+                bottom: -6px;
+            }
             .links h2 {
-                font-size: 1.3rem;
-                margin: 2rem 0 0.8rem;
+                font-size: 1.2rem;
+                margin: 1.8rem 0 0.8rem;
             }
-
+            .links h2::after {
+                width: 35px;
+                height: 2px;
+                bottom: -5px;
+            }
             .link-grid {
-                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-                gap: 1rem;
+                gap: 0.8rem;
+                padding: 0 0.3rem;
             }
-
             .link-item {
-                height: 140px;
+                min-height: 120px;
+                padding: 0.8rem;
             }
-
             .link-item .title {
                 font-size: 1rem;
             }
-
             .link-item .description {
                 font-size: 0.8rem;
             }
@@ -281,22 +501,35 @@
 </head>
 <body>
     <nav>
-        <div class="logo-container">
-            <img src="./icon.png" alt="Logo Icon" class="logo-icon">
-            <div class="logo">HaruAddons</div>
-        </div>
-        <button class="menu-toggle">☰</button>
+        <a href="./index.html" class="logo-container"> 
+            <img src="./icon.png" alt="HARU Addons Icon" loading="lazy">
+            <div class="logo">HARUAddons</div>
+        </a>
         <ul>
-            <li><a href="./index.html">ホーム</a></li>
+            <li><a href="./index.html">ホーム</a></li> 
+            <li><a href="./Assistant/support.html">Assistant</a></li>
             <li><a href="./developer_info.html">開発者情報</a></li>
-            <li><a href="./links.html">リンク</a></li>
+            <li><a href="./links.html" class="active">リンク</a></li>
+            <li><a href="./tweets.html">Tweet</a></li>
         </ul>
+        <button class="menu-toggle" aria-label="メニューを開閉する" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </nav>
 
-    <section class="links" id="about">
+    <ul class="mobile-nav">
+        <li><a href="./index.html">ホーム</a></li>
+        <li><a href="./Assistant/support.html">Assistant</a></li>
+        <li><a href="./developer_info.html">開発者情報</a></li>
+        <li><a href="./links.html">リンク</a></li>
+        <li><a href="./tweets.html">Tweet</a></li>
+    </ul>
+
+    <section class="links">
         <h1>リンク</h1>
 
-        <!-- ソーシャルメディア -->
         <h2>ソーシャルメディア</h2>
         <div class="link-grid">
             <div class="link-item social-x">
@@ -312,7 +545,7 @@
                 </a>
             </div>
             <div class="link-item social-discord">
-                <a href="#" target="_blank">
+                <a href="https://discord.gg/PbZtPCysfJ" target="_blank">
                     <div class="title">Discord</div>
                     <div class="description">HARUAddons公式Discordサーバー。</div>
                 </a>
@@ -325,7 +558,6 @@
             </div>
         </div>
 
-        <!-- 配信プラットフォーム -->
         <h2>配信プラットフォーム</h2>
         <div class="link-grid">
             <div class="link-item stream-youtube">
@@ -342,7 +574,6 @@
             </div>
         </div>
 
-        <!-- その他 -->
         <h2>その他</h2>
         <div class="link-grid">
             <div class="link-item other-minesecure">
@@ -361,12 +592,25 @@
     </section>
 
     <footer>
-        <p>© 2025 HaruAddons. All Rights Reserved.</p>
+        <p>© 2025 HARU Addons. All Rights Reserved.</p>
     </footer>
 
     <script>
-        document.querySelector('.menu-toggle').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mobileNav = document.querySelector('.mobile-nav');
+        menuToggle.addEventListener('click', () => {
+            const isExpanded = mobileNav.classList.toggle('active');
+            menuToggle.setAttribute('aria-expanded', isExpanded);
+            menuToggle.classList.toggle('open');
+        });
+
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 30) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
         });
     </script>
 </body>
