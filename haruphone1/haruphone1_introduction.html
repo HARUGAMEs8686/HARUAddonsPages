@@ -722,23 +722,34 @@
         <p>© 2025 HARU Addons. All Rights Reserved.</p>
     </footer>
 
-    <script>
-        const menuToggle = document.querySelector('.menu-toggle');
-        const mobileNav = document.querySelector('.mobile-nav');
-        menuToggle.addEventListener('click', () => {
-            const isExpanded = mobileNav.classList.toggle('active');
-            menuToggle.setAttribute('aria-expanded', isExpanded);
-            menuToggle.classList.toggle('open');
-        });
+<script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mobileNav = document.querySelector('.mobile-nav');
+    menuToggle.addEventListener('click', () => {
+        const isExpanded = mobileNav.classList.toggle('active');
+        menuToggle.setAttribute('aria-expanded', isExpanded);
+        menuToggle.classList.toggle('open');
+    });
 
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 30) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
+    window.addEventListener('scroll', () => {
+        const nav = document.querySelector('nav');
+        if (window.scrollY > 30) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+    });
+
+    // ダウンロードボタンのクリックを追跡
+    document.querySelectorAll('.download-btn, .download-btn_alpha, .download-btn_out').forEach(button => {
+        button.addEventListener('click', () => {
+            gtag('event', 'download', {
+                'event_category': 'HARUPhone1_Download',
+                'event_label': button.getAttribute('href'),
+                'value': 1
+            });
         });
-    </script>
+    });
+</script>
 </body>
 </html>
