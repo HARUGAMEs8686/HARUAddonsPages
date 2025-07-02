@@ -1,3 +1,0 @@
-[build]
-  publish = "." # Netlifyがホストするファイルの場所 (この場合、プロジェクトのルート)
-  functions = "netlify/functions" # Netlify Functionsの場所
