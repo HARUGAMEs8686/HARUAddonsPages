@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="google-site-verification" content="9S9blQzCvgIm-0eArJeotUn8jH2cKG7KbiQ1VUnwNDQ" />
+        <title>HARU Addons サポートチャット</title>
+        <meta name="description" content="Minecraft統合版のアドオン開発チーム『HARU Addons』の公式サイト!経済システムや荒らし対策など、多彩で高品質なアドオンを公開中！" />
+        <meta property="og:title" content="HARU Addons | マイクラBEアドオン配布＆開発" />
+        <meta property="og:image" content="https://harugames8686.github.io/HARUAddonsPages/ogp-image.png" />
+        <meta property="og:url" content="https://harugames8686.github.io/HARUAddonsPages/" />
+        <meta property="og:description" content="マイクラBEのアドオン配布サイト『HARU Addons』！経済システム・荒らし対策・便利機能など、高品質なアドオンを無料公開中！" />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://harugames8686.github.io/HARUAddonsPages/" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <link rel="icon" type="image/png" href="https://harugames8686.github.io/HARUAddonsPages/icon.png" sizes="32x32" />
+        <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <nav>
+            <a href="./index.html" class="logo-container">
+                <img src="https://harugames8686.github.io/HARUAddonsPages/icon.png" alt="HARU Addons Icon" loading="lazy" />
+                <div class="logo">HARUAddons</div>
+            </a>
+            <ul>
+                <li><a href="https://harugames8686.github.io/HARUAddonsPages/index.html">ホーム</a></li>
+                <li><a href="#" class="active">Assistant</a></li>
+                <li><a href="https://harugames8686.github.io/HARUAddonsPages/developer_info.html">開発者情報</a></li>
+                <li><a href="https://harugames8686.github.io/HARUAddonsPages/links.html">リンク</a></li>
+                <li><a href="https://harugames8686.github.io/HARUAddonsPages/tweets.html">Tweet</a></li>
+            </ul>
+            <button class="menu-toggle" aria-label="メニューを開閉する" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+
+        <ul class="mobile-nav">
+            <li><a href="https://harugames8686.github.io/HARUAddonsPages/index.html">ホーム</a></li>
+            <li><a href="#" class="active">Assistant</a></li>
+            <li><a href="https://harugames8686.github.io/HARUAddonsPages/developer_info.html">開発者情報</a></li>
+            <li><a href="https://harugames8686.github.io/HARUAddonsPages/links.html">リンク</a></li>
+            <li><a href="https://harugames8686.github.io/HARUAddonsPages/tweets.html">Tweet</a></li>
+        </ul>
+
+        <section class="chat-section">
+            <div class="chat-container">
+                <h2>Assistant</h2>
+                <div class="chat-box" id="chat-box">
+                    <div class="message bot-message">
+                        <p>こんにちは！HARU Addons サポートチャットへようこそ！アドオンについて何か質問がありますか？</p>
+                    </div>
+                    <div class="message bot-message api-key-notice">
+                        <p>※このチャットボットはGoogleのGemini APIを利用しています。APIキーはあなたのブラウザのローカルストレージにのみ保存され、HARU Addons側には送信されません。</p>
+                    </div>
+                </div>
+                <div class="input-area">
+                    <input type="text" id="user-input" placeholder="質問を入力してください..." rows="1" />
+                    <button id="send-button">送信</button>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2025 HARU Addons. All Rights Reserved.</p>
+        </footer>
+
+        <div id="apiKeyModal" class="modal">
+            <div class="modal-content">
+                <h2>Gemini APIキーの入力</h2>
+                <p>このチャットボットを利用するには、Google Gemini APIキーが必要です。</p>
+                <p>ご自身のAPIキーを下記に入力し、「保存して開始」ボタンを押してください。</p>
+                <p class="modal-notice">※APIキーはあなたのブラウザのローカルストレージにのみ保存され、HARU Addons側には送信されません。</p>
+                <input type="password" id="api-key-input" placeholder="ここにAPIキーを入力してください" />
+                <button id="save-api-key-button">保存して開始</button>
+            </div>
+        </div>
+
+        <script src="script_202507021932.js"></script>
+        <script>
+            // モバイルメニューの開閉
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mobileNav = document.querySelector('.mobile-nav');
+            menuToggle.addEventListener('click', () => {
+                const isExpanded = mobileNav.classList.toggle('active');
+                menuToggle.setAttribute('aria-expanded', isExpanded);
+                menuToggle.classList.toggle('open');
+            });
+
+            // スクロールでナビゲーションのスタイル変更
+            window.addEventListener('scroll', () => {
+                const nav = document.querySelector('nav');
+                if (window.scrollY > 30) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+        </script>
+    </body>
+</html>
