@@ -1,0 +1,662 @@
+/* --- HARU Addons 公式サイトのルート変数 --- */
+:root {
+    --bg-light: #f8f9fa;
+    --bg-white: #ffffff;
+    --text-dark: #343a40;
+    --text-muted: #6c757d;
+    --primary: #007bff; /* 青 */
+    --primary-light: #e6f2ff; /* 薄い青 */
+    --accent: #28a745; /* 緑 */
+    --accent-light: #eaf6ec; /* 薄い緑 */
+    --border-color: #dee2e6;
+    --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.12);
+    --font-sans-jp: 'Noto Sans JP', sans-serif;
+    --font-rounded: 'M PLUS Rounded 1c', sans-serif;
+
+    --discord-color: #5865f2;
+    --discord-hover-color: #4752c4;
+    --tag-economy-bg: var(--primary-light);
+    --tag-economy-text: var(--primary);
+    --tag-security-bg: var(--accent-light);
+    --tag-security-text: var(--accent);
+    --tag-utility-bg: #e9ecef;
+    --tag-utility-text: #495057;
+    --tag-communication-bg: #fff3e0;
+    --tag-communication-text: #ff9800;
+    --tag-bug-bg: #ffebee;
+    --tag-bug-text: #e53935;
+    --tag-update-bg: #e3f2fd;
+    --tag-update-text: #1e88e5;
+
+    /* AIチャット特有のカラー */
+    --ai-input-focus-glow: rgba(0, 123, 255, 0.4); /* 入力欄フォーカス時の光 */
+    --ai-icon-glow: rgba(0, 123, 255, 0.5); /* AIアイコンの光 */
+}
+
+/* --- 全体的なリセットと基本スタイル --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    font-family: var(--font-sans-jp);
+    line-height: 1.7;
+    overflow-x: hidden; /* 横スクロールバーを防ぐ */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- ナビゲーションバー (変更なし) --- */
+nav {
+    position: fixed;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 40px);
+    max-width: 1100px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 0.8rem 1.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+nav.scrolled {
+    top: 10px;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    text-decoration: none;
+}
+.logo-container img {
+    width: 35px;
+    height: 35px;
+    transition: transform 0.3s ease;
+}
+.logo-container:hover img {
+    transform: rotate(15deg);
+}
+.logo-container .logo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    font-family: var(--font-rounded);
+    color: var(--primary);
+    letter-spacing: 0.5px;
+}
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+}
+nav ul li a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+nav ul li a:hover,
+nav ul li a.active {
+    background: var(--primary-light);
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+.menu-toggle {
+    display: none;
+    font-size: 1.8rem;
+    background: none;
+    border: none;
+    color: var(--primary);
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+.menu-toggle:hover {
+    background-color: var(--primary-light);
+}
+.menu-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: var(--primary);
+    margin: 5px 0;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+.menu-toggle.open span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.menu-toggle.open span:nth-child(2) {
+    opacity: 0;
+}
+.menu-toggle.open span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+.mobile-nav {
+    display: none;
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    width: 220px;
+    background: var(--bg-white);
+    border-radius: 15px;
+    padding: 1rem;
+    z-index: 999;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+    transform: translateY(-10px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    list-style: none;
+}
+.mobile-nav.active {
+    display: block;
+    transform: translateY(0);
+    opacity: 1;
+}
+.mobile-nav li {
+    margin-bottom: 0.5rem;
+}
+.mobile-nav li a {
+    color: var(--text-dark);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 0.8rem 1.2rem;
+    border-radius: 10px;
+    display: block;
+    transition: all 0.3s ease;
+}
+.mobile-nav li a:hover {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+/* --- チャットセクションのスタイル (UI調整) --- */
+.chat-section {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 120px 2rem 4rem;
+    background: linear-gradient(135deg, #e7f3ff 0%, #f8f9fa 100%);
+    position: relative;
+    overflow: hidden;
+}
+/* 背景の装飾 (変更なし) */
+.chat-section::before, .chat-section::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(50px);
+    z-index: 0;
+    opacity: 0.7;
+}
+.chat-section::before {
+    top: 5%;
+    left: -5%;
+    width: 200px;
+    height: 200px;
+    background: rgba(0, 123, 255, 0.1);
+}
+.chat-section::after {
+    bottom: 5%;
+    right: -5%;
+    width: 250px;
+    height: 250px;
+    background: rgba(40, 167, 69, 0.1);
+}
+
+/* --- チャットコンテナ (UI調整) --- */
+.chat-container {
+    background-color: rgba(255, 255, 255, 0.6); /* 透明度を少し調整 */
+    backdrop-filter: blur(15px);
+    border-radius: 20px; /* 角丸を調整 */
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15); /* 影を調整 */
+    width: 100%;
+    max-width: 800px; /* 最大幅を調整 */
+    height: 80vh; /* 高さをビューポートに合わせる */
+    max-height: 700px; /* 最大高さを設定 */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+/* 枠線の光彩効果 (削除) */
+
+/* --- チャットヘッダー (UI調整) --- */
+h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    font-family: var(--font-rounded);
+    background: var(--primary);
+    color: white;
+    padding: 15px 25px;
+    margin: 0;
+    text-align: left; /* テキストを左寄せに */
+    border-top-left-radius: 19px; /* コンテナの角丸に合わせる */
+    border-top-right-radius: 19px;
+    position: relative;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+    letter-spacing: 0.5px;
+    display: flex; /* Flexboxでアイコンとテキストを配置 */
+    align-items: center;
+    gap: 12px; /* アイコンとテキストの間隔 */
+}
+h2 svg {
+    stroke-width: 2;
+    opacity: 0.9;
+}
+
+/* --- チャットボックス (UI調整) --- */
+.chat-box {
+    flex-grow: 1;
+    padding: 25px;
+    overflow-y: auto;
+    background-color: transparent; /* 親要素の背景を継承 */
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* メッセージ間の間隔 */
+}
+
+/* スクロールバーのスタイル */
+.chat-box::-webkit-scrollbar {
+    width: 8px;
+}
+.chat-box::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+}
+.chat-box::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 123, 255, 0.5);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+.chat-box::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 123, 255, 0.7);
+}
+
+
+/* --- メッセージ共通スタイル (UI調整) --- */
+.message {
+    display: flex;
+    align-items: flex-end; /* アイコンと吹き出しの下端を揃える */
+    gap: 10px;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInSlideUp 0.4s ease-out forwards;
+    max-width: 85%;
+}
+@keyframes fadeInSlideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.user-message {
+    justify-content: flex-end;
+    align-self: flex-end; /* 右寄せにする */
+}
+
+.bot-message {
+    justify-content: flex-start;
+    align-self: flex-start; /* 左寄せにする */
+}
+
+.message p {
+    padding: 12px 18px;
+    border-radius: 18px;
+    line-height: 1.6;
+    word-wrap: break-word;
+    margin: 0;
+    font-size: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+    position: relative;
+}
+
+/* --- ボットメッセージ (UI調整) --- */
+.bot-message p {
+    background-color: var(--bg-white);
+    color: var(--text-dark);
+    border-bottom-left-radius: 5px;
+}
+/* ボットアイコン */
+.bot-message::before {
+    content: '';
+    width: 40px;
+    height: 40px;
+    background-image: url('https://harugames8686.github.io/HARUAddonsPages/icon.png');
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    border: 2px solid var(--bg-white);
+    box-shadow: 0 0 12px var(--ai-icon-glow);
+    flex-shrink: 0; /* 縮まないようにする */
+}
+/* 吹き出しのしっぽ */
+.bot-message p::after {
+    content: '';
+    position: absolute;
+    left: -8px;
+    bottom: 8px;
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 8px solid var(--bg-white);
+}
+
+
+/* --- ユーザーメッセージ (UI調整) --- */
+.user-message p {
+    background-color: var(--primary);
+    color: white;
+    border-bottom-right-radius: 5px;
+}
+/* 吹き出しのしっぽ */
+.user-message p::after {
+    content: '';
+    position: absolute;
+    right: -8px;
+    bottom: 8px;
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid var(--primary);
+}
+
+
+/* --- APIキー注意書き (UI調整) --- */
+.bot-message.api-key-notice {
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
+}
+.bot-message.api-key-notice p {
+    background-color: var(--primary-light);
+    color: var(--primary);
+    border: 1px solid rgba(0, 123, 255, 0.2);
+    font-size: 0.85rem;
+    text-align: center;
+    box-shadow: none;
+    width: 100%;
+    border-radius: 10px;
+}
+.bot-message.api-key-notice::before,
+.bot-message.api-key-notice p::after {
+    display: none; /* アイコンとしっぽを非表示 */
+}
+
+
+/* --- メッセージ内コンテンツのスタイル (変更なし) --- */
+.message p strong { font-weight: 700; }
+.message p pre {
+    background-color: #2d2d2d;
+    color: #f8f8f2;
+    padding: 10px 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin-top: 10px;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.9em;
+    line-height: 1.4;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+.message p pre code { display: block; }
+.message p a {
+    color: var(--primary);
+    text-decoration: underline;
+    font-weight: 700;
+    word-break: break-all;
+}
+.user-message p a { color: #fff; } /* ユーザーメッセージ内のリンク色 */
+.message p a:hover { text-decoration: none; }
+
+
+/* --- 入力エリア (UI調整) --- */
+.input-area {
+    display: flex;
+    padding: 15px 25px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-bottom-left-radius: 19px;
+    border-bottom-right-radius: 19px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    gap: 15px;
+    align-items: center;
+}
+
+#user-input {
+    flex-grow: 1;
+    padding: 12px 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 25px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    font-family: var(--font-sans-jp);
+    background-color: var(--bg-white);
+}
+#user-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px var(--ai-input-focus-glow);
+}
+
+#send-button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 48px; /* 正方形に */
+    height: 48px;
+    border-radius: 50%; /* 円形に */
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#send-button span {
+    display: none; /* テキストは非表示 */
+}
+#send-button svg {
+    transition: transform 0.3s ease;
+}
+#send-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+}
+#send-button:hover svg {
+    transform: rotate(-15deg) scale(1.1);
+}
+#send-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
+}
+
+
+/* --- フッター (変更なし) --- */
+footer {
+    background-color: var(--text-dark);
+    color: var(--bg-light);
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: auto;
+}
+footer p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    letter-spacing: 0.5px;
+}
+
+/* --- APIキー入力モーダル (変更なし) --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    background-color: var(--bg-white);
+    margin: auto;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: var(--shadow-hover);
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    animation: fadeIn 0.3s ease-out;
+}
+.modal-content h2 {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    text-shadow: none;
+    display: block; /* Flexboxをリセット */
+    text-align: center; /* テキストを中央寄せに */
+}
+.modal-content p {
+    font-size: 1rem;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+.modal-content .modal-notice {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.modal-content input[type='password'] {
+    width: calc(100% - 40px);
+    padding: 12px 18px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 25px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    font-family: var(--font-sans-jp);
+}
+.modal-content input[type='password']:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--ai-input-focus-glow);
+}
+.modal-content button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 700;
+    transition: background-color 0.3s, transform 0.1s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+    font-family: var(--font-sans-jp);
+}
+.modal-content button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+}
+.modal-content button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- レスポンシブデザイン (調整) --- */
+@media (max-width: 992px) {
+    nav ul { gap: 0.5rem; }
+    nav ul li a { padding: 0.5rem 0.8rem; }
+    .chat-section { padding: 100px 1.5rem 3rem; }
+    .chat-container { max-width: 90%; height: 85vh; }
+}
+
+@media (max-width: 768px) {
+    nav { padding: 0.6rem 1rem; width: calc(100% - 30px); }
+    .menu-toggle { display: block; }
+    nav ul { display: none; }
+    .mobile-nav.active { display: block; }
+
+    .chat-section { padding: 80px 1rem 2rem; }
+    .chat-container {
+        width: 100%;
+        max-width: 100%;
+        height: calc(100vh - 100px); /* 高さを調整 */
+        border-radius: 0; /* スマホでは角丸をなくす */
+        border: none;
+    }
+    h2 {
+        border-radius: 0;
+        padding: 12px 15px;
+        font-size: 1.2rem;
+        gap: 10px;
+    }
+    .chat-box { padding: 15px; }
+    .message { max-width: 90%; }
+    .bot-message::before { width: 35px; height: 35px; }
+    .input-area { padding: 10px 15px; gap: 10px; }
+    #user-input { padding: 10px 15px; }
+    #send-button { width: 42px; height: 42px; }
+}
+
+@media (max-width: 480px) {
+    .logo-container .logo { font-size: 1.3rem; }
+    .logo-container img { width: 30px; height: 30px; }
+    .mobile-nav { width: 200px; top: 70px; right: 15px; }
+
+    .chat-section { padding: 70px 0 0; } /* 上部のパディングを調整 */
+    .chat-container { height: calc(100vh - 70px); } /* ヘッダー分を引く */
+
+    .chat-box { padding: 10px; }
+    .message p { font-size: 0.95rem; padding: 10px 15px; }
+    .bot-message::before { width: 30px; height: 30px; }
+    .input-area { padding: 8px; }
+    #user-input { font-size: 0.9rem; }
+    #send-button { width: 40px; height: 40px; }
+}
