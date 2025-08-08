@@ -31,9 +31,7 @@
 
     /* AIチャット特有のカラー */
     --ai-input-focus-glow: rgba(0, 123, 255, 0.4); /* 入力欄フォーカス時の光 */
-    /* AI感のあるグラデーション（派手すぎないように彩度を抑えめ） */
-    --ai-gradient-subtle: linear-gradient(45deg, rgba(0, 123, 255, 0.1), rgba(40, 167, 69, 0.1), rgba(255, 165, 0, 0.1)); /* 透明度をさらに下げてよりガラス感 */
-    --ai-icon-glow: rgba(0, 123, 255, 0.6); /* AIアイコンの光 */
+    --ai-icon-glow: rgba(0, 123, 255, 0.5); /* AIアイコンの光 */
 }
 
 /* --- 全体的なリセットと基本スタイル --- */
@@ -56,7 +54,7 @@ body {
     min-height: 100vh;
 }
 
-/* --- ナビゲーションバー (HARU Addons 公式サイトのデザインを適用) --- */
+/* --- ナビゲーションバー (変更なし) --- */
 nav {
     position: fixed;
     top: 15px;
@@ -194,7 +192,7 @@ nav ul li a.active {
     color: var(--primary);
 }
 
-/* --- チャットセクションのコンテナスタイル (公式サイトのセクションに合わせる) --- */
+/* --- チャットセクションのスタイル (UI調整) --- */
 .chat-section {
     flex-grow: 1;
     display: flex;
@@ -205,113 +203,114 @@ nav ul li a.active {
     position: relative;
     overflow: hidden;
 }
-/* AI感を出すための背景装飾 */
-.chat-section::before {
+/* 背景の装飾 (変更なし) */
+.chat-section::before, .chat-section::after {
     content: '';
     position: absolute;
+    border-radius: 50%;
+    filter: blur(50px);
+    z-index: 0;
+    opacity: 0.7;
+}
+.chat-section::before {
     top: 5%;
     left: -5%;
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     background: rgba(0, 123, 255, 0.1);
-    border-radius: 50%;
-    filter: blur(30px);
-    z-index: 0;
 }
 .chat-section::after {
-    content: '';
-    position: absolute;
     bottom: 5%;
     right: -5%;
-    width: 180px;
-    height: 180px;
+    width: 250px;
+    height: 250px;
     background: rgba(40, 167, 69, 0.1);
-    border-radius: 50%;
-    filter: blur(40px);
-    z-index: 0;
 }
 
+/* --- チャットコンテナ (UI調整) --- */
 .chat-container {
-    background-color: rgba(255, 255, 255, 0.1); /* より透明に */
-    backdrop-filter: blur(20px); /* ぼかしを調整 */
-    border-radius: 16px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-    width: 95%;
-    max-width: 950px;
+    background-color: rgba(255, 255, 255, 0.6); /* 透明度を少し調整 */
+    backdrop-filter: blur(15px);
+    border-radius: 20px; /* 角丸を調整 */
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15); /* 影を調整 */
+    width: 100%;
+    max-width: 800px; /* 最大幅を調整 */
+    height: 80vh; /* 高さをビューポートに合わせる */
+    max-height: 700px; /* 最大高さを設定 */
     display: flex;
     flex-direction: column;
     overflow: hidden;
     position: relative;
     z-index: 1;
-    border: 1px solid rgba(255, 255, 255, 0.3); /* 薄い白い枠線 */
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
-/* グラデーションの枠線とガラス感 */
-.chat-container::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(45deg, #42a5f5aa, #64b5f6aa, #42a5f5aa, #64b5f6aa); /* 控えめな青系グラデーション */
-    z-index: -1;
-    border-radius: 18px;
-    filter: blur(10px); /* ぼかしで光彩感を出す */
-    opacity: 0.7; /* 透明度を調整 */
-    animation: gradientBorder 5s linear infinite; /* アニメーションで動きを出す */
-}
-@keyframes gradientBorder {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
+/* 枠線の光彩効果 (削除) */
 
+/* --- チャットヘッダー (UI調整) --- */
 h2 {
-    /* チャットタイトルのスタイル */
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 700;
     font-family: var(--font-rounded);
-    /* よりAIらしいグラデーション */
-    background: linear-gradient(45deg, rgb(137, 166, 255) 30%, #3facff 90%);
+    background: var(--primary);
     color: white;
-    padding: 12px 20px;
+    padding: 15px 25px;
     margin: 0;
-    text-align: center;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+    text-align: left; /* テキストを左寄せに */
+    border-top-left-radius: 19px; /* コンテナの角丸に合わせる */
+    border-top-right-radius: 19px;
     position: relative;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0 2px 8px rgba(66, 165, 245, 0.4); /* 影の色を調整 */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
     letter-spacing: 0.5px;
+    display: flex; /* Flexboxでアイコンとテキストを配置 */
+    align-items: center;
+    gap: 12px; /* アイコンとテキストの間隔 */
+}
+h2 svg {
+    stroke-width: 2;
+    opacity: 0.9;
 }
 
+/* --- チャットボックス (UI調整) --- */
 .chat-box {
     flex-grow: 1;
-    padding: 20px;
+    padding: 25px;
     overflow-y: auto;
-    max-height: 95vh; /* 縦の長さをさらに長く */
-    min-height: 500px; /* 最小高さを調整 */
-    border-bottom: 1px solid var(--border-color);
-    background-color: var(--bg-light);
+    background-color: transparent; /* 親要素の背景を継承 */
     display: flex;
     flex-direction: column;
+    gap: 15px; /* メッセージ間の間隔 */
 }
 
+/* スクロールバーのスタイル */
+.chat-box::-webkit-scrollbar {
+    width: 8px;
+}
+.chat-box::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+}
+.chat-box::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 123, 255, 0.5);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+.chat-box::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 123, 255, 0.7);
+}
+
+
+/* --- メッセージ共通スタイル (UI調整) --- */
 .message {
-    margin-bottom: 15px;
-    display: flex; /* メッセージ行をフレックスコンテナにする */
-    align-items: flex-start; /* アイコンとテキストの先頭を揃える */
+    display: flex;
+    align-items: flex-end; /* アイコンと吹き出しの下端を揃える */
+    gap: 10px;
     opacity: 0;
     transform: translateY(10px);
-    animation: fadeInSlideUp 0.3s ease-out forwards;
+    animation: fadeInSlideUp 0.4s ease-out forwards;
+    max-width: 85%;
 }
-
 @keyframes fadeInSlideUp {
     to {
         opacity: 1;
@@ -321,187 +320,192 @@ h2 {
 
 .user-message {
     justify-content: flex-end;
+    align-self: flex-end; /* 右寄せにする */
 }
 
 .bot-message {
     justify-content: flex-start;
-}
-
-.bot-message p {
-    padding: 12px 18px;
-    border-radius: 20px; /* 角丸をより強く */
-    line-height: 1.6;
-    word-wrap: break-word;
-    margin: 0;
-    font-size: 1rem;
-    background-color: var(--bg-white); /* 以前の白い背景に戻す */
-    color: var(--text-dark);
-    border-bottom-left-radius: 5px;
-    box-shadow: var(--shadow-soft); /* 以前のソフトな影に戻す */
-    border: 1px solid var(--border-color); /* 以前の標準ボーダーに戻す */
-    padding-left: 55px; /* AIアイコン分のスペースを確保 */
-    position: relative;
-    max-width: 80%; /* 親要素に対する最大幅を設定 */
+    align-self: flex-start; /* 左寄せにする */
 }
 
 .message p {
-    /* 既存のスタイルをここに維持 */
     padding: 12px 18px;
-    border-radius: 20px;
+    border-radius: 18px;
     line-height: 1.6;
     word-wrap: break-word;
     margin: 0;
     font-size: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+    position: relative;
+}
+
+/* --- ボットメッセージ (UI調整) --- */
+.bot-message p {
     background-color: var(--bg-white);
     color: var(--text-dark);
     border-bottom-left-radius: 5px;
-    box-shadow: var(--shadow-soft);
-    border: 1px solid var(--border-color);
-    padding-left: 55px;
-    position: relative;
-    max-width: 80%;
 }
-
-/* タイピング中の太字記法を一時的に強調するスタイル */
-.message p span.temp-bold {
-    font-weight: 600; /* 少し太く */
-    color: #333; /* 少し濃いめの色 */
-}
-
-/* APIキーに関する注意書きのメッセージスタイル */
-.bot-message.api-key-notice p {
-    background-color: #f0f8ff; /* 薄い水色 */
-    color: #4682b4; /* 少し濃いめの青文字 */
-    border: 1px solid #b0e0e6;
-    font-size: 0.85rem;
-    padding-left: 18px; /* アイコンがないので通常のパディング */
-    text-align: center;
-    box-shadow: none;
-    order: 100; /* 常に一番下に表示されるように */
-    opacity: 0; /* 初期は非表示 */
-    transform: translateY(10px);
-    animation: none; /* 初期アニメーションを無効化 */
-}
-.bot-message.api-key-notice p::before {
-    display: none; /* アイコン非表示 */
-}
-
-.bot-message p::before {
-    /* AIアイコン */
+/* ボットアイコン */
+.bot-message::before {
     content: '';
-    position: absolute;
-    left: 10px;
-    top: 10px; /* メッセージボックスの左上に配置 */
-    /* transform: translateY(-50%); */ /* 中央揃えの変換を削除 */
-    width: 35px;
-    height: 35px;
-    background-image: url('https://haruaddons.f5.si/icon.png'); /* ユーザーが提供する画像 */
+    width: 40px;
+    height: 40px;
+    background-image: url('https://harugames8686.github.io/HARUAddonsPages/icon.png');
     background-size: cover;
     background-position: center;
-    border-radius: 50%; /* 丸いアイコン */
-    border: 2px solid var(--primary); /* アイコン周りの細いボーダー */
-    box-shadow: 0 0 10px var(--ai-icon-glow); /* AIアイコンの光を強調 */
+    border-radius: 50%;
+    border: 2px solid var(--bg-white);
+    box-shadow: 0 0 12px var(--ai-icon-glow);
+    flex-shrink: 0; /* 縮まないようにする */
+}
+/* 吹き出しのしっぽ */
+.bot-message p::after {
+    content: '';
+    position: absolute;
+    left: -8px;
+    bottom: 8px;
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 8px solid var(--bg-white);
 }
 
+
+/* --- ユーザーメッセージ (UI調整) --- */
 .user-message p {
-    max-width: 75%;
-    padding: 12px 18px;
-    border-radius: 20px;
-    line-height: 1.6;
-    word-wrap: break-word;
-    margin: 0;
-    font-size: 1rem;
-    background-color: var(--primary-light);
-    color: var(--text-dark);
+    background-color: var(--primary);
+    color: white;
     border-bottom-right-radius: 5px;
 }
-
-/* 太字の強調 */
-.message p strong {
-    font-weight: 700;
+/* 吹き出しのしっぽ */
+.user-message p::after {
+    content: '';
+    position: absolute;
+    right: -8px;
+    bottom: 8px;
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid var(--primary);
 }
 
-/* コードブロックのスタイル */
+
+/* --- APIキー注意書き (UI調整) --- */
+.bot-message.api-key-notice {
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
+}
+.bot-message.api-key-notice p {
+    background-color: var(--primary-light);
+    color: var(--primary);
+    border: 1px solid rgba(0, 123, 255, 0.2);
+    font-size: 0.85rem;
+    text-align: center;
+    box-shadow: none;
+    width: 100%;
+    border-radius: 10px;
+}
+.bot-message.api-key-notice::before,
+.bot-message.api-key-notice p::after {
+    display: none; /* アイコンとしっぽを非表示 */
+}
+
+
+/* --- メッセージ内コンテンツのスタイル (変更なし) --- */
+.message p strong { font-weight: 700; }
 .message p pre {
-    background-color: #2d2d2d; /* ダークな背景 */
-    color: #f8f8f2; /* 明るいテキスト */
+    background-color: #2d2d2d;
+    color: #f8f8f2;
     padding: 10px 15px;
     border-radius: 8px;
-    overflow-x: auto; /* 横スクロール */
+    overflow-x: auto;
     margin-top: 10px;
-    font-family: 'Consolas', 'Monaco', 'Courier New', monospace; /* 等幅フォント */
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
     font-size: 0.9em;
     line-height: 1.4;
-    white-space: pre-wrap; /* 改行とスペースを保持し、必要に応じて折り返す */
-    word-break: break-all; /* 長い単語でも強制改行 */
+    white-space: pre-wrap;
+    word-break: break-all;
 }
-
-.message p pre code {
-    display: block;
-}
-
+.message p pre code { display: block; }
 .message p a {
-    /* URLリンクのスタイル */
     color: var(--primary);
     text-decoration: underline;
     font-weight: 700;
     word-break: break-all;
 }
-.message p a:hover {
-    color: var(--accent);
-}
+.user-message p a { color: #fff; } /* ユーザーメッセージ内のリンク色 */
+.message p a:hover { text-decoration: none; }
 
+
+/* --- 入力エリア (UI調整) --- */
 .input-area {
     display: flex;
-    padding: 20px;
-    background-color: var(--bg-white);
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-    gap: 10px;
+    padding: 15px 25px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-bottom-left-radius: 19px;
+    border-bottom-right-radius: 19px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    gap: 15px;
+    align-items: center;
 }
 
 #user-input {
     flex-grow: 1;
-    padding: 12px 18px;
+    padding: 12px 20px;
     border: 1px solid var(--border-color);
     border-radius: 25px;
     font-size: 1rem;
     outline: none;
     transition: border-color 0.3s, box-shadow 0.3s;
     font-family: var(--font-sans-jp);
+    background-color: var(--bg-white);
 }
-
 #user-input:focus {
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px var(--ai-input-focus-glow);
+    box-shadow: 0 0 0 4px var(--ai-input-focus-glow);
 }
 
 #send-button {
     background-color: var(--primary);
     color: white;
     border: none;
-    padding: 12px 25px;
-    border-radius: 25px;
+    padding: 12px;
+    width: 48px; /* 正方形に */
+    height: 48px;
+    border-radius: 50%; /* 円形に */
     cursor: pointer;
     font-size: 1rem;
     font-weight: 700;
-    transition: background-color 0.3s, transform 0.1s, box-shadow 0.3s;
+    transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
-    font-family: var(--font-sans-jp);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
+#send-button span {
+    display: none; /* テキストは非表示 */
+}
+#send-button svg {
+    transition: transform 0.3s ease;
+}
 #send-button:hover {
     background-color: #0056b3;
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
 }
-
+#send-button:hover svg {
+    transform: rotate(-15deg) scale(1.1);
+}
 #send-button:active {
     transform: translateY(0);
     box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
 }
 
-/* --- フッター (HARU Addons 公式サイトのデザインを適用) --- */
+
+/* --- フッター (変更なし) --- */
 footer {
     background-color: var(--text-dark);
     color: var(--bg-light);
@@ -515,21 +519,20 @@ footer p {
     letter-spacing: 0.5px;
 }
 
-/* --- APIキー入力モーダルのスタイル --- */
+/* --- APIキー入力モーダル (変更なし) --- */
 .modal {
-    display: none; /* 初期状態は非表示 */
+    display: none;
     position: fixed;
-    z-index: 1001; /* ナビゲーションバーより手前に */
+    z-index: 1001;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.6); /* 半透明の背景 */
-    justify-content: center; /* 水平中央寄せ */
-    align-items: center; /* 垂直中央寄せ */
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
 }
-
 .modal-content {
     background-color: var(--bg-white);
     margin: auto;
@@ -541,33 +544,31 @@ footer p {
     text-align: center;
     animation: fadeIn 0.3s ease-out;
 }
-
 .modal-content h2 {
     font-size: 1.8rem;
     color: var(--primary);
     margin-bottom: 20px;
-    background: none; /* h2のグラデーションをリセット */
-    box-shadow: none; /* h2の影をリセット */
-    padding: 0; /* h2のパディングをリセット */
-    text-shadow: none; /* h2のテキストシャドウをリセット */
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    text-shadow: none;
+    display: block; /* Flexboxをリセット */
+    text-align: center; /* テキストを中央寄せに */
 }
-
 .modal-content p {
     font-size: 1rem;
     color: var(--text-dark);
     margin-bottom: 15px;
     line-height: 1.6;
 }
-
 .modal-content .modal-notice {
     font-size: 0.8rem;
     color: var(--text-muted);
     margin-top: 10px;
     margin-bottom: 20px;
 }
-
 .modal-content input[type='password'] {
-    width: calc(100% - 40px); /* パディングを考慮 */
+    width: calc(100% - 40px);
     padding: 12px 18px;
     margin-bottom: 20px;
     border: 1px solid var(--border-color);
@@ -577,12 +578,10 @@ footer p {
     transition: border-color 0.3s, box-shadow 0.3s;
     font-family: var(--font-sans-jp);
 }
-
 .modal-content input[type='password']:focus {
     border-color: var(--primary);
     box-shadow: 0 0 0 3px var(--ai-input-focus-glow);
 }
-
 .modal-content button {
     background-color: var(--primary);
     color: white;
@@ -596,198 +595,68 @@ footer p {
     box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
     font-family: var(--font-sans-jp);
 }
-
 .modal-content button:hover {
     background-color: #0056b3;
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
 }
-
 .modal-content button:active {
     transform: translateY(0);
     box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
 }
-
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- レスポンシブデザイン --- */
+/* --- レスポンシブデザイン (調整) --- */
 @media (max-width: 992px) {
-    nav ul {
-        gap: 0.5rem;
-    }
-    nav ul li a {
-        padding: 0.5rem 0.8rem;
-    }
-    .chat-section {
-        padding: 100px 1.5rem 3rem;
-    }
-    .chat-container {
-        max-width: 700px;
-    }
-    h2 {
-        font-size: 1.8rem;
-        padding-bottom: 20px;
-    }
-    h2::after {
-        width: 50px;
-        height: 3px;
-        bottom: 8px;
-    }
-    .chat-box {
-        max-height: 65vh; /* 縦の長さを調整 */
-    }
-    .message p {
-        font-size: 0.95rem;
-    }
-    #user-input,
-    #send-button {
-        font-size: 0.95rem;
-        padding: 10px 20px;
-    }
+    nav ul { gap: 0.5rem; }
+    nav ul li a { padding: 0.5rem 0.8rem; }
+    .chat-section { padding: 100px 1.5rem 3rem; }
+    .chat-container { max-width: 90%; height: 85vh; }
 }
 
 @media (max-width: 768px) {
-    nav {
-        padding: 0.6rem 1rem;
-        width: calc(100% - 30px);
-    }
-    .menu-toggle {
-        display: block;
-    }
-    nav ul {
-        display: none;
-    }
-    .mobile-nav.active {
-        display: block;
-    }
+    nav { padding: 0.6rem 1rem; width: calc(100% - 30px); }
+    .menu-toggle { display: block; }
+    nav ul { display: none; }
+    .mobile-nav.active { display: block; }
 
-    .chat-section {
-        padding: 80px 1rem 2rem;
-    }
+    .chat-section { padding: 80px 1rem 2rem; }
     .chat-container {
-        width: 95%;
+        width: 100%;
+        max-width: 100%;
+        height: calc(100vh - 100px); /* 高さを調整 */
+        border-radius: 0; /* スマホでは角丸をなくす */
+        border: none;
     }
     h2 {
-        font-size: 1.5rem;
-        padding-bottom: 18px;
+        border-radius: 0;
+        padding: 12px 15px;
+        font-size: 1.2rem;
+        gap: 10px;
     }
-    h2::after {
-        width: 40px;
-        height: 3px;
-        bottom: 6px;
-    }
-    .chat-box {
-        max-height: 75vh; /* 縦の長さをさらに長く */
-        min-height: 350px; /* 最小高さを調整 */
-        padding: 15px;
-    }
-    .message {
-        align-items: flex-start; /* アイコンとテキストの先頭を揃える */
-    }
-    .bot-message p {
-        padding-left: 45px; /* アイコンが小さくなった分、左パディングを調整 */
-        max-width: calc(100% - 60px); /* アイコンと余白を考慮した最大幅 */
-        padding-top: 10px; /* アイコン分のパディングを確保 */
-    }
-    .bot-message p::before {
-        width: 30px; /* アイコンを小さく */
-        height: 30px;
-        left: 8px; /* アイコンの位置を調整 */
-        top: 8px; /* メッセージボックスの左上に配置 */
-    }
-    .bot-message.api-key-notice p {
-        padding-left: 15px; /* モーダル内の注意書き */
-        max-width: 100%; /* 全幅に */
-    }
+    .chat-box { padding: 15px; }
+    .message { max-width: 90%; }
+    .bot-message::before { width: 35px; height: 35px; }
+    .input-area { padding: 10px 15px; gap: 10px; }
+    #user-input { padding: 10px 15px; }
+    #send-button { width: 42px; height: 42px; }
 }
 
 @media (max-width: 480px) {
-    .logo-container .logo {
-        font-size: 1.3rem;
-    }
-    .logo-container img {
-        width: 30px;
-        height: 30px;
-    }
-    .mobile-nav {
-        width: 200px;
-        top: 70px;
-        right: 15px;
-    }
+    .logo-container .logo { font-size: 1.3rem; }
+    .logo-container img { width: 30px; height: 30px; }
+    .mobile-nav { width: 200px; top: 70px; right: 15px; }
 
-    .chat-section {
-        padding: 70px 0.5rem 1.5rem;
-    }
-    .chat-container {
-        border-radius: 10px;
-    }
-    h2 {
-        font-size: 1.3rem;
-        padding: 10px 15px;
-        border-top-left-radius: 9px;
-        border-top-right-radius: 9px;
-    }
-    h2::after {
-        width: 30px;
-        height: 2px;
-        bottom: 5px;
-    }
-    .chat-box {
-        max-height: 70vh; /* 縦の長さをさらに長く */
-        min-height: 300px; /* 最小高さを調整 */
-        padding: 10px;
-    }
-    .message {
-        align-items: flex-start; /* アイコンとテキストの先頭を揃える */
-    }
-    .message p {
-        font-size: 0.9rem;
-        padding: 8px 12px;
-    } /* 文字サイズを少し大きく */
-    .input-area {
-        padding: 10px;
-    }
-    #user-input,
-    #send-button {
-        font-size: 0.85rem;
-        padding: 8px 15px;
-    }
-    footer p {
-        font-size: 0.8rem;
-    }
+    .chat-section { padding: 70px 0 0; } /* 上部のパディングを調整 */
+    .chat-container { height: calc(100vh - 70px); } /* ヘッダー分を引く */
 
-    .bot-message p {
-        padding-left: 40px; /* アイコンがさらに小さくなった分、左パディングを調整 */
-        max-width: calc(100% - 55px); /* アイコンと余白を考慮した最大幅 */
-        padding-top: 8px; /* アイコン分のパディングを確保 */
-    }
-    .bot-message p::before {
-        width: 25px; /* アイコンをさらに小さく */
-        height: 25px;
-        left: 5px; /* アイコンの位置を調整 */
-        top: 5px; /* メッセージボックスの左上に配置 */
-    }
-    .bot-message.api-key-notice p {
-        padding-left: 10px; /* モーダル内の注意書き */
-        max-width: 100%; /* 全幅に */
-    }
-    .modal-content h2 {
-        font-size: 1.5rem;
-    }
-    .modal-content p {
-        font-size: 0.9rem;
-    }
-    .modal-content button {
-        font-size: 1rem;
-        padding: 10px 25px;
-    }
+    .chat-box { padding: 10px; }
+    .message p { font-size: 0.95rem; padding: 10px 15px; }
+    .bot-message::before { width: 30px; height: 30px; }
+    .input-area { padding: 8px; }
+    #user-input { font-size: 0.9rem; }
+    #send-button { width: 40px; height: 40px; }
 }
