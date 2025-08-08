@@ -15,9 +15,11 @@
         <meta name="twitter:card" content="summary_large_image" />
         <link rel="icon" type="image/png" href="https://harugames8686.github.io/HARUAddonsPages/icon.png" sizes="32x32" />
         <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />
+        <!-- 外部CSSファイルへのリンク -->
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
+        <!-- ナビゲーションバー -->
         <nav>
             <a href="./index.html" class="logo-container">
                 <img src="https://harugames8686.github.io/HARUAddonsPages/icon.png" alt="HARU Addons Icon" loading="lazy" />
@@ -37,6 +39,7 @@
             </button>
         </nav>
 
+        <!-- モバイル用ナビゲーション -->
         <ul class="mobile-nav">
             <li><a href="https://harugames8686.github.io/HARUAddonsPages/index.html">ホーム</a></li>
             <li><a href="#" class="active">Assistant</a></li>
@@ -45,9 +48,13 @@
             <li><a href="https://harugames8686.github.io/HARUAddonsPages/tweets.html">Tweet</a></li>
         </ul>
 
+        <!-- チャットセクション -->
         <section class="chat-section">
             <div class="chat-container">
-                <h2>Assistant</h2>
+                <!-- UI変更: ヘッダーにアイコンを追加 -->
+                <h2>
+                    Assistant
+                </h2>
                 <div class="chat-box" id="chat-box">
                     <div class="message bot-message">
                         <p>こんにちは！HARU Addons サポートチャットへようこそ！アドオンについて何か質問がありますか？</p>
@@ -58,15 +65,20 @@
                 </div>
                 <div class="input-area">
                     <input type="text" id="user-input" placeholder="質問を入力してください..." rows="1" />
-                    <button id="send-button">送信</button>
+                    <!-- UI変更: 送信ボタンに紙飛行機アイコンを追加 -->
+                    <button id="send-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-send"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    </button>
                 </div>
             </div>
         </section>
 
+        <!-- フッター -->
         <footer>
             <p>© 2025 HARU Addons. All Rights Reserved.</p>
         </footer>
 
+        <!-- APIキー入力モーダル -->
         <div id="apiKeyModal" class="modal">
             <div class="modal-content">
                 <h2>Gemini APIキーの入力</h2>
@@ -78,6 +90,7 @@
             </div>
         </div>
 
+        <!-- 外部JavaScriptファイルへのリンク -->
         <script src="script_202507021932.js"></script>
         <script>
             // モバイルメニューの開閉
