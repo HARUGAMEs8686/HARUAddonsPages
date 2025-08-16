@@ -209,7 +209,7 @@
             font-weight: 700;
             font-family: var(--font-rounded);
             color: var(--primary);
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             position: relative;
             display: inline-block;
         }
@@ -225,32 +225,78 @@
             background-color: var(--primary);
             border-radius: 2px;
         }
-
+        
+        /* --- TWEET DESIGN UPDATED (Timeline Style) --- */
         .tweets-container {
             max-width: 800px;
             margin: 0 auto;
+            position: relative;
+            padding-left: 50px; /* Space for the timeline */
         }
-
+        
+        /* The timeline vertical line */
+        .tweets-container::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            bottom: 15px;
+            left: 14px;
+            width: 4px;
+            background-color: #e9ecef;
+            border-radius: 2px;
+        }
+        
         .tweet {
             background: var(--bg-white);
-            padding: 1.5rem;
+            padding: 1.5rem 2rem;
             border-radius: 16px;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2.5rem;
             box-shadow: var(--shadow-soft);
             text-align: left;
+            position: relative;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .tweet:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        /* The circle on the timeline */
+        .tweet::before {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: -38px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            border: 4px solid var(--bg-light);
+            z-index: 1;
         }
 
         .tweet p {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: var(--text-muted);
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        
+        .tweet p:first-of-type {
+            font-weight: 700;
+            font-family: var(--font-rounded);
+            color: var(--text-dark);
+            font-size: 1.25rem;
+            margin-bottom: 1.2rem;
         }
 
         .tweet img {
             width: 100%;
-            max-width: 500px;
+            max-width: 450px;
             height: auto;
-            margin: 1rem auto;
+            margin: 1rem auto 1.5rem;
             border-radius: 12px;
             box-shadow: var(--shadow-soft);
             object-fit: contain;
@@ -259,10 +305,13 @@
 
         .tweet .timestamp {
             font-size: 0.9rem;
+            font-family: var(--font-rounded);
             color: var(--text-muted);
-            opacity: 0.7;
+            opacity: 0.8;
             text-align: right;
+            margin-top: 1.5rem;
         }
+        /* --- END OF UPDATE --- */
 
         footer {
             background-color: var(--text-dark);
@@ -307,8 +356,23 @@
             .tweets-section h1 {
                 font-size: 1.8rem;
             }
+
+            .tweets-container {
+                padding-left: 35px; /* Adjust for smaller screens */
+            }
+            .tweet {
+                padding: 1.2rem 1.5rem;
+            }
+            .tweet::before {
+                left: -28px; /* Adjust circle position */
+                width: 14px;
+                height: 14px;
+            }
             .tweet p {
                 font-size: 1rem;
+            }
+            .tweet p:first-of-type {
+                font-size: 1.15rem;
             }
             .tweet img {
                 max-width: 100%;
@@ -345,17 +409,29 @@
                 height: 3px;
                 bottom: -8px;
             }
+             .tweets-container {
+                padding-left: 30px;
+            }
             .tweet {
-                padding: 1rem;
+                padding: 1rem 1.2rem;
+            }
+            .tweet::before {
+                left: -25px;
+                width: 12px;
+                height: 12px;
             }
             .tweet p {
                 font-size: 0.9rem;
             }
+            .tweet p:first-of-type {
+                font-size: 1rem;
+            }
             .tweet img {
-                margin: 0.8rem auto;
+                margin: 0.8rem auto 1rem;
             }
             .tweet .timestamp {
                 font-size: 0.8rem;
+                margin-top: 1rem;
             }
         }
     </style>
@@ -391,6 +467,14 @@
     <section class="tweets-section">
         <h1>Tweet</h1>
         <div class="tweets-container">
+            <div class="tweet">
+                <p>新アドオンリリースです！✨</p>
+                <p>マイクラ統合版のチェストロックアドオンです！</p>
+                <p>UIとインタラクトで簡単に保護できます！</p>
+                <p>※リリース当初ですので不具合がある可能性も少なからずあります！その場合は迅速に対応しますね！^^</p>
+                <img src="./ChestLock.png" alt="SecurityCraft" loading="lazy">
+                <div class="timestamp">2025年4月3日 3:49</div>
+            </div>
             <div class="tweet">
                 <p>SecurityCraftのX-ray検知システムにて、稀に誤検知がある可能性</p>
                 <p>X-ray検知システムはデフォルトで、Level3に設定されています。ですが、今月1件の誤検知の報告がございました！</p>
