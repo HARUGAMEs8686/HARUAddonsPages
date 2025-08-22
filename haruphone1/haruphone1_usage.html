@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="9S9blQzCvgIm-0eArJeotUn8jH2cKG7KbiQ1VUnwNDQ" />
     <title>HaruAddons - HARUPhone1 使い方</title>
-    <meta name="description" content="HARUPhone1の使い方を詳しく解説。Minecraft統合版のスマートフォン風UIアドオンの操作方法や機能をチェック！">
-    <meta property="og:title" content="HaruAddons | HARUPhone1 使い方">
+    <meta name="description" content="HARUPhone1の全機能を徹底解説。プレイヤー向けの使い方から管理者向けの高度な設定まで、すべてを網羅した完全ガイド。">
+    <meta property="og:title" content="HaruAddons | HARUPhone1 機能詳細ガイド">
     <meta property="og:image" content="https://harugames8686.github.io/HARUAddonsPages/haruphone1.png">
-    <meta property="og:url" content="https://harugames8686.github.io/HARUAddonsPages/Assistant/haruphone1_introduction.html">
-    <meta property="og:description" content="HARUPhone1の基本操作や主な機能を紹介。Minecraft BEで仮想通貨やネットショップを活用しよう！">
+    <meta property="og:url" content="https://harugames8686.github.io/HARUAddonsPages/Assistant/haruphone1_manual.html">
+    <meta property="og:description" content="Minecraft統合版アドオンHARUPhone1の経済、国家、社会システムの使い方を完全解説。">
     <meta property="og:type" content="website">
-    <link rel="canonical" href="https://harugames8686.github.io/HARUAddonsPages/Assistant/haruphone1_introduction.html">
+    <link rel="canonical" href="https://harugames8686.github.io/HARUAddonsPages/Assistant/haruphone1_manual.html">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" type="image/png" href="../icon.png" sizes="32x32">
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
@@ -197,7 +196,7 @@
             background: var(--primary-light);
             color: var(--primary);
         }
-
+        
         .addon-header {
             padding: 8rem 2rem 2rem;
             background-color: var(--bg-light);
@@ -245,7 +244,7 @@
             max-width: 800px;
             margin: 0 auto;
             background: var(--bg-white);
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: 16px;
             box-shadow: var(--shadow-soft);
             position: relative;
@@ -255,7 +254,7 @@
         .addon-content .buttons {
             display: flex;
             gap: 1rem;
-            margin: 1.5rem 0;
+            margin-bottom: 2rem;
             justify-content: center;
         }
 
@@ -283,33 +282,43 @@
             font-weight: 700;
             font-family: var(--font-rounded);
             color: var(--text-dark);
-            margin: 2rem 0 1rem;
+            margin: 2.5rem 0 1rem;
+            border-bottom: 3px solid var(--primary-light);
+            padding-bottom: 0.5rem;
         }
 
         .addon-content h3 {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--primary);
+            margin: 2rem 0 1rem;
+            border-left: 5px solid var(--primary);
+            padding-left: 1rem;
+        }
+        
+        .addon-content h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-dark);
             margin: 1.5rem 0 0.5rem;
         }
 
         .addon-content p {
             font-size: 1.1rem;
             color: var(--text-muted);
-            line-height: 1.6;
+            line-height: 1.8;
             margin-bottom: 1rem;
         }
 
-        .addon-content ul {
-            list-style-type: disc;
+        .addon-content ul, .addon-content ol {
             padding-left: 2rem;
             margin-bottom: 1.5rem;
         }
 
-        .addon-content ul li {
+        .addon-content ul li, .addon-content ol li {
             font-size: 1.1rem;
             color: var(--text-muted);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
         }
 
         .addon-content pre {
@@ -317,32 +326,13 @@
             padding: 1rem;
             border-radius: 8px;
             overflow-x: auto;
-            margin-bottom: 1.5rem;
+            margin: 1rem 0 1.5rem;
         }
 
         .addon-content code {
             font-family: 'Courier New', Courier, monospace;
             font-size: 1rem;
             color: var(--text-dark);
-        }
-
-        .update-list {
-            padding-left: 1.5rem;
-            list-style-type: none;
-            margin-bottom: 1.5rem;
-        }
-
-        .update-list li {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 0.8rem;
-            position: relative;
-        }
-
-        .update-list li:before {
-            content: "📅";
-            margin-right: 0.5rem;
-            color: var(--primary);
         }
 
         footer {
@@ -359,21 +349,6 @@
             letter-spacing: 0.5px;
         }
 
-        @media (max-width: 992px) {
-            nav ul {
-                gap: 0.5rem;
-            }
-            nav ul li a {
-                padding: 0.5rem 0.8rem;
-            }
-            .addon-header h1 {
-                font-size: 2rem;
-            }
-            .addon-content h2 {
-                font-size: 1.8rem;
-            }
-        }
-
         @media (max-width: 768px) {
             nav {
                 padding: 0.6rem 1rem;
@@ -388,9 +363,6 @@
             .addon-header {
                 padding: 6rem 1rem 1.5rem;
             }
-            .addon-header img {
-                max-width: 600px;
-            }
             .addon-header h1 {
                 font-size: 1.8rem;
             }
@@ -401,157 +373,34 @@
                 padding: 1.5rem;
             }
             .addon-content h2 {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
             }
             .addon-content h3 {
-                font-size: 1.2rem;
+                font-size: 1.3rem;
             }
-            .addon-content p {
+            .addon-content h4 {
+                font-size: 1.1rem;
+            }
+            .addon-content p, .addon-content ul li, .addon-content ol li {
                 font-size: 1rem;
-            }
-            .addon-content ul li,
-            .update-list li {
-                font-size: 1rem;
-            }
-            .addon-content .btn {
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
-            }
-            .addon-content pre {
-                padding: 0.8rem;
-            }
-            .addon-content code {
-                font-size: 0.9rem;
             }
         }
 
         @media (max-width: 480px) {
-            body {
-                line-height: 1.6;
+            .addon-content {
+                padding: 1.2rem;
             }
-            .logo-container .logo {
-                font-size: 1.3rem;
-            }
-            .logo-container img {
-                width: 30px;
-                height: 30px;
-            }
-            .mobile-nav {
-                width: 200px;
-                top: 70px;
-                right: 15px;
-            }
-            .addon-header {
-                padding: 5rem 0.8rem 1rem;
-            }
-            .addon-header img {
-                max-width: 100%;
-            }
-            .addon-header h1 {
+             .addon-header h1 {
                 font-size: 1.6rem;
             }
-            .addon-header h1::after {
-                width: 50px;
-                height: 3px;
-                bottom: -8px;
-            }
-            .addon-page {
-                padding: 0 0.5rem 2.5rem;
-            }
-            .addon-content {
-                padding: 1rem;
-            }
-            .addon-content .buttons {
-                flex-direction: column;
-                gap: 0.8rem;
-                justify-content: center;
-            }
             .addon-content h2 {
-                font-size: 1.3rem;
-            }
-            .addon-content h3 {
-                font-size: 1.1rem;
-            }
-            .addon-content p {
-                font-size: 0.9rem;
-            }
-            .addon-content ul li,
-            .update-list li {
-                font-size: 0.9rem;
-            }
-            .addon-content .btn {
-                padding: 0.5rem 0.8rem;
-                font-size: 0.8rem;
-            }
-            .addon-content pre {
-                padding: 0.6rem;
-            }
-            .addon-content code {
-                font-size: 0.8rem;
-            }
-        }
-
-        @media (max-width: 360px) {
-            nav {
-                padding: 0.5rem 0.8rem;
-                width: calc(100% - 20px);
-            }
-            .logo-container .logo {
-                font-size: 1.2rem;
-            }
-            .logo-container img {
-                width: 28px;
-                height: 28px;
-            }
-            .mobile-nav {
-                width: 180px;
-                top: 65px;
-                right: 10px;
-                padding: 0.8rem;
-            }
-            .mobile-nav li a {
-                font-size: 0.9rem;
-                padding: 0.6rem 1rem;
-            }
-            .addon-header {
-                padding: 4.5rem 0.5rem 0.8rem;
-            }
-            .addon-header h1 {
                 font-size: 1.4rem;
             }
-            .addon-header h1::after {
-                width: 40px;
-                height: 2px;
-                bottom: -6px;
-            }
-            .addon-page {
-                padding: 0 0.3rem 2rem;
-            }
-            .addon-content {
-                padding: 0.8rem;
-            }
-            .addon-content h2 {
+            .addon-content h3 {
                 font-size: 1.2rem;
             }
-            .addon-content h3 {
-                font-size: 1rem;
-            }
-            .addon-content p {
-                font-size: 0.85rem;
-            }
-            .addon-content ul li,
-            .update-list li {
-                font-size: 0.85rem;
-            }
-            .addon-content .btn {
-                padding: 0.4rem 0.7rem;
-                font-size: 0.75rem;
-            }
-            .addon-content pre {
-                padding: 0.5rem;
-            }
-            .addon-content code {
-                font-size: 0.75rem;
+             .addon-content p, .addon-content ul li, .addon-content ol li {
+                font-size: 0.95rem;
             }
         }
     </style>
@@ -586,7 +435,7 @@
 
     <section class="addon-header">
         <img src="../haruphone1.png" alt="HARUPhone1 Image" loading="lazy">
-        <h1>HARUPhone1</h1>
+        <h1>HARUPhone1 使い方</h1>
     </section>
 
     <section class="addon-page">
@@ -594,63 +443,167 @@
             <div class="buttons">
                 <a href="./haruphone1.html" class="btn">戻る</a>
             </div>
-            <h2>基本操作</h2>
-            <p>HARUPhone1は、Minecraft統合版のスマートフォン風UIを提供するアドオンです。</p>
+
+            <h2>はじめに：HARUPhone1でできること</h2>
+            <p>「HARUPhone1」は、Minecraftの世界にスマートフォン風のUIを導入し、そこからアクセスできる多種多様な機能群です。単なる経済アドオンではなく、国家運営、商業、物流、娯楽までを含む、一つの箱庭社会を形成するための総合システムです。</p>
             <ul>
-                <li>インベントリから <strong>HARUPhone1</strong> を選択し、使用する。</li>
-                <li>メニューからアプリを選んでタップ操作で利用できる。</li>
-                <li>「Quick」や「メール」など、様々な機能が搭載されている。</li>
-            </ul>
-            
-            <h2>主な機能</h2>
-            <h3>1. HARUPAY（通貨）機能</h3>
-            <p>ゲーム内の仮想通貨を管理し、送金やチャージが可能です。</p>
-            <ul>
-                <li><strong>残高の確認</strong><br>スマホを開き「HARUPAY」→「残高確認」</li>
-                <li><strong>プレイヤーへの送金</strong><br>「HARUPAY」→「送る」→ 送信先プレイヤーを選択 → 金額を設定し送信</li>
+                <li><strong>統合経済システム</strong>: HARUPAYでの送金、ATMでの口座管理、レジでの対面決済、アイテムの換金・購入、プレイヤー間のフリーマーケット、企業運営、自動販売機まで、あらゆる経済活動をサポートします。</li>
+                <li><strong>国家・領土システム</strong>: プレイヤーは自らの「国」を建国し、土地（チャンク）を所有して領土を保護できます。他国との境界線を可視化したり、メンバーに権限を与えたりと、本格的な国家運営が可能です。</li>
+                <li><strong>多彩なアプリケーション</strong>: マップナビゲーション、プレイヤーが自由にページを作成できるブラウザ、アイテムを遠隔地に送る宅配便（Post）、企業・店舗運営ができるAdvanceなど、生活を豊かにするアプリが満載です。</li>
+                <li><strong>コンテンツと娯楽</strong>: 特定のモンスターを倒してお金を稼ぐ「キルカウントシステム」や、運試しができる「カジノゲーム」など、遊びの幅を広げるコンテンツを提供します。</li>
+                <li><strong>究極のカスタマイズ性</strong>: 管理者は、ゲーム内のUIからシステムのあらゆる側面を直感的に設定できます。料金体系、ルールの変更、機能の有効/無効化、アイテム設定など、サーバーの特色に合わせて世界を自由にデザインできます。</li>
             </ul>
 
-            <h3>2. Quick（ネットショップ）機能</h3>
-            <p>ゲーム内でアイテムの出品や購入が可能です。</p>
+            <h2>プレイヤー向け完全ガイド</h2>
+
+            <h3>1. HARUPhone1の基本操作</h3>
+            <p>ワールドに参加すると、「additem:haruphone1」という専用アイテムがインベントリに自動で配布されます。このアイテムを手に持って使用（画面を長押しや右クリック）すると、システムのメインメニューである「HARUPhone1」のホーム画面が開きます。</p>
+            <p>ホーム画面には様々な「アプリ」のアイコンが並んでおり、それぞれを選択することで各機能を利用できます。</p>
+
+            <h3>2. 経済活動（お金の管理）</h3>
+            <h4>HARUPAYアプリ</h4>
             <ul>
-                <li><strong>出品する場合</strong><br>「Quick」→「出品」→ 商品名と金額を入力し送信</li>
-                <li><strong>購入する場合</strong><br>「Quick」→「購入」→ 商品を選択 → 確認後、購入</li>
+                <li><strong>送金</strong>: 他のオンラインプレイヤーにお金を送金します。</li>
+                <li><strong>チャージ</strong>: 管理者が設定した専用アイテム（CoinやBill）をインベントリに入れた状態で、その価値分の金額をHARUPAY残高にチャージできます。</li>
+                <li><strong>残高リスト</strong>: サーバー内のプレイヤーのHARUPAY残高（money）と口座残高（account）のランキングを見ることができます。（管理者が許可している場合）</li>
+            </ul>
+            <h4>ATM（ブロック）</h4>
+            <p>ワールドに設置されたATMブロックを操作すると、HARUPAY残高（手持ちのお金）を安全な「口座」に預け入れたり、引き出したりすることができます。</p>
+            <h4>レジ（ブロック）</h4>
+            <p>プレイヤー間で直接アイテムを売買する際、レジブロックを使えば安全な対面決済ができます。</p>
+            <ol>
+                <li>支払い側（客）がレジを操作し、近くにいる支払い相手（店員）を選択します。</li>
+                <li>受け取り側（店員）の画面に金額入力UIが表示されるので、合計金額を入力します。</li>
+                <li>支払い側（客）の画面に確認UIが表示され、支払いを承認すると取引が完了します。代金は受け取り側の「口座」に直接振り込まれます。</li>
+            </ol>
+            <h4>請求アプリ</h4>
+            <p>他のプレイヤーに対して、理由を添えてお金を請求することができます。請求された側は、内容を確認して支払いを「許可」または「拒否」できます。許可されると自動的に送金が行われます。</p>
+
+            <h3>3. 国家運営と領土（社会システム）</h3>
+            <h4>国の作成と参加</h4>
+            <ul>
+                <li><strong>作成</strong>: HARUPhone1の「社会システム」アプリから、設定された費用を支払って自分の国を作ることができます。リーダーとしてメンバーの権限管理などを行います。</li>
+                <li><strong>参加</strong>: 他のプレイヤーの国から招待を受けるか、参加が自由な「オープン」設定の国に自由に参加することができます。招待は同アプリの「招待を確認」から承認できます。</li>
+            </ul>
+            <h4>土地（チャンク）の購入と保護</h4>
+            <p>国に所属すると、その国のメンバーとして土地を購入できます。購入した土地はあなたの国だけのものになり、メンバー以外はブロックの破壊や設置、特定のブロックへのインタラクトができなくなります。</p>
+            <ul>
+                <li><strong>購入・売却</strong>: 「社会システム」アプリから、現在いるチャンクや、範囲を指定して土地を売買できます。</li>
+                <li><strong>権限</strong>: 国のリーダーは、メンバーごとに「土地の購入・売却権限」や「他プレイヤーの招待権限」を個別に設定できます。</li>
+            </ul>
+            <h4>境界線の可視化</h4>
+            <p>自分のいる場所がどの国の土地なのか、あるいは誰のものでもない土地なのかを常に画面上部に表示します。また、設定でパーティクルによる境界線表示をONにすると、土地の境界が壁のように表示され、領土の範囲が一目でわかります。</p>
+
+            <h3>4. お金を稼ぐ様々な方法</h3>
+            <h4>キルカウントシステム</h4>
+            <p>特定のモンスターを決められた数だけ倒すことで、報酬としてお金がもらえます。モンスターを倒すごとに、報酬獲得までの残り討伐数が画面に表示されます。</p>
+            <h4>換金アプリ</h4>
+            <p>ダイヤモンドや鉄インゴットなど、サーバーが設定した特定のアイテムを売却し、お金に換えることができます。ジャンル分けされているため、目的のアイテムを探しやすくなっています。</p>
+            <h4>仕事依頼・探すアプリ</h4>
+            <p>プレイヤーが他のプレイヤーに仕事を依頼したり、依頼された仕事を受けたりできる掲示板です。</p>
+            <ul>
+                <li><strong>募集</strong>: 仕事のジャンル、内容、報酬額を設定して依頼を投稿します。</li>
+                <li><strong>探す</strong>: 募集されている仕事の一覧から、やりたい仕事を選んで受けることができます。仕事を受けると募集者に通知が行き、募集はリストから削除されます。</li>
             </ul>
 
-            <h3>3. メール</h3>
-            <p>他のプレイヤーと個別でメッセージをやり取りできます。</p>
+            <h3>5. ショッピングと商業活動</h3>
+            <h4>購入アプリ</h4>
+            <p>サーバーが設定したアイテムを、お金を払って購入できます。こちらもジャンル分けされています。</p>
+            <h4>Quickアプリ（フリーマーケット）</h4>
+            <p>プレイヤーが自由に出品・購入できるフリーマーケット機能です。</p>
+            <ul>
+                <li><strong>出品</strong>: 売りたいアイテムの名前、詳細、価格を設定して出品します。</li>
+                <li><strong>購入</strong>: 他のプレイヤーが出品した商品を購入できます。代金は自動で出品者のHARUPAY残高に支払われ、出品者に通知が行きます。商品は自分で受け取りに行く必要があります。</li>
+            </ul>
+            <h4>Advanceアプリ（企業・店舗運営）</h4>
+            <p>プレイヤーは「会社」や「お店」のアカウントを作成し、商品を登録して販売できます。</p>
+            <ul>
+                <li><strong>アカウント</strong>: 会社名（店名）でアカウントを作成・ログインできます。</li>
+                <li><strong>商品管理</strong>: 商品の追加、在庫数や価格の編集ができます。</li>
+                <li><strong>資産管理</strong>: 売上は会社の資産として蓄積され、個人のHARUPAY残高に送金できます。</li>
+                <li><strong>配送管理</strong>: プレイヤーから注文が入ると、注文リストに記録されます。配送が完了したら、リストから完了処理を行うことができます。</li>
+                <li><strong>買い物</strong>: 他のプレイヤーが運営するAdvanceの会社をキーワードや会社名で検索し、商品を購入できます。</li>
+            </ul>
+            <h4>自動販売機</h4>
+            <p>ワールドに設置されている自動販売機ブロックを操作すると、設置者が樽に入れたアイテムを購入できます。</p>
+            <ul>
+                <li><strong>使い方</strong>: ブロックをタップし、商品リストから欲しいアイテムと数量を選んで購入します。代金は設置者の売上としてプールされます。</li>
+                <li><strong>設置者向け</strong>: 自分が設置した自動販売機をタップすると、商品の価格設定や売上回収などの管理メニューが開きます。</li>
+            </ul>
 
-            <h3>4. オープンチャット</h3>
-            <p>他のプレイヤーと全員とメッセージをやり取りできます。</p>
-            
-            <h3>5. 換金</h3>
-            <p>管理者がカスタマイズしたアイテムをHARUPAYに変換できます。</p>
+            <h3>6. 便利なユーティリティアプリ</h3>
+            <h4>マップアプリ</h4>
+            <p>管理者が登録した公共施設や、自分で見つけた場所の座標を登録し、目的地までのナビゲーションを表示させる機能です。目的地を設定すると、画面下部のアクションバーに方角と直線距離が常に表示されます。</p>
+            <h4>ブラウザアプリ</h4>
+            <p>プレイヤーが自由に情報ページを作成・閲覧できる機能です。</p>
+            <ul>
+                <li><strong>作成・編集</strong>: 検索されやすいタイトルやページ本文を作成・編集・削除できます。</li>
+                <li><strong>検索</strong>: キーワードで他のプレイヤーが作成したページを検索できます。</li>
+                <li><strong>おすすめ</strong>: 閲覧数の多い人気ページが「おすすめ」に表示されます。</li>
+                <li><strong>広告</strong>: 費用を支払うことで、自分のページをHARUPhone1のホーム画面にランダムで表示される広告として掲載できます。</li>
+            </ul>
+            <h4>Post（宅配）アプリ</h4>
+            <p>アイテムを手持ちから遠隔地の「ポスト」（チェストまたは樽）に送ることができる便利な機能です。手数料がかかります。</p>
+            <h4>メールアプリ</h4>
+            <p>特定のプレイヤーに短いテキストメッセージと、送信時の自分の座標を送ることができます。</p>
+            <h4>オープンチャットアプリ</h4>
+            <p>サーバー全体にメッセージを送信するグローバルチャット機能です。座標を共有することもできます。</p>
+            <h4>情報アプリ</h4>
+            <p>アドオンのバージョン情報や、制作者の公式サイトへのリンクなどが表示されます。</p>
+            <h4>HARUAssistant</h4>
+            <p>AIチャットボットと会話ができるアプリです。雑談や簡単な質問に答えてくれます。</p>
 
-            <h3>6. 購入</h3>
-            <p>管理者がカスタマイズしたアイテムをHARUPAYで購入できます。</p>
-            
-            <h3>7. 社会システム</h3>
-            <p>ワールド内に独自の「国」や「街」を作成することが可能です。作成したコミュニティの領土を購入したり、メンバーを管理したりできます。仲間と共に壮大な街を築き上げたり、他のコミュニティとの交流を楽しんだり、新たなロールプレイの可能性が広がります。</p>
+            <h3>7. 娯楽機能</h3>
+            <h4>GAME（ゲームブロック）</h4>
+            <p>ワールドに設置されたゲームブロックから、2種類のギャンブルで遊べます。</p>
+            <ul>
+                <li><strong>ラッキーレター</strong>: 複数のアルファベットの中から「当たり」を引くゲームです。当たれば賭け金が倍になって返ってきます。</li>
+                <li><strong>ハイアンドロー</strong>: 表示された数字よりも次の数字が「高いか低いか」を当てるゲームです。連続で正解すると報酬が増えますが、失敗すると全て失います。</li>
+            </ul>
 
-            <h3>8. マップ</h3>
-            <p>ワールドの管理者が、街の中心や特定の施設など、重要な場所の座標を登録できるシステムです。登録された場所はマップ上に表示され、目的地までのナビゲーション機能も搭載されています。広大なワールドでの移動がより便利になります。</p>
+            <h2>管理者（OP）向け完全ガイド</h2>
+            <p>管理者（OP権限を持ち、<code>HARUPhoneOP</code> タグを持つプレイヤー）は、「HARUPhone1」のホーム画面から「Operator Controller」アプリにアクセスすることで、システムの全てを詳細に設定できます。</p>
 
-            <h3>※他にもいくつかの機能があります</h3>
-            <h2>よくある質問</h2>
+            <h3>1. Operator Controller 機能一覧</h3>
+            <h4>ログ</h4>
+            <p>HARUPAY、Quick、仕事依頼など、各機能での取引ログ（日時、プレイヤー、金額など）を確認でき、サーバー内の経済の動きを把握できます。</p>
+            <h4>データ編集</h4>
+            <ul>
+                <li><strong>換金・購入データ</strong>: プレイヤーが「換金」「購入」アプリで売買できるアイテムを追加・編集・削除します。</li>
+                <li><strong>Coin-Bill金額</strong>: 「HARUPAY」のチャージに使われるアイテムの価値を設定します。</li>
+            </ul>
+            <h4>データ権限削除</h4>
+            <p>Quickの出品、仕事依頼の募集、ブラウザのページや広告など、プレイヤーが作成したデータを管理者が個別に強制削除できます。</p>
+            <h4>トラブルシューティング</h4>
+            <p><strong>プレイヤーキルカウントリセット</strong>: 全プレイヤーのキルカウントデータをリセットします。</p>
+            <h4>機能カスタマイズ</h4>
+            <ul>
+                <li><strong>利用金額</strong>: ブラウザのページ投稿費用と広告掲載費用などを設定できます。</li>
+                <li><strong>サウンド通知</strong>: キルカウントシステムの通知音をON/OFFできます。</li>
+                <li><strong>自動付与システム</strong>: 新規プレイヤーへのHARUPhone1や初期所持金の自動付付与機能のON/OFFを切り替えます。</li>
+                <li><strong>キルカウントシステム</strong>: システム全体のON/OFF、対象MOBの追加や報酬額の編集が可能です。</li>
+                <li><strong>UIカスタマイズ (HARU-X Editor)</strong>: HARUPhone1ホーム画面に表示されるアプリの順番や種類をカスタマイズできます。</li>
+                <li><strong>残高リスト表示</strong>: HARUPAYの残高リストを全プレイヤーに表示するか、管理者のみに表示するかを切り替えます。</li>
+                <li><strong>マップカスタマイズ</strong>: 「マップ」アプリでナビゲーション対象となる公共の座標を登録・編集・削除できます。</li>
+            </ul>
+            <h4>社会システム設定</h4>
+            <p>国家システムの詳細設定が可能です。</p>
+            <ul>
+                <li><strong>システム有効化</strong>: 各ディメンションでシステムを個別に有効/無効化できます。</li>
+                <li><strong>経済設定</strong>: チャンクの購入・売却価格、国の作成費用を設定します。</li>
+                <li><strong>ルール設定</strong>: 未購入の土地での行動制限や、OPが土地保護の影響を受けるかなどを設定できます。</li>
+                <li><strong>表示設定</strong>: 国に入った時のタイトル表示や、国の呼称（例：「国」を「クラン」に変更）などを設定できます。</li>
+                <li><strong>国/公共土地の管理</strong>: 管理者が全ての国や土地の情報を閲覧し、強制解散など直接的な介入を行えます。</li>
+            </ul>
+            <h4>HARUPAY [OP版]</h4>
+            <ul>
+                <li><strong>管理者マネー</strong>: 各種機能の手数料から得られた収益がここに蓄積されます。</li>
+                <li><strong>送金</strong>: 管理者マネーから任意のプレイヤーに送金できます。イベントの賞金配布などに利用できます。</li>
+                <li><strong>収益設定</strong>: どの機能からの手数料を管理者マネーに加算するかを設定できます。</li>
+            </ul>
 
-            <h3>🔹 全プレイヤーのHARUPAY残高をランキング順に表示したい</h3>
-            <p>HARUPAYの残高は <strong>scoreboard</strong> で管理されています。</p>
-            <p>以下のコマンドを使用すると、ランキング順に画面右側へ表示できます。</p>
-            <pre><code>/scoreboard objectives setdisplay sidebar money</code></pre>
-            
-            <h3>🔹 HARUPhone1の入手方法</h3>
-            <p>HARUPhone1は、<strong>初回参加時に自動付与</strong> されます（システムが有効な場合）。</p>
-            <p>再度取得する場合は、以下のコマンドを使用してください。</p>
-            <pre><code>/give <ゲーマータグ> additem:haruphone1</code></pre>
-            
-            <h3>🔹 レジの入手方法</h3>
-            <p>以下のコマンドでレジを入手できます。</p>
-            <pre><code>/give <ゲーマータグ> addblock:register</code></pre>
+            <hr style="margin: 2rem 0; border-color: var(--border-color);">
+            <p style="font-size: 0.9rem; color: var(--text-muted);">※このマニュアルを制作にあたり、一部AIを利用しております。</p>
         </div>
     </section>
 
