@@ -389,11 +389,23 @@
                 margin-bottom: 0.5rem;
                 line-height: 1;
             }
-            .addon-category.economy { background-color: var(--tag-economy-bg); color: var(--tag-economy-text); }
-            .addon-category.security { background-color: var(--tag-security-bg); color: var(--tag-security-text); }
-            .addon-category.utility { background-color: var(--tag-utility-bg); color: var(--tag-utility-text); }
-            .addon-category.communication { background-color: var(--tag-communication-bg); color: var(--tag-communication-text); }
-            
+            .addon-category.economy {
+                background-color: var(--tag-economy-bg);
+                color: var(--tag-economy-text);
+            }
+            .addon-category.security {
+                background-color: var(--tag-security-bg);
+                color: var(--tag-security-text);
+            }
+            .addon-category.utility {
+                background-color: var(--tag-utility-bg);
+                color: var(--tag-utility-text);
+            }
+            .addon-category.communication {
+                background-color: var(--tag-communication-bg);
+                color: var(--tag-communication-text);
+            }
+
             .addon-item .title {
                 font-size: 1.4rem;
                 font-weight: 700;
@@ -482,8 +494,14 @@
                 white-space: nowrap;
                 margin-top: 2px;
             }
-            .news-category.bug { background-color: var(--tag-bug-bg); color: var(--tag-bug-text); }
-            .news-category.update { background-color: var(--tag-update-bg); color: var(--tag-update-text); }
+            .news-category.bug {
+                background-color: var(--tag-bug-bg);
+                color: var(--tag-bug-text);
+            }
+            .news-category.update {
+                background-color: var(--tag-update-bg);
+                color: var(--tag-update-text);
+            }
             .news-item .news-date {
                 font-size: 0.9rem;
                 color: var(--text-muted);
@@ -499,9 +517,9 @@
                 padding-left: 1.2rem;
                 margin: 0;
             }
-             .news-item .news-content p {
-                 margin-top: 1rem;
-             }
+            .news-item .news-content p {
+                margin-top: 1rem;
+            }
 
             /* --- 🌐 Community Section (Discord) スタイル (改善) 🌐 --- */
             .community-section {
@@ -598,13 +616,46 @@
             .community-container:hover .discord-mockup {
                 transform: rotate(2deg) scale(1.05);
             }
-            .mockup-header { font-weight: 700; margin-bottom: 1rem; }
-            .mockup-channel { padding: 0.5rem; border-radius: 5px; margin-bottom: 0.3rem; font-size: 0.9rem; position: relative; padding-left: 1.5rem; }
-            .mockup-channel::before { content: '#'; position: absolute; left: 0.5rem; color: var(--text-muted); }
-            .mockup-channel.active { background: var(--primary-light); color: var(--primary); font-weight: 700; }
-            .mockup-user { margin-top: 1rem; padding: 0.5rem; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem; }
-            .user-avatar { width: 24px; height: 24px; border-radius: 50%; background: var(--tag-utility-bg); }
-            .user-avatar.dev { background: var(--accent); }
+            .mockup-header {
+                font-weight: 700;
+                margin-bottom: 1rem;
+            }
+            .mockup-channel {
+                padding: 0.5rem;
+                border-radius: 5px;
+                margin-bottom: 0.3rem;
+                font-size: 0.9rem;
+                position: relative;
+                padding-left: 1.5rem;
+            }
+            .mockup-channel::before {
+                content: '#';
+                position: absolute;
+                left: 0.5rem;
+                color: var(--text-muted);
+            }
+            .mockup-channel.active {
+                background: var(--primary-light);
+                color: var(--primary);
+                font-weight: 700;
+            }
+            .mockup-user {
+                margin-top: 1rem;
+                padding: 0.5rem;
+                font-size: 0.9rem;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            .user-avatar {
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                background: var(--tag-utility-bg);
+            }
+            .user-avatar.dev {
+                background: var(--accent);
+            }
 
             /* --- 🦶 フッター スタイル (変更なし) 🦶 --- */
             footer {
@@ -622,51 +673,156 @@
 
             /* --- 🔄 レスポンシブデザイン (改善) 🔄 --- */
             @media (max-width: 992px) {
-                nav ul { gap: 0.5rem; }
-                nav ul li a { padding: 0.5rem 0.8rem; }
-                .hero h1 { font-size: 3rem; }
-                .hero p { font-size: 1.1rem; }
-                .hero .cta-container { flex-direction: column; gap: 1rem; }
-                .community-container { flex-direction: column; padding: 3rem 2rem; text-align: center; }
-                .community-text { text-align: center; }
-                .community-text p { margin-left: auto; margin-right: auto; }
-                .community-text ul { display: inline-block; text-align: left; }
-                .community-visual { margin-top: 2rem; }
-                .discord-mockup { transform: rotate(-3deg); }
-                .community-container:hover .discord-mockup { transform: rotate(0deg) scale(1.02); }
+                nav ul {
+                    gap: 0.5rem;
+                }
+                nav ul li a {
+                    padding: 0.5rem 0.8rem;
+                }
+                .hero h1 {
+                    font-size: 3rem;
+                }
+                .hero p {
+                    font-size: 1.1rem;
+                }
+                .hero .cta-container {
+                    flex-direction: column;
+                    gap: 1rem;
+                }
+                .community-container {
+                    flex-direction: column;
+                    padding: 3rem 2rem;
+                    text-align: center;
+                }
+                .community-text {
+                    text-align: center;
+                }
+                .community-text p {
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+                .community-text ul {
+                    display: inline-block;
+                    text-align: left;
+                }
+                .community-visual {
+                    margin-top: 2rem;
+                }
+                .discord-mockup {
+                    transform: rotate(-3deg);
+                }
+                .community-container:hover .discord-mockup {
+                    transform: rotate(0deg) scale(1.02);
+                }
             }
             @media (max-width: 768px) {
-                nav { padding: 0.6rem 1rem; width: calc(100% - 30px); }
-                .menu-toggle { display: block; }
-                nav ul { display: none; }
-                .hero { min-height: 60vh; padding-top: 100px; }
-                .hero h1 { font-size: 2.5rem; }
-                .hero p { font-size: 1rem; padding: 0 1rem; }
-                .addon-list, .news-section { padding: 4rem 1.5rem; }
-                .addon-list h2, .news-section h2 { font-size: 2rem; }
-                .addon-grid, .news-grid { grid-template-columns: 1fr; gap: 1.8rem; }
-                .addon-item .title { font-size: 1.3rem; }
-                .addon-item .addon-description { font-size: 0.9rem; }
-                .community-section { padding: 4rem 1.5rem; }
-                .community-container { padding: 2.5rem 1.5rem; }
-                .community-text h2 { font-size: 2.2rem; }
-                .community-text p { font-size: 1rem; }
+                nav {
+                    padding: 0.6rem 1rem;
+                    width: calc(100% - 30px);
+                }
+                .menu-toggle {
+                    display: block;
+                }
+                nav ul {
+                    display: none;
+                }
+                .hero {
+                    min-height: 60vh;
+                    padding-top: 100px;
+                }
+                .hero h1 {
+                    font-size: 2.5rem;
+                }
+                .hero p {
+                    font-size: 1rem;
+                    padding: 0 1rem;
+                }
+                .addon-list,
+                .news-section {
+                    padding: 4rem 1.5rem;
+                }
+                .addon-list h2,
+                .news-section h2 {
+                    font-size: 2rem;
+                }
+                .addon-grid,
+                .news-grid {
+                    grid-template-columns: 1fr;
+                    gap: 1.8rem;
+                }
+                .addon-item .title {
+                    font-size: 1.3rem;
+                }
+                .addon-item .addon-description {
+                    font-size: 0.9rem;
+                }
+                .community-section {
+                    padding: 4rem 1.5rem;
+                }
+                .community-container {
+                    padding: 2.5rem 1.5rem;
+                }
+                .community-text h2 {
+                    font-size: 2.2rem;
+                }
+                .community-text p {
+                    font-size: 1rem;
+                }
             }
             @media (max-width: 480px) {
-                body { line-height: 1.6; }
-                .logo-container .logo { font-size: 1.3rem; }
-                .logo-container img { width: 30px; height: 30px; }
-                .mobile-nav { width: 200px; top: 70px; right: 15px; }
-                .hero { padding-top: 80px; }
-                .hero h1 { font-size: 2.2rem; }
-                .hero p { font-size: 0.9rem; margin-bottom: 2rem; }
-                .hero .cta { padding: 0.8rem 2rem; font-size: 1rem; }
-                .addon-list, .news-section { padding: 3rem 1rem; }
-                .addon-list h2, .news-section h2 { font-size: 1.8rem; margin-bottom: 2.5rem; }
-                .addon-list h2::after, .news-section h2::after { width: 50px; height: 3px; bottom: -8px; }
-                .community-section { padding: 3rem 1rem; }
-                .community-container { padding: 2rem 1rem; }
-                .community-text h2 { font-size: 2rem; }
+                body {
+                    line-height: 1.6;
+                }
+                .logo-container .logo {
+                    font-size: 1.3rem;
+                }
+                .logo-container img {
+                    width: 30px;
+                    height: 30px;
+                }
+                .mobile-nav {
+                    width: 200px;
+                    top: 70px;
+                    right: 15px;
+                }
+                .hero {
+                    padding-top: 80px;
+                }
+                .hero h1 {
+                    font-size: 2.2rem;
+                }
+                .hero p {
+                    font-size: 0.9rem;
+                    margin-bottom: 2rem;
+                }
+                .hero .cta {
+                    padding: 0.8rem 2rem;
+                    font-size: 1rem;
+                }
+                .addon-list,
+                .news-section {
+                    padding: 3rem 1rem;
+                }
+                .addon-list h2,
+                .news-section h2 {
+                    font-size: 1.8rem;
+                    margin-bottom: 2.5rem;
+                }
+                .addon-list h2::after,
+                .news-section h2::after {
+                    width: 50px;
+                    height: 3px;
+                    bottom: -8px;
+                }
+                .community-section {
+                    padding: 3rem 1rem;
+                }
+                .community-container {
+                    padding: 2rem 1rem;
+                }
+                .community-text h2 {
+                    font-size: 2rem;
+                }
             }
         </style>
     </head>
@@ -796,12 +952,58 @@
                         <p class="addon-description">定期的なアイテムキルで、ワールドを軽量化</p>
                     </div>
                 </a>
+                <a href="./itemid/itemid.html" class="addon-item">
+                    <img src="./ItemID.png" alt="ItemID アドオン" loading="lazy" />
+                    <div class="addon-info">
+                        <div class="addon-tags">
+                            <span class="addon-category utility">便利機能</span>
+                        </div>
+                        <h3 class="title">ItemID</h3>
+                        <p class="addon-description">あらゆるアイテムのIDを特定</p>
+                    </div>
+                </a>
+                <a href="./servertransfer/servertransfer.html" class="addon-item">
+                    <img src="./ServerTransfer.png" alt="ServerTransfer アドオン" loading="lazy" />
+                    <div class="addon-info">
+                        <div class="addon-tags">
+                            <span class="addon-category utility">便利機能</span>
+                        </div>
+                        <h3 class="title">ServerTransfer</h3>
+                        <p class="addon-description">メニューを表示しサーバーへ移動</p>
+                    </div>
+                </a>
             </div>
         </section>
 
         <section class="news-section" id="news">
             <h2>最新ニュース</h2>
             <div class="news-grid">
+                <div class="news-item">
+                    <div class="news-header">
+                        <div class="news-title">ServerTransferのリリース</div>
+                        <span class="news-category update">リリース</span>
+                    </div>
+                    <div class="news-date">2025年9月9日</div>
+                    <div class="news-content">
+                        <ul>
+                            <li>サーバーに移動することが出来ます</li>
+                        </ul>
+                        <p>詳しくはアドオンページをご確認ください</p>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <div class="news-title">公式サイト限定でItemID特定アドオンのリリース</div>
+                        <span class="news-category update">リリース</span>
+                    </div>
+                    <div class="news-date">2025年9月9日</div>
+                    <div class="news-content">
+                        <ul>
+                            <li>あらゆるアドオンのアイテムやブロックのIDを簡単に特定できます</li>
+                        </ul>
+                        <p>詳しくはアドオンページをご確認ください</p>
+                    </div>
+                </div>
                 <div class="news-item">
                     <div class="news-header">
                         <div class="news-title">SecurityCraftのアップデート</div>
@@ -818,26 +1020,6 @@
                             <li>スクリプトコマンドからカスタムコマンドに移行</li>
                         </ul>
                         <p>詳しくは公式ディスコ―ドをご確認ください！</p>
-                    </div>
-                </div>
-                <div class="news-item">
-                    <div class="news-header">
-                        <div class="news-title">HARUPhone1 V2.7.9 アップデート</div>
-                        <span class="news-category update">アップデート</span>
-                    </div>
-                    <div class="news-date">2025年7月2日</div>
-                    <div class="news-content">
-                        <p>HARUPhone1 V2.7.9をリリースしました<br>・社会システムのインタラクト制限の不具合を修正しました</p>
-                    </div>
-                </div>
-                <div class="news-item">
-                    <div class="news-header">
-                        <div class="news-title">AutoItemKill の公式限定リリース</div>
-                        <span class="news-category update">リリース</span>
-                    </div>
-                    <div class="news-date">2025年7月2日</div>
-                    <div class="news-content">
-                        <p>定期的にアイテムキルを行うことで、ワールドを軽量化するアドオンです<br>このアドオンは公式サイトのみで配布しております！</p>
                     </div>
                 </div>
             </div>
@@ -866,7 +1048,7 @@
                             <div class="user-avatar"></div>
                             <span>Player1</span>
                         </div>
-                         <div class="mockup-user">
+                        <div class="mockup-user">
                             <div class="user-avatar dev"></div>
                             <span>HARU (開発者)</span>
                         </div>
@@ -911,4 +1093,3 @@
         </script>
     </body>
 </html>
-
