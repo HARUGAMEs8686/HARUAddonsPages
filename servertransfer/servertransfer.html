@@ -10,7 +10,7 @@
         <meta property="og:url" content="https://harugames8686.github.io/HARUAddonsPages/addons/ServerTransfer.html" />
         <meta property="og:description" content="ServerTransferアドオンのダウンロードと導入方法。Minecraft BEでUIから簡単にサーバー移動" />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://harugames8686.github.io/HARUAddons    Pages/addons/ServerTransfer.html" />
+        <link rel="canonical" href="https://harugames8686.github.io/HARUAddonsPages/addons/ServerTransfer.html" />
         <meta name="twitter:card" content="summary_large_image" />
         <link rel="icon" type="image/png" href="../icon.png" sizes="32x32" />
         <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />
@@ -30,6 +30,8 @@
                 --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.12);
                 --font-sans-jp: 'Noto Sans JP', sans-serif;
                 --font-rounded: 'M PLUS Rounded 1c', sans-serif;
+                --code-bg: #2d2d2d;
+                --code-text: #f8f8f2;
             }
 
             * {
@@ -363,35 +365,64 @@
 
             .addon-content ul {
                 list-style-type: none;
-                padding-left: 1.5rem;
+                padding-left: 0;
                 margin-bottom: 1.5rem;
             }
-
-            .addon-content ul li {
-                font-size: 1.1rem;
-                color: var(--text-muted);
-                margin-bottom: 0.8rem;
-                position: relative;
+            .addon-content ul.setup-list li {
                 padding-left: 1.5rem;
             }
-
-            .addon-content ul li::before {
-                content: '🔹';
+            .addon-content ul.setup-list li::before {
+                content: '';
                 position: absolute;
                 left: 0;
                 color: var(--accent);
             }
-
-            .command {
-                font-weight: 700;
-                color: var(--text-dark);
-                background: var(--accent-light);
-                padding: 0.5rem 1rem;
+            
+            /* --- Code Block Styles --- */
+            .code-block {
+                background: var(--code-bg);
+                color: var(--code-text);
+                padding: 1.5rem;
                 border-radius: 8px;
-                display: inline-block;
-                margin: 0.5rem 0;
-                width: 100%;
+                margin: 1rem 0;
+                font-family: 'Consolas', 'Monaco', monospace;
+                font-size: 0.95rem;
+                overflow-x: auto;
+                white-space: pre-wrap;
                 word-break: break-all;
+            }
+            
+            .code-block .code-comment { color: #6272a4; } /* Comment */
+            .code-block .code-keyword { color: #ff79c6; } /* export, const */
+            .code-block .code-variable { color: #8be9fd; } /* config */
+            .code-block .code-key { color: #50fa7b; } /* name, ip, port */
+            .code-block .code-string { color: #f1fa8c; } /* 'ロビーサーバー' */
+            .code-block .code-number { color: #bd93f9; } /* 19132 */
+            .code-block .code-punc { color: #f8f8f2; } /* Brackets, commas */
+
+            .command-block {
+                background: #e9ecef;
+                color: #495057;
+                padding: 1rem;
+                border-radius: 8px;
+                margin: 1rem 0;
+                font-family: 'Consolas', 'Monaco', monospace;
+                font-weight: bold;
+                border-left: 5px solid var(--primary);
+                word-break: break-all;
+                line-height: 1.5;
+            }
+            
+            .command-block .command-main { color: #d63384; }
+            .command-block .command-event { color: #0d6efd; }
+            .command-block .command-arg { color: #198754; }
+
+            code {
+                font-family: 'Consolas', 'Monaco', monospace;
+                background: #e9ecef;
+                padding: 0.2em 0.4em;
+                border-radius: 4px;
+                font-size: 90%;
             }
 
             footer {
@@ -591,7 +622,7 @@
                 </div>
 
                 <h2>アドオンの概要</h2>
-                <p>ServerTransferは、UIから簡単に別サーバーへ移動できるアドオンです。Bedrock Dedicated Server (BDS) などで複数のワールドを繋ぐハブサーバーを構築する際に役立ちます。</p>
+                <p>ServerTransferは、UIやコマンドから簡単に別サーバーへ移動できるアドオンです。Bedrock Dedicated Server (BDS) などで複数のワールドを繋ぐハブサーバーを構築する際に役立ちます。</p>
 
                 <h2>アドオンの入手</h2>
                 <p>ServerTransferは以下のボタンからダウンロードできます。</p>
@@ -604,36 +635,57 @@
                 </div>
 
                 <h2>機能と設定</h2>
-                <p>このアドオンは、簡単なコマンドでサーバー移動UIを表示し、設定ファイル `config.js` を編集することで移動先サーバーを自由にカスタマイズできます。</p>
+                <p>このアドオンは、簡単なコマンドでサーバー移動UIを表示したり、直接プレイヤーを転送させることが可能です。設定ファイル `scripts/config.js` を編集することで、UIに表示される移動先サーバーを自由にカスタマイズできます。</p>
 
-                <h3>設定方法</h3>
-                <p>アドオン内の `scripts/config.js` ファイルを編集して、移動先のサーバーリストを設定します。`name` にはUIに表示する名前、`ip` と `port` には接続先サーバーの情報を入力してください。</p>
-                <p class="command">
-// scripts/config.js の例<br>
-export const config = [<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: 'ロビーサーバー',<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip: '000.000.000.000',<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;port: 19132,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: 'ゲームサーバー',<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip: '111.111.111.111',<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;port: 19133,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-];
-                </p>
+                <h3>設定方法 (UI用)</h3>
+                <p>UIに表示するサーバーリストは、アドオン内の `scripts/config.js` ファイルを編集して設定します。`name` にはUIに表示する名前、`ip` と `port` には接続先サーバーの情報を入力してください。</p>
+                <div class="code-block">
+<span class="code-comment">// scripts/config.js の例</span><br>
+<span class="code-keyword">export</span> <span class="code-keyword">const</span> <span class="code-variable">config</span> = <span class="code-punc">[</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-punc">{</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key">name</span>: <span class="code-string">'ロビーサーバー'</span><span class="code-punc">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key">ip</span>: <span class="code-string">'000.000.000.000'</span><span class="code-punc">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key">port</span>: <span class="code-number">19132</span><span class="code-punc">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-punc">},</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-punc">{</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key">name</span>: <span class="code-string">'ゲームサーバー'</span><span class="code-punc">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key">ip</span>: <span class="code-string">'111.111.111.111'</span><span class="code-punc">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key">port</span>: <span class="code-number">19133</span><span class="code-punc">,</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-punc">},</span><br>
+<span class="code-punc">];</span>
+                </div>
 
                 <h3>使用方法</h3>
-                <p>以下のコマンドを実行することで、対象のプレイヤーにサーバー移動UIを表示できます。</p>
-                <p class="command">/scriptevent servertransfer:ui &lt;ターゲットセレクター&gt;</p>
-                <p><b>実行例:</b><br>・自分にUIを表示: `/scriptevent servertransfer:ui @s`<br>・全てのプレイヤーに表示: `/scriptevent servertransfer:ui @a`</p>
+                <p>サーバー移動には「UIを表示する方法」と「コマンドで直接転送する方法」の2種類があります。</p>
+
+                <h4>1. UIを表示して移動</h4>
+                <p>以下のコマンドを実行すると、対象のプレイヤーに `config.js` で設定したサーバーリストUIを表示できます。</p>
+                <div class="command-block">
+<span class="command-main">/scriptevent</span> <span class="command-event">servertransfer:ui</span> <span class="command-arg">&lt;ターゲットセレクター&gt;</span>
+                </div>
+                <p><b>実行例:</b><br>・自分にUIを表示: <code>/scriptevent servertransfer:ui @s</code><br>・全てのプレイヤーに表示: <code>/scriptevent servertransfer:ui @a</code></p>
+                
+                <h4>2. コマンドで直接サーバーへ転送する</h4>
+                <p>以下のコマンドで、UIを介さずに直接プレイヤーを特定のサーバーに転送できます。</p>
+                <div class="command-block">
+<span class="command-main">/scriptevent</span> <span class="command-event">servertransfer:go</span> <span class="command-arg">&lt;サーバーセレクト&gt; &lt;セレクター&gt;</span>
+                </div>
+                <ul>
+                    <li><code>&lt;サーバーセレクト&gt;</code>: <code>config.js</code>で設定したサーバーの番号（0から始まります）。</li>
+                    <li><code>&lt;セレクター&gt;</code>: 転送したいプレイヤーを指定します（例: <code>@a</code>, <code>@s</code>, プレイヤー名）。</li>
+                </ul>
+                <p><b>実行例:</b></p>
+                <div class="command-block">
+<span class="command-main">/scriptevent</span> <span class="command-event">servertransfer:go</span> <span class="command-arg">0 @a</span>
+                </div>
+                <p>この例では、全てのプレイヤー（<code>@a</code>）を<code>config.js</code>の0番目（最初）に設定されたサーバーへ転送します。</p>
+
 
                 <h3>導入方法</h3>
                 <p>以下の手順でアドオンを導入してください：</p>
-                <ul>
-                    <li>ワールド設定でチートを有効にする</li>
-                    <li>「ベータAPI」を有効にする</li>
+                <ul class="setup-list">
+                    <li>・ワールド設定でチートを有効にする</li>
+                    <li>・「ベータAPI」を有効にする</li>
                 </ul>
                 <div class="note">
                     <strong>注意:</strong> このアドオンはプレイヤーを別サーバーに転送する機能を使用します。そのため、Bedrock Dedicated Server (BDS) など、サーバー転送が許可されている環境でのみ動作します。通常のローカルワールドでは機能しません。
@@ -641,7 +693,7 @@ export const config = [<br>
 
                 <h2>利用規約</h2>
                 <p>このアドオンをご利用いただくにあたり、以下の規約にご同意ください。</p>
-                <ul>
+                <ul class="setup-list">
                     <li><strong>改造の禁止</strong>: このアドオンのコードを直接改造することは禁止します。(config.js省く)</li>
                     <li><strong>二次配布の禁止</strong>: このアドオンを単体で再配布することは禁止します。</li>
                     <li><strong>配布ワールドへの組み込み</strong>: 配布ワールドの一部としてこのアドオンを組み込むことは許可します。</li>
@@ -676,6 +728,3 @@ export const config = [<br>
     </body>
 
 </html>
-
-
-
