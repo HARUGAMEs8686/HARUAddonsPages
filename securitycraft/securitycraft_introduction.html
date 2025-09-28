@@ -395,36 +395,49 @@
                 line-height: 1.5;
             }
 
+            /* --- 箇条書きのデザインを変更 --- */
             .addon-content ul {
                 list-style-type: none;
-                padding-left: 1.5rem;
+                padding-left: 0; /* 左のパディングをリセット */
                 margin-bottom: 1.5rem;
             }
 
             .addon-content ul li {
                 font-size: 1.1rem;
-                color: var(--text-muted);
-                margin-bottom: 0.8rem;
+                color: var(--text-dark); /* 文字色を濃くして視認性を向上 */
+                margin-bottom: 1rem; /* 各項目間の余白を広げる */
                 position: relative;
-                padding-left: 1.5rem;
+                padding-left: 2.2rem; /* アイコン用のスペースを確保 */
+                line-height: 1.8; /* 行間を広げて読みやすく */
             }
 
             .addon-content ul li::before {
-                content: '🔹';
+                content: '✔'; /* アイコンをチェックマークに変更 */
                 position: absolute;
                 left: 0;
-                color: var(--accent);
+                top: 2px; /* 位置を微調整 */
+                color: var(--accent); /* アイコンの色をアクセントカラーに */
+                font-size: 1.3rem;
+                font-weight: bold;
             }
+            /* --- 箇条書きのデザイン変更ここまで --- */
 
+            /* --- コマンドのデザインを変更 --- */
             .command {
+                font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
                 font-weight: 700;
-                color: var(--text-dark);
-                background: var(--accent-light);
-                padding: 0.5rem 1rem;
+                color: var(--primary); /* テキスト色をプライマリカラーに */
+                background: var(--primary-light); /* 背景を薄いプライマリカラーに */
+                padding: 0.8rem 1.5rem;
                 border-radius: 8px;
-                display: inline-block;
-                margin: 0.5rem 0;
+                display: block; /* ブロック要素に変更 */
+                margin: 1rem 0;
+                border-left: 4px solid var(--primary); /* 左側にアクセントボーダーを追加 */
+                white-space: pre; /* 半角スペースを維持 */
+                overflow-x: auto; /* 横に長いコマンドはスクロール可能に */
+                box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* 軽い影を追加 */
             }
+            /* --- コマンドのデザイン変更ここまで --- */
 
             footer {
                 background-color: var(--text-dark);
@@ -695,8 +708,3 @@
         </script>
     </body>
 </html>
-
-
-
-
-
