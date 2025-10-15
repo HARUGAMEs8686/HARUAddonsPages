@@ -1,593 +1,601 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="9S9blQzCvgIm-0eArJeotUn8jH2cKG7KbiQ1VUnwNDQ" />
-    <title>HARUAddons公式サイト - HARUPhone1</title>
-    <meta name="description" content="HARUPhone1はMinecraft統合版向けのスマートフォン風UIアドオン。通貨管理やアプリ機能を追加！">
-    <meta property="og:title" content="HARUAddons | HARUPhone1">
-    <meta property="og:image" content="https://haruaddons.f5.si/haruphone1.png">
-    <meta property="og:url" content="https://haruaddons.f5.si/haruphone1/haruphone1.html">
-    <meta property="og:description" content="HARUPhone1アドオンの詳細。Minecraft BEにスマートフォンUIを追加し、便利で楽しいプレイ体験を！">
-    <meta property="og:type" content="website">
-    <link rel="canonical" href="https://haruaddons.f5.si/haruphone1/haruphone1.html">
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="icon" type="image/png" href="../icon.png" sizes="32x32">
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="google-site-verification" content="9S9blQzCvgIm-0eArJeotUn8jH2cKG7KbiQ1VUnwNDQ" />
+        <title>HARUAddons公式サイト - HARUPhone1</title>
+        <meta name="description" content="HARUPhone1はMinecraft統合版向けのスマートフォン風UIアドオン。通貨管理やアプリ機能を追加！" />
+        <meta property="og:title" content="HARUAddons | HARUPhone1" />
+        <meta property="og:image" content="https://haruaddons.f5.si/haruphone1.png" />
+        <meta property="og:url" content="https://haruaddons.f5.si/haruphone1/haruphone1.html" />
+        <meta property="og:description" content="HARUPhone1アドオンの詳細。Minecraft BEにスマートフォンUIを追加し、便利で楽しいプレイ体験を！" />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://haruaddons.f5.si/haruphone1/haruphone1.html" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <link rel="icon" type="image/png" href="../icon.png" sizes="32x32" />
+        <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />
 
-    <style>
-        :root {
-            /* --- ✨ 明るい配色テーマ ✨ --- */
-            --bg-light: #f8f9fa;       /* 全体の背景色 (明るいグレー) */
-            --bg-white: #ffffff;       /* カードなどの背景色 (白) */
-            --text-dark: #343a40;      /* 基本のテキスト色 (濃いグレー) */
-            --text-muted: #6c757d;     /* やや薄いテキスト色 */
-            --primary: #007bff;        /* メインカラー (明るい青) */
-            --primary-light: #e6f2ff;  /* メインカラーの薄い色 (ホバー背景など) */
-            --accent: #28a745;         /* アクセントカラー (緑) */
-            --accent-light: #eaf6ec;   /* アクセントカラーの薄い色 */
-            --border-color: #dee2e6;   /* 境界線の色 */
-            --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08); /* 柔らかい影 */
-            --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.12); /* ホバー時の影 */
-            --font-sans-jp: 'Noto Sans JP', sans-serif;
-            --font-rounded: 'M PLUS Rounded 1c', sans-serif; /* 親しみやすい丸ゴシック */
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            font-family: var(--font-sans-jp);
-            line-height: 1.7; /* 行間を少し広げる */
-            overflow-x: hidden;
-        }
-
-        /* --- ☁️ ナビゲーション ☁️ --- */
-        nav {
-            position: fixed;
-            top: 15px; /* 少し下に */
-            left: 50%;
-            transform: translateX(-50%);
-            width: calc(100% - 40px); /* 左右に余白 */
-            max-width: 1100px;
-            background: rgba(255, 255, 255, 0.85); /* 白っぽい半透明 */
-            backdrop-filter: blur(10px);
-            border-radius: 30px; /* 角丸を大きく */
-            padding: 0.8rem 1.8rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            box-shadow: var(--shadow-soft);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-        }
-
-        nav.scrolled {
-            top: 10px;
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            text-decoration: none; /* ロゴのアンダーラインを削除 */
-        }
-
-        .logo-container img {
-            width: 35px; /* 少し大きく */
-            height: 35px;
-            transition: transform 0.3s ease;
-        }
-        .logo-container:hover img {
-            transform: rotate(15deg); /* ホバーで少し回転 */
-        }
-
-        .logo-container .logo {
-            font-size: 1.6rem;
-            font-weight: 700;
-            font-family: var(--font-rounded); /* 丸ゴシック */
-            color: var(--primary); /* メインカラー */
-            letter-spacing: 0.5px;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 1rem; /* 少し間隔を調整 */
-        }
-
-        nav ul li a {
-            color: var(--text-muted); /* やや薄い色に */
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: 700; /* 少し太く */
-            padding: 0.6rem 1.2rem;
-            border-radius: 20px; /* 角丸 */
-            transition: all 0.3s ease;
-        }
-
-        nav ul li a:hover,
-        nav ul li a.active {
-            background: var(--primary-light);
-            color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        /* --- 🍔 モバイルメニュー 🍔 --- */
-        .menu-toggle {
-            display: none;
-            font-size: 1.8rem;
-            background: none;
-            border: none;
-            color: var(--primary); /* メインカラー */
-            cursor: pointer;
-            padding: 5px;
-            border-radius: 50%;
-            transition: background-color 0.3s;
-        }
-        .menu-toggle:hover {
-            background-color: var(--primary-light);
-        }
-
-        .menu-toggle span {
-            display: block;
-            width: 25px;
-            height: 3px;
-            background: var(--primary);
-            margin: 5px 0;
-            border-radius: 3px;
-            transition: all 0.3s ease;
-        }
-        .menu-toggle.open span:nth-child(1) {
-            transform: translateY(8px) rotate(45deg);
-        }
-        .menu-toggle.open span:nth-child(2) {
-            opacity: 0;
-        }
-        .menu-toggle.open span:nth-child(3) {
-            transform: translateY(-8px) rotate(-45deg);
-        }
-
-        .mobile-nav {
-            display: none;
-            position: fixed;
-            top: 80px; /* ナビゲーションの下に配置 */
-            right: 20px;
-            width: 220px;
-            background: var(--bg-white);
-            border-radius: 15px;
-            padding: 1rem;
-            z-index: 999;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border: 1px solid var(--border-color);
-            transform: translateY(-10px);
-            opacity: 0;
-            transition: all 0.3s ease;
-            list-style: none; /* ul要素に直接適用 */
-        }
-
-        .mobile-nav.active {
-            display: block; /* ul要素を表示 */
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .mobile-nav li {
-            margin-bottom: 0.5rem; /* 各項目に少し間隔 */
-        }
-
-        .mobile-nav li a {
-            color: var(--text-dark);
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: 700;
-            padding: 0.8rem 1.2rem; /* パディング調整 */
-            border-radius: 10px;
-            display: block;
-            transition: all 0.3s ease;
-        }
-
-        .mobile-nav li a:hover {
-            background: var(--primary-light);
-            color: var(--primary);
-        }
-
-        /* --- 📱 アドオンヘッダーセクション 📱 --- */
-        .addon-header {
-            padding: 8rem 2rem 3rem;
-            background-color: var(--bg-light);
-            text-align: center;
-        }
-
-        .addon-header img {
-            width: 100%;
-            max-width: 960px;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-            border-radius: 16px;
-            box-shadow: var(--shadow-soft);
-        }
-
-        .addon-header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            font-family: var(--font-rounded);
-            color: var(--primary);
-            margin: 1.5rem 0;
-            position: relative;
-            display: inline-block;
-        }
-
-        .addon-header h1::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background-color: var(--primary);
-            border-radius: 2px;
-        }
-
-        /* --- 📄 アドオンコンテンツセクション 📄 --- */
-        .addon-page {
-            padding: 0 2rem 5rem;
-            background-color: var(--bg-light);
-            display: flex;
-            justify-content: center;
-        }
-
-        .addon-content {
-            max-width: 800px;
-            width: 100%;
-            background: var(--bg-white);
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: var(--shadow-soft);
-        }
-
-        .addon-content h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            font-family: var(--font-rounded);
-            color: var(--text-dark);
-            margin: 1.5rem 0 1rem;
-        }
-
-        .addon-content h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin: 1rem 0 0.5rem;
-        }
-
-        .addon-content p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        .addon-content .buttons {
-            display: flex;
-            gap: 1rem;
-            margin: 1.5rem 0;
-            justify-content: center;
-        }
-
-        .addon-content .btn {
-            padding: 0.8rem 2rem;
-            background: var(--accent);
-            color: var(--bg-white);
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 700;
-            font-family: var(--font-sans-jp);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
-        }
-
-        .addon-content .btn:hover {
-            background: #218838; /* 濃い緑 */
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
-        }
-
-        .addon-content ul {
-            list-style-type: none;
-            padding-left: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .addon-content ul li {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 0.8rem;
-            position: relative;
-            padding-left: 1.5rem;
-        }
-
-        .addon-content ul li::before {
-            content: "🔹";
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-        }
-
-        .update-list {
-            list-style-type: none;
-            padding-left: 1.5rem;
-        }
-
-        .update-list li {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 0.8rem;
-            position: relative;
-            padding-left: 1.5rem;
-        }
-
-        .update-list li::before {
-            content: "📅";
-            position: absolute;
-            left: 0;
-            color: var(--primary);
-        }
-
-        .latest-update {
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        /* --- 🦶 フッター 🦶 --- */
-        footer {
-            background-color: var(--text-dark);
-            color: var(--bg-light);
-            text-align: center;
-            padding: 2rem 1rem;
-            margin-top: 4rem;
-        }
-
-        footer p {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            letter-spacing: 0.5px;
-        }
-
-        /* --- 🔄 レスポンシブデザイン 🔄 --- */
-        @media (max-width: 992px) {
-            nav ul {
-                gap: 0.5rem;
+        <style>
+            :root {
+                /* --- ✨ 明るい配色テーマ ✨ --- */
+                --bg-light: #f8f9fa; /* 全体の背景色 (明るいグレー) */
+                --bg-white: #ffffff; /* カードなどの背景色 (白) */
+                --text-dark: #343a40; /* 基本のテキスト色 (濃いグレー) */
+                --text-muted: #6c757d; /* やや薄いテキスト色 */
+                --primary: #007bff; /* メインカラー (明るい青) */
+                --primary-light: #e6f2ff; /* メインカラーの薄い色 (ホバー背景など) */
+                --accent: #28a745; /* アクセントカラー (緑) */
+                --accent-light: #eaf6ec; /* アクセントカラーの薄い色 */
+                --border-color: #dee2e6; /* 境界線の色 */
+                --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08); /* 柔らかい影 */
+                --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.12); /* ホバー時の影 */
+                --font-sans-jp: 'Noto Sans JP', sans-serif;
+                --font-rounded: 'M PLUS Rounded 1c', sans-serif; /* 親しみやすい丸ゴシック */
             }
-            nav ul li a {
-                padding: 0.5rem 0.8rem;
-            }
-            .addon-header h1 {
-                font-size: 2rem;
-            }
-        }
 
-        @media (max-width: 768px) {
-            nav {
-                padding: 0.6rem 1rem;
-                width: calc(100% - 30px);
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
             }
-            .menu-toggle {
-                display: block;
-            }
-            nav ul {
-                display: none;
-            }
-            .addon-header {
-                padding: 6rem 1rem 2rem;
-            }
-            .addon-header img {
-                max-width: 600px;
-            }
-            .addon-header h1 {
-                font-size: 1.8rem;
-            }
-            .addon-page {
-                padding: 0 1rem 4rem;
-            }
-            .addon-content {
-                padding: 1.5rem;
-            }
-            .addon-content h2 {
-                font-size: 1.8rem;
-            }
-            .addon-content h3 {
-                font-size: 1.3rem;
-            }
-            .addon-content p {
-                font-size: 1rem;
-            }
-            .addon-content .buttons {
-                flex-direction: row;
-                gap: 0.8rem;
-            }
-            .addon-content .btn {
-                padding: 0.7rem 1.5rem;
-                font-size: 0.9rem;
-            }
-            .addon-content ul li,
-            .update-list li {
-                font-size: 1rem;
-            }
-        }
 
-        @media (max-width: 480px) {
             body {
-                line-height: 1.6;
+                background-color: var(--bg-light);
+                color: var(--text-dark);
+                font-family: var(--font-sans-jp);
+                line-height: 1.7; /* 行間を少し広げる */
+                overflow-x: hidden;
             }
-            .logo-container .logo {
-                font-size: 1.3rem;
+
+            /* --- ☁️ ナビゲーション ☁️ --- */
+            nav {
+                position: fixed;
+                top: 15px; /* 少し下に */
+                left: 50%;
+                transform: translateX(-50%);
+                width: calc(100% - 40px); /* 左右に余白 */
+                max-width: 1100px;
+                background: rgba(255, 255, 255, 0.85); /* 白っぽい半透明 */
+                backdrop-filter: blur(10px);
+                border-radius: 30px; /* 角丸を大きく */
+                padding: 0.8rem 1.8rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                z-index: 1000;
+                box-shadow: var(--shadow-soft);
+                border: 1px solid rgba(0, 0, 0, 0.05);
+                transition: all 0.3s ease;
             }
+
+            nav.scrolled {
+                top: 10px;
+                background: rgba(255, 255, 255, 0.95);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .logo-container {
+                display: flex;
+                align-items: center;
+                gap: 0.8rem;
+                text-decoration: none; /* ロゴのアンダーラインを削除 */
+            }
+
             .logo-container img {
-                width: 30px;
-                height: 30px;
+                width: 35px; /* 少し大きく */
+                height: 35px;
+                transition: transform 0.3s ease;
             }
-            .mobile-nav {
-                width: 200px;
-                top: 70px;
-                right: 15px;
+            .logo-container:hover img {
+                transform: rotate(15deg); /* ホバーで少し回転 */
             }
-            .addon-header {
-                padding: 5rem 0.5rem 1.5rem;
-            }
-            .addon-header img {
-                max-width: 400px;
-            }
-            .addon-header h1 {
+
+            .logo-container .logo {
                 font-size: 1.6rem;
+                font-weight: 700;
+                font-family: var(--font-rounded); /* 丸ゴシック */
+                color: var(--primary); /* メインカラー */
+                letter-spacing: 0.5px;
             }
-            .addon-header h1::after {
-                width: 50px;
+
+            nav ul {
+                display: flex;
+                list-style: none;
+                gap: 1rem; /* 少し間隔を調整 */
+            }
+
+            nav ul li a {
+                color: var(--text-muted); /* やや薄い色に */
+                text-decoration: none;
+                font-size: 1rem;
+                font-weight: 700; /* 少し太く */
+                padding: 0.6rem 1.2rem;
+                border-radius: 20px; /* 角丸 */
+                transition: all 0.3s ease;
+            }
+
+            nav ul li a:hover,
+            nav ul li a.active {
+                background: var(--primary-light);
+                color: var(--primary);
+                transform: translateY(-2px);
+            }
+
+            /* --- 🍔 モバイルメニュー 🍔 --- */
+            .menu-toggle {
+                display: none;
+                font-size: 1.8rem;
+                background: none;
+                border: none;
+                color: var(--primary); /* メインカラー */
+                cursor: pointer;
+                padding: 5px;
+                border-radius: 50%;
+                transition: background-color 0.3s;
+            }
+            .menu-toggle:hover {
+                background-color: var(--primary-light);
+            }
+
+            .menu-toggle span {
+                display: block;
+                width: 25px;
                 height: 3px;
-                bottom: -8px;
+                background: var(--primary);
+                margin: 5px 0;
+                border-radius: 3px;
+                transition: all 0.3s ease;
             }
-            .addon-page {
-                padding: 0 0.5rem 3rem;
+            .menu-toggle.open span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
             }
-            .addon-content {
+            .menu-toggle.open span:nth-child(2) {
+                opacity: 0;
+            }
+            .menu-toggle.open span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .mobile-nav {
+                display: none;
+                position: fixed;
+                top: 80px; /* ナビゲーションの下に配置 */
+                right: 20px;
+                width: 220px;
+                background: var(--bg-white);
+                border-radius: 15px;
                 padding: 1rem;
+                z-index: 999;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                border: 1px solid var(--border-color);
+                transform: translateY(-10px);
+                opacity: 0;
+                transition: all 0.3s ease;
+                list-style: none; /* ul要素に直接適用 */
             }
+
+            .mobile-nav.active {
+                display: block; /* ul要素を表示 */
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .mobile-nav li {
+                margin-bottom: 0.5rem; /* 各項目に少し間隔 */
+            }
+
+            .mobile-nav li a {
+                color: var(--text-dark);
+                text-decoration: none;
+                font-size: 1rem;
+                font-weight: 700;
+                padding: 0.8rem 1.2rem; /* パディング調整 */
+                border-radius: 10px;
+                display: block;
+                transition: all 0.3s ease;
+            }
+
+            .mobile-nav li a:hover {
+                background: var(--primary-light);
+                color: var(--primary);
+            }
+
+            /* --- 📱 アドオンヘッダーセクション 📱 --- */
+            .addon-header {
+                padding: 8rem 2rem 3rem;
+                background-color: var(--bg-light);
+                text-align: center;
+            }
+
+            .addon-header img {
+                width: 100%;
+                max-width: 960px;
+                height: auto;
+                display: block;
+                margin: 0 auto;
+                border-radius: 16px;
+                box-shadow: var(--shadow-soft);
+            }
+
+            .addon-header h1 {
+                font-size: 2.5rem;
+                font-weight: 700;
+                font-family: var(--font-rounded);
+                color: var(--primary);
+                margin: 1.5rem 0;
+                position: relative;
+                display: inline-block;
+            }
+
+            .addon-header h1::after {
+                content: '';
+                position: absolute;
+                bottom: -10px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 60px;
+                height: 4px;
+                background-color: var(--primary);
+                border-radius: 2px;
+            }
+
+            /* --- 📄 アドオンコンテンツセクション 📄 --- */
+            .addon-page {
+                padding: 0 2rem 5rem;
+                background-color: var(--bg-light);
+                display: flex;
+                justify-content: center;
+            }
+
+            .addon-content {
+                max-width: 800px;
+                width: 100%;
+                background: var(--bg-white);
+                padding: 2rem;
+                border-radius: 16px;
+                box-shadow: var(--shadow-soft);
+            }
+
             .addon-content h2 {
-                font-size: 1.5rem;
+                font-size: 2rem;
+                font-weight: 700;
+                font-family: var(--font-rounded);
+                color: var(--text-dark);
+                margin: 1.5rem 0 1rem;
             }
+
             .addon-content h3 {
-                font-size: 1.2rem;
+                font-size: 1.5rem;
+                font-weight: 700;
+                color: var(--primary);
+                margin: 1rem 0 0.5rem;
             }
+
             .addon-content p {
-                font-size: 0.9rem;
+                font-size: 1.1rem;
+                color: var(--text-muted);
+                line-height: 1.6;
+                margin-bottom: 1rem;
             }
+
             .addon-content .buttons {
-                flex-direction: column;
-                gap: 0.5rem;
+                display: flex;
+                gap: 1rem;
+                margin: 1.5rem 0;
+                justify-content: center;
             }
+
             .addon-content .btn {
-                padding: 0.6rem 1rem;
-                font-size: 0.8rem;
+                padding: 0.8rem 2rem;
+                background: var(--accent);
+                color: var(--bg-white);
+                text-decoration: none;
+                border-radius: 50px;
+                font-size: 1rem;
+                font-weight: 700;
+                font-family: var(--font-sans-jp);
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
             }
-            .addon-content ul li,
+
+            .addon-content .btn:hover {
+                background: #218838; /* 濃い緑 */
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+            }
+
+            .addon-content ul {
+                list-style-type: none;
+                padding-left: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .addon-content ul li {
+                font-size: 1.1rem;
+                color: var(--text-muted);
+                margin-bottom: 0.8rem;
+                position: relative;
+                padding-left: 1.5rem;
+            }
+
+            .addon-content ul li::before {
+                content: '🔹';
+                position: absolute;
+                left: 0;
+                color: var(--accent);
+            }
+
+            .update-list {
+                list-style-type: none;
+                padding-left: 1.5rem;
+            }
+
             .update-list li {
-                font-size: 0.9rem;
+                font-size: 1.1rem;
+                color: var(--text-muted);
+                margin-bottom: 0.8rem;
+                position: relative;
+                padding-left: 1.5rem;
             }
-        }
-    </style>
-</head>
-<body>
-    <nav>
-        <a href="../index.html" class="logo-container"> 
-            <img src="../icon.png" alt="HARU Addons Icon" loading="lazy">
-            <div class="logo">HARUAddons</div>
-        </a>
-        <ul>
-            <li><a href="../index.html">ホーム</a></li> 
+
+            .update-list li::before {
+                content: '📅';
+                position: absolute;
+                left: 0;
+                color: var(--primary);
+            }
+
+            .latest-update {
+                font-weight: 700;
+                color: var(--primary);
+            }
+
+            /* --- 🦶 フッター 🦶 --- */
+            footer {
+                background-color: var(--text-dark);
+                color: var(--bg-light);
+                text-align: center;
+                padding: 2rem 1rem;
+                margin-top: 4rem;
+            }
+
+            footer p {
+                font-size: 0.9rem;
+                opacity: 0.8;
+                letter-spacing: 0.5px;
+            }
+
+            /* --- 🔄 レスポンシブデザイン 🔄 --- */
+            @media (max-width: 992px) {
+                nav ul {
+                    gap: 0.5rem;
+                }
+                nav ul li a {
+                    padding: 0.5rem 0.8rem;
+                }
+                .addon-header h1 {
+                    font-size: 2rem;
+                }
+            }
+
+            @media (max-width: 768px) {
+                nav {
+                    padding: 0.6rem 1rem;
+                    width: calc(100% - 30px);
+                }
+                .menu-toggle {
+                    display: block;
+                }
+                nav ul {
+                    display: none;
+                }
+                .addon-header {
+                    padding: 6rem 1rem 2rem;
+                }
+                .addon-header img {
+                    max-width: 600px;
+                }
+                .addon-header h1 {
+                    font-size: 1.8rem;
+                }
+                .addon-page {
+                    padding: 0 1rem 4rem;
+                }
+                .addon-content {
+                    padding: 1.5rem;
+                }
+                .addon-content h2 {
+                    font-size: 1.8rem;
+                }
+                .addon-content h3 {
+                    font-size: 1.3rem;
+                }
+                .addon-content p {
+                    font-size: 1rem;
+                }
+                .addon-content .buttons {
+                    flex-direction: row;
+                    gap: 0.8rem;
+                }
+                .addon-content .btn {
+                    padding: 0.7rem 1.5rem;
+                    font-size: 0.9rem;
+                }
+                .addon-content ul li,
+                .update-list li {
+                    font-size: 1rem;
+                }
+            }
+
+            @media (max-width: 480px) {
+                body {
+                    line-height: 1.6;
+                }
+                .logo-container .logo {
+                    font-size: 1.3rem;
+                }
+                .logo-container img {
+                    width: 30px;
+                    height: 30px;
+                }
+                .mobile-nav {
+                    width: 200px;
+                    top: 70px;
+                    right: 15px;
+                }
+                .addon-header {
+                    padding: 5rem 0.5rem 1.5rem;
+                }
+                .addon-header img {
+                    max-width: 400px;
+                }
+                .addon-header h1 {
+                    font-size: 1.6rem;
+                }
+                .addon-header h1::after {
+                    width: 50px;
+                    height: 3px;
+                    bottom: -8px;
+                }
+                .addon-page {
+                    padding: 0 0.5rem 3rem;
+                }
+                .addon-content {
+                    padding: 1rem;
+                }
+                .addon-content h2 {
+                    font-size: 1.5rem;
+                }
+                .addon-content h3 {
+                    font-size: 1.2rem;
+                }
+                .addon-content p {
+                    font-size: 0.9rem;
+                }
+                .addon-content .buttons {
+                    flex-direction: column;
+                    gap: 0.5rem;
+                }
+                .addon-content .btn {
+                    padding: 0.6rem 1rem;
+                    font-size: 0.8rem;
+                }
+                .addon-content ul li,
+                .update-list li {
+                    font-size: 0.9rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <a href="../index.html" class="logo-container">
+                <img src="../icon.png" alt="HARU Addons Icon" loading="lazy" />
+                <div class="logo">HARUAddons</div>
+            </a>
+            <ul>
+                <li><a href="../index.html">ホーム</a></li>
+                <li><a href="../Assistant/support.html">Assistant</a></li>
+                <li><a href="../developer_info.html">開発者情報</a></li>
+                <li><a href="../links.html">リンク</a></li>
+                <li><a href="../tweets.html">Tweet</a></li>
+            </ul>
+            <button class="menu-toggle" aria-label="メニューを開閉する" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+
+        <ul class="mobile-nav">
+            <li><a href="../index.html">ホーム</a></li>
             <li><a href="../Assistant/support.html">Assistant</a></li>
             <li><a href="../developer_info.html">開発者情報</a></li>
             <li><a href="../links.html">リンク</a></li>
             <li><a href="../tweets.html">Tweet</a></li>
         </ul>
-        <button class="menu-toggle" aria-label="メニューを開閉する" aria-expanded="false">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-    </nav>
 
-    <ul class="mobile-nav">
-        <li><a href="../index.html">ホーム</a></li>
-        <li><a href="../Assistant/support.html">Assistant</a></li>
-        <li><a href="../developer_info.html">開発者情報</a></li>
-        <li><a href="../links.html">リンク</a></li>
-        <li><a href="../tweets.html">Tweet</a></li>
-    </ul>
+        <section class="addon-header">
+            <img src="../haruphone1.png" alt="HARUPhone1 Image" loading="lazy" />
+            <h1>HARUPhone1</h1>
+        </section>
 
-    <section class="addon-header">
-        <img src="../haruphone1.png" alt="HARUPhone1 Image" loading="lazy">
-        <h1>HARUPhone1</h1>
-    </section>
+        <section class="addon-page">
+            <div class="addon-content">
+                <h2>概要</h2>
+                <p>HARUPhone1は、Minecraft統合版の経済アドオンです。ゲーム内にスマートフォン風のUIを追加し、便利で楽しいプレイ体験を提供します。</p>
+                <div class="buttons">
+                    <a href="./haruphone1_introduction.html" class="btn">ダウンロードへ</a>
+                    <a href="./haruphone1_usage.html" class="btn">使い方</a>
+                </div>
 
-    <section class="addon-page">
-        <div class="addon-content">
-            <h2>概要</h2>
-            <p>HARUPhone1は、Minecraft統合版の経済アドオンです。ゲーム内にスマートフォン風のUIを追加し、便利で楽しいプレイ体験を提供します。</p>
-            <div class="buttons">
-                <a href="./haruphone1_introduction.html" class="btn">ダウンロードへ</a>
-                <a href="./haruphone1_usage.html" class="btn">使い方</a>
+                <h2>利用規約</h2>
+                <h3>ダウンロード前にご確認ください</h3>
+                <ul>
+                    <li><strong>改造の禁止</strong>: このアドオンのコードを直接改造することは禁止します。</li>
+                    <li><strong>二次配布の禁止</strong>: このアドオンを単体で再配布することは禁止します。</li>
+                    <li><strong>配布ワールドへの組み込み</strong>: 配布ワールドの一部としてこのアドオンを組み込むことは許可します。</li>
+                    <li><strong>商用利用</strong>: このアドオンを組み込んだコンテンツ（配布ワールドなど）を商用目的で利用することは許可します。</li>
+                    <li><strong>動画投稿・配信</strong>: このアドオンを使用したゲームプレイの動画投稿やライブ配信は許可します。</li>
+                </ul>
+
+                <h2>アップデート情報</h2>
+                <p>定期的にアップデートを行い、機能を追加・改善しています。</p>
+                <p class="latest-update">最新版：2025/08/12 社会システムのインタラクト制限による不具合を修正</p>
+                <h3>過去の主な更新</h3>
+                <ul class="update-list">
+                    <li>2025/8/12 - 社会システムのインタラクト制限による不具合を修正</li>
+                    <li>2025/7/27 - HARUPAY/ブラウザ/社会システム/自動販売機/ポスト/GAMEのアップデート</li>
+                    <li>2025/7/10 - 社会システムで、オーバーワールド以外にも対応しました。個別で操作が可能です</li>
+                    <li>2025/7/7 - スポーン時境界パーティクル表示の不具合を修正しました</li>
+                    <li>2025/7/1 - 社会システムの境界パーティクル不具合を修正/HARUAppsに対応</li>
+                    <li>2025/6/28 - 軽量化のよる一部の不具合を修正しました</li>
+                    <li>2025/6/27 - 社会システムのインタラクト制限(オンオフ)/大幅な軽量化/サウンド設定の追加</li>
+                    <li>2025/6/24 - 社会システムの土地の端側が分かるパーティクルの追加/Postアイテムの追加</li>
+                    <li>2025/6/7 - 社会システムの一部不具合修正/UIテクスチャーのアップデート</li>
+                    <li>2025/5/10 - 社会システムの追加/マップの追加/HARUPAYのランキング表示機能追加</li>
+                    <li>2025/4/23 - 自動販売機(BETA)の追加/ブラウザ・請求の軽量化/一部テクスチャ調整</li>
+                    <li>2025/4/18 - 過去バージョンからアップデート時、UIボタンが一部非表示になる不具合を修正</li>
+                    <li>2025/4/17 - Operator Controllerの操作性改善・Coin/Billの追加(Coin100廃止)</li>
+                    <li>2025/4/9 - 各機能のアイコンを追加/換金・購入の軽量化/UI編集機能の不具合修正</li>
+                    <li>2025/4/2 - HARUPhone1の各機能を表示/非表示が可能に (順番入れ替えも可)</li>
+                    <li>2025/3/24 - HARU-X-Editorの追加,Quickのデータの永久維持が可能に(オン/オフ)</li>
+                    <li>2025/3/18 - ATM,レジの軽量化 バグ修正 & HARUAssistantの追加</li>
+                    <li>2025/3/4 - Advanceバグ修正</li>
+                    <li>2025/2/27 - UIの大幅変更・軽量化 バグ修正</li>
+                    <li>2025/2/22 - キルポイントシステム / Advance機能追加</li>
+                    <li>2024/12/14 - Short（メッセージ機能）開発開始 / ATM不具合修正</li>
+                    <li>2024/10/12 - 換金システム / Quick相場共有機能追加</li>
+                    <li>2024/8/20 - 大幅アップデート（使いやすさ向上・不具合修正）</li>
+                    <li>2024/7/8 - 配布開始</li>
+                </ul>
             </div>
-            
-            <h2>利用規約</h2>
-            <h3>ダウンロード前にご確認ください</h3>
-            <ul>
-                <li><strong>改造の禁止</strong>: このアドオンのコードを直接改造することは禁止します。</li>
-                <li><strong>二次配布の禁止</strong>: このアドオンを単体で再配布することは禁止します。</li>
-                <li><strong>配布ワールドへの組み込み</strong>: 配布ワールドの一部としてこのアドオンを組み込むことは許可します。</li>
-                <li><strong>商用利用</strong>: このアドオンを組み込んだコンテンツ（配布ワールドなど）を商用目的で利用することは許可します。</li>
-                <li><strong>動画投稿・配信</strong>: このアドオンを使用したゲームプレイの動画投稿やライブ配信は許可します。</li>
-            </ul>
+        </section>
 
-            <h2>アップデート情報</h2>
-            <p>定期的にアップデートを行い、機能を追加・改善しています。</p>
-            <p class="latest-update">最新版：2025/6/7 社会システムの一部不具合修正/UIテクスチャーのアップデート</p>
-            <h3>過去の主な更新</h3>
-            <ul class="update-list">
-                <li>2025/6/7 - 社会システムの一部不具合修正/UIテクスチャーのアップデート</li>
-                <li>2025/5/10 - 社会システムの追加/マップの追加/HARUPAYのランキング表示機能追加</li>
-                <li>2025/4/23 - 自動販売機(BETA)の追加/ブラウザ・請求の軽量化/一部テクスチャ調整</li>
-                <li>2025/4/18 - 過去バージョンからアップデート時、UIボタンが一部非表示になる不具合を修正</li>
-                <li>2025/4/17 - Operator Controllerの操作性改善・Coin/Billの追加(Coin100廃止)</li>
-                <li>2025/4/9 - 各機能のアイコンを追加/換金・購入の軽量化/UI編集機能の不具合修正</li>
-                <li>2025/4/2 - HARUPhone1の各機能を表示/非表示が可能に (順番入れ替えも可)</li>
-                <li>2025/3/24 - HARU-X-Editorの追加,Quickのデータの永久維持が可能に(オン/オフ)</li>
-                <li>2025/3/18 - ATM,レジの軽量化 バグ修正 & HARUAssistantの追加</li>
-                <li>2025/3/4 - Advanceバグ修正</li>
-                <li>2025/2/27 - UIの大幅変更・軽量化 バグ修正</li>
-                <li>2025/2/22 - キルポイントシステム / Advance機能追加</li>
-                <li>2024/12/14 - Short（メッセージ機能）開発開始 / ATM不具合修正</li>
-                <li>2024/10/12 - 換金システム / Quick相場共有機能追加</li>
-                <li>2024/8/20 - 大幅アップデート（使いやすさ向上・不具合修正）</li>
-                <li>2024/7/8 - 配布開始</li>
-            </ul>
-        </div>
-    </section>
+        <footer>
+            <p>© 2025 HARU Addons. All Rights Reserved.</p>
+        </footer>
 
-    <footer>
-        <p>© 2025 HARU Addons. All Rights Reserved.</p>
-    </footer>
+        <script>
+            // モバイルメニューの開閉
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mobileNav = document.querySelector('.mobile-nav');
+            menuToggle.addEventListener('click', () => {
+                const isExpanded = mobileNav.classList.toggle('active');
+                menuToggle.setAttribute('aria-expanded', isExpanded);
+                menuToggle.classList.toggle('open');
+            });
 
-    <script>
-        // モバイルメニューの開閉
-        const menuToggle = document.querySelector('.menu-toggle');
-        const mobileNav = document.querySelector('.mobile-nav');
-        menuToggle.addEventListener('click', () => {
-            const isExpanded = mobileNav.classList.toggle('active');
-            menuToggle.setAttribute('aria-expanded', isExpanded);
-            menuToggle.classList.toggle('open');
-        });
-
-        // スクロールでナビゲーションのスタイル変更
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 30) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-    </script>
-</body>
+            // スクロールでナビゲーションのスタイル変更
+            window.addEventListener('scroll', () => {
+                const nav = document.querySelector('nav');
+                if (window.scrollY > 30) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+        </script>
+    </body>
 </html>
