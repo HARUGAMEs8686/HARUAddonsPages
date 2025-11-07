@@ -274,7 +274,7 @@
                 line-height: 1.6;
                 margin-bottom: 1rem;
             }
-            
+
             .addon-content .note {
                 background-color: var(--primary-light);
                 border-left: 5px solid var(--primary);
@@ -377,7 +377,7 @@
                 left: 0;
                 color: var(--accent);
             }
-            
+
             .command-block {
                 background: #e9ecef;
                 color: #495057;
@@ -390,10 +390,16 @@
                 word-break: break-all;
                 line-height: 1.5;
             }
-            
-            .command-block .command-main { color: #d63384; }
-            .command-block .command-event { color: #0d6efd; }
-            .command-block .command-arg { color: #198754; }
+
+            .command-block .command-main {
+                color: #d63384;
+            }
+            .command-block .command-event {
+                color: #0d6efd;
+            }
+            .command-block .command-arg {
+                color: #198754;
+            }
 
             code {
                 font-family: 'Consolas', 'Monaco', monospace;
@@ -605,9 +611,9 @@
                 <h2>アドオンの入手</h2>
                 <p>WorldBorderは以下のボタンからダウンロードできます。</p>
                 <div class="download-buttons">
-                    <a href="https://example.com/WorldBorder_v.1.0.0.mcaddon" class="download-btn">【mcaddon】WorldBorder_v1.0.0</a>
-                    <a href="https://example.com/WorldBorder_v.1.0.0.zip" class="download-btn">【zip】WorldBorder_v1.0.0</a>
-                     <p class="version-info">・v1.0.0: 初回リリース</p>
+                    <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/WorldBorder_v.1.0.0.mcaddon" class="download-btn">【mcaddon】WorldBorder_v1.0.0</a>
+                    <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/WorldBorder_v.1.0.0.zip" class="download-btn">【zip】WorldBorder_v1.0.0</a>
+                    <p class="version-info">・v1.0.0: 初回リリース</p>
                 </div>
 
                 <h2>機能と使用方法</h2>
@@ -615,10 +621,8 @@
 
                 <h3>設定UIの開き方</h3>
                 <p>設定を行うには、管理者用のタグ <code>WorldorderOP</code> が必要です。タグを付けた後、以下のコマンドを実行すると設定画面が開きます。</p>
-                <div class="command-block">
-<span class="command-main">/scriptevent</span> <span class="command-event">worldborder:s</span>
-                </div>
-                <p><b>実行例:</b><br>・自分にタグを付与: <code>/tag @s add WorldorderOP</code></p>
+                <div class="command-block"><span class="command-main">/scriptevent</span> <span class="command-event">worldborder:s</span></div>
+                <p><b>実行例:</b><br />・自分にタグを付与: <code>/tag @s add WorldorderOP</code></p>
                 <p>UIでは以下の項目を設定できます：</p>
                 <ul>
                     <li><b>制限範囲</b>: ワールドの中心(0,0)からのブロック数を指定します。例えば「1000」と入力すると、X座標とZ座標がそれぞれ-1000から1000の範囲に制限されます。</li>
@@ -666,5 +670,4 @@
             });
         </script>
     </body>
-
 </html>
