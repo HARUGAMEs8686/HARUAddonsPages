@@ -294,7 +294,11 @@
                 cursor: pointer;
             }
             @keyframes bounce {
-                0%, 20%, 50%, 80%, 100% {
+                0%,
+                20%,
+                50%,
+                80%,
+                100% {
                     transform: translateX(-50%) rotate(-45deg) translateY(0);
                 }
                 40% {
@@ -304,7 +308,6 @@
                     transform: translateX(-50%) rotate(-45deg) translateY(-5px);
                 }
             }
-
 
             /* --- 🧩 アドオンリスト スタイル (変更なし) 🧩 --- */
             .addon-list {
@@ -961,12 +964,36 @@
                         <p class="addon-description">メニューを表示しサーバーへ移動</p>
                     </div>
                 </a>
+                <a href="./worldborder/worldborder.html" class="addon-item">
+                    <img src="./WorldBorder.png" alt="ServerTransfer アドオン" loading="lazy" />
+                    <div class="addon-info">
+                        <div class="addon-tags">
+                            <span class="addon-category utility">便利機能</span>
+                        </div>
+                        <h3 class="title">WorldBorder</h3>
+                        <p class="addon-description">座標を制限し行動範囲を決める</p>
+                    </div>
+                </a>
             </div>
         </section>
 
         <section class="news-section" id="news">
             <h2>最新ニュース</h2>
             <div class="news-grid">
+                <div class="news-item">
+                    <div class="news-header">
+                        <div class="news-title">新アドオン World Border</div>
+                        <br />
+                        <span class="news-category update">リリース</span>
+                    </div>
+                    <div class="news-date">2025年11月7日</div>
+                    <div class="news-content">
+                        <ul>
+                            <li>座標を制限できます</li>
+                        </ul>
+                        <p>詳しくはアドオンページをご確認ください</p>
+                    </div>
+                </div>
                 <div class="news-item">
                     <div class="news-header">
                         <div class="news-title">ServerTransferのリリース</div>
@@ -991,24 +1018,6 @@
                             <li>あらゆるアドオンのアイテムやブロックのIDを簡単に特定できます</li>
                         </ul>
                         <p>詳しくはアドオンページをご確認ください</p>
-                    </div>
-                </div>
-                <div class="news-item">
-                    <div class="news-header">
-                        <div class="news-title">SecurityCraftのアップデート</div>
-                        <span class="news-category update">アップデート</span>
-                    </div>
-                    <div class="news-date">2025年8月21日</div>
-                    <div class="news-content">
-                        <ul>
-                            <li>アクセス記録システムの追加</li>
-                            <li>設置/破壊記録システムの不具合修正</li>
-                            <li>時刻表示/設定が可能に</li>
-                            <li>UIの大幅改善</li>
-                            <li>X-ray検知の大幅改善</li>
-                            <li>スクリプトコマンドからカスタムコマンドに移行</li>
-                        </ul>
-                        <p>詳しくは公式ディスコ―ドをご確認ください！</p>
                     </div>
                 </div>
             </div>
