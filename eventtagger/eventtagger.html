@@ -374,14 +374,14 @@
 
         .addon-content ul {
             list-style-type: none;
-            padding-left: 1.5rem;
+            padding-left: 0;
             margin-bottom: 1.5rem;
         }
 
         .addon-content ul li {
             font-size: 1.1rem;
             color: var(--text-muted);
-            margin-bottom: 0.8rem;
+            margin-bottom: 1.2rem;
             position: relative;
             padding-left: 1.5rem;
         }
@@ -390,17 +390,39 @@
             content: "🔹";
             position: absolute;
             left: 0;
+            top: 0.2em;
             color: var(--accent);
         }
 
-        .command {
+        .addon-content ul.tag-list li {
+            padding-left: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .addon-content ul.tag-list li::before {
+            display: none;
+        }
+        
+        .tag-list strong {
+            font-size: 1.2em;
+            color: var(--text-dark);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .tag-list code {
             font-weight: 700;
             color: var(--text-dark);
             background: var(--accent-light);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            display: inline-block;
-            margin: 0.5rem 0;
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.95em;
+        }
+
+        .tag-list span {
+            display: block;
+            margin-top: 0.3rem;
+            padding-left: 1rem;
         }
 
         footer {
@@ -597,34 +619,97 @@
             </div>
 
             <h2>アドオンの概要</h2>
-            <p>EventTaggerは、プレイヤーの様々な行動を検知し、一時的なタグを付与することで、より高度なコマンドやスクリプト連携を可能にするツールです。特定の行動が行われた際に、そのプレイヤーに1ティックだけ特定のタグが付与され、すぐに削除されます。これにより、コマンドブロックや他のアドオンから、プレイヤーの瞬時のアクションを正確に検出できるようになります。</p>
+            <p>このアドオンは、プレイヤーの様々な行動を検知し、一時的なタグを付与することで、より高度なコマンドやスクリプト連携を可能にするツールです。特定の行動が行われた際に、そのプレイヤーやエンティティに1ティックだけ特定のタグが付与され、すぐに削除されます。これにより、コマンドブロックや他のアドオンから、プレイヤーの瞬時のアクションをブロックやアイテム、エンティティの種類まで含めて正確に検出できるようになります。</p>
 
             <h2>アドオンの入手</h2>
             <p>EventTaggerは以下のボタンからダウンロードできます。</p>
             <div class="download-buttons">
                 <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/EventTagger_v.1.0.0.mcaddon" class="download-btn">【mcaddon】EventTagger_v1.0.0</a>
                 <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/EventTagger_v.1.0.0.zip" class="download-btn">【zip】EventTagger_v1.0.0</a>
-                <p class="version-info">・以下の機能です</p>
+                <p class="version-info">・最新版の機能です</p>
             </div>
 
             <h2>機能と付与されるタグ</h2>
-            <p>このアドオンは、以下のイベント発生時にプレイヤーに一時的なタグを付与します。</p>
-            <ul>
-                <li><strong>ブロック設置時</strong><br>イベント: <code>world.afterEvents.playerPlaceBlock</code><br>タグ: <code>PlaceBlock</code><br>説明: プレイヤーがブロックを設置した直後に付与されます。</li>
-                <li><strong>ブロック破壊時</strong><br>イベント: <code>world.afterEvents.playerBreakBlock</code><br>タグ: <code>BreakBlock</code><br>説明: プレイヤーがブロックを破壊した直後に付与されます。</li>
-                <li><strong>ブロック右クリック時</strong><br>イベント: <code>world.afterEvents.playerInteractWithBlock</code><br>タグ: <code>InteractWithBlock</code><br>説明: プレイヤーがブロックを右クリック（使用）した直後に付与されます。</li>
-                <li><strong>ブロック攻撃時</strong><br>イベント: <code>world.afterEvents.entityHitBlock</code><br>タグ: <code>HitBlock</code><br>説明: エンティティ（プレイヤーやモブなど）がブロックを攻撃した直後に付与されます。</li>
-                <li><strong>エンティティ右クリック時</strong><br>イベント: <code>world.afterEvents.playerInteractWithEntity</code><br>タグ: <code>InteractWithEntity</code><br>説明: プレイヤーがエンティティを右クリック（使用）した直後に付与されます。</li>
-                <li><strong>アイテム使用時</strong><br>イベント: <code>world.afterEvents.itemUse</code><br>タグ: <code>itemUse</code><br>説明: プレイヤーがアイテムを使用した直後に付与されます。</li>
-                <li><strong>エンティティ死亡時</strong><br>イベント: <code>world.afterEvents.entityDie</code><br>タグ: <code>entityDieA</code> (攻撃者), <code>entityDieB</code> (死亡したエンティティ)<br>説明: エンティティが死亡した直後に、攻撃したエンティティと死亡したエンティティの両方にタグが付与されます。</li>
-                <li><strong>エンティティ被ダメージ時</strong><br>イベント: <code>world.afterEvents.entityHurt</code><br>タグ: <code>entityHurt</code><br>説明: エンティティがダメージを受けた直後に、ダメージを与えたエンティティに付与されます。</li>
-                <li><strong>エンティティ攻撃時</strong><br>イベント: <code>world.afterEvents.entityHitEntity</code><br>タグ: <code>entityHitEntity</code><br>説明: エンティティが別のエンティティに攻撃をヒットさせた直後に、攻撃を受けたエンティティに付与されます。</li>
+            <p>このアドオンは、以下のイベント発生時にプレイヤーやエンティティに一時的なタグを付与します。</p>
+            <ul class="tag-list">
+                <li>
+                    <strong>ブロック設置時</strong>
+                    <span>イベント: <code>world.afterEvents.playerPlaceBlock</code></span>
+                    <span>タグ: <code>PlaceBlock</code>, <code>PlaceBlock_&lt;ブロックID&gt;</code></span>
+                    <span>説明: プレイヤーがブロックを設置した直後に付与されます。&lt;ブロックID&gt;には設置されたブロックの種類が入ります。（例: PlaceBlock_minecraft:stone）</span>
+                </li>
+                <li>
+                    <strong>ブロック破壊時</strong>
+                    <span>イベント: <code>world.afterEvents.playerBreakBlock</code></span>
+                    <span>タグ: <code>BreakBlock</code>, <code>BreakBlock_&lt;ブロックID&gt;</code></span>
+                    <span>説明: プレイヤーがブロックを破壊した直後に付与されます。&lt;ブロックID&gt;には破壊されたブロックの種類が入ります。（例: BreakBlock_minecraft:dirt）</span>
+                </li>
+                <li>
+                    <strong>ブロック右クリック時</strong>
+                    <span>イベント: <code>world.beforeEvents.playerInteractWithBlock</code></span>
+                    <span>タグ: <code>InteractWithBlock</code>, <code>HitBlock_&lt;ブロックID&gt;</code></span>
+                    <span>説明: プレイヤーがブロックを右クリック（使用）した直後に付与されます。&lt;ブロックID&gt;には右クリックしたブロックの種類が入ります。</span>
+                </li>
+                <li>
+                    <strong>ブロック攻撃時</strong>
+                    <span>イベント: <code>world.afterEvents.entityHitBlock</code></span>
+                    <span>タグ: <code>HitBlock</code>, <code>HitBlock_&lt;ブロックID&gt;</code></span>
+                    <span>説明: エンティティ（プレイヤーやモブなど）がブロックを攻撃した直後に付与されます。&lt;ブロックID&gt;には攻撃されたブロックの種類が入ります。</span>
+                </li>
+                <li>
+                    <strong>エンティティ右クリック時</strong>
+                    <span>イベント: <code>world.afterEvents.playerInteractWithEntity</code></span>
+                    <span>タグ: <code>InteractWithEntity</code>, <code>InteractWithEntity_&lt;エンティティID&gt;</code></span>
+                    <span>説明: プレイヤーがエンティティを右クリックした直後に付与されます。&lt;エンティティID&gt;には対象エンティティの種類が入ります。（例: InteractWithEntity_minecraft:villager_v2）</span>
+                </li>
+                <li>
+                    <strong>アイテム使用時</strong>
+                    <span>イベント: <code>world.afterEvents.itemUse</code></span>
+                    <span>タグ: <code>itemUse</code>, <code>itemUse_&lt;アイテムID&gt;</code></span>
+                    <span>説明: プレイヤーがアイテムを使用した直後に付与されます。&lt;アイテムID&gt;には使用されたアイテムの種類が入ります。（例: itemUse_minecraft:ender_pearl）</span>
+                </li>
+                <li>
+                    <strong>左クリック時</strong>
+                    <span>イベント: <code>world.afterEvents.playerSwingStart</code></span>
+                    <span>タグ: <code>playerSwingStart</code>, <code>playerSwingStart_&lt;アイテムID&gt;</code></span>
+                    <span>説明: プレイヤーが左クリックで腕を振った直後に付与されます。手にアイテムを持っている場合、&lt;アイテムID&gt;にそのアイテムの種類が入ります。</span>
+                </li>
+                <li>
+                    <strong>エンティティ死亡時</strong>
+                    <span>イベント: <code>world.afterEvents.entityDie</code></span>
+                    <span>攻撃者タグ: <code>entityDieA</code>, <code>entityDieA_&lt;攻撃者のID&gt;</code></span>
+                    <span>死亡者タグ: <code>entityDieB</code>, <code>entityDieB_&lt;死亡したエンティティのID&gt;</code></span>
+                    <span>説明: エンティティが死亡した直後、攻撃者と死亡したエンティティの両方にそれぞれのタグが付与されます。</span>
+                </li>
+                <li>
+                    <strong>エンティティ被ダメージ時</strong>
+                    <span>イベント: <code>world.afterEvents.entityHurt</code></span>
+                    <span>タグ: <code>entityHurt</code>, <code>entityHurt_&lt;攻撃者のID&gt;</code></span>
+                    <span>説明: エンティティがダメージを受けた直後に、ダメージを与えた側のエンティティに付与されます。</span>
+                </li>
+                 <li>
+                    <strong>エンティティ攻撃時</strong>
+                    <span>イベント: <code>world.afterEvents.entityHitEntity</code></span>
+                    <span>タグ: <code>entityHitEntity</code>, <code>entityHitEntity_&lt;被攻撃者のID&gt;</code></span>
+                    <span>説明: エンティティが別のエンティティに攻撃をヒットさせた直後に、攻撃を受けた側のエンティティに付与されます。</span>
+                </li>
+                <li>
+                    <strong>ジャンプ時</strong>
+                     <span>タグ: <code>playerJump</code></span>
+                     <span>説明: プレイヤーがジャンプした瞬間に付与されます。</span>
+                </li>
+                <li>
+                    <strong>スニーク時</strong>
+                    <span>タグ: <code>playerSneak</code></span>
+                    <span>説明: プレイヤーがスニークを開始した瞬間に付与されます。</span>
+                </li>
             </ul>
 
             <h3>導入方法</h3>
             <p>以下の手順でアドオンを導入してください：</p>
             <ul>
                 <li>チートを有効にする</li>
+                <li>ベータAPIを有効にする</li>
             </ul>
 
             <h2>利用規約</h2>
