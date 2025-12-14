@@ -3,12 +3,12 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>HARUAddons - LandAddon</title>
-        <meta name="description" content="LandAddonのダウンロードページ。Minecraft統合版向け経済対応・土地保護アドオン" />
-        <meta property="og:title" content="HARUAddons | LandAddon" />
+        <title>HARUAddons - LandProtection</title>
+        <meta name="description" content="LandProtectionのダウンロードページ。Minecraft統合版向け経済対応・土地保護アドオン" />
+        <meta property="og:title" content="HARUAddons | LandProtection" />
         <meta property="og:image" content="https://harugames8686.github.io/HARUAddonsPages/LandProtection.png" />
         <meta property="og:url" content="https://harugames8686.github.io/HARUAddonsPages/addons/Land.html" />
-        <meta property="og:description" content="LandAddonのダウンロードと導入方法。経済システム対応の土地保護・売買システム" />
+        <meta property="og:description" content="LandProtectionのダウンロードと導入方法。経済システム対応の土地保護・売買システム" />
         <meta property="og:type" content="website" />
         <link rel="canonical" href="https://harugames8686.github.io/HARUAddonsPages/addons/Land.html" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -436,6 +436,30 @@
                     font-size: 1rem;
                 }
             }
+
+            @media (max-width: 768px) {
+                nav {
+                    padding: 0.6rem 1rem;
+                    width: calc(100% - 30px);
+                }
+                .menu-toggle {
+                    display: block;
+                }
+                nav ul {
+                    display: none;
+                }
+                /* --- ここまで --- */
+
+                .addon-header h1 {
+                    font-size: 1.8rem;
+                }
+                .addon-content {
+                    padding: 1.5rem;
+                }
+                .download-btn {
+                    font-size: 1rem;
+                }
+            }
         </style>
     </head>
     <body>
@@ -468,7 +492,7 @@
 
         <section class="addon-header">
             <img src="../LandProtection.png" alt="Land Addon Image" loading="lazy" />
-            <h1>LandAddon</h1>
+            <h1>LandProtection</h1>
         </section>
 
         <section class="addon-page">
