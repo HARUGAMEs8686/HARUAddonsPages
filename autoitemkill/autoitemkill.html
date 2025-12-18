@@ -131,9 +131,6 @@
                 border-radius: 50%;
                 transition: background-color 0.3s;
             }
-            .menu-toggle:hover {
-                background-color: var(--primary-light);
-            }
 
             .menu-toggle span {
                 display: block;
@@ -143,15 +140,6 @@
                 margin: 5px 0;
                 border-radius: 3px;
                 transition: all 0.3s ease;
-            }
-            .menu-toggle.open span:nth-child(1) {
-                transform: translateY(8px) rotate(45deg);
-            }
-            .menu-toggle.open span:nth-child(2) {
-                opacity: 0;
-            }
-            .menu-toggle.open span:nth-child(3) {
-                transform: translateY(-8px) rotate(-45deg);
             }
 
             .mobile-nav {
@@ -178,10 +166,6 @@
                 opacity: 1;
             }
 
-            .mobile-nav li {
-                margin-bottom: 0.5rem;
-            }
-
             .mobile-nav li a {
                 color: var(--text-dark);
                 text-decoration: none;
@@ -190,12 +174,6 @@
                 padding: 0.8rem 1.2rem;
                 border-radius: 10px;
                 display: block;
-                transition: all 0.3s ease;
-            }
-
-            .mobile-nav li a:hover {
-                background: var(--primary-light);
-                color: var(--primary);
             }
 
             .addon-header {
@@ -264,7 +242,7 @@
                 font-size: 1.5rem;
                 font-weight: 700;
                 color: var(--primary);
-                margin: 1rem 0 0.5rem;
+                margin: 1.8rem 0 0.8rem;
             }
 
             .addon-content p {
@@ -272,6 +250,36 @@
                 color: var(--text-muted);
                 line-height: 1.6;
                 margin-bottom: 1rem;
+            }
+
+            .addon-content .note {
+                background-color: var(--primary-light);
+                border-left: 5px solid var(--primary);
+                padding: 1rem;
+                border-radius: 8px;
+                margin: 1.5rem 0;
+                font-size: 1rem;
+                color: #004085;
+            }
+
+            .command-block {
+                background: #e9ecef;
+                color: #495057;
+                padding: 1rem;
+                border-radius: 8px;
+                margin: 1rem 0;
+                font-family: 'Consolas', 'Monaco', monospace;
+                font-weight: bold;
+                border-left: 5px solid var(--primary);
+                word-break: break-all;
+                line-height: 1.5;
+            }
+
+            .command-block .command-main {
+                color: #d63384;
+            }
+            .command-block .command-event {
+                color: #0d6efd;
             }
 
             .addon-content .buttons {
@@ -289,7 +297,6 @@
                 border-radius: 50px;
                 font-size: 1rem;
                 font-weight: 700;
-                font-family: var(--font-sans-jp);
                 transition: all 0.3s ease;
                 box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
             }
@@ -297,7 +304,6 @@
             .addon-content .btn:hover {
                 background: #218838;
                 transform: translateY(-2px);
-                box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
             }
 
             .download-buttons {
@@ -308,8 +314,7 @@
                 border: 1px solid var(--border-color);
             }
 
-            .download-btn,
-            .download-btn_back {
+            .download-btn {
                 display: block;
                 padding: 0.9rem 2rem;
                 color: var(--bg-white);
@@ -322,16 +327,12 @@
                 text-align: center;
                 position: relative;
                 margin-bottom: 1rem;
-            }
-
-            .download-btn {
                 background: linear-gradient(135deg, #0056b3, #34649b);
             }
 
             .download-btn:hover {
                 transform: translateY(-3px);
                 box-shadow: var(--shadow-hover);
-                background: linear-gradient(135deg, #0056b3, #215a88);
             }
 
             .download-btn::before {
@@ -342,28 +343,7 @@
                 border-radius: 10px;
                 position: absolute;
                 top: 0.5rem;
-                right: 0.5rem;
-            }
-
-            .download-btn_back {
-                background: linear-gradient(135deg, #6c757d, #343a40);
-            }
-
-            .download-btn_back:hover {
-                transform: translateY(-3px);
-                box-shadow: var(--shadow-hover);
-                background: linear-gradient(135deg, #5a6268, #2c3e50);
-            }
-
-            .download-btn_back::before {
-                content: '旧';
-                font-size: 0.8rem;
-                background: rgba(255, 255, 255, 0.3);
-                padding: 0.2rem 0.6rem;
-                border-radius: 10px;
-                position: absolute;
-                top: 0.5rem;
-                right: 0.5rem;
+                right: 1.5rem;
             }
 
             .version-info {
@@ -373,13 +353,13 @@
                 line-height: 1.5;
             }
 
-            .addon-content ul {
+            .addon-content ul.setup-list {
                 list-style-type: none;
-                padding-left: 1.5rem;
+                padding-left: 0;
                 margin-bottom: 1.5rem;
             }
 
-            .addon-content ul li {
+            .addon-content ul.setup-list li {
                 font-size: 1.1rem;
                 color: var(--text-muted);
                 margin-bottom: 0.8rem;
@@ -387,21 +367,11 @@
                 padding-left: 1.5rem;
             }
 
-            .addon-content ul li::before {
+            .addon-content ul.setup-list li::before {
                 content: '🔹';
                 position: absolute;
                 left: 0;
                 color: var(--accent);
-            }
-
-            .command {
-                font-weight: 700;
-                color: var(--text-dark);
-                background: var(--accent-light);
-                padding: 0.5rem 1rem;
-                border-radius: 8px;
-                display: inline-block;
-                margin: 0.5rem 0;
             }
 
             footer {
@@ -412,152 +382,11 @@
                 margin-top: 4rem;
             }
 
-            footer p {
-                font-size: 0.9rem;
-                opacity: 0.8;
-                letter-spacing: 0.5px;
-            }
-
-            @media (max-width: 992px) {
-                nav ul {
-                    gap: 0.5rem;
-                }
-                nav ul li a {
-                    padding: 0.5rem 0.8rem;
-                }
-                .addon-header h1 {
-                    font-size: 2rem;
-                }
-            }
-
             @media (max-width: 768px) {
-                nav {
-                    padding: 0.6rem 1rem;
-                    width: calc(100% - 30px);
-                }
-                .menu-toggle {
-                    display: block;
-                }
-                nav ul {
-                    display: none;
-                }
-                .addon-header {
-                    padding: 6rem 1rem 2rem;
-                }
-                .addon-header img {
-                    max-width: 600px;
-                }
-                .addon-header h1 {
-                    font-size: 1.8rem;
-                }
-                .addon-page {
-                    padding: 0 1rem 4rem;
-                }
-                .addon-content {
-                    padding: 1.5rem;
-                }
-                .addon-content h2 {
-                    font-size: 1.8rem;
-                }
-                .addon-content h3 {
-                    font-size: 1.3rem;
-                }
-                .addon-content p {
-                    font-size: 1rem;
-                }
-                .addon-content .buttons {
-                    flex-direction: row;
-                    gap: 0.8rem;
-                }
-                .addon-content .btn {
-                    padding: 0.7rem 1.5rem;
-                    font-size: 0.9rem;
-                }
-                .download-btn,
-                .download-btn_back {
-                    padding: 0.8rem 1.5rem;
-                    font-size: 1rem;
-                }
-                .version-info {
-                    font-size: 0.9rem;
-                }
-                .addon-content ul li {
-                    font-size: 1rem;
-                }
-            }
-
-            @media (max-width: 480px) {
-                body {
-                    line-height: 1.6;
-                }
-                .logo-container .logo {
-                    font-size: 1.3rem;
-                }
-                .logo-container img {
-                    width: 30px;
-                    height: 30px;
-                }
-                .mobile-nav {
-                    width: 200px;
-                    top: 70px;
-                    right: 15px;
-                }
-                .addon-header {
-                    padding: 5rem 0.5rem 1.5rem;
-                }
-                .addon-header img {
-                    max-width: 400px;
-                }
-                .addon-header h1 {
-                    font-size: 1.6rem;
-                }
-                .addon-header h1::after {
-                    width: 50px;
-                    height: 3px;
-                    bottom: -8px;
-                }
-                .addon-page {
-                    padding: 0 0.5rem 3rem;
-                }
-                .addon-content {
-                    padding: 1rem;
-                }
-                .addon-content h2 {
-                    font-size: 1.5rem;
-                }
-                .addon-content h3 {
-                    font-size: 1.2rem;
-                }
-                .addon-content p {
-                    font-size: 0.9rem;
-                }
-                .addon-content .buttons {
-                    flex-direction: column;
-                    gap: 0.5rem;
-                }
-                .addon-content .btn {
-                    padding: 0.6rem 1rem;
-                    font-size: 0.8rem;
-                }
-                .download-buttons {
-                    padding: 0.8rem;
-                }
-                .download-btn,
-                .download-btn_back {
-                    padding: 0.7rem 1rem;
-                    font-size: 0.9rem;
-                }
-                .download-btn::before,
-                .download-btn_back::before {
-                    font-size: 0.7rem;
-                    padding: 0.15rem 0.4rem;
-                }
-                .version-info {
-                    font-size: 0.8rem;
-                }
-                .addon-content ul li {
-                    font-size: 0.9rem;
-                }
+                .menu-toggle { display: block; }
+                nav ul { display: none; }
+                .addon-header { padding: 6rem 1rem 2rem; }
+                .addon-header h1 { font-size: 1.8rem; }
             }
         </style>
     </head>
@@ -575,9 +404,7 @@
                 <li><a href="../tweets.html">Tweet</a></li>
             </ul>
             <button class="menu-toggle" aria-label="メニューを開閉する" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </button>
         </nav>
 
@@ -601,37 +428,53 @@
                 </div>
 
                 <h2>アドオンの概要</h2>
-                <p>AutoItemKillは、定期的に自動でアイテムキルが実行されワールドを軽量化するアドオンです</p>
+                <p>AutoItemKillは、ワールド内のドロップアイテムを定期的に自動消去し、ラグを軽減してワールドを軽量化するアドオンです。全ディメンション（オーバーワールド、ネザー、エンド）のアイテムを一度に掃除します。</p>
+
+                <div class="note">
+                    <b>BETA API（実験的な機能）は不要です</b><br>
+                    このアドオンは、最新の安定版Minecraftでそのまま動作します。複雑な設定なしですぐに導入可能です。
+                </div>
+
+                <h2>使い方と設定方法</h2>
+                <p>導入すると、標準設定で「30分に1回」のアイテムキルが開始されます。設定を変更したい場合は、チャット欄で以下のコマンドを入力してください。</p>
+
+                <h3>設定メニューを開く</h3>
+                <div class="command-block">
+                    <span class="command-main">/scriptevent</span> <span class="command-event">itemkill:s</span>
+                </div>
+                <p>このコマンドを実行すると、専用のカスタマイズUIが表示されます。</p>
+
+                <h3>UIで設定できる項目</h3>
+                <ul class="setup-list">
+                    <li><b>アイテムキル間隔（分）</b>: 何分ごとに掃除を実行するかを設定します。</li>
+                    <li><b>警告メッセージの送信タイミング</b>: 実行の何分前にプレイヤーに通知するかを設定します。</li>
+                </ul>
+
+                <h2>主な機能</h2>
+                <h3>1. 親切な通知システム</h3>
+                <p>設定した警告時間になると、プレイヤー全員のチャット欄に通知が届き、通知音が鳴ります。掃除のタイミングを事前に知ることができます。</p>
+
+                <h3>2. 直前カウントダウン</h3>
+                <p>アイテムキルの<b>3秒前</b>から、画面下（アクションバー）に「3、2、1」とカウントダウンが表示されます。大事なアイテムを投げている最中の事故を防ぎます。</p>
 
                 <h2>アドオンの入手</h2>
-                <p>AutoItemKillは以下のボタンからダウンロードできます。</p>
                 <div class="download-buttons">
                     <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/AutoItemKill_v.1.0.0.mcaddon" class="download-btn">【mcaddon】AutoItemKill_v1.0.0</a>
                     <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/AutoItemKill_v.1.0.0.zip" class="download-btn">【zip】AutoItemKill_v1.0.0</a>
-                    <p class="version-info">・以下の機能です</p>
+                    <p class="version-info">・v1.0.0: 初回リリース</p>
                 </div>
 
-                <h2>機能</h2>
-                <p>このアドオンは、自動でアイテムキルが実行され、間隔の調整や、メッセージのお知らせタイミングをカスタマイズできます！</p>
-
-                <h3>UI表示方法</h3>
-                <p>以下のコマンドを実行する事でカスタマイズUIを表示できます</p>
-                <p>/scriptevent itemkill:s</p>
-
-                <h3>導入方法</h3>
-                <p>以下の手順でアドオンを導入してください：</p>
-                <ul>
-                    <li>チートを有効にする</li>
+                <h2>導入方法</h2>
+                <ul class="setup-list">
+                    <li>世界の設定で「チート」を有効にする</li>
+                    <li>ビヘイビアパックを適用する</li>
                 </ul>
 
                 <h2>利用規約</h2>
-                <p>このアドオンをご利用いただくにあたり、以下の規約にご同意ください。</p>
-                <ul>
-                    <li><strong>改造の禁止</strong>: このアドオンのコードを直接改造することは禁止します。</li>
-                    <li><strong>二次配布の禁止</strong>: このアドオンを単体で再配布することは禁止します。</li>
-                    <li><strong>配布ワールドへの組み込み</strong>: 配布ワールドの一部としてこのアドオンを組み込むことは許可します。</li>
-                    <li><strong>商用利用</strong>: このアドオンを組み込んだコンテンツ（配布ワールドなど）を商用目的で利用することは許可します。</li>
-                    <li><strong>動画投稿・配信</strong>: このアドオンを使用したゲームプレイの動画投稿やライブ配信は許可します。</li>
+                <ul class="setup-list">
+                    <li><strong>改造の禁止</strong>: コードの直接改造は禁止します。</li>
+                    <li><strong>二次配布の禁止</strong>: アドオン単体での再配布は禁止します。</li>
+                    <li><strong>動画投稿・配信</strong>: 自由にご利用いただけます。報告も不要です。</li>
                 </ul>
             </div>
         </section>
@@ -646,7 +489,6 @@
             menuToggle.addEventListener('click', () => {
                 const isExpanded = mobileNav.classList.toggle('active');
                 menuToggle.setAttribute('aria-expanded', isExpanded);
-                menuToggle.classList.toggle('open');
             });
 
             window.addEventListener('scroll', () => {
@@ -660,3 +502,4 @@
         </script>
     </body>
 </html>
+
