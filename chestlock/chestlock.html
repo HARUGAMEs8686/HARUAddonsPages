@@ -5,11 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="google-site-verification" content="9S9blQzCvgIm-0eArJeotUn8jH2cKG7KbiQ1VUnwNDQ" />
         <title>HARUAddons - ChestLock</title>
-        <meta name="description" content="ChestLockのダウンロードページ。Minecraft統合版向けチェストロックアドオン！" />
+        <meta name="description" content="ChestLockのダウンロードページ。Minecraft統合版向けチェストロックアドオン" />
         <meta property="og:title" content="HARUAddons | ChestLock" />
         <meta property="og:image" content="https://harugames8686.github.io/HARUAddonsPages/ChestLock.png" />
         <meta property="og:url" content="https://harugames8686.github.io/HARUAddonsPages/addons/ChestLock.html" />
-        <meta property="og:description" content="ChestLockアドオンのダウンロードと導入方法。Minecraft BEでチェストロックアドオン！" />
+        <meta property="og:description" content="ChestLockアドオンのダウンロードと導入方法。Minecraft BEのチェストロックアドオン" />
         <meta property="og:type" content="website" />
         <link rel="canonical" href="https://harugames8686.github.io/HARUAddonsPages/addons/ChestLock.html" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -26,6 +26,7 @@
                 --primary-light: #e6f2ff;
                 --accent: #28a745;
                 --accent-light: #eaf6ec;
+                --danger: #dc3545;
                 --border-color: #dee2e6;
                 --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
                 --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.12);
@@ -33,11 +34,7 @@
                 --font-rounded: 'M PLUS Rounded 1c', sans-serif;
             }
 
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
+            * { margin: 0; padding: 0; box-sizing: border-box; }
 
             body {
                 background-color: var(--bg-light);
@@ -67,42 +64,18 @@
                 transition: all 0.3s ease;
             }
 
-            nav.scrolled {
-                top: 10px;
-                background: rgba(255, 255, 255, 0.95);
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            }
+            nav.scrolled { top: 10px; background: rgba(255, 255, 255, 0.95); }
 
-            .logo-container {
-                display: flex;
-                align-items: center;
-                gap: 0.8rem;
-                text-decoration: none;
-            }
-
-            .logo-container img {
-                width: 35px;
-                height: 35px;
-                transition: transform 0.3s ease;
-            }
-            .logo-container:hover img {
-                transform: rotate(15deg);
-            }
-
+            .logo-container { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; }
+            .logo-container img { width: 35px; height: 35px; }
             .logo-container .logo {
                 font-size: 1.6rem;
                 font-weight: 700;
                 font-family: var(--font-rounded);
                 color: var(--primary);
-                letter-spacing: 0.5px;
             }
 
-            nav ul {
-                display: flex;
-                list-style: none;
-                gap: 1rem;
-            }
-
+            nav ul { display: flex; list-style: none; gap: 1rem; }
             nav ul li a {
                 color: var(--text-muted);
                 text-decoration: none;
@@ -110,49 +83,12 @@
                 font-weight: 700;
                 padding: 0.6rem 1.2rem;
                 border-radius: 20px;
-                transition: all 0.3s ease;
+                transition: 0.3s;
             }
+            nav ul li a:hover { background: var(--primary-light); color: var(--primary); }
 
-            nav ul li a:hover,
-            nav ul li a.active {
-                background: var(--primary-light);
-                color: var(--primary);
-                transform: translateY(-2px);
-            }
-
-            .menu-toggle {
-                display: none;
-                font-size: 1.8rem;
-                background: none;
-                border: none;
-                color: var(--primary);
-                cursor: pointer;
-                padding: 5px;
-                border-radius: 50%;
-                transition: background-color 0.3s;
-            }
-            .menu-toggle:hover {
-                background-color: var(--primary-light);
-            }
-
-            .menu-toggle span {
-                display: block;
-                width: 25px;
-                height: 3px;
-                background: var(--primary);
-                margin: 5px 0;
-                border-radius: 3px;
-                transition: all 0.3s ease;
-            }
-            .menu-toggle.open span:nth-child(1) {
-                transform: translateY(8px) rotate(45deg);
-            }
-            .menu-toggle.open span:nth-child(2) {
-                opacity: 0;
-            }
-            .menu-toggle.open span:nth-child(3) {
-                transform: translateY(-8px) rotate(-45deg);
-            }
+            .menu-toggle { display: none; background: none; border: none; cursor: pointer; }
+            .menu-toggle span { display: block; width: 25px; height: 3px; background: var(--primary); margin: 5px 0; border-radius: 3px; }
 
             .mobile-nav {
                 display: none;
@@ -164,407 +100,119 @@
                 border-radius: 15px;
                 padding: 1rem;
                 z-index: 999;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-                border: 1px solid var(--border-color);
-                transform: translateY(-10px);
-                opacity: 0;
-                transition: all 0.3s ease;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
                 list-style: none;
             }
+            .mobile-nav.active { display: block; }
+            .mobile-nav li a { color: var(--text-dark); text-decoration: none; font-weight: 700; padding: 0.8rem; display: block; }
 
-            .mobile-nav.active {
-                display: block;
-                transform: translateY(0);
-                opacity: 1;
-            }
+            .addon-header { padding: 8rem 2rem 3rem; text-align: center; }
+            .addon-header img { width: 100%; max-width: 960px; border-radius: 16px; box-shadow: var(--shadow-soft); }
+            .addon-header h1 { font-size: 2.5rem; color: var(--primary); margin: 1.5rem 0; font-family: var(--font-rounded); }
 
-            .mobile-nav li {
-                margin-bottom: 0.5rem;
-            }
+            .addon-page { padding: 0 2rem 5rem; display: flex; justify-content: center; }
+            .addon-content { max-width: 800px; width: 100%; background: var(--bg-white); padding: 2rem; border-radius: 16px; box-shadow: var(--shadow-soft); }
 
-            .mobile-nav li a {
-                color: var(--text-dark);
-                text-decoration: none;
-                font-size: 1rem;
-                font-weight: 700;
-                padding: 0.8rem 1.2rem;
-                border-radius: 10px;
-                display: block;
-                transition: all 0.3s ease;
-            }
+            .addon-content h2 { font-size: 2rem; margin: 1.5rem 0 1rem; font-family: var(--font-rounded); }
+            .addon-content h3 { font-size: 1.4rem; color: var(--primary); margin: 1.8rem 0 0.8rem; border-bottom: 2px solid var(--primary-light); padding-bottom: 0.3rem; }
 
-            .mobile-nav li a:hover {
-                background: var(--primary-light);
-                color: var(--primary);
-            }
-
-            .addon-header {
-                padding: 8rem 2rem 3rem;
-                background-color: var(--bg-light);
-                text-align: center;
-            }
-
-            .addon-header img {
-                width: 100%;
-                max-width: 960px;
-                height: auto;
-                display: block;
-                margin: 0 auto;
-                border-radius: 16px;
-                box-shadow: var(--shadow-soft);
-            }
-
-            .addon-header h1 {
-                font-size: 2.5rem;
-                font-weight: 700;
-                font-family: var(--font-rounded);
-                color: var(--primary);
+            .note {
+                background-color: var(--primary-light);
+                border-left: 5px solid var(--primary);
+                padding: 1rem;
+                border-radius: 8px;
                 margin: 1.5rem 0;
-                position: relative;
-                display: inline-block;
+                color: #004085;
             }
 
-            .addon-header h1::after {
-                content: '';
-                position: absolute;
-                bottom: -10px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 60px;
-                height: 4px;
-                background-color: var(--primary);
-                border-radius: 2px;
+            .note.warning {
+                background-color: #fff3cd;
+                border-left-color: #ffc107;
+                color: #856404;
             }
 
-            .addon-page {
-                padding: 0 2rem 5rem;
-                background-color: var(--bg-light);
+            .command-block {
+                background: #e9ecef;
+                padding: 1rem;
+                border-radius: 8px;
+                margin: 1rem 0;
+                font-family: 'Consolas', monospace;
+                font-weight: bold;
+                border-left: 5px solid var(--primary);
+            }
+            .command-text { color: #d63384; }
+
+            .addon-content ul.feature-list {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 10px;
+                list-style: none;
+                margin: 1.5rem 0;
+            }
+            .addon-content ul.feature-list li {
+                background: var(--accent-light);
+                padding: 0.8rem;
+                border-radius: 8px;
+                font-weight: bold;
+                color: var(--accent);
                 display: flex;
-                justify-content: center;
+                align-items: center;
+                gap: 8px;
             }
+            .addon-content ul.feature-list li::before { content: ''; }
 
-            .addon-content {
-                max-width: 800px;
-                width: 100%;
-                background: var(--bg-white);
-                padding: 2rem;
-                border-radius: 16px;
-                box-shadow: var(--shadow-soft);
-            }
-
-            .addon-content h2 {
-                font-size: 2rem;
-                font-weight: 700;
-                font-family: var(--font-rounded);
-                color: var(--text-dark);
-                margin: 1.5rem 0 1rem;
-            }
-
-            .addon-content h3 {
-                font-size: 1.5rem;
-                font-weight: 700;
-                color: var(--primary);
-                margin: 1rem 0 0.5rem;
-            }
-
-            .addon-content p {
-                font-size: 1.1rem;
-                color: var(--text-muted);
-                line-height: 1.6;
-                margin-bottom: 1rem;
-            }
-
-            .addon-content .buttons {
-                display: flex;
-                gap: 1rem;
-                margin: 1.5rem 0;
-                justify-content: center;
-            }
-
-            .addon-content .btn {
-                padding: 0.8rem 2rem;
-                background: var(--accent);
-                color: var(--bg-white);
-                text-decoration: none;
-                border-radius: 50px;
-                font-size: 1rem;
-                font-weight: 700;
-                font-family: var(--font-sans-jp);
-                transition: all 0.3s ease;
-                box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
-            }
-
-            .addon-content .btn:hover {
-                background: #218838;
-                transform: translateY(-2px);
-                box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
-            }
-
-            .download-buttons {
-                margin: 1.5rem 0;
-                padding: 1.5rem;
-                background: var(--primary-light);
-                border-radius: 12px;
-                border: 1px solid var(--border-color);
-            }
-
-            .download-btn,
-            .download-btn_back {
-                display: block;
-                padding: 0.9rem 2rem;
-                color: var(--bg-white);
-                text-decoration: none;
-                border-radius: 50px;
-                font-size: 1.2rem;
-                font-weight: 700;
-                transition: all 0.3s ease;
-                box-shadow: var(--shadow-soft);
-                text-align: center;
-                position: relative;
-                margin-bottom: 1rem;
-            }
-
-            .download-btn {
-                background: linear-gradient(135deg, #0056b3, #34649b);
-            }
-
-            .download-btn:hover {
-                transform: translateY(-3px);
-                box-shadow: var(--shadow-hover);
-                background: linear-gradient(135deg, #0056b3, #215a88);
-            }
-
-            .download-btn::before {
-                content: '最新';
-                font-size: 0.8rem;
-                background: rgba(255, 255, 255, 0.3);
-                padding: 0.2rem 0.6rem;
-                border-radius: 10px;
-                position: absolute;
-                top: 0.5rem;
-                right: 0.5rem;
-            }
-
-            .download-btn_back {
-                background: linear-gradient(135deg, #6c757d, #343a40);
-            }
-
-            .download-btn_back:hover {
-                transform: translateY(-3px);
-                box-shadow: var(--shadow-hover);
-                background: linear-gradient(135deg, #5a6268, #2c3e50);
-            }
-
-            .download-btn_back::before {
-                content: '旧';
-                font-size: 0.8rem;
-                background: rgba(255, 255, 255, 0.3);
-                padding: 0.2rem 0.6rem;
-                border-radius: 10px;
-                position: absolute;
-                top: 0.5rem;
-                right: 0.5rem;
-            }
-
-            .version-info {
-                font-size: 0.95rem;
-                color: var(--text-muted);
-                margin-top: 0.5rem;
-                line-height: 1.5;
-            }
-
-            .addon-content ul {
-                list-style-type: none;
-                padding-left: 1.5rem;
-                margin-bottom: 1.5rem;
-            }
-
-            .addon-content ul li {
-                font-size: 1.1rem;
-                color: var(--text-muted);
-                margin-bottom: 0.8rem;
-                position: relative;
-                padding-left: 1.5rem;
-            }
-
-            .addon-content ul li::before {
-                content: '🔹';
+            .step-list { list-style: none; counter-reset: step; }
+            .step-list li { position: relative; padding-left: 3rem; margin-bottom: 1.2rem; }
+            .step-list li::before {
+                counter-increment: step;
+                content: counter(step);
                 position: absolute;
                 left: 0;
-                color: var(--accent);
+                top: 0;
+                width: 2rem;
+                height: 2rem;
+                background: var(--primary);
+                color: white;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
             }
 
-            .command {
-                font-weight: 700;
-                color: var(--text-dark);
-                background: var(--accent-light);
-                padding: 0.5rem 1rem;
-                border-radius: 8px;
-                display: inline-block;
-                margin: 0.5rem 0;
-            }
+            .buttons { display: flex; justify-content: center; margin: 1.5rem 0; }
+            .btn { padding: 0.8rem 2rem; background: var(--accent); color: white; text-decoration: none; border-radius: 50px; font-weight: 700; transition: 0.3s; }
+            .btn:hover { background: #218838; transform: translateY(-2px); }
 
-            footer {
-                background-color: var(--text-dark);
-                color: var(--bg-light);
+            .download-buttons { background: var(--primary-light); padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; }
+            .download-btn {
+                display: block;
+                padding: 1rem;
+                background: linear-gradient(135deg, #0056b3, #34649b);
+                color: white;
+                text-decoration: none;
+                border-radius: 50px;
                 text-align: center;
-                padding: 2rem 1rem;
-                margin-top: 4rem;
+                font-weight: bold;
+                margin-bottom: 1rem;
+                transition: 0.3s;
             }
+            .download-btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 
-            footer p {
-                font-size: 0.9rem;
-                opacity: 0.8;
-                letter-spacing: 0.5px;
-            }
-
-            @media (max-width: 992px) {
-                nav ul {
-                    gap: 0.5rem;
-                }
-                nav ul li a {
-                    padding: 0.5rem 0.8rem;
-                }
-                .addon-header h1 {
-                    font-size: 2rem;
-                }
-            }
+            footer { background: var(--text-dark); color: white; text-align: center; padding: 2rem; margin-top: 4rem; }
 
             @media (max-width: 768px) {
-                nav {
-                    padding: 0.6rem 1rem;
-                    width: calc(100% - 30px);
-                }
-                .menu-toggle {
-                    display: block;
-                }
-                nav ul {
-                    display: none;
-                }
-                .addon-header {
-                    padding: 6rem 1rem 2rem;
-                }
-                .addon-header img {
-                    max-width: 600px;
-                }
-                .addon-header h1 {
-                    font-size: 1.8rem;
-                }
-                .addon-page {
-                    padding: 0 1rem 4rem;
-                }
-                .addon-content {
-                    padding: 1.5rem;
-                }
-                .addon-content h2 {
-                    font-size: 1.8rem;
-                }
-                .addon-content h3 {
-                    font-size: 1.3rem;
-                }
-                .addon-content p {
-                    font-size: 1rem;
-                }
-                .addon-content .buttons {
-                    flex-direction: row;
-                    gap: 0.8rem;
-                }
-                .addon-content .btn {
-                    padding: 0.7rem 1.5rem;
-                    font-size: 0.9rem;
-                }
-                .download-btn,
-                .download-btn_back {
-                    padding: 0.8rem 1.5rem;
-                    font-size: 1rem;
-                }
-                .version-info {
-                    font-size: 0.9rem;
-                }
-                .addon-content ul li {
-                    font-size: 1rem;
-                }
-            }
-
-            @media (max-width: 480px) {
-                body {
-                    line-height: 1.6;
-                }
-                .logo-container .logo {
-                    font-size: 1.3rem;
-                }
-                .logo-container img {
-                    width: 30px;
-                    height: 30px;
-                }
-                .mobile-nav {
-                    width: 200px;
-                    top: 70px;
-                    right: 15px;
-                }
-                .addon-header {
-                    padding: 5rem 0.5rem 1.5rem;
-                }
-                .addon-header img {
-                    max-width: 400px;
-                }
-                .addon-header h1 {
-                    font-size: 1.6rem;
-                }
-                .addon-header h1::after {
-                    width: 50px;
-                    height: 3px;
-                    bottom: -8px;
-                }
-                .addon-page {
-                    padding: 0 0.5rem 3rem;
-                }
-                .addon-content {
-                    padding: 1rem;
-                }
-                .addon-content h2 {
-                    font-size: 1.5rem;
-                }
-                .addon-content h3 {
-                    font-size: 1.2rem;
-                }
-                .addon-content p {
-                    font-size: 0.9rem;
-                }
-                .addon-content .buttons {
-                    flex-direction: column;
-                    gap: 0.5rem;
-                }
-                .addon-content .btn {
-                    padding: 0.6rem 1rem;
-                    font-size: 0.8rem;
-                }
-                .download-buttons {
-                    padding: 0.8rem;
-                }
-                .download-btn,
-                .download-btn_back {
-                    padding: 0.7rem 1rem;
-                    font-size: 0.9rem;
-                }
-                .download-btn::before,
-                .download-btn_back::before {
-                    font-size: 0.7rem;
-                    padding: 0.15rem 0.4rem;
-                }
-                .version-info {
-                    font-size: 0.8rem;
-                }
-                .addon-content ul li {
-                    font-size: 0.9rem;
-                }
+                .menu-toggle { display: block; }
+                nav ul { display: none; }
+                .addon-header { padding: 6rem 1rem 2rem; }
+                .addon-header h1 { font-size: 1.8rem; }
             }
         </style>
     </head>
     <body>
         <nav>
             <a href="../index.html" class="logo-container">
-                <img src="../icon.png" alt="HARU Addons Icon" loading="lazy" />
+                <img src="../icon.png" alt="HARU Addons Icon" />
                 <div class="logo">HARUAddons</div>
             </a>
             <ul>
@@ -574,10 +222,8 @@
                 <li><a href="../links.html">リンク</a></li>
                 <li><a href="../tweets.html">Tweet</a></li>
             </ul>
-            <button class="menu-toggle" aria-label="メニューを開閉する" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
+            <button class="menu-toggle" aria-label="メニューを開閉する">
+                <span></span><span></span><span></span>
             </button>
         </nav>
 
@@ -601,64 +247,62 @@
                 </div>
 
                 <h2>アドオンの概要</h2>
-                <p>ChestLockは、UIとインタラクト操作のみで簡単に収納ブロックを保護できます。</p>
+                <p>ChestLockは、統合版Minecraftにおいて最も手軽かつ強力なチェスト保護機能を提供します。コマンドを覚える必要はなく、UIと直感的な操作だけであなたの財産を守ります。</p>
+
+                <div class="note warning">
+                    <b>⚠️ 導入時の注意点</b><br>
+                    このアドオンを動作させるには、ワールド設定で<b>「ベータAPI（実験的な機能）」</b>を有効にする必要があります。
+                </div>
+
+                <h3>保護機能</h3>
+                <p>保護された収納ブロック（チェスト、樽、シュルカーボックス等）は、以下のあらゆる干渉から保護されます：</p>
+                <ul class="feature-list">
+                    <li>他プレイヤーのアクセス</li>
+                    <li>ブロックの破壊</li>
+                    <li>ホッパーによる抜き取り</li>
+                    <li>TNT・クリーパーの爆破</li>
+                    <li>ホッパー付きトロッコ</li>
+                    <li>ピストンによる移動</li>
+                </ul>
+
+                <h3>使い方（簡単3ステップ）</h3>
+                <ul class="step-list">
+                    <li>
+                        <b>専用アイテムの取得</b><br>
+                        チャット欄に以下の文字列を入力して送信してください。
+                        <div class="command-block"><span class="command-text">!icl</span></div>
+                    </li>
+                    <li>
+                        <b>UIの起動</b><br>
+                        入手したアイテムを使用（右クリック/長押し）すると、設定画面が開きます。メニューから「保護チェスト登録」を選択してください。
+                    </li>
+                    <li>
+                        <b>保護の適用</b><br>
+                        保護したいチェストや樽を、そのまま「インタラクト（開く操作）」してください。これで保護完了です！
+                    </li>
+                </ul>
+
+                <h3>高度な連携（HARUPhone 1）</h3>
+                <p>HARUPhone 1を使用している場合、「OperatorController」経由でアプリとして登録し、よりスムーズにアクセスすることも可能です。</p>
+                <div class="note">
+                    <b>HARUPhone設定用スクリプトイベント:</b><br>
+                    <code>scriptevent haruapps:chestlock</code>
+                </div>
 
                 <h2>アドオンの入手</h2>
-                <p>ChestLockは以下のボタンからダウンロードできます。</p>
                 <div class="download-buttons">
                     <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/ChestLock_v.1.8.2.mcaddon" class="download-btn">【mcaddon】ChestLock_v1.8.2</a>
                     <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/ChestLock_v.1.8.2.zip" class="download-btn">【zip】ChestLock_v1.8.2</a>
-                    <p class="version-info">・1.21.130対応</p>
-                    <p class="version-info">・今後のMinecraftアップデートでアドオンの故障率を軽減</p>
-                    <p class="version-info">・以下の機能です</p>
+                    <p class="version-info">・1.21.130 以降のバージョンに対応</p>
+                    <p class="version-info">・将来のアップデートによる故障率を大幅に軽減</p>
                 </div>
 
-                <h2>機能</h2>
-                <p>このアドオンは、保護された収納ブロックを以下のようなイベントからお守りします</p>
-                <ul>
-                    <li><strong>ホッパーの抜き取り</strong></li>
-                    <li><strong>TNTなどの爆破</strong></li>
-                    <li><strong>収納ブロックへのアクセス</strong></li>
-                    <li><strong>破壊</strong></li>
-                    <li><strong>ホッパー付きトロッコ</strong></li>
-                    <li><strong>ピストン</strong></li>
-                </ul>
-
-                <p>▶️チェストロックに必要なアイテムは以下の方法で取得できます</p>
-                <p>メッセージで !icl と入力</p>
-
-                <h3>導入方法</h3>
-                <p>以下の手順でアドオンを導入してください：</p>
-                <ul>
-                    <li>チートを有効にする</li>
-                    <li>ベータAPIを有効にする</li>
-                </ul>
-
-                <h3>使い方</h3>
-                <p>① !icl とメッセージ送信することでチェストロックに必要なアイテムを取得できます</p>
-                <p>② 取得したアイテムを開くとUIが表示されます</p>
-                <p>※この取得方法は、権限は関係なく誰でも可能です</p>
-                <p>③ 表示されたUIから保護チェスト登録を選択</p>
-
-                <p>④ 保護する 収納ブロック(チェスト/樽/シュルカーボックス)をインタラクトします</p>
-
-                <p>→これで保護が完了です</p>
-
-                <h3>HARUPhone１との連携も可能です</h3>
-                <p>HARUPhone1を開き「OperatorController」→「その他」→「UIカスタマイズ」を選択</p>
-                <p>「アプリケーション」を追加</p>
-                <p>「HARU-X-Editor」で「新規作成」→「LiteFrame」→アプリ名「職業」で作成</p>
-                <p>「コマンド(複数可)を実行」を選び、scriptevent haruapps:chestlock を入力</p>
-                <p>「Applicationのアップロード」でアップロード</p>
-
                 <h2>利用規約</h2>
-                <p>このアドオンをご利用いただくにあたり、以下の規約にご同意ください。</p>
+                <p>ご利用の際は以下の規約を守ってください：</p>
                 <ul>
-                    <li><strong>改造の禁止</strong>: このアドオンのコードを直接改造することは禁止します。</li>
-                    <li><strong>二次配布の禁止</strong>: このアドオンを単体で再配布することは禁止します。</li>
-                    <li><strong>配布ワールドへの組み込み</strong>: 配布ワールドの一部としてこのアドオンを組み込むことは許可します。</li>
-                    <li><strong>商用利用</strong>: このアドオンを組み込んだコンテンツ（配布ワールドなど）を商用目的で利用することは許可します。</li>
-                    <li><strong>動画投稿・配信</strong>: このアドオンを使用したゲームプレイの動画投稿やライブ配信は許可します。</li>
+                    <li><strong>改造・二次配布の禁止</strong>: コードの改変やアドオン単体での再配布を禁じます。</li>
+                    <li><strong>ワールドへの組み込み</strong>: 配布ワールドの一部として利用することは大歓迎です。</li>
+                    <li><strong>実況・配信</strong>: 自由にご利用いただけます。</li>
                 </ul>
             </div>
         </section>
@@ -671,18 +315,13 @@
             const menuToggle = document.querySelector('.menu-toggle');
             const mobileNav = document.querySelector('.mobile-nav');
             menuToggle.addEventListener('click', () => {
-                const isExpanded = mobileNav.classList.toggle('active');
-                menuToggle.setAttribute('aria-expanded', isExpanded);
-                menuToggle.classList.toggle('open');
+                mobileNav.classList.toggle('active');
             });
 
             window.addEventListener('scroll', () => {
                 const nav = document.querySelector('nav');
-                if (window.scrollY > 30) {
-                    nav.classList.add('scrolled');
-                } else {
-                    nav.classList.remove('scrolled');
-                }
+                if (window.scrollY > 30) nav.classList.add('scrolled');
+                else nav.classList.remove('scrolled');
             });
         </script>
     </body>
