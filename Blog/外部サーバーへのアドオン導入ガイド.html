@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>HARUAddons - BDS(外部サーバー)導入ガイド</title>
+        <meta name="description" content="Minecraft BE(統合版)のBDS(外部サーバー)へHARU Addonsを導入・アップデートする方法と、UUIDリストのまとめ。" />
+
+        <link rel="icon" type="image/png" href="../icon.png" sizes="32x32" />
+        <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />
+
+        <style>
+            :root {
+                --bg-light: #f8f9fa;
+                --bg-white: #ffffff;
+                --text-dark: #343a40;
+                --text-muted: #6c757d;
+                --primary: #007bff;
+                --primary-light: #e6f2ff;
+                --accent: #28a745;
+                --accent-light: #eaf6ec;
+                --border-color: #dee2e6;
+                --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+                --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.12);
+                --font-sans-jp: 'Noto Sans JP', sans-serif;
+                --font-rounded: 'M PLUS Rounded 1c', sans-serif;
+                --code-bg: #2d2d2d;
+                --code-text: #f8f8f2;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                background-color: var(--bg-light);
+                color: var(--text-dark);
+                font-family: var(--font-sans-jp);
+                line-height: 1.7;
+                overflow-x: hidden;
+            }
+
+            /* --- ナビゲーション --- */
+            nav {
+                position: fixed;
+                top: 15px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: calc(100% - 40px);
+                max-width: 1100px;
+                background: rgba(255, 255, 255, 0.85);
+                backdrop-filter: blur(10px);
+                border-radius: 30px;
+                padding: 0.8rem 1.8rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                z-index: 1000;
+                box-shadow: var(--shadow-soft);
+                border: 1px solid rgba(0, 0, 0, 0.05);
+                transition: all 0.3s ease;
+            }
+
+            nav.scrolled {
+                top: 10px;
+                background: rgba(255, 255, 255, 0.95);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .logo-container {
+                display: flex;
+                align-items: center;
+                gap: 0.8rem;
+                text-decoration: none;
+            }
+
+            .logo-container img {
+                width: 35px;
+                height: 35px;
+                transition: transform 0.3s ease;
+            }
+            .logo-container:hover img {
+                transform: rotate(15deg);
+            }
+
+            .logo-container .logo {
+                font-size: 1.6rem;
+                font-weight: 700;
+                font-family: var(--font-rounded);
+                color: var(--primary);
+            }
+
+            nav ul {
+                display: flex;
+                list-style: none;
+                gap: 1rem;
+            }
+
+            nav ul li a {
+                color: var(--text-muted);
+                text-decoration: none;
+                font-size: 1rem;
+                font-weight: 700;
+                padding: 0.6rem 1.2rem;
+                border-radius: 20px;
+                transition: all 0.3s ease;
+            }
+
+            nav ul li a:hover {
+                background: var(--primary-light);
+                color: var(--primary);
+                transform: translateY(-2px);
+            }
+
+            .menu-toggle {
+                display: none;
+                font-size: 1.8rem;
+                background: none;
+                border: none;
+                color: var(--primary);
+                cursor: pointer;
+                padding: 5px;
+                border-radius: 50%;
+            }
+
+            .menu-toggle span {
+                display: block;
+                width: 25px;
+                height: 3px;
+                background: var(--primary);
+                margin: 5px 0;
+                border-radius: 3px;
+                transition: all 0.3s ease;
+            }
+
+            .mobile-nav {
+                display: none;
+                position: fixed;
+                top: 80px;
+                right: 20px;
+                width: 220px;
+                background: var(--bg-white);
+                border-radius: 15px;
+                padding: 1rem;
+                z-index: 999;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                border: 1px solid var(--border-color);
+                transform: translateY(-10px);
+                opacity: 0;
+                transition: all 0.3s ease;
+                list-style: none;
+            }
+
+            .mobile-nav.active {
+                display: block;
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .mobile-nav li a {
+                color: var(--text-dark);
+                text-decoration: none;
+                font-size: 1rem;
+                font-weight: 700;
+                padding: 0.8rem 1.2rem;
+                display: block;
+                border-radius: 10px;
+            }
+
+            /* --- コンテンツヘッダー --- */
+            .addon-header {
+                padding: 8rem 2rem 3rem;
+                background-color: var(--bg-light);
+                text-align: center;
+            }
+
+            .addon-header h1 {
+                font-size: 2.2rem;
+                font-weight: 700;
+                font-family: var(--font-rounded);
+                color: var(--primary);
+                margin: 1.5rem 0;
+                position: relative;
+                display: inline-block;
+            }
+
+            .addon-header h1::after {
+                content: '';
+                position: absolute;
+                bottom: -10px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 60px;
+                height: 4px;
+                background-color: var(--primary);
+                border-radius: 2px;
+            }
+
+            /* --- コンテンツ本体 --- */
+            .addon-page {
+                padding: 0 2rem 5rem;
+                background-color: var(--bg-light);
+                display: flex;
+                justify-content: center;
+            }
+
+            .addon-content {
+                max-width: 900px;
+                width: 100%;
+                background: var(--bg-white);
+                padding: 3rem;
+                border-radius: 16px;
+                box-shadow: var(--shadow-soft);
+            }
+
+            .addon-content h2 {
+                font-size: 1.8rem;
+                font-weight: 700;
+                font-family: var(--font-rounded);
+                color: var(--text-dark);
+                margin: 2.5rem 0 1rem;
+                border-bottom: 2px solid var(--primary-light);
+                padding-bottom: 0.5rem;
+            }
+
+            .addon-content h2:first-child {
+                margin-top: 0;
+            }
+
+            .addon-content h3 {
+                font-size: 1.4rem;
+                font-weight: 700;
+                color: var(--primary);
+                margin: 1.5rem 0 0.5rem;
+            }
+
+            .addon-content p {
+                font-size: 1.05rem;
+                color: var(--text-muted);
+                line-height: 1.7;
+                margin-bottom: 1rem;
+            }
+
+            .addon-content .note {
+                background-color: #fff3e0;
+                border-left: 5px solid #ff9800;
+                padding: 1rem;
+                border-radius: 8px;
+                margin: 1.5rem 0;
+                font-size: 0.95rem;
+                color: #e65100;
+            }
+
+            .addon-content ul,
+            .addon-content ol {
+                padding-left: 1.5rem;
+                margin-bottom: 1.5rem;
+                color: var(--text-muted);
+            }
+
+            .addon-content li {
+                margin-bottom: 0.5rem;
+            }
+
+            /* コードブロック */
+            .code-block {
+                background: var(--code-bg);
+                color: var(--code-text);
+                padding: 1.2rem;
+                border-radius: 8px;
+                margin: 1rem 0 1.5rem;
+                font-family: 'Consolas', 'Monaco', monospace;
+                font-size: 0.95rem;
+                overflow-x: auto;
+                line-height: 1.5;
+            }
+
+            code {
+                font-family: 'Consolas', 'Monaco', monospace;
+                background: #e9ecef;
+                padding: 0.2em 0.4em;
+                border-radius: 4px;
+                font-size: 90%;
+                color: #d63384;
+            }
+
+            .code-block code {
+                background: transparent;
+                color: inherit;
+                padding: 0;
+            }
+
+            /* --- UUIDテーブル --- */
+            .uuid-table-wrapper {
+                overflow-x: auto;
+                margin: 2rem 0;
+                border-radius: 8px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            }
+
+            .uuid-table {
+                width: 100%;
+                border-collapse: collapse;
+                min-width: 600px;
+                background: var(--bg-white);
+            }
+
+            .uuid-table th,
+            .uuid-table td {
+                padding: 1rem;
+                text-align: left;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .uuid-table th {
+                background-color: var(--primary);
+                color: var(--bg-white);
+                font-weight: 700;
+                white-space: nowrap;
+            }
+
+            .uuid-table tr:last-child td {
+                border-bottom: none;
+            }
+
+            .uuid-table tr:hover td {
+                background-color: var(--primary-light);
+            }
+
+            .addon-name {
+                font-weight: 700;
+                color: var(--text-dark);
+            }
+
+            .uuid-text {
+                font-family: 'Consolas', monospace;
+                font-size: 0.9rem;
+                color: var(--text-muted);
+                background: var(--bg-light);
+                padding: 0.3rem 0.5rem;
+                border-radius: 4px;
+                display: inline-block;
+                margin-bottom: 4px;
+                word-break: break-all;
+            }
+
+            /* フッター */
+            footer {
+                background-color: var(--text-dark);
+                color: var(--bg-light);
+                text-align: center;
+                padding: 2rem 1rem;
+                margin-top: 2rem;
+            }
+
+            @media (max-width: 768px) {
+                nav {
+                    padding: 0.6rem 1rem;
+                    width: calc(100% - 30px);
+                }
+                nav ul {
+                    display: none;
+                }
+                .menu-toggle {
+                    display: block;
+                }
+                .addon-header {
+                    padding: 6rem 1rem 2rem;
+                }
+                .addon-header h1 {
+                    font-size: 1.8rem;
+                }
+                .addon-content {
+                    padding: 1.5rem;
+                }
+                .uuid-table th,
+                .uuid-table td {
+                    padding: 0.8rem;
+                    font-size: 0.9rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- ナビゲーション -->
+        <nav>
+            <a href="../index.html" class="logo-container">
+                <img src="../icon.png" alt="HARU Addons Icon" loading="lazy" />
+                <div class="logo">HARUAddons</div>
+            </a>
+            <ul>
+                <li><a href="../index.html">ホーム</a></li>
+                <li><a href="../Assistant/support.html">Assistant</a></li>
+                <li><a href="../developer_info.html">開発者情報</a></li>
+                <li><a href="../links.html">リンク</a></li>
+                <li><a href="../tweets.html">Tweet</a></li>
+            </ul>
+            <button class="menu-toggle" aria-label="メニューを開閉する"><span></span><span></span><span></span></button>
+        </nav>
+
+        <ul class="mobile-nav">
+            <li><a href="../index.html">ホーム</a></li>
+            <li><a href="../Assistant/support.html">Assistant</a></li>
+            <li><a href="../developer_info.html">開発者情報</a></li>
+            <li><a href="../links.html">リンク</a></li>
+            <li><a href="../tweets.html">Tweet</a></li>
+        </ul>
+
+        <!-- ヘッダー -->
+        <section class="addon-header">
+            <h1>BDS(外部サーバー) 導入・アップデートガイド</h1>
+        </section>
+
+        <!-- メインコンテンツ -->
+        <section class="addon-page">
+            <div class="addon-content">
+                <h2>BDSへのアドオン新規導入手順</h2>
+                <p>Bedrock Dedicated Server (BDS) などの外部サーバーにアドオンを導入する手順です。</p>
+
+                <h3>1. アドオンファイルの解凍</h3>
+                <p>ダウンロードしたアドオン（<code>.mcaddon</code> または <code>.zip</code>）を解凍し、中にある<strong>ビヘイビアーパック(BP)</strong>と<strong>リソースパック(RP)</strong>のフォルダを取り出します。</p>
+
+                <h3>2. サーバーのフォルダへ配置</h3>
+                <p>取り出したフォルダを、サーバーのディレクトリ内にある指定のフォルダへアップロードします。</p>
+                <ul>
+                    <li><strong>BPフォルダ</strong> ➔ <code>behavior_packs</code> または <code>development_behavior_packs</code></li>
+                    <li><strong>RPフォルダ</strong> ➔ <code>resource_packs</code> または <code>development_resource_packs</code></li>
+                </ul>
+
+                <h3>3. ワールドへの適用 (JSONファイルの編集)</h3>
+                <p>サーバー内の <code>worlds/Bedrock level/</code> (※ワールド名によって異なります) の中にある、以下の2つのファイルにアドオンのUUIDとバージョンを追記します。ファイルがない場合は新規作成してください。</p>
+
+                <p><strong>▼ world_behavior_packs.json の記述例</strong></p>
+                <pre class="code-block"><code>[
+  {
+    "pack_id": "BPのUUIDを入力",
+    "version":[1, 0, 0]
+  }
+]</code></pre>
+
+                <p><strong>▼ world_resource_packs.json の記述例</strong></p>
+                <pre class="code-block"><code>[
+  {
+    "pack_id": "RPのUUIDを入力",
+    "version":[1, 0, 0]
+  }
+]</code></pre>
+
+                <div class="note"><strong>注意:</strong> 複数のアドオンを入れる場合は <code>,</code> (カンマ) で区切って配列の中に追加してください。最後の要素にカンマをつけるとエラーで読み込まれません。</div>
+
+                <h2>アドオンのアップデート手順</h2>
+                <p>既に導入しているアドオンを最新バージョンに更新する場合の手順です。</p>
+
+                <ol>
+                    <li><strong>サーバーを停止する</strong> (起動したまま書き換えるとワールドが破損する恐れがあります)</li>
+                    <li><code>behavior_packs</code> および <code>resource_packs</code> 内の<strong>古いアドオンフォルダを完全に削除</strong>する</li>
+                    <li>新しいバージョンのBP/RPフォルダをそれぞれ配置する</li>
+                    <li><code>world_behavior_packs.json</code> と <code>world_resource_packs.json</code> に記載している<strong>バージョン(version)の数値を最新のものに書き換える</strong></li>
+                    <li>サーバーを起動する</li>
+                </ol>
+
+                <h2>HARU Addons - UUID リスト</h2>
+                <p>JSONファイルに記述するためのUUIDリストです。アドオンごとに「BP用」と「RP用」のUUIDが存在します。<br />※実際のUUIDとバージョンは、必ずご自身がダウンロードしたファイル内の <code>manifest.json</code> の <code>header</code> 項目を最終確認してください。</p>
+
+                <!-- 
+                  ※ 下記のUUIDはプレースホルダー（仮の文字列）です。
+                  ※ 実際のUUIDに書き換えてご使用ください。 
+                -->
+                <div class="uuid-table-wrapper">
+                    <table class="uuid-table">
+                        <thead>
+                            <tr>
+                                <th>アドオン名</th>
+                                <th>パック</th>
+                                <th>UUID (pack_id)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="addon-name" rowspan="2">HARUPhone1</td>
+                                <td>BP</td>
+                                <td><span class="uuid-text">fa4fbacb-fbb2-4123-b2d1-c3d834cd30c9</span></td>
+                            </tr>
+                            <tr>
+                                <td>RP</td>
+                                <td><span class="uuid-text">87612ea1-9f24-4f47-a14d-7bdc966c37c3</span></td>
+                            </tr>
+
+                            <tr>
+                                <td class="addon-name" rowspan="2">Job Level Up</td>
+                                <td>BP</td>
+                                <td><span class="uuid-text">bf0942ed-2867-4522-b5ad-e59f2b84d105</span></td>
+                            </tr>
+                            <tr>
+                                <td>RP</td>
+                                <td><span class="uuid-text">67b5a345-2650-428e-bbae-37b2cf42785b</span></td>
+                            </tr>
+
+                            <tr>
+                                <td class="addon-name" rowspan="2">SecurityCraft</td>
+                                <td>BP</td>
+                                <td><span class="uuid-text">0c1821f4-93fe-4058-a127-9312c9d97098</span></td>
+                            </tr>
+                            <tr>
+                                <td>RP</td>
+                                <td><span class="uuid-text">必要なし</span></td>
+                            </tr>
+
+                            <tr>
+                                <td class="addon-name" rowspan="2">RankAdventure</td>
+                                <td>BP</td>
+                                <td><span class="uuid-text">8321c0a4-29eb-4351-b9ee-9197f95b0588</span></td>
+                            </tr>
+                            <tr>
+                                <td>RP</td>
+                                <td><span class="uuid-text">b38b860e-aeda-474d-a702-598281b22aa0</span></td>
+                            </tr>
+
+                            <tr>
+                                <td class="addon-name" rowspan="2">Storage</td>
+                                <td>BP</td>
+                                <td><span class="uuid-text">82776043-2678-4fa1-a38e-028b348a4b5f</span></td>
+                            </tr>
+                            <tr>
+                                <td>RP</td>
+                                <td><span class="uuid-text">189717cf-4c5b-4127-bd1f-47757dfddb32</span></td>
+                            </tr>
+
+                            <tr>
+                                <td class="addon-name" rowspan="2">Chest Lock</td>
+                                <td>BP</td>
+                                <td><span class="uuid-text">ee74cb7f-39b1-4c97-bd02-a8b3351af1a9</span></td>
+                            </tr>
+                            <tr>
+                                <td>RP</td>
+                                <td><span class="uuid-text">必要なし</span></td>
+                            </tr>
+
+                            <tr>
+                                <td class="addon-name" rowspan="2">Camera</td>
+                                <td>BP</td>
+                                <td><span class="uuid-text">a696c227-b6c8-4bd2-9270-726d23d18e53</span></td>
+                            </tr>
+                            <tr>
+                                <td>RP</td>
+                                <td><span class="uuid-text">8e7494a8-d8a7-42b4-ab5f-51ab3e9736f7</span></td>
+                            </tr>
+
+                            <tr>
+                                <td class="addon-name" rowspan="2">Whitelist</td>
+                                <td>BP</td>
+                                <td><span class="uuid-text">36033cb2-a103-442f-9e2c-27462ddd8677</span></td>
+                            </tr>
+                            <tr>
+                                <td>RP</td>
+                                <td><span class="uuid-text">必要なし</span></td>
+                            </tr>
+
+                            <tr>
+                                <td class="addon-name" rowspan="2">Teams</td>
+                                <td>BP</td>
+                                <td><span class="uuid-text">0b3c71c5-cae8-4648-8460-cb7b99e7c6a1</span></td>
+                            </tr>
+                            <tr>
+                                <td>RP</td>
+                                <td><span class="uuid-text">必要なし</span></td>
+                            </tr>
+
+                            <tr>
+                                <td class="addon-name" rowspan="2">Sphere</td>
+                                <td>BP</td>
+                                <td><span class="uuid-text">12815af6-50b0-47ed-bd02-1567455c9c17</span></td>
+                            </tr>
+                            <tr>
+                                <td>RP</td>
+                                <td><span class="uuid-text">必要なし</span></td>
+                            </tr>
+
+                            <tr>
+                                <td class="addon-name" rowspan="2">WorldBorder</td>
+                                <td>BP</td>
+                                <td><span class="uuid-text">a17e1da3-dac7-4684-ac3f-3960b346de60</span></td>
+                            </tr>
+                            <tr>
+                                <td>RP</td>
+                                <td><span class="uuid-text">必要なし</span></td>
+                            </tr>
+
+                            <tr>
+                                <td class="addon-name" rowspan="2">LandProtection</td>
+                                <td>BP</td>
+                                <td><span class="uuid-text">8613b3e8-417c-4e9d-b81e-b669e8f00a7a</span></td>
+                            </tr>
+                            <tr>
+                                <td>RP</td>
+                                <td><span class="uuid-text">必要なし</span></td>
+                            </tr>
+
+                            <tr>
+                                <td class="addon-name" rowspan="2">EventTagger</td>
+                                <td>BP</td>
+                                <td><span class="uuid-text">e4a06825-b28b-46c5-a6a3-ae2d34767744</span></td>
+                            </tr>
+                            <tr>
+                                <td>RP</td>
+                                <td><span class="uuid-text">必要なし</span></td>
+                            </tr>
+
+                            <tr>
+                                <td class="addon-name" rowspan="2">AutoItemKill</td>
+                                <td>BP</td>
+                                <td><span class="uuid-text">c21962b9-3de8-4646-832c-61161e984930</span></td>
+                            </tr>
+                            <tr>
+                                <td>RP</td>
+                                <td><span class="uuid-text">必要なし</span></td>
+                            </tr>
+
+                            <tr>
+                                <td class="addon-name" rowspan="2">ItemID</td>
+                                <td>BP</td>
+                                <td><span class="uuid-text">d4155949-b925-484d-be48-6fb9add5a66c</span></td>
+                            </tr>
+                            <tr>
+                                <td>RP</td>
+                                <td><span class="uuid-text">必要なし</span></td>
+                            </tr>
+
+                            <tr>
+                                <td class="addon-name" rowspan="2">Blacklist</td>
+                                <td>BP</td>
+                                <td><span class="uuid-text">727f7816-d906-42e6-99cb-c03a8c0ae580</span></td>
+                            </tr>
+                            <tr>
+                                <td>RP</td>
+                                <td><span class="uuid-text">必要なし</span></td>
+                            </tr>
+
+                            <tr>
+                                <td class="addon-name" rowspan="2">Mute</td>
+                                <td>BP</td>
+                                <td><span class="uuid-text">202f25ff-563b-44b4-a1ef-50db684ded66</span></td>
+                            </tr>
+                            <tr>
+                                <td>RP</td>
+                                <td><span class="uuid-text">必要なし</span></td>
+                            </tr>
+
+                            <tr>
+                                <td class="addon-name" rowspan="2">CommandShortCut</td>
+                                <td>BP</td>
+                                <td><span class="uuid-text">ff662cc2-68fc-4b43-8439-248759d6e2ad</span></td>
+                            </tr>
+                            <tr>
+                                <td>RP</td>
+                                <td><span class="uuid-text">344923f3-3bae-44ac-b518-3ebceca02521</span></td>
+                            </tr>
+
+                            <tr>
+                                <td class="addon-name" rowspan="2">CommunicationPlus</td>
+                                <td>BP</td>
+                                <td><span class="uuid-text">64ad9f8d-e9ea-4757-ac7c-924e261e15dd</span></td>
+                            </tr>
+                            <tr>
+                                <td>RP</td>
+                                <td><span class="uuid-text">ab4a6809-ea75-4075-ae10-ed95179816b1</span></td>
+                            </tr>
+
+                            <tr>
+                                <td class="addon-name" rowspan="2">ServerTransfer</td>
+                                <td>BP</td>
+                                <td><span class="uuid-text">c7e4d79f-412a-4813-9a4f-9fa986b9e0e5</span></td>
+                            </tr>
+                            <tr>
+                                <td>RP</td>
+                                <td><span class="uuid-text">必要なし</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2025 HARU Addons. All Rights Reserved.</p>
+        </footer>
+
+        <script>
+            // モバイルメニューの開閉処理
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mobileNav = document.querySelector('.mobile-nav');
+            menuToggle.addEventListener('click', () => {
+                const isExpanded = mobileNav.classList.toggle('active');
+                menuToggle.setAttribute('aria-expanded', isExpanded);
+                menuToggle.classList.toggle('open');
+            });
+
+            // スクロール時のヘッダー装飾
+            window.addEventListener('scroll', () => {
+                const nav = document.querySelector('nav');
+                if (window.scrollY > 30) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+        </script>
+    </body>
+</html>
