@@ -18,11 +18,11 @@
 
         <style>
             :root {
-                /* --- ✨ 明るい配色テーマ ✨ --- */
+                /* --- 明るい配色テーマ --- */
                 --bg-light: #f8f9fa; /* 全体の背景色 (明るいグレー) */
                 --bg-white: #ffffff; /* カードなどの背景色 (白) */
                 --text-dark: #343a40; /* 基本のテキスト色 (濃いグレー) */
-                --text-muted: #6c757d; /* やや薄いテキスト色 */
+                --text-muted: #3a3a3a; /* やや薄いテキスト色 */
                 --primary: #007bff; /* メインカラー (明るい青) */
                 --primary-light: #e6f2ff; /* メインカラーの薄い色 (ホバー背景など) */
                 --accent: #28a745; /* アクセントカラー (緑) */
@@ -48,7 +48,7 @@
                 overflow-x: hidden;
             }
 
-            /* --- ☁️ ナビゲーション ☁️ --- */
+            /* --- ナビゲーション --- */
             nav {
                 position: fixed;
                 top: 15px; /* 少し下に */
@@ -122,7 +122,7 @@
                 transform: translateY(-2px);
             }
 
-            /* --- 🍔 モバイルメニュー 🍔 --- */
+            /* --- モバイルメニュー --- */
             .menu-toggle {
                 display: none;
                 font-size: 1.8rem;
@@ -320,7 +320,7 @@
             }
 
             .addon-content ul li::before {
-                content: '🔹';
+                content: '▪️';
                 position: absolute;
                 left: 0;
                 color: var(--accent);
@@ -542,9 +542,12 @@
 
                 <h2>アップデート情報</h2>
                 <p>定期的にアップデートを行い、機能を追加・改善しています。</p>
-                <p class="latest-update">最新版：2025/11/15 Advance/ポストの強化/FilesSettingに対応/その他アップデート</p>
+                <p class="latest-update">最新版：2026/3/23 自動買取機の追加 / Advanceの改良 / GAMEブロックでのブラックジャックの追加</p>
                 <h3>過去の主な更新</h3>
                 <ul class="update-list">
+                    <li>2026/3/23 - 自動買取機の追加 / Advanceの改良 / GAMEブロックでのブラックジャックの追加</li>
+                    <li>2026/1/21 - UIの改善/ 自動販売機の改善/Advance設定の追加/テクスチャー改善/その他機能更新</li>
+                    <li>2025/12/25 - UIの改善 / グリッチの対策</li>
                     <li>2025/11/15 - Advance/ポストの強化/FilesSettingに対応/その他アップデート</li>
                     <li>2025/10/19 - 購入機能にて65以上の個数をセレクトした場合に発生する不具合を修正しました</li>
                     <li>2025/10/18 - HARUPhoneAPIの追加/その他大幅アップデート</li>
