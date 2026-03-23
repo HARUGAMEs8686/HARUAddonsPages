@@ -226,13 +226,13 @@
 
             /* --- ヒーローセクションのデザイン改善 --- */
             .hero {
-                min-height: 75vh; /* 高さを少し調整 */
+                min-height: 45vh; /* 75vhから45vhに短縮 */
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
                 text-align: center;
-                padding: 120px 2rem 80px; /* 下部の余白を確保 */
+                padding: 100px 2rem 40px; /* 下側の余白を80pxから40pxに半分に */
                 background: linear-gradient(135deg, #e7f3ff 0%, #f8f9fa 100%);
                 position: relative;
                 overflow: hidden;
@@ -736,7 +736,7 @@
                     display: none;
                 }
                 .hero {
-                    min-height: 60vh;
+                    min-height: 40vh;
                     padding-top: 100px;
                 }
                 .hero h1 {
@@ -813,9 +813,10 @@
                 }
                 .hero {
                     padding-top: 80px;
+                    min-height: 40vh;
                 }
                 .hero h1 {
-                    font-size: 2.2rem;
+                    font-size: 2rem; 
                 }
                 .hero p {
                     font-size: 0.9rem;
