@@ -135,6 +135,16 @@
                 transition: all 0.3s ease;
             }
 
+            .menu-toggle.open span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .menu-toggle.open span:nth-child(2) {
+                opacity: 0;
+            }
+            .menu-toggle.open span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
             .mobile-nav {
                 display: none;
                 position: fixed;
@@ -332,6 +342,7 @@
             .addon-name {
                 font-weight: 700;
                 color: var(--text-dark);
+                vertical-align: middle;
             }
 
             .uuid-text {
@@ -379,6 +390,50 @@
                 .uuid-table td {
                     padding: 0.8rem;
                     font-size: 0.9rem;
+                }
+            }
+
+            @media (max-width: 480px) {
+                body {
+                    line-height: 1.6;
+                }
+                .logo-container .logo {
+                    font-size: 1.3rem;
+                }
+                .logo-container img {
+                    width: 30px;
+                    height: 30px;
+                }
+                .mobile-nav {
+                    width: 200px;
+                    top: 70px;
+                    right: 15px;
+                }
+                .addon-header {
+                    padding: 5rem 0.5rem 1.5rem;
+                }
+                .addon-header h1 {
+                    font-size: 1.6rem;
+                }
+                .addon-header h1::after {
+                    width: 50px;
+                    height: 3px;
+                    bottom: -8px;
+                }
+                .addon-page {
+                    padding: 0 0.5rem 3rem;
+                }
+                .addon-content {
+                    padding: 1rem;
+                }
+                .addon-content h2 {
+                    font-size: 1.5rem;
+                }
+                .addon-content h3 {
+                    font-size: 1.2rem;
+                }
+                .addon-content p {
+                    font-size: 0.95rem;
                 }
             }
         </style>
