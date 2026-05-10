@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
     <head>
         <meta charset="UTF-8" />
@@ -425,72 +425,140 @@
                 letter-spacing: 0.5px;
             }
 
-            @media (max-width: 768px) {
-                .addon-header h1 {
-                    font-size: 1.8rem;
-                }
-                .addon-content {
-                    padding: 1.5rem;
-                }
-                .download-btn {
-                    font-size: 1rem;
-                }
-            }
-
- @media (max-width: 992px) {
-                nav {
-                    padding: 0.6rem 1rem;
-                    width: calc(100% - 30px);
-                }
-
-                /* PC用メニューを隠す */
+            @media (max-width: 992px) {
                 nav ul {
-                    display: none;
+                    gap: 0.5rem;
                 }
-
-                /* ハンバーガーボタンを表示 */
-                .menu-toggle {
-                    display: block;
+                nav ul li a {
+                    padding: 0.5rem 0.8rem;
                 }
-
                 .addon-header h1 {
                     font-size: 2rem;
                 }
             }
-
-            /* 768px以下（スマホ）の微調整 */
             @media (max-width: 768px) {
-                .addon-header {
-                    padding: 7rem 1rem 2rem;
+                nav {
+                    padding: 0.6rem 1rem;
+                    width: calc(100% - 30px);
                 }
-
+                .menu-toggle {
+                    display: block;
+                }
+                nav ul {
+                    display: none;
+                }
+                .addon-header {
+                    padding: 6rem 1rem 2rem;
+                }
+                .addon-header img {
+                    max-width: 600px;
+                }
                 .addon-header h1 {
                     font-size: 1.8rem;
                 }
-
+                .addon-page {
+                    padding: 0 1rem 4rem;
+                }
                 .addon-content {
                     padding: 1.5rem;
                 }
-
-                .download-btn {
+                .addon-content h2 {
+                    font-size: 1.8rem;
+                }
+                .addon-content h3 {
+                    font-size: 1.3rem;
+                }
+                .addon-content p {
                     font-size: 1rem;
                 }
-
-                /* モバイルナビの幅を調整 */
-                .mobile-nav {
-                    width: 200px;
-                    right: 15px;
+                .addon-content .buttons {
+                    flex-direction: row;
+                    gap: 0.8rem;
+                }
+                .addon-content .btn {
+                    padding: 0.7rem 1.5rem;
+                    font-size: 0.9rem;
+                }
+                .download-btn {
+                    padding: 0.8rem 1.5rem;
+                    font-size: 1rem;
+                }
+                .version-info {
+                    font-size: 0.9rem;
+                }
+                .addon-content ul li {
+                    font-size: 1rem;
                 }
             }
-
-            /* 480px以下（小さいスマホ） */
             @media (max-width: 480px) {
+                body {
+                    line-height: 1.6;
+                }
                 .logo-container .logo {
                     font-size: 1.3rem;
                 }
                 .logo-container img {
                     width: 30px;
                     height: 30px;
+                }
+                .mobile-nav {
+                    width: 200px;
+                    top: 70px;
+                    right: 15px;
+                }
+                .addon-header {
+                    padding: 5rem 0.5rem 1.5rem;
+                }
+                .addon-header img {
+                    max-width: 400px;
+                }
+                .addon-header h1 {
+                    font-size: 1.6rem;
+                }
+                .addon-header h1::after {
+                    width: 50px;
+                    height: 3px;
+                    bottom: -8px;
+                }
+                .addon-page {
+                    padding: 0 0.5rem 3rem;
+                }
+                .addon-content {
+                    padding: 1rem;
+                }
+                .addon-content h2 {
+                    font-size: 1.5rem;
+                }
+                .addon-content h3 {
+                    font-size: 1.2rem;
+                }
+                .addon-content p {
+                    font-size: 0.9rem;
+                }
+                .addon-content .buttons {
+                    flex-direction: column;
+                    gap: 0.5rem;
+                }
+                .addon-content .btn {
+                    padding: 0.6rem 1rem;
+                    font-size: 0.8rem;
+                }
+                .download-buttons {
+                    padding: 0.8rem;
+                }
+                .download-btn {
+                    padding: 0.7rem 1rem;
+                    font-size: 0.9rem;
+                }
+                .download-btn::before {
+                    font-size: 0.7rem;
+                    padding: 0.15rem 0.4rem;
+                }
+                .version-info {
+                    font-size: 0.8rem;
+                }
+                .addon-content ul li {
+                    font-size: 0.9rem;
                 }
             }
         </style>
@@ -641,4 +709,3 @@
         </script>
     </body>
 </html>
-
