@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>HARUAddons - BDS(外部サーバー)導入ガイド</title>
         <meta name="description" content="Minecraft BE(統合版)のBDS(外部サーバー)へHARU Addonsを導入・アップデートする方法と、UUIDリストのまとめ。" />
-
         <link rel="icon" type="image/png" href="../icon.png" sizes="32x32" />
         <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />
 
@@ -42,7 +41,6 @@
                 overflow-x: hidden;
             }
 
-            /* --- ナビゲーション --- */
             nav {
                 position: fixed;
                 top: 15px;
@@ -90,6 +88,7 @@
                 font-weight: 700;
                 font-family: var(--font-rounded);
                 color: var(--primary);
+                letter-spacing: 0.5px;
             }
 
             nav ul {
@@ -108,7 +107,8 @@
                 transition: all 0.3s ease;
             }
 
-            nav ul li a:hover {
+            nav ul li a:hover,
+            nav ul li a.active {
                 background: var(--primary-light);
                 color: var(--primary);
                 transform: translateY(-2px);
@@ -123,6 +123,10 @@
                 cursor: pointer;
                 padding: 5px;
                 border-radius: 50%;
+                transition: background-color 0.3s;
+            }
+            .menu-toggle:hover {
+                background-color: var(--primary-light);
             }
 
             .menu-toggle span {
@@ -134,7 +138,6 @@
                 border-radius: 3px;
                 transition: all 0.3s ease;
             }
-
             .menu-toggle.open span:nth-child(1) {
                 transform: translateY(8px) rotate(45deg);
             }
@@ -169,17 +172,26 @@
                 opacity: 1;
             }
 
+            .mobile-nav li {
+                margin-bottom: 0.5rem;
+            }
+
             .mobile-nav li a {
                 color: var(--text-dark);
                 text-decoration: none;
                 font-size: 1rem;
                 font-weight: 700;
                 padding: 0.8rem 1.2rem;
-                display: block;
                 border-radius: 10px;
+                display: block;
+                transition: all 0.3s ease;
             }
 
-            /* --- コンテンツヘッダー --- */
+            .mobile-nav li a:hover {
+                background: var(--primary-light);
+                color: var(--primary);
+            }
+
             .addon-header {
                 padding: 8rem 2rem 3rem;
                 background-color: var(--bg-light);
@@ -187,7 +199,7 @@
             }
 
             .addon-header h1 {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
                 font-weight: 700;
                 font-family: var(--font-rounded);
                 color: var(--primary);
@@ -208,7 +220,6 @@
                 border-radius: 2px;
             }
 
-            /* --- コンテンツ本体 --- */
             .addon-page {
                 padding: 0 2rem 5rem;
                 background-color: var(--bg-light);
@@ -217,50 +228,44 @@
             }
 
             .addon-content {
-                max-width: 900px;
+                max-width: 800px;
                 width: 100%;
                 background: var(--bg-white);
-                padding: 3rem;
+                padding: 2rem;
                 border-radius: 16px;
                 box-shadow: var(--shadow-soft);
             }
 
             .addon-content h2 {
-                font-size: 1.8rem;
+                font-size: 2rem;
                 font-weight: 700;
                 font-family: var(--font-rounded);
                 color: var(--text-dark);
-                margin: 2.5rem 0 1rem;
-                border-bottom: 2px solid var(--primary-light);
-                padding-bottom: 0.5rem;
-            }
-
-            .addon-content h2:first-child {
-                margin-top: 0;
+                margin: 2rem 0 1rem;
             }
 
             .addon-content h3 {
-                font-size: 1.4rem;
+                font-size: 1.5rem;
                 font-weight: 700;
                 color: var(--primary);
                 margin: 1.5rem 0 0.5rem;
             }
 
             .addon-content p {
-                font-size: 1.05rem;
+                font-size: 1.1rem;
                 color: var(--text-muted);
-                line-height: 1.7;
+                line-height: 1.6;
                 margin-bottom: 1rem;
             }
 
             .addon-content .note {
-                background-color: #fff3e0;
-                border-left: 5px solid #ff9800;
+                background-color: var(--primary-light);
+                border-left: 5px solid var(--primary);
                 padding: 1rem;
                 border-radius: 8px;
-                margin: 1.5rem 0;
-                font-size: 0.95rem;
-                color: #e65100;
+                margin: 1rem 0;
+                font-size: 1rem;
+                color: #004085;
             }
 
             .addon-content ul,
@@ -274,15 +279,16 @@
                 margin-bottom: 0.5rem;
             }
 
-            /* コードブロック */
+            /* コードブロックのデザインをWhitelistに合わせる */
             .code-block {
-                background: var(--code-bg);
-                color: var(--code-text);
-                padding: 1.2rem;
+                background: #e9ecef;
+                color: #495057;
+                padding: 1rem;
                 border-radius: 8px;
                 margin: 1rem 0 1.5rem;
                 font-family: 'Consolas', 'Monaco', monospace;
-                font-size: 0.95rem;
+                font-weight: bold;
+                border-left: 5px solid var(--primary);
                 overflow-x: auto;
                 line-height: 1.5;
             }
@@ -293,7 +299,6 @@
                 padding: 0.2em 0.4em;
                 border-radius: 4px;
                 font-size: 90%;
-                color: #d63384;
             }
 
             .code-block code {
@@ -302,7 +307,7 @@
                 padding: 0;
             }
 
-            /* --- UUIDテーブル --- */
+            /* --- UUIDテーブル用（はみ出し防止スクロール対応） --- */
             .uuid-table-wrapper {
                 overflow-x: auto;
                 margin: 2rem 0;
@@ -342,7 +347,6 @@
             .addon-name {
                 font-weight: 700;
                 color: var(--text-dark);
-                vertical-align: middle;
             }
 
             .uuid-text {
@@ -357,13 +361,30 @@
                 word-break: break-all;
             }
 
-            /* フッター */
             footer {
                 background-color: var(--text-dark);
                 color: var(--bg-light);
                 text-align: center;
                 padding: 2rem 1rem;
-                margin-top: 2rem;
+                margin-top: 4rem;
+            }
+
+            footer p {
+                font-size: 0.9rem;
+                opacity: 0.8;
+                letter-spacing: 0.5px;
+            }
+
+            @media (max-width: 992px) {
+                nav ul {
+                    gap: 0.5rem;
+                }
+                nav ul li a {
+                    padding: 0.5rem 0.8rem;
+                }
+                .addon-header h1 {
+                    font-size: 2rem;
+                }
             }
 
             @media (max-width: 768px) {
@@ -371,11 +392,11 @@
                     padding: 0.6rem 1rem;
                     width: calc(100% - 30px);
                 }
-                nav ul {
-                    display: none;
-                }
                 .menu-toggle {
                     display: block;
+                }
+                nav ul {
+                    display: none;
                 }
                 .addon-header {
                     padding: 6rem 1rem 2rem;
@@ -383,8 +404,23 @@
                 .addon-header h1 {
                     font-size: 1.8rem;
                 }
+                .addon-page {
+                    padding: 0 1rem 4rem;
+                }
                 .addon-content {
                     padding: 1.5rem;
+                }
+                .addon-content h2 {
+                    font-size: 1.8rem;
+                }
+                .addon-content h3 {
+                    font-size: 1.3rem;
+                }
+                .addon-content p {
+                    font-size: 1rem;
+                }
+                .addon-content ul li {
+                    font-size: 1rem;
                 }
                 .uuid-table th,
                 .uuid-table td {
@@ -433,13 +469,20 @@
                     font-size: 1.2rem;
                 }
                 .addon-content p {
-                    font-size: 0.95rem;
+                    font-size: 0.9rem;
+                }
+                .addon-content ul li {
+                    font-size: 0.9rem;
+                }
+                .uuid-table th,
+                .uuid-table td {
+                    padding: 0.6rem;
+                    font-size: 0.85rem;
                 }
             }
         </style>
     </head>
     <body>
-        <!-- ナビゲーション -->
         <nav>
             <a href="../index.html" class="logo-container">
                 <img src="../icon.png" alt="HARU Addons Icon" loading="lazy" />
@@ -452,7 +495,11 @@
                 <li><a href="../links.html">リンク</a></li>
                 <li><a href="../tweets.html">Tweet</a></li>
             </ul>
-            <button class="menu-toggle" aria-label="メニューを開閉する"><span></span><span></span><span></span></button>
+            <button class="menu-toggle" aria-label="メニューを開閉する" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </nav>
 
         <ul class="mobile-nav">
@@ -463,12 +510,10 @@
             <li><a href="../tweets.html">Tweet</a></li>
         </ul>
 
-        <!-- ヘッダー -->
         <section class="addon-header">
             <h1>BDS(外部サーバー) 導入・アップデートガイド</h1>
         </section>
 
-        <!-- メインコンテンツ -->
         <section class="addon-page">
             <div class="addon-content">
                 <h2>BDSへのアドオン新規導入手順</h2>
@@ -519,10 +564,6 @@
                 <h2>HARU Addons - UUID リスト</h2>
                 <p>JSONファイルに記述するためのUUIDリストです。アドオンごとに「BP用」と「RP用」のUUIDが存在します。<br />※実際のUUIDとバージョンは、必ずご自身がダウンロードしたファイル内の <code>manifest.json</code> の <code>header</code> 項目を最終確認してください。</p>
 
-                <!-- 
-                  ※ 下記のUUIDはプレースホルダー（仮の文字列）です。
-                  ※ 実際のUUIDに書き換えてご使用ください。 
-                -->
                 <div class="uuid-table-wrapper">
                     <table class="uuid-table">
                         <thead>
@@ -550,7 +591,7 @@
                             </tr>
                             <tr>
                                 <td>RP</td>
-                                <td><span class="uuid-text">67b5a345-2650-428e-bbae-37b2cf42785b</span></td>
+                                <td><span class="uuid-text">必要なし</span></td>
                             </tr>
 
                             <tr>
@@ -716,7 +757,7 @@
                             <tr>
                                 <td class="addon-name" rowspan="2">CommunicationPlus</td>
                                 <td>BP</td>
-                                <td><span class="uuid-text">0c48764e-ab1b-4967-804d-66a795f2a790</span></td>
+                                <td><span class="uuid-text">64ad9f8d-e9ea-4757-ac7c-924e261e15dd</span></td>
                             </tr>
                             <tr>
                                 <td>RP</td>
@@ -739,20 +780,19 @@
         </section>
 
         <footer>
-            <p>© 2025 HARU Addons. All Rights Reserved.</p>
+            <p>© 2026 HARU Addons. All Rights Reserved.</p>
         </footer>
 
         <script>
-            // モバイルメニューの開閉処理
             const menuToggle = document.querySelector('.menu-toggle');
             const mobileNav = document.querySelector('.mobile-nav');
+
             menuToggle.addEventListener('click', () => {
                 const isExpanded = mobileNav.classList.toggle('active');
                 menuToggle.setAttribute('aria-expanded', isExpanded);
                 menuToggle.classList.toggle('open');
             });
 
-            // スクロール時のヘッダー装飾
             window.addEventListener('scroll', () => {
                 const nav = document.querySelector('nav');
                 if (window.scrollY > 30) {
