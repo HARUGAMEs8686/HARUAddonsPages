@@ -314,6 +314,72 @@
                     font-size: 1rem;
                 }
             }
+
+            .menu-toggle span {
+                display: block;
+                width: 25px;
+                height: 3px;
+                background: var(--primary);
+                margin: 5px 0;
+                border-radius: 3px;
+                transition: all 0.3s ease;
+            }
+            .menu-toggle.open span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .menu-toggle.open span:nth-child(2) {
+                opacity: 0;
+            }
+            .menu-toggle.open span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .mobile-nav {
+                display: none;
+                position: fixed;
+                top: 80px;
+                right: 20px;
+                width: 220px;
+                background: var(--bg-white);
+                border-radius: 15px;
+                padding: 1rem;
+                z-index: 999;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                border: 1px solid var(--border-color);
+                transform: translateY(-10px);
+                opacity: 0;
+                transition: all 0.3s ease;
+                list-style: none;
+            }
+            .mobile-nav.active {
+                display: block;
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            @media (max-width: 480px) {
+                .logo-container .logo {
+                    font-size: 1.3rem;
+                }
+                .addon-header {
+                    padding: 5rem 0.5rem 1.5rem;
+                }
+                .addon-header img {
+                    max-width: 100%;
+                } /* 画像がはみ出すのを防ぐ */
+                .addon-header h1 {
+                    font-size: 1.6rem;
+                }
+                .addon-content {
+                    padding: 1rem;
+                }
+                .addon-content h2 {
+                    font-size: 1.5rem;
+                }
+                .addon-content .buttons {
+                    flex-direction: column;
+                }
+            }
         </style>
     </head>
     <body>
@@ -329,7 +395,20 @@
                 <li><a href="../links.html">リンク</a></li>
                 <li><a href="../tweets.html">Tweet</a></li>
             </ul>
+            <button class="menu-toggle" aria-label="メニューを開閉する" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </nav>
+
+        <ul class="mobile-nav">
+            <li><a href="../index.html">ホーム</a></li>
+            <li><a href="../Assistant/support.html">Assistant</a></li>
+            <li><a href="../developer_info.html">開発者情報</a></li>
+            <li><a href="../links.html">リンク</a></li>
+            <li><a href="../tweets.html">Tweet</a></li>
+        </ul>
 
         <section class="addon-header">
             <img src="../Rail.png" alt="Rail Image" />
@@ -402,5 +481,24 @@
         <footer>
             <p>© 2026 HARU Addons. All Rights Reserved.</p>
         </footer>
+        <script>
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mobileNav = document.querySelector('.mobile-nav');
+
+            menuToggle.addEventListener('click', () => {
+                const isExpanded = mobileNav.classList.toggle('active');
+                menuToggle.setAttribute('aria-expanded', isExpanded);
+                menuToggle.classList.toggle('open');
+            });
+
+            window.addEventListener('scroll', () => {
+                const nav = document.querySelector('nav');
+                if (window.scrollY > 30) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+        </script>
     </body>
 </html>
