@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>HARUAddons - Item Search</title>
+        <meta name="description" content="HARUAddonsのアイテムID・テクスチャ検索ページ" />
+        <link rel="icon" type="image/png" href="../icon.png" sizes="32x32" />
+        <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />
+
+        <style>
+            /* ＝＝＝ ベースのサイトデザイン ＝＝＝ */
+            :root {
+                --bg-light: #f8f9fa;
+                --bg-white: #ffffff;
+                --text-dark: #343a40;
+                --text-muted: #6c757d;
+                --primary: #007bff;
+                --primary-light: #e6f2ff;
+                --accent: #28a745;
+                --border-color: #dee2e6;
+                --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+                --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.12);
+                --font-sans-jp: 'Noto Sans JP', sans-serif;
+                --font-rounded: 'M PLUS Rounded 1c', sans-serif;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                background-color: var(--bg-light);
+                color: var(--text-dark);
+                font-family: var(--font-sans-jp);
+                line-height: 1.7;
+                overflow-x: hidden;
+            }
+
+            /* ナビゲーション */
+            nav {
+                position: fixed;
+                top: 15px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: calc(100% - 40px);
+                max-width: 1100px;
+                background: rgba(255, 255, 255, 0.85);
+                backdrop-filter: blur(10px);
+                border-radius: 30px;
+                padding: 0.8rem 1.8rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                z-index: 1000;
+                box-shadow: var(--shadow-soft);
+                border: 1px solid rgba(0, 0, 0, 0.05);
+                transition: all 0.3s ease;
+            }
+
+            nav.scrolled {
+                top: 10px;
+                background: rgba(255, 255, 255, 0.95);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .logo-container {
+                display: flex;
+                align-items: center;
+                gap: 0.8rem;
+                text-decoration: none;
+            }
+
+            .logo-container img {
+                width: 35px;
+                height: 35px;
+                transition: transform 0.3s ease;
+            }
+            .logo-container:hover img {
+                transform: rotate(15deg);
+            }
+
+            .logo-container .logo {
+                font-size: 1.6rem;
+                font-weight: 700;
+                font-family: var(--font-rounded);
+                color: var(--primary);
+                letter-spacing: 0.5px;
+            }
+
+            nav ul {
+                display: flex;
+                list-style: none;
+                gap: 1rem;
+            }
+
+            nav ul li a {
+                color: var(--text-muted);
+                text-decoration: none;
+                font-size: 1rem;
+                font-weight: 700;
+                padding: 0.6rem 1.2rem;
+                border-radius: 20px;
+                transition: all 0.3s ease;
+            }
+
+            nav ul li a:hover {
+                background: var(--primary-light);
+                color: var(--primary);
+                transform: translateY(-2px);
+            }
+
+            .menu-toggle {
+                display: none;
+                font-size: 1.8rem;
+                background: none;
+                border: none;
+                color: var(--primary);
+                cursor: pointer;
+                padding: 5px;
+                border-radius: 50%;
+                transition: background-color 0.3s;
+            }
+            .menu-toggle:hover {
+                background-color: var(--primary-light);
+            }
+
+            .menu-toggle span {
+                display: block;
+                width: 25px;
+                height: 3px;
+                background: var(--primary);
+                margin: 5px 0;
+                border-radius: 3px;
+                transition: all 0.3s ease;
+            }
+            .menu-toggle.open span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .menu-toggle.open span:nth-child(2) {
+                opacity: 0;
+            }
+            .menu-toggle.open span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .mobile-nav {
+                display: none;
+                position: fixed;
+                top: 80px;
+                right: 20px;
+                width: 220px;
+                background: var(--bg-white);
+                border-radius: 15px;
+                padding: 1rem;
+                z-index: 999;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                border: 1px solid var(--border-color);
+                transform: translateY(-10px);
+                opacity: 0;
+                transition: all 0.3s ease;
+                list-style: none;
+            }
+
+            .mobile-nav.active {
+                display: block;
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .mobile-nav li {
+                margin-bottom: 0.5rem;
+            }
+
+            .mobile-nav li a {
+                color: var(--text-dark);
+                text-decoration: none;
+                font-size: 1rem;
+                font-weight: 700;
+                padding: 0.8rem 1.2rem;
+                border-radius: 10px;
+                display: block;
+                transition: all 0.3s ease;
+            }
+
+            .mobile-nav li a:hover {
+                background: var(--primary-light);
+                color: var(--primary);
+            }
+
+            .addon-page {
+                padding: 0 2rem 5rem;
+                background-color: var(--bg-light);
+                display: flex;
+                justify-content: center;
+            }
+
+            .addon-content {
+                max-width: 900px;
+                width: 100%;
+                background: var(--bg-white);
+                padding: 2.5rem;
+                border-radius: 16px;
+                box-shadow: var(--shadow-soft);
+            }
+
+            .addon-content h2 {
+                font-size: 1.8rem;
+                font-weight: 700;
+                font-family: var(--font-rounded);
+                color: var(--text-dark);
+                margin: 0 0 1rem;
+            }
+
+            .addon-content p {
+                font-size: 1rem;
+                color: var(--text-dark);
+                line-height: 1.6;
+                margin-bottom: 1.5rem;
+            }
+
+            .addon-content .buttons {
+                display: flex;
+                justify-content: center; /* 中央揃えに変更 */
+                gap: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .addon-content .btn {
+                padding: 0.8rem 2rem;
+                background: var(--accent);
+                color: var(--bg-white);
+                text-decoration: none;
+                border-radius: 50px;
+                font-size: 1rem;
+                font-weight: 700;
+                font-family: var(--font-sans-jp);
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+            }
+
+            .addon-content .btn:hover {
+                background: #218838;
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+            }
+
+            footer {
+                background-color: var(--text-dark);
+                color: var(--bg-light);
+                text-align: center;
+                padding: 2rem 1rem;
+                margin-top: 4rem;
+            }
+
+            footer p {
+                font-size: 0.9rem;
+                opacity: 0.8;
+                letter-spacing: 0.5px;
+            }
+
+            /* ＝＝＝ 検索機能用追加CSS ＝＝＝ */
+            .search-header {
+                padding: 7rem 2rem 2rem;
+                text-align: center;
+            }
+
+            .search-header h1 {
+                font-size: 2.5rem;
+                font-weight: 700;
+                font-family: var(--font-rounded);
+                color: var(--primary);
+                position: relative;
+                display: inline-block;
+                margin-bottom: 1rem;
+            }
+
+            .search-header h1::after {
+                content: '';
+                position: absolute;
+                bottom: -10px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 60px;
+                height: 4px;
+                background-color: var(--primary);
+                border-radius: 2px;
+            }
+
+            /* 丸型検索ボックス */
+            .search-container {
+                margin: 1.5rem auto 2.5rem;
+                position: relative;
+                max-width: 100%;
+            }
+            .search-input {
+                width: 100%;
+                padding: 1.1rem 1.5rem 1.1rem 3.8rem;
+                font-size: 1.1rem;
+                border: 1px solid var(--border-color);
+                border-radius: 50px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+                outline: none;
+                transition: all 0.3s ease;
+                font-family: var(--font-sans-jp);
+                color: var(--text-dark);
+                background: var(--bg-white);
+            }
+            .search-input:hover {
+                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            }
+            .search-input:focus {
+                box-shadow: 0 4px 20px rgba(0, 123, 255, 0.25);
+                border-color: var(--primary);
+            }
+            .search-input::placeholder {
+                color: #adb5bd;
+            }
+            .search-icon {
+                position: absolute;
+                left: 1.4rem;
+                top: 50%;
+                transform: translateY(-50%);
+                color: #adb5bd;
+                width: 22px;
+                height: 22px;
+                transition: color 0.3s ease;
+                pointer-events: none;
+            }
+            .search-input:focus + .search-icon {
+                color: var(--primary);
+            }
+
+            /* 検索結果のUI設定 */
+            .result-count {
+                text-align: right;
+                font-size: 0.95rem;
+                color: var(--text-muted);
+                margin-bottom: 0.5rem;
+                font-weight: bold;
+            }
+            .results-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+                gap: 1.2rem;
+            }
+
+            /* カードデザインの変更 (アイコンなしレイアウト) */
+            .result-card {
+                background: var(--bg-light);
+                border: 1px solid var(--border-color);
+                border-radius: 12px;
+                padding: 1.2rem;
+                display: flex;
+                flex-direction: column;
+                transition:
+                    transform 0.3s ease,
+                    box-shadow 0.3s ease;
+            }
+            .result-card:hover {
+                transform: translateY(-3px);
+                box-shadow: var(--shadow-hover);
+                border-color: var(--primary-light);
+                background: var(--bg-white);
+            }
+            .result-card h4 {
+                font-size: 1.15rem;
+                color: var(--primary);
+                margin-bottom: 0.8rem;
+                padding-bottom: 0.5rem;
+                border-bottom: 1px dashed var(--border-color);
+                font-family: var(--font-rounded);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .info-row {
+                display: flex;
+                align-items: center;
+                margin-bottom: 0.5rem;
+            }
+            .info-row:last-child {
+                margin-bottom: 0;
+            }
+            .info-label {
+                font-size: 0.75rem;
+                color: var(--text-muted);
+                font-weight: bold;
+                width: 40px;
+                flex-shrink: 0;
+            }
+
+            /* コピーできるテキストの装飾 */
+            .copyable {
+                cursor: pointer;
+                transition: all 0.2s;
+                font-size: 0.85rem;
+                background: var(--bg-white);
+                border: 1px solid var(--border-color);
+                padding: 3px 8px;
+                border-radius: 6px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                flex: 1;
+                font-family: 'Consolas', 'Monaco', monospace;
+                color: var(--text-dark);
+                position: relative;
+            }
+            .copyable:hover {
+                background-color: var(--primary-light);
+                color: var(--primary);
+                border-color: var(--primary);
+            }
+            .no-results {
+                grid-column: 1 / -1;
+                text-align: center;
+                color: var(--text-muted);
+                padding: 3rem;
+                background: var(--bg-light);
+                border-radius: 12px;
+                font-weight: bold;
+                border: 2px dashed var(--border-color);
+            }
+
+            /* コピー成功時のトースト通知 */
+            .toast {
+                position: fixed;
+                bottom: 30px;
+                left: 50%;
+                transform: translateX(-50%) translateY(20px);
+                background: var(--text-dark);
+                color: var(--bg-white);
+                padding: 0.8rem 1.8rem;
+                border-radius: 50px;
+                font-size: 0.95rem;
+                font-weight: bold;
+                opacity: 0;
+                transition:
+                    opacity 0.3s ease,
+                    transform 0.3s ease;
+                pointer-events: none;
+                z-index: 10000;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            }
+            .toast.show {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+
+            /* レスポンシブ対応 */
+            @media (max-width: 992px) {
+                nav ul {
+                    gap: 0.5rem;
+                }
+                nav ul li a {
+                    padding: 0.5rem 0.8rem;
+                }
+            }
+            @media (max-width: 768px) {
+                nav {
+                    padding: 0.6rem 1rem;
+                    width: calc(100% - 30px);
+                }
+                .menu-toggle {
+                    display: block;
+                }
+                nav ul {
+                    display: none;
+                }
+
+                .results-grid {
+                    grid-template-columns: 1fr;
+                }
+                .addon-content {
+                    padding: 1.5rem;
+                }
+                .search-input {
+                    font-size: 1rem;
+                    padding-left: 3rem;
+                }
+                .search-icon {
+                    left: 1rem;
+                    width: 18px;
+                    height: 18px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <a href="../index.html" class="logo-container">
+                <img src="../icon.png" alt="HARU Addons Icon" loading="lazy" />
+                <div class="logo">HARUAddons</div>
+            </a>
+            <ul>
+                <li><a href="../index.html">ホーム</a></li>
+                <li><a href="../Assistant/support.html">Assistant</a></li>
+                <li><a href="../developer_info.html">開発者情報</a></li>
+                <li><a href="../links.html">リンク</a></li>
+                <li><a href="../tweets.html">Tweet</a></li>
+            </ul>
+            <button class="menu-toggle" aria-label="メニューを開閉する" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+
+        <ul class="mobile-nav">
+            <li><a href="../index.html">ホーム</a></li>
+            <li><a href="../Assistant/support.html">Assistant</a></li>
+            <li><a href="../developer_info.html">開発者情報</a></li>
+            <li><a href="../links.html">リンク</a></li>
+            <li><a href="../tweets.html">Tweet</a></li>
+        </ul>
+
+        <section class="search-header">
+            <h1>ID&アイコンパス検索</h1>
+        </section>
+
+        <section class="addon-page">
+            <div class="addon-content">
+                <div class="buttons">
+                    <a href="../index.html" class="btn">戻る</a>
+                </div>
+
+                <h2>アイテム検索</h2>
+                <p>
+                    アイテムID、日本語名、テクスチャパスから瞬時に検索できます。<br />
+                    複数の単語を<strong>スペースで区切る</strong>ことで、絞り込み検索 (AND検索) が可能です。<br />
+                    <span style="font-size: 0.85rem; color: var(--text-muted)">※ 検索結果の「ID」や「パス」をクリックすると、クリップボードに自動コピーされます。</span>
+                </p>
+
+                <!-- 検索ボックス -->
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="例: phone, コイン, additem..." autocomplete="off" />
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </div>
+
+                <!-- 検索結果表示エリア -->
+                <div id="resultCount" class="result-count"></div>
+                <div id="resultsContainer" class="results-grid">
+                    <!-- ここにJSで結果が挿入されます -->
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 HARU Addons. All Rights Reserved.</p>
+        </footer>
+
+        <!-- JSファイル読み込み (ファイルパスは環境に合わせて変更してください) -->
+        <script type="module">
+            import { IDConfig } from '../data/IDConfig.js';
+
+            const searchInput = document.getElementById('searchInput');
+            const resultsContainer = document.getElementById('resultsContainer');
+            const resultCount = document.getElementById('resultCount');
+
+            // 検索結果の描画処理
+            function renderResults(results) {
+                resultsContainer.innerHTML = '';
+                resultCount.textContent = `該当件数: ${results.length}件`;
+
+                if (results.length === 0) {
+                    resultsContainer.innerHTML = `
+                        <div class="no-results">
+                            該当するアイテムが見つかりませんでした。<br>
+                            別のキーワードをお試しください。
+                        </div>`;
+                    return;
+                }
+
+                results.forEach(item => {
+                    const id = item[0];
+                    const name = item[1];
+                    const texture = item[2];
+
+                    const card = document.createElement('div');
+                    card.className = 'result-card';
+                    card.innerHTML = `
+                        <h4 title="${name}">${name}</h4>
+                        <div class="info-row">
+                            <span class="info-label">ID:</span>
+                            <code class="copyable" data-copy="${id}" title="クリックでコピー">${id}</code>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">パス:</span>
+                            <code class="copyable" data-copy="${texture}" title="クリックでコピー">${texture}</code>
+                        </div>
+                    `;
+                    resultsContainer.appendChild(card);
+                });
+            }
+
+            // 検索ボックスの入力イベント (リアルタイム検索)
+            searchInput.addEventListener('input', e => {
+                const query = e.target.value.toLowerCase().trim();
+
+                // 検索が空なら全件表示
+                if (query === '') {
+                    renderResults(IDConfig);
+                    return;
+                }
+
+                // スペースで区切って複数キーワード(AND検索)に対応
+                const keywords = query.split(/\s+/);
+
+                const filtered = IDConfig.filter(item => {
+                    return keywords.every(kw => {
+                        return (item[0] && item[0].toLowerCase().includes(kw)) || (item[1] && item[1].toLowerCase().includes(kw)) || (item[2] && item[2].toLowerCase().includes(kw));
+                    });
+                });
+
+                renderResults(filtered);
+            });
+
+            // コピー機能 (イベント委譲)
+            document.addEventListener('click', e => {
+                if (e.target.classList.contains('copyable')) {
+                    const text = e.target.getAttribute('data-copy');
+
+                    if (navigator.clipboard) {
+                        navigator.clipboard
+                            .writeText(text)
+                            .then(() => {
+                                showToast('クリップボードにコピーしました');
+                            })
+                            .catch(err => {
+                                showToast('コピーに失敗しました');
+                            });
+                    } else {
+                        // 古いブラウザ用フォールバック
+                        const textarea = document.createElement('textarea');
+                        textarea.value = text;
+                        document.body.appendChild(textarea);
+                        textarea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(textarea);
+                        showToast('クリップボードにコピーしました');
+                    }
+                }
+            });
+
+            // トースト通知 (下からふわっと出てくる通知)
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            document.body.appendChild(toast);
+
+            let toastTimeout;
+            function showToast(msg) {
+                toast.textContent = msg;
+                toast.classList.add('show');
+                clearTimeout(toastTimeout);
+                toastTimeout = setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2500);
+            }
+
+            // 初回アクセス時は全件表示
+            renderResults(IDConfig);
+        </script>
+
+        <!-- モバイル版用ナビゲーション制御 -->
+        <script>
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mobileNav = document.querySelector('.mobile-nav');
+            menuToggle.addEventListener('click', () => {
+                const isExpanded = mobileNav.classList.toggle('active');
+                menuToggle.setAttribute('aria-expanded', isExpanded);
+                menuToggle.classList.toggle('open');
+            });
+
+            window.addEventListener('scroll', () => {
+                const nav = document.querySelector('nav');
+                if (window.scrollY > 30) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+        </script>
+    </body>
+</html>
