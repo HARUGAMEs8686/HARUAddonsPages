@@ -468,6 +468,7 @@
                 padding: 1.8rem;
                 display: flex;
                 flex-direction: column;
+                height: 100%;
             }
             .news-item:hover {
                 transform: translateY(-5px);
@@ -514,6 +515,13 @@
                 font-size: 1rem;
                 color: var(--text-dark);
                 line-height: 1.6;
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
+            }
+
+            .news-item .news-content p:last-child {
+                margin-top: auto;
             }
             .news-item .news-content ul {
                 list-style-type: '・';
@@ -524,7 +532,6 @@
                 margin-top: 1rem;
             }
 
-            /* --- 🌐 Community Section (Discord) スタイル (変更なし) 🌐 --- */
             .community-section {
                 padding: 5rem 2rem;
                 background-color: var(--bg-white);
@@ -1067,7 +1074,6 @@
                     </div>
                 </a>
                 <a href="./rail/Rail.html" class="addon-item" data-date="2026-04-11">
-                    <span class="badge-new">NEW</span>
                     <img src="./Rail.png" alt="Rail アドオン" loading="lazy" />
                     <div class="addon-info">
                         <div class="addon-tags">
@@ -1088,7 +1094,6 @@
                     </div>
                 </a>
                 <a href="./quickdimension/QuickDimension.html" class="addon-item" data-date="2026-05-06">
-                    <span class="badge-new">NEW</span>
                     <img src="./QuickDimension.png" alt="QuickDimension アドオン" loading="lazy" />
                     <div class="addon-info">
                         <div class="addon-tags">
@@ -1111,16 +1116,6 @@
                         <p></p>
                     </div>
                 </a>
-                <a href="./camera/camera.html" class="addon-item" data-date="2026-01-03">
-                    <img src="./Camera.png" alt="Camera アドオン" loading="lazy" />
-                    <div class="addon-info">
-                        <div class="addon-tags">
-                            <span class="addon-category utility">便利機能</span>
-                        </div>
-                        <h3 class="title">Camera</h3>
-                        <p class="addon-description">視点を記録&共有</p>
-                    </div>
-                </a>
                 <a href="./teams/teams.html" class="addon-item" data-date="2026-02-19">
                     <img src="./Teams.png" alt="Teams アドオン" loading="lazy" />
                     <div class="addon-info">
@@ -1129,6 +1124,19 @@
                         </div>
                         <h3 class="title">Teams</h3>
                         <p class="addon-description">チーム分け / フレンドリーファイヤ管理</p>
+                        <p></p>
+                    </div>
+                </a>
+                <a href="./fillpro/fillpro.html" class="addon-item" data-date="2026-07-29">
+                    <img src="./FillPro.png" alt="FillPro アドオン" loading="lazy" />
+                    <span class="badge-new">NEW</span>
+                    <div class="addon-info">
+                        <div class="addon-tags">
+                            <span class="addon-category utility">便利機能</span>
+                            <span class="addon-category economy">コマンド</span>
+                        </div>
+                        <h3 class="title">FillPro</h3>
+                        <p class="addon-description">大規模な整地や建築を高速化</p>
                         <p></p>
                     </div>
                 </a>
@@ -1143,7 +1151,16 @@
                         <p></p>
                     </div>
                 </a>
-
+                <a href="./camera/camera.html" class="addon-item" data-date="2026-01-03">
+                    <img src="./Camera.png" alt="Camera アドオン" loading="lazy" />
+                    <div class="addon-info">
+                        <div class="addon-tags">
+                            <span class="addon-category utility">便利機能</span>
+                        </div>
+                        <h3 class="title">Camera</h3>
+                        <p class="addon-description">視点を記録&共有</p>
+                    </div>
+                </a>
                 <a href="./worldborder/worldborder.html" class="addon-item" data-date="2025-12-16">
                     <img src="./WorldBorder.png" alt="WorldBorder アドオン" loading="lazy" />
                     <div class="addon-info">
@@ -1165,7 +1182,6 @@
                     </div>
                 </a>
                 <a href="./monitor/monitor.html" class="addon-item" data-date="2026-04-07">
-                    <span class="badge-new">NEW</span>
                     <img src="./Monitor.png" alt="Monitor アドオン" loading="lazy" />
                     <div class="addon-info">
                         <div class="addon-tags">
@@ -1275,7 +1291,7 @@
             <h2>ブログ・ツール</h2>
             <div class="news-grid">
                 <!-- ブログ記事カード -->
-                <a href="./Blog/外部サーバーへのアドオン導入ガイド.html" style="text-decoration: none; color: inherit; display: block">
+                <a href="./Blog/外部サーバーへのアドオン導入ガイド.html" style="text-decoration: none; color: inherit; display: block; height: 100%">
                     <div class="news-item">
                         <div class="news-header">
                             <div class="news-title" style="color: var(--primary)">BDS(外部サーバー) 導入・アップデートガイド</div>
@@ -1284,11 +1300,11 @@
                         <div class="news-date">2026年03月23日</div>
                         <div class="news-content">
                             <p>Bedrock Dedicated Server(BDS)などの外部サーバーへアドオンを導入する方法と、設定に必要なUUIDリストをまとめています。</p>
-                            <p style="color: var(--primary); font-weight: bold; margin-top: 1rem">➔ 詳しく見る</p>
+                            <p style="color: var(--primary); font-weight: bold; margin-top: auto; padding-top: 1rem">➔ 詳しく見る</p>
                         </div>
                     </div>
                 </a>
-                <a href="./Touls/search.html" style="text-decoration: none; color: inherit; display: block">
+                <a href="./Touls/search.html" style="text-decoration: none; color: inherit; display: block; height: 100%">
                     <div class="news-item">
                         <div class="news-header">
                             <div class="news-title" style="color: var(--primary)">アイコンパス検索</div>
@@ -1297,7 +1313,7 @@
                         <div class="news-date">2026年07月19日</div>
                         <div class="news-content">
                             <p>各アドオン設定に必要なアイコンパスを検索できます</p>
-                            <p style="color: var(--primary); font-weight: bold; margin-top: 1rem">➔ 詳しく見る</p>
+                            <p style="color: var(--primary); font-weight: bold; margin-top: auto; padding-top: 1rem">➔ 詳しく見る</p>
                         </div>
                     </div>
                 </a>
