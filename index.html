@@ -14,6 +14,9 @@
         <link rel="canonical" href="https://haruaddons.f5.si/" />
         <meta name="twitter:card" content="summary_large_image" />
         <link rel="icon" type="image/png" href="https://haruaddons.f5.si/icon.png" sizes="32x32" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />
         <script type="application/ld+json">
             {
@@ -58,8 +61,10 @@
                 --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.12);
                 --font-sans-jp: 'Noto Sans JP', sans-serif;
                 --font-rounded: 'M PLUS Rounded 1c', sans-serif;
+                --font-heading: 'Poppins', sans-serif;
+                --rounded-full: 9999px;
 
-                /* --- ✨ 新しい配色テーマ（タグ・コミュニティ用）✨ --- */
+                /* --- 新しい配色テーマ（タグ・コミュニティ用）--- */
                 --discord-color: #5865f2;
                 --discord-hover-color: #4752c4;
                 --tag-economy-bg: var(--primary-light);
@@ -89,48 +94,41 @@
             }
             nav {
                 position: fixed;
-                top: 15px;
+                top: 1rem;
                 left: 50%;
                 transform: translateX(-50%);
-                width: calc(100% - 40px);
+                width: calc(100% - 2rem);
                 max-width: 1100px;
-                background: rgba(255, 255, 255, 0.85);
+                background: rgba(255, 255, 255, 0.7);
                 backdrop-filter: blur(10px);
-                border-radius: 30px;
-                padding: 0.8rem 1.8rem;
+                border-radius: var(--rounded-full);
+                padding: 0.75rem 1.5rem;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 z-index: 1000;
                 box-shadow: var(--shadow-soft);
-                border: 1px solid rgba(0, 0, 0, 0.05);
-                transition: all 0.3s ease;
-            }
-            nav.scrolled {
-                top: 10px;
-                background: rgba(255, 255, 255, 0.95);
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                border: 1px solid var(--border-color);
             }
             .logo-container {
                 display: flex;
                 align-items: center;
-                gap: 0.8rem;
+                gap: 0.75rem;
                 text-decoration: none;
             }
             .logo-container img {
-                width: 35px;
-                height: 35px;
-                transition: transform 0.3s ease;
+                width: 32px;
+                height: 32px;
+                transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             }
             .logo-container:hover img {
-                transform: rotate(15deg);
+                transform: rotate(20deg) scale(1.1);
             }
             .logo-container .logo {
-                font-size: 1.6rem;
+                font-size: 1.5rem;
                 font-weight: 700;
-                font-family: var(--font-rounded);
-                color: var(--primary);
-                letter-spacing: 0.5px;
+                font-family: var(--font-heading);
+                color: var(--text-dark);
             }
             nav ul {
                 display: flex;
@@ -138,7 +136,7 @@
                 gap: 1rem;
             }
             nav ul li a {
-                color: var(--text-muted);
+                color: var(--text-dark);
                 text-decoration: none;
                 font-size: 1rem;
                 font-weight: 700;
@@ -224,61 +222,211 @@
                 color: var(--primary);
             }
 
-            /* --- ヒーローセクションのデザイン改善 --- */
             .hero {
-                min-height: 45vh; /* 75vhから45vhに短縮 */
+                min-height: 45vh;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
                 text-align: center;
-                padding: 100px 2rem 40px; /* 下側の余白を80pxから40pxに半分に */
-                background: linear-gradient(135deg, #e7f3ff 0%, #f8f9fa 100%);
+                padding: 100px 2rem 40px;
                 position: relative;
                 overflow: hidden;
+                background-color: #111; /* 画像読み込み前の黒背景 */
             }
-            .hero::before {
+
+            .hero-slideshow {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 0;
+            }
+            .hero-slideshow::after {
+                /* 白文字を見やすくするための少し暗いフィルター */
                 content: '';
                 position: absolute;
-                bottom: -50px;
-                left: -50px;
-                width: 200px;
-                height: 200px;
-                background: var(--primary-light);
-                border-radius: 50%;
-                opacity: 0.5;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.45);
+                z-index: 1;
             }
-            .hero::after {
-                content: '';
+            .hero-slideshow .slide {
                 position: absolute;
-                top: 100px;
-                right: -80px;
-                width: 250px;
-                height: 250px;
-                background: var(--accent-light);
-                border-radius: 50%;
-                opacity: 0.6;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-size: cover;
+                background-position: center;
+                opacity: 0;
+                animation: fadeAnim 25s infinite; /* 5枚を25秒かけてループ */
+                z-index: 0;
             }
+            .hero-slideshow .slide:nth-child(1) {
+                animation-delay: 0s;
+            }
+            .hero-slideshow .slide:nth-child(2) {
+                animation-delay: 5s;
+            }
+            .hero-slideshow .slide:nth-child(3) {
+                animation-delay: 10s;
+            }
+            .hero-slideshow .slide:nth-child(4) {
+                animation-delay: 15s;
+            }
+            .hero-slideshow .slide:nth-child(5) {
+                animation-delay: 20s;
+            }
+
+            @keyframes fadeAnim {
+                0% {
+                    opacity: 0;
+                }
+                8% {
+                    opacity: 1;
+                }
+                20% {
+                    opacity: 1;
+                }
+                28% {
+                    opacity: 0;
+                }
+                100% {
+                    opacity: 0;
+                }
+            }
+
             .hero-content {
                 max-width: 700px;
                 position: relative;
-                z-index: 1;
+                z-index: 2; /* 画像の上に表示 */
+            }
+            .hero-title {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 15px; /* アイコンと文字の隙間 */
+                margin-bottom: 0.8rem;
+            }
+            .hero-icon {
+                width: 52px;
+                height: 52px;
+                object-fit: contain;
             }
             .hero h1 {
                 font-size: 3.8rem;
                 font-weight: 700;
                 font-family: var(--font-rounded);
-                color: var(--primary);
-                margin-bottom: 1rem;
-                line-height: 1.2;
+                color: #ffffff;
+                margin-bottom: 0;
+                text-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
             }
             .hero p {
                 font-size: 1.3rem;
-                color: var(--text-muted);
-                margin-bottom: 0; /* ボタンを消したためマージンを削除 */
+                color: #f8f9fa;
+                margin-bottom: 0;
+                text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
             }
 
-            /* --- スクロールダウン矢印 (新規追加) --- */
+            .hero-actions {
+                margin-top: 2rem;
+                display: flex;
+                justify-content: center;
+                gap: 1rem;
+                flex-wrap: wrap; /* スマホなどで自動折り返し */
+            }
+            .hero-btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.6rem;
+                padding: 0.8rem 2.2rem;
+                border-radius: 50px;
+                font-weight: 700;
+                text-decoration: none;
+                transition: all 0.3s ease;
+                font-size: 1.05rem;
+            }
+            /* Discordボタン */
+            .hero-btn.discord-btn {
+                background-color: var(--discord-color);
+                color: #ffffff;
+                border: 2px solid var(--discord-color);
+                box-shadow: 0 4px 12px rgba(88, 101, 242, 0.3);
+            }
+            .hero-btn.discord-btn:hover {
+                background-color: var(--discord-hover-color);
+                border-color: var(--discord-hover-color);
+                transform: translateY(-2px);
+                box-shadow: 0 6px 16px rgba(88, 101, 242, 0.5);
+            }
+            /* FANBOXボタン */
+            .hero-btn.fanbox-btn {
+                background-color: #fff0f5;
+                color: #ff4757;
+                border: 2px solid #ff4757;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            }
+            .hero-btn.fanbox-btn:hover {
+                background-color: #ff4757;
+                color: #ffffff;
+                transform: translateY(-2px);
+                box-shadow: 0 6px 16px rgba(255, 71, 87, 0.4);
+            }
+
+            @media (max-width: 768px) {
+                .hero h1 {
+                    font-size: 3rem;
+                }
+                .hero p {
+                    font-size: 1.1rem;
+                }
+                .hero-icon {
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .hero h1 {
+                    font-size: 2.2rem;
+                }
+                .hero p {
+                    font-size: 0.95rem;
+                }
+                .hero-icon {
+                    width: 32px;
+                    height: 32px;
+                }
+
+                .hero-actions {
+                    margin-top: 1.5rem;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 0.8rem;
+                }
+
+                .hero-btn.discord-btn {
+                    display: none !important;
+                }
+
+                .hero-btn {
+                    width: 85%;
+                    max-width: 280px;
+                    padding: 0.6rem 1.5rem;
+                    font-size: 0.9rem;
+                    justify-content: center;
+                }
+                .hero-btn svg {
+                    width: 16px;
+                    height: 16px;
+                }
+            }
+
+            /* --- スクロールダウン矢印 --- */
             .scroll-down {
                 position: absolute;
                 bottom: 30px;
@@ -534,137 +682,103 @@
 
             .community-section {
                 padding: 5rem 2rem;
-                background-color: var(--bg-white);
-                position: relative;
-                overflow: hidden;
+                background-color: var(--bg-light);
             }
             .community-container {
-                max-width: 1000px;
+                max-width: 900px;
                 margin: 0 auto;
-                background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent-light) 100%);
-                border-radius: 24px;
-                padding: 4rem;
+                background: var(--bg-white);
+                border: 1px solid var(--border-color);
+                border-radius: 16px;
+                padding: 3.5rem;
                 display: flex;
                 align-items: center;
-                gap: 3rem;
-                position: relative;
-                z-index: 1;
+                gap: 4rem;
+                box-shadow: var(--shadow-soft);
             }
-            .community-text {
+            .community-info {
                 flex: 1;
                 text-align: left;
             }
-            .community-text h2 {
-                font-size: 2.8rem;
+            .discord-icon-wrapper {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 56px;
+                height: 56px;
+                background: var(--primary-light);
+                color: var(--discord-color);
+                border-radius: 14px;
+                margin-bottom: 1.2rem;
+            }
+            .discord-icon-wrapper svg {
+                width: 32px;
+                height: 32px;
+            }
+            .community-info h2 {
+                font-size: 2.2rem;
                 font-weight: 700;
                 font-family: var(--font-rounded);
-                color: var(--primary);
-                margin-bottom: 1rem;
+                color: var(--text-dark);
+                margin-bottom: 0.8rem;
                 line-height: 1.2;
             }
-            .community-text p {
-                font-size: 1.1rem;
+            .community-info p {
+                font-size: 1.05rem;
                 color: var(--text-muted);
-                margin-bottom: 1.5rem;
-                max-width: 500px;
+                margin-bottom: 2rem;
+                line-height: 1.6;
             }
-            .community-text ul {
-                list-style: none;
-                margin-bottom: 2.5rem;
+            .community-features {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
             }
-            .community-text ul li {
-                position: relative;
-                padding-left: 1.8rem;
-                margin-bottom: 0.7rem;
-                font-size: 1rem;
-                font-weight: 500;
+            .feature-item {
+                display: flex;
+                align-items: flex-start;
+                gap: 1rem;
             }
-            .community-text ul li::before {
-                content: '✔';
-                position: absolute;
-                left: 0;
-                top: 0;
-                color: var(--accent);
-                font-weight: 900;
-                font-size: 1.1rem;
+            .feature-icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 44px;
+                height: 44px;
+                background: var(--bg-light);
+                color: var(--text-dark);
+                border-radius: 12px;
+                flex-shrink: 0;
+                border: 1px solid var(--border-color);
+            }
+            .feature-text {
+                display: flex;
+                flex-direction: column;
+            }
+            .feature-text strong {
+                font-size: 1.05rem;
+                color: var(--text-dark);
+                margin-bottom: 0.2rem;
+            }
+            .feature-text span {
+                font-size: 0.9rem;
+                color: var(--text-muted);
+                line-height: 1.5;
             }
             .community-section .cta.discord-cta {
                 background: var(--discord-color);
                 color: var(--bg-white);
-                padding: 1rem 2.5rem;
-                font-size: 1.1rem;
+                padding: 0.9rem 2.2rem;
+                font-size: 1.05rem;
                 font-weight: 700;
                 border-radius: 50px;
                 text-decoration: none;
-                transition: all 0.3s ease;
-                box-shadow: 0 5px 20px rgba(88, 101, 242, 0.35);
-                display: inline-flex;
-                align-items: center;
-                gap: 0.8rem;
+                transition: background-color 0.2s ease;
+                display: inline-block;
             }
             .community-section .cta.discord-cta:hover {
                 background: var(--discord-hover-color);
-                transform: translateY(-3px);
-                box-shadow: 0 7px 25px rgba(88, 101, 242, 0.45);
-            }
-            .community-visual {
-                flex: 0 0 280px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            .discord-mockup {
-                width: 250px;
-                height: 300px;
-                background: var(--bg-white);
-                border-radius: 12px;
-                padding: 1rem;
-                box-shadow: var(--shadow-hover);
-                transform: rotate(5deg);
-                transition: all 0.3s ease;
-            }
-            .community-container:hover .discord-mockup {
-                transform: rotate(2deg) scale(1.05);
-            }
-            .mockup-header {
-                font-weight: 700;
-                margin-bottom: 1rem;
-            }
-            .mockup-channel {
-                padding: 0.5rem;
-                border-radius: 5px;
-                margin-bottom: 0.3rem;
-                font-size: 0.9rem;
-                position: relative;
-                padding-left: 1.5rem;
-            }
-            .mockup-channel::before {
-                content: '#';
-                position: absolute;
-                left: 0.5rem;
-                color: var(--text-muted);
-            }
-            .mockup-channel.active {
-                background: var(--primary-light);
-                color: var(--primary);
-                font-weight: 700;
-            }
-            .mockup-user {
-                margin-top: 1rem;
-                padding: 0.5rem;
-                font-size: 0.9rem;
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-            }
-            .user-avatar {
-                width: 24px;
-                height: 24px;
-                border-radius: 50%;
-                background: var(--tag-utility-bg);
-            }
-            .user-avatar.dev {
-                background: var(--accent);
             }
 
             /* --- 🦶 フッター スタイル (変更なし) 🦶 --- */
@@ -800,6 +914,12 @@
                 .sort-select {
                     width: 100%;
                     text-align: center;
+                }
+                .community-info p br {
+                    display: none;
+                }
+                .feature-item {
+                    text-align: left;
                 }
             }
             @media (max-width: 480px) {
@@ -980,12 +1100,37 @@
         </ul>
 
         <section class="hero">
-            <div class="hero-content">
-                <h1>HARU Addons</h1>
-                <p>高品質なMinecraftアドオンで、あなたのワールドをもっと楽しく！</p>
+            <!-- 背景スライドショー -->
+            <div class="hero-slideshow">
+                <div class="slide" style="background-image: url('./Slideshow/1.jpg')"></div>
+                <div class="slide" style="background-image: url('./Slideshow/2.jpg')"></div>
+                <div class="slide" style="background-image: url('./Slideshow/3.jpg')"></div>
+                <div class="slide" style="background-image: url('./Slideshow/4.jpg')"></div>
+                <div class="slide" style="background-image: url('./Slideshow/5.jpg')"></div>
             </div>
-            <!-- 下のコンテンツへ誘導するスクロールアロー -->
-            <a href="#addons" class="scroll-down" aria-label="アドオン一覧へスクロール" onclick="scrollToAddons(event)"></a>
+
+            <!-- コンテンツ（文字とボタン） -->
+            <div class="hero-content">
+                <div class="hero-title">
+                    <img src="./icon.png" alt="HARU Addons Icon" class="hero-icon" />
+                    <h1>HARU Addons</h1>
+                </div>
+                <p>高品質なMinecraftアドオンで、あなたのワールドをもっと楽しく！</p>
+
+                <div class="hero-actions">
+                    <a href="https://discord.gg/PbZtPCysfJ" class="hero-btn discord-btn" target="_blank" rel="noopener noreferrer">
+                        <svg viewBox="0 0 127.14 96.36" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                            <path
+                                d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c0,0,.04-.06.05-.09h0c2.53-26.6-2.67-49.88-19.01-72.06Zm-63,60.6c-5.91,0-10.82-5.32-10.82-11.83s4.82-11.83,10.82-11.83c6.05,0,10.93,5.37,10.82,11.83,0,6.51-4.82,11.83-10.82,11.83Zm41.83,0c-5.91,0-10.82-5.32-10.82-11.83s4.82-11.83,10.82-11.83c6.05,0,10.93,5.37,10.82,11.83,0,6.51-4.78,11.83-10.82,11.83Z" />
+                        </svg>
+                        Discord
+                    </a>
+                    <a href="https://haruaddons.fanbox.cc/" class="hero-btn fanbox-btn" target="_blank" rel="noopener noreferrer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                        FANBOXで支援
+                    </a>
+                </div>
+            </div>
         </section>
 
         <section class="addon-list" id="addons">
@@ -1274,16 +1419,6 @@
                         <p class="addon-description">メニューを表示しサーバーへ移動</p>
                     </div>
                 </a>
-                <!-- <a href="./" class="addon-item">
-                    <img src="./LoadThumbnail.png" alt="OnlineScore アドオン" loading="lazy" />
-                    <div class="addon-info">
-                        <div class="addon-tags">
-                            <span class="addon-category utility">便利機能</span>
-                        </div>
-                        <h3 class="title">OnlineScore (準備中)</h3>
-                        <p class="addon-description">オフラインプレイヤーのスコアを操作</p>
-                    </div>
-                </a> -->
             </div>
         </section>
 
@@ -1356,29 +1491,52 @@
 
         <section class="community-section">
             <div class="community-container">
-                <div class="community-text">
+                <!-- 左側：メイン案内とボタン -->
+                <div class="community-info">
+                    <div class="discord-icon-wrapper">
+                        <!-- Discordのロゴマーク -->
+                        <svg viewBox="0 0 127.14 96.36" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c0,0,.04-.06.05-.09h0c2.53-26.6-2.67-49.88-19.01-72.06Zm-63,60.6c-5.91,0-10.82-5.32-10.82-11.83s4.82-11.83,10.82-11.83c6.05,0,10.93,5.37,10.82,11.83,0,6.51-4.82,11.83-10.82,11.83Zm41.83,0c-5.91,0-10.82-5.32-10.82-11.83s4.82-11.83,10.82-11.83c6.05,0,10.93,5.37,10.82,11.83,0,6.51-4.78,11.83-10.82,11.83Z" />
+                        </svg>
+                    </div>
                     <h2>Discordサーバー</h2>
-                    <p>HARU Addonsの最新情報、アドオンのサポート</p>
-                    <ul>
-                        <li>最新アップデート情報の先行公開</li>
-                        <li>開発者への直接フィードバック</li>
-                        <li>サポートチャンネル</li>
-                    </ul>
-                    <a href="https://discord.gg/PbZtPCysfJ" class="cta discord-cta" target="_blank" rel="noopener noreferrer"> Discordサーバーに参加 </a>
+                    <p>HARU Addonsの最新情報や、<br />アドオンのサポートを行っています。</p>
+                    <a href="https://discord.gg/PbZtPCysfJ" class="cta discord-cta" target="_blank" rel="noopener noreferrer"> Discordに参加する </a>
                 </div>
-                <div class="community-visual">
-                    <div class="discord-mockup">
-                        <div class="mockup-header">HARU Addons</div>
-                        <div class="mockup-channel">お知らせ</div>
-                        <div class="mockup-channel active">サポート</div>
-                        <div class="mockup-channel">雑談</div>
-                        <div class="mockup-user">
-                            <div class="user-avatar"></div>
-                            <span>Player1</span>
+
+                <!-- 右側：アイコン付きの特徴リスト -->
+                <div class="community-features">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+                                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+                            </svg>
                         </div>
-                        <div class="mockup-user">
-                            <div class="user-avatar dev"></div>
-                            <span>HARU (開発者)</span>
+                        <div class="feature-text">
+                            <strong>最新情報の先行公開</strong>
+                            <span>アップデート情報などをいち早くお届けします。</span>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                            </svg>
+                        </div>
+                        <div class="feature-text">
+                            <strong>開発者へフィードバック</strong>
+                            <span>直接ご意見やご要望を伝えることができます。</span>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                        </div>
+                        <div class="feature-text">
+                            <strong>サポートチャンネル</strong>
+                            <span>導入に関する疑問や不具合などを解決します。</span>
                         </div>
                     </div>
                 </div>
