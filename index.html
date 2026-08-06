@@ -185,10 +185,11 @@
             .mobile-nav {
                 display: none;
                 position: fixed;
-                top: 80px;
+                top: 90px;
                 right: 20px;
                 width: 220px;
-                background: var(--bg-white);
+                background: rgba(255, 255, 255, 0.7);
+                backdrop-filter: blur(10px);
                 border-radius: 15px;
                 padding: 1rem;
                 z-index: 999;
@@ -935,7 +936,7 @@
                 }
                 .mobile-nav {
                     width: 200px;
-                    top: 70px;
+                    top: 80px;
                     right: 15px;
                 }
                 .hero {
@@ -1553,13 +1554,6 @@
                 event.preventDefault();
                 document.getElementById('addons').scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
-            // scrollToNews関数はボタンを削除したため、必要に応じて削除またはコメントアウトできます。
-            /*
-            function scrollToNews(event) {
-                event.preventDefault();
-                document.getElementById('news').scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-            */
 
             // モバイルメニューの開閉
             const menuToggle = document.querySelector('.menu-toggle');
@@ -1568,6 +1562,15 @@
                 const isExpanded = mobileNav.classList.toggle('active');
                 menuToggle.setAttribute('aria-expanded', isExpanded);
                 menuToggle.classList.toggle('open');
+            });
+
+            document.addEventListener('click', event => {
+                const nav = document.querySelector('nav');
+                if (!nav.contains(event.target) && !mobileNav.contains(event.target) && mobileNav.classList.contains('active')) {
+                    mobileNav.classList.remove('active');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                    menuToggle.classList.remove('open');
+                }
             });
 
             // スクロールでナビゲーションのスタイル変更
