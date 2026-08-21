@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
     <head>
         <meta charset="UTF-8" />
@@ -17,6 +17,15 @@
 
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-WTVSFX0F18"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'G-WTVSFX0F18');
+        </script>
 
         <style>
             :root {
@@ -324,7 +333,7 @@
                 position: relative;
                 margin-bottom: 1rem;
             }
-            
+
             .download-btn {
                 background: linear-gradient(135deg, #0056b3, #34649b);
             }
@@ -644,5 +653,4 @@
             });
         </script>
     </body>
-
 </html>

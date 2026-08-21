@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
     <head>
         <meta charset="UTF-8" />
@@ -16,7 +16,16 @@
         <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />
 
         <!-- Google tag (gtag.js) -->
-　　　　　<script async src="https://www.googletagmanager.com/gtag/js?id=G-WTVSFX0F18"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-WTVSFX0F18"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'G-WTVSFX0F18');
+        </script>
 
         <style>
             :root {
@@ -623,7 +632,7 @@
                 </div>
 
                 <h2>機能と遊び方（プレイヤー向け）</h2>
-                
+
                 <h3>基本操作</h3>
                 <p>ワールドに参加すると、メニューを開くためのアイテムがインベントリに追加されます。このアイテムを使用することで、現在のステータス確認や、ショップ機能へのアクセスが可能です。</p>
 
@@ -639,7 +648,7 @@
                 <h3>1. 管理者権限とアイテムの付与</h3>
                 <p>以下のコマンドを実行してタグを付与します。また、メニューアイテムが必要な場合はID指定で入手できます。</p>
                 <div class="command-block">
-                    <span class="command-main">/tag</span> <span class="command-arg">@s</span> <span class="command-event">add AdventureOP</span><br>
+                    <span class="command-main">/tag</span> <span class="command-arg">@s</span> <span class="command-event">add AdventureOP</span><br />
                     <span class="command-main">/give</span> <span class="command-arg">@s</span> <span class="command-event">additem:rankadventure</span>
                 </div>
 
@@ -700,6 +709,4 @@
             });
         </script>
     </body>
-
 </html>
-

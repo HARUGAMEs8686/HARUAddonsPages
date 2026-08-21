@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
     <head>
         <meta charset="UTF-8" />
@@ -16,7 +16,16 @@
         <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />
 
         <!-- Google tag (gtag.js) -->
-　　　　　<script async src="https://www.googletagmanager.com/gtag/js?id=G-WTVSFX0F18"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-WTVSFX0F18"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'G-WTVSFX0F18');
+        </script>
 
         <style>
             :root {
@@ -287,7 +296,7 @@
                 font-size: 1rem;
                 color: #004085;
             }
-            
+
             .addon-content .warning {
                 background-color: #fff3cd;
                 border-left: 5px solid #ffc107;
@@ -661,7 +670,8 @@
                     <li><b>向き（円のみ）</b>: 横向き（床）、縦向き（壁）などが選べます。</li>
                     <li><b>ブロックID</b>: <code>minecraft:stone</code> や <code>minecraft:glass</code> のように入力します。</li>
                     <li><b>半径</b>: 大きさを数字で入力します（例: 10）。</li>
-                    <li><b>生成モード</b>:
+                    <li>
+                        <b>生成モード</b>:
                         <ul>
                             <li>- <b>Normal</b>: 範囲内を完全にブロックで埋めます。</li>
                             <li>- <b>Hollow</b>: 中身をくり抜いて、殻（または輪）だけ作ります。</li>
@@ -670,9 +680,7 @@
                     </li>
                 </ul>
 
-                <div class="warning">
-                    <strong>注意:</strong> 生成時読み込みを維持するため自動的に実行者がTPする場合があります。安全を確保するため、クリエイティブモードにて実行してください。
-                </div>
+                <div class="warning"><strong>注意:</strong> 生成時読み込みを維持するため自動的に実行者がTPする場合があります。安全を確保するため、クリエイティブモードにて実行してください。</div>
 
                 <h3>5. 生成完了</h3>
                 <p>画面下に進捗バーが出るので、100%になるまで少しお待ちください。</p>

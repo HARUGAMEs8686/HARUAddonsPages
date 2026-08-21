@@ -1,910 +1,918 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="9S9blQzCvgIm-0eArJeotUn8jH2cKG7KbiQ1VUnwNDQ" />
-    <title>HARUAddons - HARUPhone1 過去バージョン</title>
-    <meta name="description" content="HARUPhone1の過去バージョンをダウンロード。Minecraft統合版向けアドオンの旧版を入手！">
-    <meta property="og:title" content="HARUAddons | HARUPhone1 過去バージョン">
-    <meta property="og:image" content="https://harugames8686.github.io/HARUAddonsPages/haruphone1.png">
-    <meta property="og:url" content="https://harugames8686.github.io/HARUAddonsPages/addons/haruphone1_old.html">
-    <meta property="og:description" content="HARUPhone1アドオンの過去バージョンダウンロードページ。Minecraft BEの旧版をチェック！">
-    <meta property="og:type" content="website">
-    <link rel="canonical" href="https://harugames8686.github.io/HARUAddonsPages/addons/haruphone1_old.html">
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="icon" type="image/png" href="../icon.png" sizes="32x32">
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Google tag (gtag.js) -->
-　　<script async src="https://www.googletagmanager.com/gtag/js?id=G-WTVSFX0F18"></script>
-
-    <style>
-        :root {
-            --bg-light: #f8f9fa;
-            --bg-white: #ffffff;
-            --text-dark: #343a40;
-            --text-muted: #6c757d;
-            --primary: #007bff;
-            --primary-light: #e6f2ff;
-            --accent: #28a745;
-            --accent-light: #eaf6ec;
-            --border-color: #dee2e6;
-            --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.12);
-            --font-sans-jp: 'Noto Sans JP', sans-serif;
-            --font-rounded: 'M PLUS Rounded 1c', sans-serif;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            font-family: var(--font-sans-jp);
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
-
-        nav {
-            position: fixed;
-            top: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: calc(100% - 40px);
-            max-width: 1100px;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 0.8rem 1.8rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            box-shadow: var(--shadow-soft);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-        }
-
-        nav.scrolled {
-            top: 10px;
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            text-decoration: none;
-        }
-
-        .logo-container img {
-            width: 35px;
-            height: 35px;
-            transition: transform 0.3s ease;
-        }
-        .logo-container:hover img {
-            transform: rotate(15deg);
-        }
-
-        .logo-container .logo {
-            font-size: 1.6rem;
-            font-weight: 700;
-            font-family: var(--font-rounded);
-            color: var(--primary);
-            letter-spacing: 0.5px;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 1rem;
-        }
-
-        nav ul li a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: 700;
-            padding: 0.6rem 1.2rem;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-        }
-
-        nav ul li a:hover,
-        nav ul li a.active {
-            background: var(--primary-light);
-            color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        .menu-toggle {
-            display: none;
-            font-size: 1.8rem;
-            background: none;
-            border: none;
-            color: var(--primary);
-            cursor: pointer;
-            padding: 5px;
-            border-radius: 50%;
-            transition: background-color 0.3s;
-        }
-        .menu-toggle:hover {
-            background-color: var(--primary-light);
-        }
-
-        .menu-toggle span {
-            display: block;
-            width: 25px;
-            height: 3px;
-            background: var(--primary);
-            margin: 5px 0;
-            border-radius: 3px;
-            transition: all 0.3s ease;
-        }
-        .menu-toggle.open span:nth-child(1) {
-            transform: translateY(8px) rotate(45deg);
-        }
-        .menu-toggle.open span:nth-child(2) {
-            opacity: 0;
-        }
-        .menu-toggle.open span:nth-child(3) {
-            transform: translateY(-8px) rotate(-45deg);
-        }
-
-        .mobile-nav {
-            display: none;
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            width: 220px;
-            background: var(--bg-white);
-            border-radius: 15px;
-            padding: 1rem;
-            z-index: 999;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border: 1px solid var(--border-color);
-            transform: translateY(-10px);
-            opacity: 0;
-            transition: all 0.3s ease;
-            list-style: none;
-        }
-
-        .mobile-nav.active {
-            display: block;
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .mobile-nav li {
-            margin-bottom: 0.5rem;
-        }
-
-        .mobile-nav li a {
-            color: var(--text-dark);
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: 700;
-            padding: 0.8rem 1.2rem;
-            border-radius: 10px;
-            display: block;
-            transition: all 0.3s ease;
-        }
-
-        .mobile-nav li a:hover {
-            background: var(--primary-light);
-            color: var(--primary);
-        }
-
-        .addon-header {
-            padding: 8rem 2rem 3rem;
-            background-color: var(--bg-light);
-            text-align: center;
-        }
-
-        .addon-header img {
-            width: 100%;
-            max-width: 960px;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-            border-radius: 16px;
-            box-shadow: var(--shadow-soft);
-        }
-
-        .addon-header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            font-family: var(--font-rounded);
-            color: var(--primary);
-            margin: 1.5rem 0;
-            position: relative;
-            display: inline-block;
-        }
-
-        .addon-header h1::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background-color: var(--primary);
-            border-radius: 2px;
-        }
-
-        .addon-page {
-            padding: 0 2rem 5rem;
-            background-color: var(--bg-light);
-            display: flex;
-            justify-content: center;
-        }
-
-        .addon-content {
-            max-width: 800px;
-            width: 100%;
-            background: var(--bg-white);
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: var(--shadow-soft);
-        }
-
-        .addon-content h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            font-family: var(--font-rounded);
-            color: var(--text-dark);
-            margin: 1.5rem 0 1rem;
-        }
-
-        .addon-content h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin: 1.5rem 0 0.8rem;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            display: inline-block;
-        }
-
-        .addon-content h3.latest {
-            color: var(--bg-white);
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-        }
-
-        .addon-content h3.old {
-            color: var(--bg-white);
-            background: linear-gradient(135deg, #6c757d, #343a40);
-        }
-
-        .addon-content p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        .addon-content .buttons {
-            display: flex;
-            gap: 1rem;
-            margin: 1.5rem 0;
-            justify-content: center;
-        }
-
-        .addon-content .btn {
-            padding: 0.8rem 2rem;
-            background: var(--accent);
-            color: var(--bg-white);
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 700;
-            font-family: var(--font-sans-jp);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
-        }
-
-        .addon-content .btn:hover {
-            background: #218838;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
-        }
-
-        .download-buttons {
-            margin: 1.5rem 0;
-            padding: 1.5rem;
-            background: var(--primary-light);
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-        }
-
-        .download-btn, .download-btn_back {
-            display: block;
-            padding: 0.9rem 2rem;
-            color: var(--bg-white);
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-soft);
-            text-align: center;
-            position: relative;
-            margin-bottom: 1rem;
-        }
-
-        .download-btn {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-        }
-
-        .download-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
-            background: linear-gradient(135deg, #0056b3, #218838);
-        }
-
-        .download-btn::before {
-            content: "最新";
-            font-size: 0.8rem;
-            background: rgba(255, 255, 255, 0.3);
-            padding: 0.2rem 0.6rem;
-            border-radius: 10px;
-            position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
-        }
-
-        .download-btn_back {
-            background: linear-gradient(135deg, #6c757d, #343a40);
-        }
-
-        .download-btn_back:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
-            background: linear-gradient(135deg, #5a6268, #2c3e50);
-        }
-
-        .download-btn_back::before {
-            content: "旧";
-            font-size: 0.8rem;
-            background: rgba(255, 255, 255, 0.3);
-            padding: 0.2rem 0.6rem;
-            border-radius: 10px;
-            position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
-        }
-
-        .version-info {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin-top: 0.5rem;
-            line-height: 1.5;
-        }
-
-        .accordion {
-            margin: 1.5rem 0;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow-soft);
-        }
-
-        .accordion-header {
-            background: linear-gradient(135deg, #6c757d, #343a40);
-            color: var(--bg-white);
-            padding: 1rem 1.5rem;
-            font-size: 1.2rem;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.3s ease;
-        }
-
-        .accordion-header:hover {
-            background: linear-gradient(135deg, #5a6268, #2c3e50);
-        }
-
-        .accordion-header::after {
-            content: "▼";
-            font-size: 0.9rem;
-            transition: transform 0.3s ease;
-        }
-
-        .accordion-header.active::after {
-            transform: rotate(180deg);
-        }
-
-        .accordion-content {
-            display: none;
-            padding: 1.5rem;
-            background: var(--bg-white);
-        }
-
-        .accordion-content.active {
-            display: block;
-        }
-
-        .version-entry {
-            margin-bottom: 1.5rem;
-        }
-
-        .version-entry h4 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 0.8rem;
-        }
-
-        .version-entry .download-buttons {
-            margin: 0;
-            padding: 1rem;
-            background: var(--primary-light);
-        }
-
-        footer {
-            background-color: var(--text-dark);
-            color: var(--bg-light);
-            text-align: center;
-            padding: 2rem 1rem;
-            margin-top: 4rem;
-        }
-
-        footer p {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            letter-spacing: 0.5px;
-        }
-
-        @media (max-width: 992px) {
-            nav ul {
-                gap: 0.5rem;
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="google-site-verification" content="9S9blQzCvgIm-0eArJeotUn8jH2cKG7KbiQ1VUnwNDQ" />
+        <title>HARUAddons - HARUPhone1 過去バージョン</title>
+        <meta name="description" content="HARUPhone1の過去バージョンをダウンロード。Minecraft統合版向けアドオンの旧版を入手！" />
+        <meta property="og:title" content="HARUAddons | HARUPhone1 過去バージョン" />
+        <meta property="og:image" content="https://harugames8686.github.io/HARUAddonsPages/haruphone1.png" />
+        <meta property="og:url" content="https://harugames8686.github.io/HARUAddonsPages/addons/haruphone1_old.html" />
+        <meta property="og:description" content="HARUPhone1アドオンの過去バージョンダウンロードページ。Minecraft BEの旧版をチェック！" />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://harugames8686.github.io/HARUAddonsPages/addons/haruphone1_old.html" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <link rel="icon" type="image/png" href="../icon.png" sizes="32x32" />
+        <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-WTVSFX0F18"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
             }
-            nav ul li a {
-                padding: 0.5rem 0.8rem;
-            }
-            .addon-header h1 {
-                font-size: 2rem;
-            }
-        }
+            gtag('js', new Date());
 
-        @media (max-width: 768px) {
+            gtag('config', 'G-WTVSFX0F18');
+        </script>
+
+        <style>
+            :root {
+                --bg-light: #f8f9fa;
+                --bg-white: #ffffff;
+                --text-dark: #343a40;
+                --text-muted: #6c757d;
+                --primary: #007bff;
+                --primary-light: #e6f2ff;
+                --accent: #28a745;
+                --accent-light: #eaf6ec;
+                --border-color: #dee2e6;
+                --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+                --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.12);
+                --font-sans-jp: 'Noto Sans JP', sans-serif;
+                --font-rounded: 'M PLUS Rounded 1c', sans-serif;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                background-color: var(--bg-light);
+                color: var(--text-dark);
+                font-family: var(--font-sans-jp);
+                line-height: 1.7;
+                overflow-x: hidden;
+            }
+
             nav {
-                padding: 0.6rem 1rem;
-                width: calc(100% - 30px);
+                position: fixed;
+                top: 15px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: calc(100% - 40px);
+                max-width: 1100px;
+                background: rgba(255, 255, 255, 0.85);
+                backdrop-filter: blur(10px);
+                border-radius: 30px;
+                padding: 0.8rem 1.8rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                z-index: 1000;
+                box-shadow: var(--shadow-soft);
+                border: 1px solid rgba(0, 0, 0, 0.05);
+                transition: all 0.3s ease;
             }
+
+            nav.scrolled {
+                top: 10px;
+                background: rgba(255, 255, 255, 0.95);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .logo-container {
+                display: flex;
+                align-items: center;
+                gap: 0.8rem;
+                text-decoration: none;
+            }
+
+            .logo-container img {
+                width: 35px;
+                height: 35px;
+                transition: transform 0.3s ease;
+            }
+            .logo-container:hover img {
+                transform: rotate(15deg);
+            }
+
+            .logo-container .logo {
+                font-size: 1.6rem;
+                font-weight: 700;
+                font-family: var(--font-rounded);
+                color: var(--primary);
+                letter-spacing: 0.5px;
+            }
+
+            nav ul {
+                display: flex;
+                list-style: none;
+                gap: 1rem;
+            }
+
+            nav ul li a {
+                color: var(--text-muted);
+                text-decoration: none;
+                font-size: 1rem;
+                font-weight: 700;
+                padding: 0.6rem 1.2rem;
+                border-radius: 20px;
+                transition: all 0.3s ease;
+            }
+
+            nav ul li a:hover,
+            nav ul li a.active {
+                background: var(--primary-light);
+                color: var(--primary);
+                transform: translateY(-2px);
+            }
+
             .menu-toggle {
+                display: none;
+                font-size: 1.8rem;
+                background: none;
+                border: none;
+                color: var(--primary);
+                cursor: pointer;
+                padding: 5px;
+                border-radius: 50%;
+                transition: background-color 0.3s;
+            }
+            .menu-toggle:hover {
+                background-color: var(--primary-light);
+            }
+
+            .menu-toggle span {
+                display: block;
+                width: 25px;
+                height: 3px;
+                background: var(--primary);
+                margin: 5px 0;
+                border-radius: 3px;
+                transition: all 0.3s ease;
+            }
+            .menu-toggle.open span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .menu-toggle.open span:nth-child(2) {
+                opacity: 0;
+            }
+            .menu-toggle.open span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .mobile-nav {
+                display: none;
+                position: fixed;
+                top: 80px;
+                right: 20px;
+                width: 220px;
+                background: var(--bg-white);
+                border-radius: 15px;
+                padding: 1rem;
+                z-index: 999;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                border: 1px solid var(--border-color);
+                transform: translateY(-10px);
+                opacity: 0;
+                transition: all 0.3s ease;
+                list-style: none;
+            }
+
+            .mobile-nav.active {
+                display: block;
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .mobile-nav li {
+                margin-bottom: 0.5rem;
+            }
+
+            .mobile-nav li a {
+                color: var(--text-dark);
+                text-decoration: none;
+                font-size: 1rem;
+                font-weight: 700;
+                padding: 0.8rem 1.2rem;
+                border-radius: 10px;
+                display: block;
+                transition: all 0.3s ease;
+            }
+
+            .mobile-nav li a:hover {
+                background: var(--primary-light);
+                color: var(--primary);
+            }
+
+            .addon-header {
+                padding: 8rem 2rem 3rem;
+                background-color: var(--bg-light);
+                text-align: center;
+            }
+
+            .addon-header img {
+                width: 100%;
+                max-width: 960px;
+                height: auto;
+                display: block;
+                margin: 0 auto;
+                border-radius: 16px;
+                box-shadow: var(--shadow-soft);
+            }
+
+            .addon-header h1 {
+                font-size: 2.5rem;
+                font-weight: 700;
+                font-family: var(--font-rounded);
+                color: var(--primary);
+                margin: 1.5rem 0;
+                position: relative;
+                display: inline-block;
+            }
+
+            .addon-header h1::after {
+                content: '';
+                position: absolute;
+                bottom: -10px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 60px;
+                height: 4px;
+                background-color: var(--primary);
+                border-radius: 2px;
+            }
+
+            .addon-page {
+                padding: 0 2rem 5rem;
+                background-color: var(--bg-light);
+                display: flex;
+                justify-content: center;
+            }
+
+            .addon-content {
+                max-width: 800px;
+                width: 100%;
+                background: var(--bg-white);
+                padding: 2rem;
+                border-radius: 16px;
+                box-shadow: var(--shadow-soft);
+            }
+
+            .addon-content h2 {
+                font-size: 2rem;
+                font-weight: 700;
+                font-family: var(--font-rounded);
+                color: var(--text-dark);
+                margin: 1.5rem 0 1rem;
+            }
+
+            .addon-content h3 {
+                font-size: 1.5rem;
+                font-weight: 700;
+                color: var(--primary);
+                margin: 1.5rem 0 0.8rem;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                display: inline-block;
+            }
+
+            .addon-content h3.latest {
+                color: var(--bg-white);
+                background: linear-gradient(135deg, var(--primary), var(--accent));
+            }
+
+            .addon-content h3.old {
+                color: var(--bg-white);
+                background: linear-gradient(135deg, #6c757d, #343a40);
+            }
+
+            .addon-content p {
+                font-size: 1.1rem;
+                color: var(--text-muted);
+                line-height: 1.6;
+                margin-bottom: 1rem;
+            }
+
+            .addon-content .buttons {
+                display: flex;
+                gap: 1rem;
+                margin: 1.5rem 0;
+                justify-content: center;
+            }
+
+            .addon-content .btn {
+                padding: 0.8rem 2rem;
+                background: var(--accent);
+                color: var(--bg-white);
+                text-decoration: none;
+                border-radius: 50px;
+                font-size: 1rem;
+                font-weight: 700;
+                font-family: var(--font-sans-jp);
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+            }
+
+            .addon-content .btn:hover {
+                background: #218838;
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+            }
+
+            .download-buttons {
+                margin: 1.5rem 0;
+                padding: 1.5rem;
+                background: var(--primary-light);
+                border-radius: 12px;
+                border: 1px solid var(--border-color);
+            }
+
+            .download-btn,
+            .download-btn_back {
+                display: block;
+                padding: 0.9rem 2rem;
+                color: var(--bg-white);
+                text-decoration: none;
+                border-radius: 50px;
+                font-size: 1.2rem;
+                font-weight: 700;
+                transition: all 0.3s ease;
+                box-shadow: var(--shadow-soft);
+                text-align: center;
+                position: relative;
+                margin-bottom: 1rem;
+            }
+
+            .download-btn {
+                background: linear-gradient(135deg, var(--primary), var(--accent));
+            }
+
+            .download-btn:hover {
+                transform: translateY(-3px);
+                box-shadow: var(--shadow-hover);
+                background: linear-gradient(135deg, #0056b3, #218838);
+            }
+
+            .download-btn::before {
+                content: '最新';
+                font-size: 0.8rem;
+                background: rgba(255, 255, 255, 0.3);
+                padding: 0.2rem 0.6rem;
+                border-radius: 10px;
+                position: absolute;
+                top: 0.5rem;
+                right: 0.5rem;
+            }
+
+            .download-btn_back {
+                background: linear-gradient(135deg, #6c757d, #343a40);
+            }
+
+            .download-btn_back:hover {
+                transform: translateY(-3px);
+                box-shadow: var(--shadow-hover);
+                background: linear-gradient(135deg, #5a6268, #2c3e50);
+            }
+
+            .download-btn_back::before {
+                content: '旧';
+                font-size: 0.8rem;
+                background: rgba(255, 255, 255, 0.3);
+                padding: 0.2rem 0.6rem;
+                border-radius: 10px;
+                position: absolute;
+                top: 0.5rem;
+                right: 0.5rem;
+            }
+
+            .version-info {
+                font-size: 0.95rem;
+                color: var(--text-muted);
+                margin-top: 0.5rem;
+                line-height: 1.5;
+            }
+
+            .accordion {
+                margin: 1.5rem 0;
+                border-radius: 12px;
+                overflow: hidden;
+                box-shadow: var(--shadow-soft);
+            }
+
+            .accordion-header {
+                background: linear-gradient(135deg, #6c757d, #343a40);
+                color: var(--bg-white);
+                padding: 1rem 1.5rem;
+                font-size: 1.2rem;
+                font-weight: 700;
+                cursor: pointer;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                transition: background 0.3s ease;
+            }
+
+            .accordion-header:hover {
+                background: linear-gradient(135deg, #5a6268, #2c3e50);
+            }
+
+            .accordion-header::after {
+                content: '▼';
+                font-size: 0.9rem;
+                transition: transform 0.3s ease;
+            }
+
+            .accordion-header.active::after {
+                transform: rotate(180deg);
+            }
+
+            .accordion-content {
+                display: none;
+                padding: 1.5rem;
+                background: var(--bg-white);
+            }
+
+            .accordion-content.active {
                 display: block;
             }
-            nav ul {
-                display: none;
-            }
-            .addon-header {
-                padding: 6rem 1rem 2rem;
-            }
-            .addon-header img {
-                max-width: 600px;
-            }
-            .addon-header h1 {
-                font-size: 1.8rem;
-            }
-            .addon-page {
-                padding: 0 1rem 4rem;
-            }
-            .addon-content {
-                padding: 1.5rem;
-            }
-            .addon-content h2 {
-                font-size: 1.8rem;
-            }
-            .addon-content h3 {
-                font-size: 1.3rem;
-                padding: 0.4rem 0.8rem;
-            }
-            .addon-content p {
-                font-size: 1rem;
-            }
-            .addon-content .buttons {
-                flex-direction: row;
-                gap: 0.8rem;
-            }
-            .addon-content .btn {
-                padding: 0.7rem 1.5rem;
-                font-size: 0.9rem;
-            }
-            .download-btn, .download-btn_back {
-                padding: 0.8rem 1.5rem;
-                font-size: 1rem;
-            }
-            .version-info {
-                font-size: 0.9rem;
-            }
-            .accordion-header {
-                font-size: 1.1rem;
-                padding: 0.8rem 1.2rem;
-            }
-            .accordion-content {
-                padding: 1rem;
-            }
-            .version-entry h4 {
-                font-size: 1.1rem;
-            }
-        }
 
-        @media (max-width: 480px) {
-            body {
-                line-height: 1.6;
+            .version-entry {
+                margin-bottom: 1.5rem;
             }
-            .logo-container .logo {
-                font-size: 1.3rem;
-            }
-            .logo-container img {
-                width: 30px;
-                height: 30px;
-            }
-            .mobile-nav {
-                width: 200px;
-                top: 70px;
-                right: 15px;
-            }
-            .addon-header {
-                padding: 5rem 0.5rem 1.5rem;
-            }
-            .addon-header img {
-                max-width: 400px;
-            }
-            .addon-header h1 {
-                font-size: 1.6rem;
-            }
-            .addon-header h1::after {
-                width: 50px;
-                height: 3px;
-                bottom: -8px;
-            }
-            .addon-page {
-                padding: 0 0.5rem 3rem;
-            }
-            .addon-content {
-                padding: 1rem;
-            }
-            .addon-content h2 {
-                font-size: 1.5rem;
-            }
-            .addon-content h3 {
-                font-size: 1.2rem;
-                padding: 0.3rem 0.6rem;
-            }
-            .addon-content p {
-                font-size: 0.9rem;
-            }
-            .addon-content .buttons {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-            .addon-content .btn {
-                padding: 0.6rem 1rem;
-                font-size: 0.8rem;
-            }
-            .download-buttons {
-                padding: 0.8rem;
-            }
-            .download-btn, .download-btn_back {
-                padding: 0.7rem 1rem;
-                font-size: 0.9rem;
-            }
-            .download-btn::before, .download-btn_back::before {
-                font-size: 0.7rem;
-                padding: 0.15rem 0.4rem;
-            }
-            .version-info {
-                font-size: 0.8rem;
-            }
-            .accordion-header {
-                font-size: 1rem;
-                padding: 0.6rem 1rem;
-            }
-            .accordion-content {
-                padding: 0.8rem;
-            }
+
             .version-entry h4 {
-                font-size: 1rem;
+                font-size: 1.2rem;
+                font-weight: 700;
+                color: var(--text-dark);
+                margin-bottom: 0.8rem;
             }
-        }
-    </style>
-</head>
-<body>
-    <nav>
-        <a href="../index.html" class="logo-container"> 
-            <img src="../icon.png" alt="HARU Addons Icon" loading="lazy">
-            <div class="logo">HARUAddons</div>
-        </a>
-        <ul>
-            <li><a href="../index.html">ホーム</a></li> 
+
+            .version-entry .download-buttons {
+                margin: 0;
+                padding: 1rem;
+                background: var(--primary-light);
+            }
+
+            footer {
+                background-color: var(--text-dark);
+                color: var(--bg-light);
+                text-align: center;
+                padding: 2rem 1rem;
+                margin-top: 4rem;
+            }
+
+            footer p {
+                font-size: 0.9rem;
+                opacity: 0.8;
+                letter-spacing: 0.5px;
+            }
+
+            @media (max-width: 992px) {
+                nav ul {
+                    gap: 0.5rem;
+                }
+                nav ul li a {
+                    padding: 0.5rem 0.8rem;
+                }
+                .addon-header h1 {
+                    font-size: 2rem;
+                }
+            }
+
+            @media (max-width: 768px) {
+                nav {
+                    padding: 0.6rem 1rem;
+                    width: calc(100% - 30px);
+                }
+                .menu-toggle {
+                    display: block;
+                }
+                nav ul {
+                    display: none;
+                }
+                .addon-header {
+                    padding: 6rem 1rem 2rem;
+                }
+                .addon-header img {
+                    max-width: 600px;
+                }
+                .addon-header h1 {
+                    font-size: 1.8rem;
+                }
+                .addon-page {
+                    padding: 0 1rem 4rem;
+                }
+                .addon-content {
+                    padding: 1.5rem;
+                }
+                .addon-content h2 {
+                    font-size: 1.8rem;
+                }
+                .addon-content h3 {
+                    font-size: 1.3rem;
+                    padding: 0.4rem 0.8rem;
+                }
+                .addon-content p {
+                    font-size: 1rem;
+                }
+                .addon-content .buttons {
+                    flex-direction: row;
+                    gap: 0.8rem;
+                }
+                .addon-content .btn {
+                    padding: 0.7rem 1.5rem;
+                    font-size: 0.9rem;
+                }
+                .download-btn,
+                .download-btn_back {
+                    padding: 0.8rem 1.5rem;
+                    font-size: 1rem;
+                }
+                .version-info {
+                    font-size: 0.9rem;
+                }
+                .accordion-header {
+                    font-size: 1.1rem;
+                    padding: 0.8rem 1.2rem;
+                }
+                .accordion-content {
+                    padding: 1rem;
+                }
+                .version-entry h4 {
+                    font-size: 1.1rem;
+                }
+            }
+
+            @media (max-width: 480px) {
+                body {
+                    line-height: 1.6;
+                }
+                .logo-container .logo {
+                    font-size: 1.3rem;
+                }
+                .logo-container img {
+                    width: 30px;
+                    height: 30px;
+                }
+                .mobile-nav {
+                    width: 200px;
+                    top: 70px;
+                    right: 15px;
+                }
+                .addon-header {
+                    padding: 5rem 0.5rem 1.5rem;
+                }
+                .addon-header img {
+                    max-width: 400px;
+                }
+                .addon-header h1 {
+                    font-size: 1.6rem;
+                }
+                .addon-header h1::after {
+                    width: 50px;
+                    height: 3px;
+                    bottom: -8px;
+                }
+                .addon-page {
+                    padding: 0 0.5rem 3rem;
+                }
+                .addon-content {
+                    padding: 1rem;
+                }
+                .addon-content h2 {
+                    font-size: 1.5rem;
+                }
+                .addon-content h3 {
+                    font-size: 1.2rem;
+                    padding: 0.3rem 0.6rem;
+                }
+                .addon-content p {
+                    font-size: 0.9rem;
+                }
+                .addon-content .buttons {
+                    flex-direction: column;
+                    gap: 0.5rem;
+                }
+                .addon-content .btn {
+                    padding: 0.6rem 1rem;
+                    font-size: 0.8rem;
+                }
+                .download-buttons {
+                    padding: 0.8rem;
+                }
+                .download-btn,
+                .download-btn_back {
+                    padding: 0.7rem 1rem;
+                    font-size: 0.9rem;
+                }
+                .download-btn::before,
+                .download-btn_back::before {
+                    font-size: 0.7rem;
+                    padding: 0.15rem 0.4rem;
+                }
+                .version-info {
+                    font-size: 0.8rem;
+                }
+                .accordion-header {
+                    font-size: 1rem;
+                    padding: 0.6rem 1rem;
+                }
+                .accordion-content {
+                    padding: 0.8rem;
+                }
+                .version-entry h4 {
+                    font-size: 1rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <a href="../index.html" class="logo-container">
+                <img src="../icon.png" alt="HARU Addons Icon" loading="lazy" />
+                <div class="logo">HARUAddons</div>
+            </a>
+            <ul>
+                <li><a href="../index.html">ホーム</a></li>
+                <li><a href="../Assistant/support.html">Assistant</a></li>
+                <li><a href="../developer_info.html">開発者情報</a></li>
+                <li><a href="../links.html">リンク</a></li>
+                <li><a href="../tweets.html">Tweet</a></li>
+            </ul>
+            <button class="menu-toggle" aria-label="メニューを開閉する" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+
+        <ul class="mobile-nav">
+            <li><a href="../index.html">ホーム</a></li>
             <li><a href="../Assistant/support.html">Assistant</a></li>
             <li><a href="../developer_info.html">開発者情報</a></li>
             <li><a href="../links.html">リンク</a></li>
             <li><a href="../tweets.html">Tweet</a></li>
         </ul>
-        <button class="menu-toggle" aria-label="メニューを開閉する" aria-expanded="false">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-    </nav>
 
-    <ul class="mobile-nav">
-        <li><a href="../index.html">ホーム</a></li>
-        <li><a href="../Assistant/support.html">Assistant</a></li>
-        <li><a href="../developer_info.html">開発者情報</a></li>
-        <li><a href="../links.html">リンク</a></li>
-        <li><a href="../tweets.html">Tweet</a></li>
-    </ul>
+        <section class="addon-header">
+            <img src="../haruphone1.png" alt="HARUPhone1 Image" loading="lazy" />
+            <h1>HARUPhone1 - 過去バージョン</h1>
+        </section>
 
-    <section class="addon-header">
-        <img src="../haruphone1.png" alt="HARUPhone1 Image" loading="lazy">
-        <h1>HARUPhone1 - 過去バージョン</h1>
-    </section>
+        <section class="addon-page">
+            <div class="addon-content">
+                <div class="buttons">
+                    <a href="./haruphone1_introduction.html" class="btn">戻る</a>
+                </div>
 
-    <section class="addon-page">
-        <div class="addon-content">
-            <div class="buttons">
-                <a href="./haruphone1_introduction.html" class="btn">戻る</a>
-            </div>
-
-            <h2>過去バージョンのダウンロード</h2>
-            <p>ここではHARUPhone1の過去バージョンをダウンロードできます。バージョンを選択して展開し、必要なファイルを入手してください。</p>
-            <div class="accordion">
-                <div class="accordion-header">2026年3月リリース</div>
-                <div class="accordion-content">
-                     <div class="version-entry">
-                        <h4>HARUPhone1_v2.8.4</h4>
-                        <div class="download-buttons">
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.9.1.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.9.1</a>
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.9.1.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.9.1</a>
-                            <p class="version-info">・ブラックジャックの改良</p>
-                            <p class="version-info">・自動買取機の追加 / Advanceの改良 / GAMEブロックでのブラックジャックの追加 / その他改善<br />※その他にも様々な機能があります</p>
+                <h2>過去バージョンのダウンロード</h2>
+                <p>ここではHARUPhone1の過去バージョンをダウンロードできます。バージョンを選択して展開し、必要なファイルを入手してください。</p>
+                <div class="accordion">
+                    <div class="accordion-header">2026年3月リリース</div>
+                    <div class="accordion-content">
+                        <div class="version-entry">
+                            <h4>HARUPhone1_v2.8.4</h4>
+                            <div class="download-buttons">
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.9.1.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.9.1</a>
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.9.1.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.9.1</a>
+                                <p class="version-info">・ブラックジャックの改良</p>
+                                <p class="version-info">・自動買取機の追加 / Advanceの改良 / GAMEブロックでのブラックジャックの追加 / その他改善<br />※その他にも様々な機能があります</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="accordion">
-                <div class="accordion-header">2026年1月リリース</div>
-                <div class="accordion-content">
-                     <div class="version-entry">
-                        <h4>HARUPhone1_v2.8.4</h4>
-                        <div class="download-buttons">
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.8.11.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.8.11</a>
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.8.11.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.8.11</a>
-                            <p class="version-info">・UIの調整/半角数字検知による不具合改善/Advance設定の追加/テクスチャー改善 <br>※その他にも様々な機能があります</p>
+                <div class="accordion">
+                    <div class="accordion-header">2026年1月リリース</div>
+                    <div class="accordion-content">
+                        <div class="version-entry">
+                            <h4>HARUPhone1_v2.8.4</h4>
+                            <div class="download-buttons">
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.8.11.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.8.11</a>
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.8.11.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.8.11</a>
+                                <p class="version-info">・UIの調整/半角数字検知による不具合改善/Advance設定の追加/テクスチャー改善 <br />※その他にも様々な機能があります</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="accordion">
-                <div class="accordion-header">2025年11月リリース</div>
-                <div class="accordion-content">
-                     <div class="version-entry">
-                        <h4>HARUPhone1_v2.8.4</h4>
-                        <div class="download-buttons">
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.8.4.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.8.4</a>
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.8.4.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.8.4</a>
-                            <p class="version-info">・FilesSettingに対応/Post機能の強化とその他機能のアップデート<br>※その他にも様々な機能があります</p>
+                <div class="accordion">
+                    <div class="accordion-header">2025年11月リリース</div>
+                    <div class="accordion-content">
+                        <div class="version-entry">
+                            <h4>HARUPhone1_v2.8.4</h4>
+                            <div class="download-buttons">
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.8.4.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.8.4</a>
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.8.4.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.8.4</a>
+                                <p class="version-info">・FilesSettingに対応/Post機能の強化とその他機能のアップデート<br />※その他にも様々な機能があります</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="accordion">
-                <div class="accordion-header">2025年10月リリース</div>
-                <div class="accordion-content">
-                     <div class="version-entry">
-                        <h4>HARUPhone1_v2.8.1</h4>
-                        <div class="download-buttons">
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.8.1.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.8.1</a>
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.8.1.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.8.1</a>
-                            <p class="version-info">・購入機能の修正・HARUPhoneAPI追加&その他大幅アップデート<br>※その他にも様々な機能があります</p>
+                <div class="accordion">
+                    <div class="accordion-header">2025年10月リリース</div>
+                    <div class="accordion-content">
+                        <div class="version-entry">
+                            <h4>HARUPhone1_v2.8.1</h4>
+                            <div class="download-buttons">
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.8.1.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.8.1</a>
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.8.1.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.8.1</a>
+                                <p class="version-info">・購入機能の修正・HARUPhoneAPI追加&その他大幅アップデート<br />※その他にも様々な機能があります</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="accordion">
-                <div class="accordion-header">2025年8月リリース</div>
-                <div class="accordion-content">
-                     <div class="version-entry">
-                        <h4>HARUPhone1_v2.7.9</h4>
-                        <div class="download-buttons">
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.7.9.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.7.9</a>
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.7.9.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.7.9</a>
-                            <p class="version-info">・社会システムのインタラクトに関する不具合を修正<br>※その他にも様々な機能があります</p>
+                <div class="accordion">
+                    <div class="accordion-header">2025年8月リリース</div>
+                    <div class="accordion-content">
+                        <div class="version-entry">
+                            <h4>HARUPhone1_v2.7.9</h4>
+                            <div class="download-buttons">
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.7.9.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.7.9</a>
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.7.9.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.7.9</a>
+                                <p class="version-info">・社会システムのインタラクトに関する不具合を修正<br />※その他にも様々な機能があります</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="accordion">
-                <div class="accordion-header">2025年7月リリース</div>
-                <div class="accordion-content">
-                     <div class="version-entry">
-                        <h4>HARUPhone1_v2.7.8</h4>
-                        <div class="download-buttons">
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.7.8.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.7.8</a>
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.7.8.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.7.8</a>
-                            <p class="version-info">・標準システム<br>・社会システムのアップデート<br>・HARUPAY/ブラウザの操作性向上<br>・爆破関連の対策<br>※その他にも様々な機能があります</p>
+                <div class="accordion">
+                    <div class="accordion-header">2025年7月リリース</div>
+                    <div class="accordion-content">
+                        <div class="version-entry">
+                            <h4>HARUPhone1_v2.7.8</h4>
+                            <div class="download-buttons">
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.7.8.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.7.8</a>
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.7.8.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.7.8</a>
+                                <p class="version-info">・標準システム<br />・社会システムのアップデート<br />・HARUPAY/ブラウザの操作性向上<br />・爆破関連の対策<br />※その他にも様々な機能があります</p>
+                            </div>
                         </div>
-                    </div>
-                     <div class="version-entry">
-                        <h4>HARUPhone1_v2.7.7</h4>
-                        <div class="download-buttons">
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.7.7.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.7.7</a>
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.7.7.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.7.7</a>
-                            <p class="version-info">・標準システム<br>・社会システムのアップデート<br>・HARUPAY/請求の軽量化<br>※その他にも様々な機能があります</p>
+                        <div class="version-entry">
+                            <h4>HARUPhone1_v2.7.7</h4>
+                            <div class="download-buttons">
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.7.7.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.7.7</a>
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.7.7.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.7.7</a>
+                                <p class="version-info">・標準システム<br />・社会システムのアップデート<br />・HARUPAY/請求の軽量化<br />※その他にも様々な機能があります</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="version-entry">
-                        <h4>HARUPhone1_v2.7.6</h4>
-                        <div class="download-buttons">
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.7.6.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.7.6</a>
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.7.6.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.7.6</a>
-                            <p class="version-info">・標準システム<br>・社会システムの一部不具合修正<br>・HARUApps対応<br>※その他にも様々な機能があります</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion">
-                <div class="accordion-header">2025年6月リリース</div>
-                <div class="accordion-content">
-                    <div class="version-entry">
-                        <h4>HARUPhone1_v2.7.4</h4>
-                        <div class="download-buttons">
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.7.4.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.7.4</a>
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.7.4.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.7.4</a>
-                            <p class="version-info">・標準システム<br>・社会システムのアップデート (インタラクト制限可)<br>・サウンド設定の追加<br>・大幅軽量化<br>※その他にも様々な機能があります</p>
-                        </div>
-                    </div>
-                    <div class="version-entry">
-                        <h4>HARUPhone1_v2.7.2</h4>
-                        <div class="download-buttons">
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.7.2.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.7.2</a>
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.7.2.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.7.2</a>
-                            <p class="version-info">・標準システム<br>・社会システムのアップデート<br>・ポストアイテムの追加<br>※その他にも様々な機能があります</p>
-                        </div>
-                    </div>
-                    <div class="version-entry">
-                        <h4>HARUPhone1_v2.6.2</h4>
-                        <div class="download-buttons">
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.6.2.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.6.2</a>
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.6.2.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.6.2</a>
-                            <p class="version-info">・標準システム<br>・社会システム&自動販売機のアップデート<br>※その他にも様々な機能があります</p>
-                        </div>
-                    </div>
-                    <div class="version-entry">
-                        <h4>HARUPhone1_v2.6.0</h4>
-                        <div class="download-buttons">
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.6.0.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.6.0</a>
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.6.0.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.6.0</a>
-                            <p class="version-info">・標準システム<br>・社会システム&自動販売機&キルカウントシステムのアップデート<br>※その他にも様々な機能があります</p>
+                        <div class="version-entry">
+                            <h4>HARUPhone1_v2.7.6</h4>
+                            <div class="download-buttons">
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.7.6.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.7.6</a>
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.7.6.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.7.6</a>
+                                <p class="version-info">・標準システム<br />・社会システムの一部不具合修正<br />・HARUApps対応<br />※その他にも様々な機能があります</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="accordion">
-                <div class="accordion-header">2025年5月リリース</div>
-                <div class="accordion-content">
-                    <div class="version-entry">
-                        <h4>HARUPhone1_v2.5.7</h4>
-                        <div class="download-buttons">
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.5.7.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.5.7</a>
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.5.7.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.5.7</a>
-                            <p class="version-info">・標準システム<br>・社会システム&自動販売機&キルカウントシステムのアップデート<br>※その他にも様々な機能があります</p>
+                <div class="accordion">
+                    <div class="accordion-header">2025年6月リリース</div>
+                    <div class="accordion-content">
+                        <div class="version-entry">
+                            <h4>HARUPhone1_v2.7.4</h4>
+                            <div class="download-buttons">
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.7.4.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.7.4</a>
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.7.4.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.7.4</a>
+                                <p class="version-info">・標準システム<br />・社会システムのアップデート (インタラクト制限可)<br />・サウンド設定の追加<br />・大幅軽量化<br />※その他にも様々な機能があります</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="version-entry">
-                        <h4>HARUPhone1_v2.5.5</h4>
-                        <div class="download-buttons">
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.5.5.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.5.5</a>
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.5.5.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.5.5</a>
-                            <p class="version-info">・標準システム<br>・キルカウントシステムのアップデート<br>※その他にも様々な機能があります</p>
+                        <div class="version-entry">
+                            <h4>HARUPhone1_v2.7.2</h4>
+                            <div class="download-buttons">
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.7.2.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.7.2</a>
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.7.2.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.7.2</a>
+                                <p class="version-info">・標準システム<br />・社会システムのアップデート<br />・ポストアイテムの追加<br />※その他にも様々な機能があります</p>
+                            </div>
                         </div>
-                    </div>
-                     <div class="version-entry">
-                        <h4>HARUPhone1_v2.5.3</h4>
-                        <div class="download-buttons">
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.5.3.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.5.3</a>
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.5.3.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.5.3</a>
-                            <p class="version-info">・社会システム/Map追加<br>※その他にも様々な機能があります</p>
+                        <div class="version-entry">
+                            <h4>HARUPhone1_v2.6.2</h4>
+                            <div class="download-buttons">
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.6.2.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.6.2</a>
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.6.2.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.6.2</a>
+                                <p class="version-info">・標準システム<br />・社会システム&自動販売機のアップデート<br />※その他にも様々な機能があります</p>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion">
-                <div class="accordion-header">2025年4月リリース</div>
-                <div class="accordion-content">
-                     <div class="version-entry">
-                        <h4>HARUPhone1_v2.4.0</h4>
-                        <div class="download-buttons">
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.4.0.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.4.0</a>
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.4.0.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.4.0</a>
-                            <p class="version-info">・HARUPAY<br>・Quick<br>・メール<br>・オープンチャット<br>・Advance<br>・換金<br>・購入<br>・HARUAssistant<br>・HARU-X-Editor<br>・Short<br>・ブラウザ<br>・OperatorController<br>※その他にも様々な機能があります</p>
-                        </div>
-                    </div>
-                    <div class="version-entry">
-                        <h4>HARUPhone1_v2.3.8</h4>
-                        <div class="download-buttons">
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.3.8.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.3.8</a>
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.3.8.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.3.8</a>
-                            <p class="version-info">・HARUPAY<br>・Quick<br>・メール<br>・オープンチャット<br>・Advance<br>・換金<br>・購入<br>・HARUAssistant<br>・HARU-X-Editor<br>・Short<br>・ブラウザ<br>・OperatorController<br>※その他にも様々な機能があります</p>
-                        </div>
-                    </div>
-                    <div class="version-entry">
-                        <h4>HARUPhone1_v2.3.7</h4>
-                        <div class="download-buttons">
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.3.7.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.3.7</a>
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.3.7.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.3.7</a>
-                            <p class="version-info">・動作不安定 [利用非推奨]</p>
-                        </div>
-                    </div>
-                    <div class="version-entry">
-                        <h4>HARUPhone1_v2.3.6</h4>
-                        <div class="download-buttons">
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.3.6.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.3.6</a>
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.3.6.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.3.6</a>
-                            <p class="version-info">・HARUPAY<br>・Quick<br>・メール<br>・オープンチャット<br>・Advance<br>・換金<br>・購入<br>・HARUAssistant<br>・HARU-X-Editor<br>・Short<br>・ブラウザ<br>・OperatorController<br>※その他にも様々な機能があります</p>
-                        </div>
-                    </div>
-                    <div class="version-entry">
-                        <h4>HARUPhone1_v2.3.5</h4>
-                        <div class="download-buttons">
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.3.5.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.3.5</a>
-                            <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.3.5.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.3.5</a>
-                            <p class="version-info">・HARUPAY<br>・Quick<br>・メール<br>・オープンチャット<br>・Advance<br>・換金<br>・購入<br>・HARUAssistant<br>・HARU-X-Editor<br>・Short<br>・ブラウザ<br>・OperatorController<br>※その他にも様々な機能があります</p>
+                        <div class="version-entry">
+                            <h4>HARUPhone1_v2.6.0</h4>
+                            <div class="download-buttons">
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.6.0.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.6.0</a>
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.6.0.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.6.0</a>
+                                <p class="version-info">・標準システム<br />・社会システム&自動販売機&キルカウントシステムのアップデート<br />※その他にも様々な機能があります</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                <div class="accordion">
+                    <div class="accordion-header">2025年5月リリース</div>
+                    <div class="accordion-content">
+                        <div class="version-entry">
+                            <h4>HARUPhone1_v2.5.7</h4>
+                            <div class="download-buttons">
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.5.7.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.5.7</a>
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.5.7.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.5.7</a>
+                                <p class="version-info">・標準システム<br />・社会システム&自動販売機&キルカウントシステムのアップデート<br />※その他にも様々な機能があります</p>
+                            </div>
+                        </div>
+                        <div class="version-entry">
+                            <h4>HARUPhone1_v2.5.5</h4>
+                            <div class="download-buttons">
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.5.5.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.5.5</a>
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.5.5.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.5.5</a>
+                                <p class="version-info">・標準システム<br />・キルカウントシステムのアップデート<br />※その他にも様々な機能があります</p>
+                            </div>
+                        </div>
+                        <div class="version-entry">
+                            <h4>HARUPhone1_v2.5.3</h4>
+                            <div class="download-buttons">
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.5.3.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.5.3</a>
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.5.3.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.5.3</a>
+                                <p class="version-info">・社会システム/Map追加<br />※その他にも様々な機能があります</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-header">2025年4月リリース</div>
+                    <div class="accordion-content">
+                        <div class="version-entry">
+                            <h4>HARUPhone1_v2.4.0</h4>
+                            <div class="download-buttons">
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.4.0.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.4.0</a>
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.4.0.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.4.0</a>
+                                <p class="version-info">・HARUPAY<br />・Quick<br />・メール<br />・オープンチャット<br />・Advance<br />・換金<br />・購入<br />・HARUAssistant<br />・HARU-X-Editor<br />・Short<br />・ブラウザ<br />・OperatorController<br />※その他にも様々な機能があります</p>
+                            </div>
+                        </div>
+                        <div class="version-entry">
+                            <h4>HARUPhone1_v2.3.8</h4>
+                            <div class="download-buttons">
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.3.8.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.3.8</a>
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.3.8.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.3.8</a>
+                                <p class="version-info">・HARUPAY<br />・Quick<br />・メール<br />・オープンチャット<br />・Advance<br />・換金<br />・購入<br />・HARUAssistant<br />・HARU-X-Editor<br />・Short<br />・ブラウザ<br />・OperatorController<br />※その他にも様々な機能があります</p>
+                            </div>
+                        </div>
+                        <div class="version-entry">
+                            <h4>HARUPhone1_v2.3.7</h4>
+                            <div class="download-buttons">
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.3.7.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.3.7</a>
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.3.7.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.3.7</a>
+                                <p class="version-info">・動作不安定 [利用非推奨]</p>
+                            </div>
+                        </div>
+                        <div class="version-entry">
+                            <h4>HARUPhone1_v2.3.6</h4>
+                            <div class="download-buttons">
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.3.6.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.3.6</a>
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.3.6.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.3.6</a>
+                                <p class="version-info">・HARUPAY<br />・Quick<br />・メール<br />・オープンチャット<br />・Advance<br />・換金<br />・購入<br />・HARUAssistant<br />・HARU-X-Editor<br />・Short<br />・ブラウザ<br />・OperatorController<br />※その他にも様々な機能があります</p>
+                            </div>
+                        </div>
+                        <div class="version-entry">
+                            <h4>HARUPhone1_v2.3.5</h4>
+                            <div class="download-buttons">
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.3.5.mcaddon" class="download-btn_back">【mcaddon】HARUPhone1_v2.3.5</a>
+                                <a href="https://harugames8686.github.io/HARUAddonsPages/addonfile/HARUPhone1_v.2.3.5.zip" class="download-btn_back">【ZIP】HARUPhone1_v2.3.5</a>
+                                <p class="version-info">・HARUPAY<br />・Quick<br />・メール<br />・オープンチャット<br />・Advance<br />・換金<br />・購入<br />・HARUAssistant<br />・HARU-X-Editor<br />・Short<br />・ブラウザ<br />・OperatorController<br />※その他にも様々な機能があります</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            <h2>注意事項</h2>
-            <p>過去バージョンはサポートが終了している場合があります。最新バージョンでの動作が不安定な場合にご利用ください。</p>
-        </div>
-    </section>
+                <h2>注意事項</h2>
+                <p>過去バージョンはサポートが終了している場合があります。最新バージョンでの動作が不安定な場合にご利用ください。</p>
+            </div>
+        </section>
 
-    <footer>
-        <p>© 2025 HARU Addons. All Rights Reserved.</p>
-    </footer>
+        <footer>
+            <p>© 2025 HARU Addons. All Rights Reserved.</p>
+        </footer>
 
-    <script>
-        const menuToggle = document.querySelector('.menu-toggle');
-        const mobileNav = document.querySelector('.mobile-nav');
-        menuToggle.addEventListener('click', () => {
-            const isExpanded = mobileNav.classList.toggle('active');
-            menuToggle.setAttribute('aria-expanded', isExpanded);
-            menuToggle.classList.toggle('open');
-        });
-
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 30) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-
-        document.querySelectorAll('.accordion-header').forEach(header => {
-            header.addEventListener('click', () => {
-                const content = header.nextElementSibling;
-                header.classList.toggle('active');
-                content.classList.toggle('active');
+        <script>
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mobileNav = document.querySelector('.mobile-nav');
+            menuToggle.addEventListener('click', () => {
+                const isExpanded = mobileNav.classList.toggle('active');
+                menuToggle.setAttribute('aria-expanded', isExpanded);
+                menuToggle.classList.toggle('open');
             });
-        });
-    </script>
-</body>
+
+            window.addEventListener('scroll', () => {
+                const nav = document.querySelector('nav');
+                if (window.scrollY > 30) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+
+            document.querySelectorAll('.accordion-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    header.classList.toggle('active');
+                    content.classList.toggle('active');
+                });
+            });
+        </script>
+    </body>
 </html>
-
-
-
-
-

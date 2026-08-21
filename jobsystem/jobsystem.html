@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
     <head>
         <meta charset="UTF-8" />
@@ -17,7 +17,16 @@
         <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />
 
         <!-- Google tag (gtag.js) -->
-　　　　　<script async src="https://www.googletagmanager.com/gtag/js?id=G-WTVSFX0F18"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-WTVSFX0F18"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'G-WTVSFX0F18');
+        </script>
 
         <style>
             :root {
@@ -614,10 +623,7 @@
                 </div>
 
                 <h2>アドオンの概要</h2>
-                <p>
-                    JobSystemは、「家畜」「鉱夫」「林業」「農業」「冒険家」「釣り人」といった職業に就いて、それぞれの活動に応じてマネーを獲得できる職業システムを提供します。
-                    職業レベルが上がるごとに、エフェクトなどの報酬も受け取ることができ、報酬やマネーは管理者が自由にカスタマイズ可能です。
-                </p>
+                <p>JobSystemは、「家畜」「鉱夫」「林業」「農業」「冒険家」「釣り人」といった職業に就いて、それぞれの活動に応じてマネーを獲得できる職業システムを提供します。 職業レベルが上がるごとに、エフェクトなどの報酬も受け取ることができ、報酬やマネーは管理者が自由にカスタマイズ可能です。</p>
 
                 <h2>アドオンの入手</h2>
                 <p>JobSystemは以下のボタンからダウンロードできます。</p>
@@ -631,27 +637,27 @@
                 <p>■ 選べる6つの職業</p>
                 <ul>
                     <li>
-                        <strong>家畜</strong><br>
+                        <strong>家畜</strong><br />
                         <code>動物を倒すとポイント獲得</code>
                     </li>
                     <li>
-                        <strong>鉱夫</strong><br>
+                        <strong>鉱夫</strong><br />
                         <code>自然生成鉱石を（シルクタッチなしで）採掘してポイント獲得</code>
                     </li>
                     <li>
-                        <strong>林業</strong><br>
+                        <strong>林業</strong><br />
                         <code>自然生成の木材を伐採してポイント獲得</code>
                     </li>
                     <li>
-                        <strong>農業</strong><br>
+                        <strong>農業</strong><br />
                         <code>育ち切った作物を収穫してポイント獲得</code>
                     </li>
                     <li>
-                        <strong>冒険家</strong><br>
+                        <strong>冒険家</strong><br />
                         <code>モンスターを倒してポイント獲得</code>
                     </li>
                     <li>
-                        <strong>釣り人</strong><br>
+                        <strong>釣り人</strong><br />
                         <code>釣りでアイテムを得てポイント獲得</code>
                     </li>
                 </ul>
@@ -677,10 +683,7 @@
                 </ul>
 
                 <h2>カスタマイズ性</h2>
-                <p>
-                    このアドオンは、GUIベースで設定できるため、各職業のポイント設定やレベル要件、対象アイテム・モブなどを簡単に調整可能。
-                    サーバーの雰囲気に合わせて柔軟に運用できます。
-                </p>
+                <p>このアドオンは、GUIベースで設定できるため、各職業のポイント設定やレベル要件、対象アイテム・モブなどを簡単に調整可能。 サーバーの雰囲気に合わせて柔軟に運用できます。</p>
 
                 <h2>初期設定方法（単体利用時）</h2>
                 <p>単体で利用する場合は、次のコマンドを実行してください：</p>
@@ -691,54 +694,39 @@
                 <h2>HARUPhone1との連携手順</h2>
                 <p>HARUPhone1を導入している場合は、以下の手順で職業システムとの連携が可能です。</p>
                 <ul class="no-bullet">
+                    <li><strong>1.</strong> HARUPhone1を開き「OperatorController」→「UIカスタマイズ」を選択</li>
+                    <li><strong>2.</strong> UIカスタマイズから「アプリケーション」を追加</li>
+                    <li><strong>3.</strong> 「HARU-X-Editor」で「新規作成」→ アプリ名「職業」と入力</li>
+                    <li><strong>4.</strong> 「コマンド(複数可)を実行」を選び、作成します</li>
+                    <li><strong>5.</strong> 「編集」→ 「コマンド編集」→ 実行0に <code>scriptevent haruapps:job</code> を入力し保存</li>
+                    <li><strong>6.</strong> アプリケーション編集メイン画面から「公開設定」にて公開に変更してください</li>
                     <li>
-                        <strong>1.</strong> HARUPhone1を開き「OperatorController」→「UIカスタマイズ」を選択
-                    </li>
-                    <li>
-                        <strong>2.</strong> UIカスタマイズから「アプリケーション」を追加
-                    </li>
-                    <li>
-                        <strong>3.</strong> 「HARU-X-Editor」で「新規作成」→ アプリ名「職業」と入力
-                    </li>
-                    <li>
-                        <strong>4.</strong> 「コマンド(複数可)を実行」を選び、作成します
-                    </li>
-                    <li>
-                        <strong>5.</strong> 「編集」→ 「コマンド編集」→ 実行0に <code>scriptevent haruapps:job</code> を入力し保存
-                    </li>
-                    <li>
-                        <strong>6.</strong> アプリケーション編集メイン画面から「公開設定」にて公開に変更してください
-                    </li>
-                    <li>
-                        <br>
+                        <br />
                         これで「職業」アプリがHARUPhone1内に追加され、メニューから起動可能になります。連携利用時は、職業アドオンのリソースパックは不要です。
                     </li>
                 </ul>
 
                 <h2>利用規約</h2>
-                <p>
-                    本アドオンをご利用いただく際の、いくつかお願いがございます。
-                    皆様に気持ちよくご利用いただくために、ご一読いただけますと幸いです。
-                </p>
+                <p>本アドオンをご利用いただく際の、いくつかお願いがございます。 皆様に気持ちよくご利用いただくために、ご一読いただけますと幸いです。</p>
                 <ul class="no-bullet">
                     <li>
-                        <strong>二次配布は禁止</strong><br>
+                        <strong>二次配布は禁止</strong><br />
                         <code>本アドオンを、許可なく他のサイトやサービスで再配布することはご遠慮ください。</code>
                     </li>
                     <li>
-                        <strong>配布ワールドへの導入OK</strong><br>
+                        <strong>配布ワールドへの導入OK</strong><br />
                         <code>ご自身で作成されたワールドに本アドオンを組み込んで配布することは問題ありません。</code>
                     </li>
                     <li>
-                        <strong>配信での使用OK</strong><br>
+                        <strong>配信での使用OK</strong><br />
                         <code>YouTubeやTwitchなどでの配信で本アドオンを使用していただくことは歓迎いたします。</code>
                     </li>
                     <li>
-                        <strong>商用利用OK</strong><br>
+                        <strong>商用利用OK</strong><br />
                         <code>収益化された動画やサーバーでの使用も許可しております。</code>
                     </li>
                     <li>
-                        <strong>改造は禁止</strong><br>
+                        <strong>改造は禁止</strong><br />
                         <code>アドオンのコードを改変したり、逆コンパイルしたりする行為は禁止とさせていただきます。</code>
                     </li>
                 </ul>
