@@ -289,11 +289,21 @@
                 color: #0056b3;
             }
 
-            .addon-content .buttons {
+             .addon-content .buttons.back-buttons {
                 display: flex;
                 gap: 1rem;
                 margin-bottom: 1.5rem;
+                justify-content: flex-start;
             }
+            /* 記事内カスタムボタングループ (中央揃え) */
+            .addon-content .buttons.content-buttons {
+                display: flex;
+                gap: 1rem;
+                margin: 1.5rem 0;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            /* 戻るボタンスタイル (復元) */
             .addon-content .btn-back {
                 display: inline-flex;
                 align-items: center;
@@ -311,6 +321,82 @@
                 background: var(--primary-light);
                 color: var(--primary) !important;
                 transform: translateY(-2px);
+            }
+            /* 記事内リンクボタン */
+            .addon-content .btn-custom {
+                padding: 0.8rem 2rem;
+                background: var(--btn-bg, var(--accent));
+                color: #ffffff !important;
+                text-decoration: none !important;
+                border-radius: 50px;
+                font-size: 1rem;
+                font-weight: 700;
+                font-family: var(--font-sans-jp);
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .addon-content .btn-custom:hover {
+                transform: translateY(-2px);
+                filter: brightness(0.9);
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            }
+
+             /* --- アコーディオン (過去バージョン用) --- */
+            .accordion {
+                margin: 1.5rem 0;
+                border-radius: 12px;
+                overflow: hidden;
+                box-shadow: var(--shadow-soft);
+            }
+            .accordion-header {
+                background: linear-gradient(135deg, #6c757d, #343a40);
+                color: #ffffff;
+                padding: 1rem 1.5rem;
+                font-size: 1.2rem;
+                font-weight: 700;
+                cursor: pointer;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                transition: background 0.3s ease;
+            }
+            .accordion-header:hover {
+                background: linear-gradient(135deg, #5a6268, #2c3e50);
+            }
+            .accordion-header::after {
+                content: '▼';
+                font-size: 0.9rem;
+                transition: transform 0.3s ease;
+            }
+            .accordion-header.active::after {
+                transform: rotate(180deg);
+            }
+            .accordion-content {
+                display: none;
+                padding: 1.5rem;
+                background: var(--bg-white);
+            }
+            .accordion-content.active {
+                display: block;
+            }
+            .version-entry {
+                margin-bottom: 1.5rem;
+            }
+            .version-entry:last-child {
+                margin-bottom: 0;
+            }
+            .version-entry h4 {
+                font-size: 1.2rem;
+                font-weight: 700;
+                color: var(--text-dark);
+                margin-bottom: 0.8rem;
+            }
+            .version-entry .download-buttons {
+                margin: 0;
+                padding: 1rem;
             }
 
             /* --- ダウンロードボタン --- */
@@ -594,6 +680,7 @@
                 .download-btn, .download-btn_back, .download-btn_out, .download-btn_alpha {
                     min-height: 52px;
                     padding: 0.8rem 2.8rem 0.8rem 1.2rem;
+                    font-size: 1rem;
                 }
 
                 /* 1列画像: タブレット・大きめスマホで程よい88%幅 */
@@ -629,6 +716,7 @@
                 .download-btn_alpha {
                     min-height: 48px;
                     padding: 0.75rem 2.6rem 0.75rem 1rem;
+                    font-size: 0.9rem;
                 }
                 .download-btn::before,
                 .download-btn_back::before,
@@ -698,7 +786,7 @@
 
         <section class="addon-page">
             <div class="addon-content">
-                <div class="buttons">
+                <div class="buttons back-buttons">
                     <a href="../index.html" class="btn-back">戻る</a>
                 </div>
 
@@ -768,16 +856,18 @@
                 <div class="content-image-box cols-1" style="--img-max-width: 35%;">
                     <div class="content-image-item"><img src="https://haruaddons.f5.si/picture/スクリーンショット 2026-08-23 184053.png" alt="SecurityCraft" loading="lazy" /></div>
                 </div>
-                <h3>プレイヤーの監視/管理</h3>
-                <p>①プレイヤーの視点を監視</p>
+                <h3>プレイヤーの監視/管理/記録</h3>
+                <h4>①プレイヤーの視点を監視</h4>
                 <div class="content-image-box cols-1" style="--img-max-width: 35%;">
                     <div class="content-image-item"><img src="https://haruaddons.f5.si/picture/スクリーンショット 2026-08-23 190007.png" alt="SecurityCraft" loading="lazy" /></div>
                 </div>
-                <p>②プレイヤーのインベントリを確認</p>
+                <h4>②プレイヤーのインベントリ管理</h4>
                 <div class="content-image-box cols-1" style="--img-max-width: 35%;">
-                    <div class="content-image-item"><img src="https://haruaddons.f5.si/picture/スクリーンショット 2026-08-23 184119.png" alt="SecurityCraft" loading="lazy" /></div>
+                    <div class="content-image-item"><img src="https://haruaddons.f5.si/picture/スクリーンショット 2026-08-24 024635.png" alt="SecurityCraft" loading="lazy" /></div>
+                    <div class="content-image-item"><img src="https://haruaddons.f5.si/picture/スクリーンショット 2026-08-24 024727.png" alt="SecurityCraft" loading="lazy" /></div>
                 </div>
-                <p>③より詳細にかつリストで分かりやすく記録確認</p>
+                <p><strong>※エンダーチェストも確認できます</strong></p>
+                <h4>③より詳細にかつリストで分かりやすく記録確認</h4>
                 <div class="content-image-box cols-1" style="--img-max-width: 35%;">
                     <div class="content-image-item"><img src="https://haruaddons.f5.si/picture/スクリーンショット 2026-08-23 184127.png" alt="SecurityCraft" loading="lazy" /></div>
                     <div class="content-image-item"><img src="https://haruaddons.f5.si/picture/スクリーンショット 2026-08-23 184134.png" alt="SecurityCraft" loading="lazy" /></div>
@@ -830,6 +920,14 @@
         </footer>
 
         <script>
+           // アコーディオン開閉
+            document.querySelectorAll('.accordion-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    header.classList.toggle('active');
+                    content.classList.toggle('active');
+                });
+            });
            function adjustDownloadButtonFontSize() {
                 document.querySelectorAll('.download-btn, .download-btn_back, .download-btn_out, .download-btn_alpha').forEach(btn => {
                     btn.style.fontSize = '';
