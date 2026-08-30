@@ -767,21 +767,64 @@
                     font-size: 1rem;
                 }
 
-                /* 1列画像: タブレット・大きめスマホで程よい88%幅 */
-                .content-image-box.cols-1 .content-image-item {
-                    width: 88%;
-                    max-width: 88%;
-                }
+                /* タブレット: 3列・4列は2列に折り返し */
                 .content-image-box {
-                    gap: 8px;
+                    gap: 10px;
                 }
                 .content-image-box.cols-3 .content-image-item,
                 .content-image-box.cols-4 .content-image-item {
-                    width: calc(50% - 4px);
-                    max-width: calc(50% - 4px);
+                    width: calc(50% - 5px);
+                    max-width: calc(50% - 5px);
                 }
             }
 
+            @media (max-width: 480px) {
+                .logo-container .logo { font-size: 1.3rem; }
+                .logo-container img { width: 30px; height: 30px; }
+                .mobile-nav { width: 200px; top: 80px; right: 15px; }
+                .addon-header { padding: 5rem 0.5rem 1.5rem; }
+                .addon-header h1 { font-size: 1.5rem; }
+                .addon-page { padding: 0 0.8rem 3.5rem; }
+                .addon-content { padding: 1.3rem; }
+
+                .download-buttons {
+                    padding: 0.8rem;
+                }
+                .download-btn,
+                .download-btn_back,
+                .download-btn_out,
+                .download-btn_alpha {
+                    min-height: 48px;
+                    padding: 0.75rem 2.6rem 0.75rem 1rem;
+                    font-size: 0.9rem;
+                }
+                .download-btn::before,
+                .download-btn_back::before,
+                .download-btn_out::before,
+                .download-btn_alpha::before {
+                    font-size: 0.7rem;
+                    padding: 0.15rem 0.4rem;
+                }
+                .version-info {
+                    font-size: 0.8rem;
+                }
+
+                /* スマホ: 崩れ防止のため全ての画像列数を1列(100%幅)に統一 */
+                .content-image-box {
+                    gap: 12px;
+                }
+                .content-image-box.cols-1 .content-image-item,
+                .content-image-box.cols-2 .content-image-item,
+                .content-image-box.cols-3 .content-image-item,
+                .content-image-box.cols-4 .content-image-item {
+                    width: 100% !important;
+                    max-width: 100% !important;
+                }
+                .content-image-item .image-caption {
+                    font-size: 0.85rem;
+                }
+            }
+                
             @media (max-width: 480px) {
                 .logo-container .logo { font-size: 1.3rem; }
                 .logo-container img { width: 30px; height: 30px; }
@@ -887,7 +930,7 @@
                 </div>
                 <h2>使い方</h2>
                 <p>以下のページをご確認ください。</p>
-                <a href="https://haruaddons.f5.si/haruphone1/haruphone1_usage.html" class="link-card" target="_blank" rel="noopener noreferrer">
+                <a href="./haruphone1_usage.html" class="link-card">
                     <div class="link-card-content">
                         <div class="link-card-title">HARUPhone1の使い方</div>
                         <div class="link-card-domain">haruaddons.f5.si</div>
