@@ -625,7 +625,7 @@
                 max-width: calc(25% - 9px);
             }
 
-            .content-image-item img {
+           .content-image-item img {
                 width: 100%;
                 max-width: 100%;
                 height: auto;
@@ -820,6 +820,10 @@
                     width: 100% !important;
                     max-width: 100% !important;
                 }
+                /* スマホで1列表示のときは元の画像比率に戻して全体を表示 */
+                .content-image-box .content-image-item img {
+                    aspect-ratio: auto !important;
+                }
                 .content-image-item .image-caption {
                     font-size: 0.85rem;
                 }
@@ -966,6 +970,7 @@
                 </div>
                 <h2>アップデート履歴</h2>
                 <ul class="setup-list" style="--bullet-color: #495057;">
+                    <li>2026/10/14 - サブスクリプション機能追加/給付&支給機能追加/オフラインへの送金/その他改善</li>
                     <li>2026/08/20 - HARUApp2の追加(他のアドオンの連携が簡単に) / 自動買取の予算表示</li>
                     <li>2026/04/04 - ブラックジャックの改良</li>
                     <li>2026/03/23 - 自動買取機の追加 / Advanceの改良 / GAMEブロックでのブラックジャックの追加</li>
