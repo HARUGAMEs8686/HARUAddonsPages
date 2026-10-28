@@ -14,7 +14,10 @@
         <link rel="canonical" href="https://harugames8686.github.io/HARUAddonsPages/developer_info.html" />
         <meta name="twitter:card" content="summary_large_image" />
         <link rel="icon" type="image/png" href="./icon.png" sizes="32x32" />
-        <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=M+PLUS+Rounded+1c:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />
 
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-WTVSFX0F18"></script>
@@ -33,7 +36,7 @@
                 --bg-light: #f8f9fa;
                 --bg-white: #ffffff;
                 --text-dark: #343a40;
-                --text-muted: #6c757d;
+                --text-muted: #333333;
                 --primary: #007bff;
                 --primary-light: #e6f2ff;
                 --accent: #28a745;
@@ -43,6 +46,8 @@
                 --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.12);
                 --font-sans-jp: 'Noto Sans JP', sans-serif;
                 --font-rounded: 'M PLUS Rounded 1c', sans-serif;
+                --font-heading: 'Poppins', sans-serif;
+                --rounded-full: 9999px;
             }
 
             * {
@@ -57,66 +62,63 @@
                 font-family: var(--font-sans-jp);
                 line-height: 1.7;
                 overflow-x: hidden;
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
             }
 
+            /* ナビゲーション */
             nav {
                 position: fixed;
-                top: 15px;
+                top: 1rem;
                 left: 50%;
                 transform: translateX(-50%);
-                width: calc(100% - 40px);
+                width: calc(100% - 2rem);
                 max-width: 1100px;
-                background: rgba(255, 255, 255, 0.85);
+                background: rgba(255, 255, 255, 0.7);
                 backdrop-filter: blur(10px);
-                border-radius: 30px;
-                padding: 0.8rem 1.8rem;
+                border-radius: var(--rounded-full);
+                padding: 0.75rem 1.5rem;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 z-index: 1000;
                 box-shadow: var(--shadow-soft);
-                border: 1px solid rgba(0, 0, 0, 0.05);
+                border: 1px solid var(--border-color);
                 transition: all 0.3s ease;
             }
-
             nav.scrolled {
                 top: 10px;
                 background: rgba(255, 255, 255, 0.95);
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             }
-
             .logo-container {
                 display: flex;
                 align-items: center;
-                gap: 0.8rem;
+                gap: 0.75rem;
                 text-decoration: none;
             }
-
             .logo-container img {
-                width: 35px;
-                height: 35px;
-                transition: transform 0.3s ease;
+                width: 32px;
+                height: 32px;
+                transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             }
             .logo-container:hover img {
-                transform: rotate(15deg);
+                transform: rotate(20deg) scale(1.1);
             }
-
             .logo-container .logo {
-                font-size: 1.6rem;
+                font-size: 1.5rem;
                 font-weight: 700;
-                font-family: var(--font-rounded);
-                color: var(--primary);
-                letter-spacing: 0.5px;
+                font-family: var(--font-heading);
+                color: var(--text-dark);
             }
-
             nav ul {
                 display: flex;
                 list-style: none;
                 gap: 1rem;
             }
-
             nav ul li a {
-                color: var(--text-muted);
+                color: var(--text-dark);
                 text-decoration: none;
                 font-size: 1rem;
                 font-weight: 700;
@@ -124,14 +126,12 @@
                 border-radius: 20px;
                 transition: all 0.3s ease;
             }
-
             nav ul li a:hover,
             nav ul li a.active {
                 background: var(--primary-light);
                 color: var(--primary);
                 transform: translateY(-2px);
             }
-
             .menu-toggle {
                 display: none;
                 font-size: 1.8rem;
@@ -143,10 +143,6 @@
                 border-radius: 50%;
                 transition: background-color 0.3s;
             }
-            .menu-toggle:hover {
-                background-color: var(--primary-light);
-            }
-
             .menu-toggle span {
                 display: block;
                 width: 25px;
@@ -169,10 +165,11 @@
             .mobile-nav {
                 display: none;
                 position: fixed;
-                top: 80px;
+                top: 90px;
                 right: 20px;
                 width: 220px;
-                background: var(--bg-white);
+                background: rgba(255, 255, 255, 0.7);
+                backdrop-filter: blur(10px);
                 border-radius: 15px;
                 padding: 1rem;
                 z-index: 999;
@@ -183,17 +180,14 @@
                 transition: all 0.3s ease;
                 list-style: none;
             }
-
             .mobile-nav.active {
                 display: block;
                 transform: translateY(0);
                 opacity: 1;
             }
-
             .mobile-nav li {
                 margin-bottom: 0.5rem;
             }
-
             .mobile-nav li a {
                 color: var(--text-dark);
                 text-decoration: none;
@@ -204,16 +198,16 @@
                 display: block;
                 transition: all 0.3s ease;
             }
-
             .mobile-nav li a:hover {
                 background: var(--primary-light);
                 color: var(--primary);
             }
 
+            /* ヘッダー・メインコンテンツ */
             .developer-info {
-                padding: 8rem 2rem 5rem;
+                padding: 7.5rem 2rem 5rem;
                 background-color: var(--bg-light);
-                min-height: 70vh;
+                flex: 1;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -223,9 +217,9 @@
                 font-size: 2.5rem;
                 font-weight: 700;
                 font-family: var(--font-rounded);
-                color: var(--primary);
+                color: var(--text-dark);
                 text-align: center;
-                margin-bottom: 3.5rem;
+                margin-bottom: 2.5rem;
                 position: relative;
                 display: inline-block;
             }
@@ -249,7 +243,7 @@
                 max-width: 1200px;
                 width: 100%;
                 margin: 0 auto;
-                justify-content: center; /* カードを中央揃えにするために追加 */
+                justify-content: center;
             }
 
             .developer-card {
@@ -257,7 +251,8 @@
                 border-radius: 16px;
                 padding: 2rem;
                 box-shadow: var(--shadow-soft);
-                transition: all 0.3s ease-in-out;
+                transition: all 0.3s ease;
+                border: 1px solid var(--border-color);
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -265,8 +260,9 @@
             }
 
             .developer-card:hover {
-                transform: translateY(-5px);
+                transform: translateY(-3px);
                 box-shadow: var(--shadow-hover);
+                border-color: var(--primary);
             }
 
             .developer-header {
@@ -286,12 +282,13 @@
             .developer-header h2 {
                 font-size: 1.8rem;
                 font-weight: 700;
+                font-family: var(--font-rounded);
                 color: var(--text-dark);
                 margin: 0;
             }
 
             .developer-card p.role {
-                font-size: 1.2rem;
+                font-size: 1.15rem;
                 font-weight: 700;
                 color: var(--primary);
                 margin-bottom: 1rem;
@@ -300,23 +297,24 @@
             .developer-card p.bio {
                 font-size: 1rem;
                 color: var(--text-muted);
-                line-height: 1.6;
+                line-height: 1.7;
             }
 
+            /* フッター */
             footer {
                 background-color: var(--text-dark);
                 color: var(--bg-light);
                 text-align: center;
-                padding: 2rem 1rem;
-                margin-top: 4rem;
+                padding: 2.5rem 1rem;
+                margin-top: auto;
             }
-
             footer p {
                 font-size: 0.9rem;
                 opacity: 0.8;
                 letter-spacing: 0.5px;
             }
 
+            /* レスポンシブ対応 */
             @media (max-width: 992px) {
                 nav ul {
                     gap: 0.5rem;
@@ -325,7 +323,7 @@
                     padding: 0.5rem 0.8rem;
                 }
                 .developer-info h1 {
-                    font-size: 2rem;
+                    font-size: 2.2rem;
                 }
                 .developer-grid {
                     gap: 1.5rem;
@@ -368,9 +366,6 @@
             }
 
             @media (max-width: 480px) {
-                body {
-                    line-height: 1.6;
-                }
                 .logo-container .logo {
                     font-size: 1.3rem;
                 }
@@ -380,19 +375,14 @@
                 }
                 .mobile-nav {
                     width: 200px;
-                    top: 70px;
+                    top: 80px;
                     right: 15px;
                 }
                 .developer-info {
                     padding: 5rem 0.8rem 3rem;
                 }
                 .developer-info h1 {
-                    font-size: 1.6rem;
-                }
-                .developer-info h1::after {
-                    width: 50px;
-                    height: 3px;
-                    bottom: -8px;
+                    font-size: 1.5rem;
                 }
                 .developer-grid {
                     gap: 1rem;
@@ -413,61 +403,6 @@
                 }
                 .developer-card p.bio {
                     font-size: 0.9rem;
-                }
-            }
-
-            @media (max-width: 360px) {
-                nav {
-                    padding: 0.5rem 0.8rem;
-                    width: calc(100% - 20px);
-                }
-                .logo-container .logo {
-                    font-size: 1.2rem;
-                }
-                .logo-container img {
-                    width: 28px;
-                    height: 28px;
-                }
-                .mobile-nav {
-                    width: 180px;
-                    top: 65px;
-                    right: 10px;
-                    padding: 0.8rem;
-                }
-                .mobile-nav li a {
-                    font-size: 0.9rem;
-                    padding: 0.6rem 1rem;
-                }
-                .developer-info {
-                    padding: 4.5rem 0.5rem 2.5rem;
-                }
-                .developer-info h1 {
-                    font-size: 1.4rem;
-                }
-                .developer-info h1::after {
-                    width: 40px;
-                    height: 2px;
-                    bottom: -6px;
-                }
-                .developer-grid {
-                    gap: 0.8rem;
-                    padding: 0 0.3rem;
-                }
-                .developer-card {
-                    padding: 1rem;
-                }
-                .developer-header img {
-                    width: 36px;
-                    height: 36px;
-                }
-                .developer-header h2 {
-                    font-size: 1.2rem;
-                }
-                .developer-card p.role {
-                    font-size: 0.95rem;
-                }
-                .developer-card p.bio {
-                    font-size: 0.85rem;
                 }
             }
         </style>
@@ -500,7 +435,7 @@
             <li><a href="./tweets.html">Tweet</a></li>
         </ul>
 
-        <section class="developer-info">
+        <main class="developer-info">
             <h1>開発者情報</h1>
             <div class="developer-grid">
                 <div class="developer-card">
@@ -528,19 +463,29 @@
                     <p class="bio">HARUAddonsのアドオンやサービスをご利用いただいており、これまでに数多くのご提案や改善点をお寄せいただいております。その貴重なフィードバックは、より高品質なアドオン開発に大きく貢献してくださっています。</p>
                 </div>
             </div>
-        </section>
+        </main>
 
         <footer>
-            <p>© 2025 HARU Addons. All Rights Reserved.</p>
+            <p>© 2026 HARU Addons. All Rights Reserved.</p>
         </footer>
 
         <script>
             const menuToggle = document.querySelector('.menu-toggle');
             const mobileNav = document.querySelector('.mobile-nav');
+
             menuToggle.addEventListener('click', () => {
                 const isExpanded = mobileNav.classList.toggle('active');
                 menuToggle.setAttribute('aria-expanded', isExpanded);
                 menuToggle.classList.toggle('open');
+            });
+
+            document.addEventListener('click', event => {
+                const nav = document.querySelector('nav');
+                if (!nav.contains(event.target) && !mobileNav.contains(event.target) && mobileNav.classList.contains('active')) {
+                    mobileNav.classList.remove('active');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                    menuToggle.classList.remove('open');
+                }
             });
 
             window.addEventListener('scroll', () => {
